@@ -14,9 +14,6 @@ class GitPushCommand extends Command
         $message = $this->argument('message') ?? 'Update from Artisan command';
         $fullMessage = sprintf('"%s - inside data updated"', $message);
 
-        $this->info('git reset --hard');
-        exec('git reset --hard');
-
         $this->info('Adding changes...');
         exec('git add .');
 

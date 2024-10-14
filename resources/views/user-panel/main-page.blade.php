@@ -27,6 +27,9 @@
     <a href="{{ route('admin.login', app()->getlocale() ) }}">
         <img class="logo" src="{{ asset('img/logo/logo-white.png') }}" alt="{{ asset('img/logo/logo-white.png') }}">
     </a>
+    <a href="{{ route('admin.login', app()->getlocale() ) }}">
+        <img class="logo" src="{{ asset('img/logo/logo-white.png') }}" alt="{{ asset('img/logo/logo-white.png') }}">
+    </a>
     <a href="/api/documentation">
         <img class="logo" src="{{ asset('img/logo/swagger-icon.png') }}" alt="{{ asset('img/logo/swagger-icon.png') }}">
     </a>
