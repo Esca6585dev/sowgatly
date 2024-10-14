@@ -31,7 +31,7 @@ body {
 }
 
 header {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     color: #fff;
     padding: 1rem 0;
@@ -43,7 +43,7 @@ header {
 }
 
 header:hover {
-    background-color: rgb(238, 231, 231);
+    background-color: rgb(20, 149, 182);
 }
 
 nav ul {
