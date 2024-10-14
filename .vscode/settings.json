@@ -1,0 +1,7 @@
+{
+    "git.ignoreLimitWarning": true,
+    "CodeGPT.apiKey": "CodeGPT Plus Beta",
+    "files.exclude": {
+        "\"files.exclude\": {     \"**/vendor\": false }, \"search.exclude\": {     \"**/vendor\": false }": true
+    }
+}
