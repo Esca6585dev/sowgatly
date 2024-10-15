@@ -221,7 +221,7 @@ class ProductController extends Controller
      *     @OA\Response(response="404", description="Product not found")
      * )
      */
-    public function show($id): JsonResponse
+    public function show($id)
     {
         $product = Product::with('images')->findOrFail($id);
         return new ProductResource($product);
