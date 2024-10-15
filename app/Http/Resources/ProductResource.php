@@ -78,8 +78,8 @@ class ProductResource extends JsonResource
             'discount' => $this->discount,
             'description' => $this->description,
             'gender' => $this->gender,
-            'sizes' => decodeSafely($this->sizes),
-            'separated_sizes' => decodeSafely($this->separated_sizes),
+            'sizes' => $this->decodeSafely($this->sizes),
+            'separated_sizes' => $this->decodeSafely($this->separated_sizes),
             'color' => $this->color,
             'manufacturer' => $this->manufacturer,
             'width' => $this->width,
@@ -98,5 +98,14 @@ class ProductResource extends JsonResource
             'category' => $this->category,
             'shop' => $this->shop,
         ];
+    }
+
+    private function decodeSafely($value)
+    {
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+            return (json_last_error() === JSON_ERROR_NONE) ? $decoded : $value;
+        }
+        return $value;
     }
 }
