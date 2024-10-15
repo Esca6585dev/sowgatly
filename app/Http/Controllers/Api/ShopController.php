@@ -41,7 +41,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $shops = Shop::all();
+        $shops = Shop::where('user_id', auth()->user()->id)->get();
+
         return ShopResource::collection($shops);
     }
 
