@@ -306,7 +306,7 @@ class ProductController extends Controller
             $data = $request->validated();
 
             // Handle array fields
-            $arrayFields = ['sizes', 'separated_sizes', 'brand_ids'];
+            $arrayFields = ['sizes', 'separated_sizes'];
             foreach ($arrayFields as $field) {
                 if (isset($data[$field]) && is_array($data[$field])) {
                     $data[$field] = implode(',', $data[$field]);
@@ -319,6 +319,8 @@ class ProductController extends Controller
 
             // Update product details
             $product->update($data);
+
+            $product->brands()->sync($data['brand_ids']);
 
             // Handle images
             if (!empty($images)) {
