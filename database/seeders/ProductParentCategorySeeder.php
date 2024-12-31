@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
-class ProductSeeder extends Seeder
+class ProductParentCategorySeeder extends Seeder
 {
     public function run()
     {
@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
 
         // Assuming you have shops and categories already seeded
         $shopIds = DB::table('shops')->pluck('id')->toArray();
-        $categoryIds = DB::table('categories')->pluck('id')->toArray();
+        $categoryIds = DB::table('categories')->where('category_id', null)->pluck('id')->toArray();
 
         foreach (range(1, 500) as $index) {  // Create 500 products
             DB::table('products')->insert([

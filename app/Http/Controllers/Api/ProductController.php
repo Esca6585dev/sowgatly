@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductBrand;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\ProductUpdateRequest;
@@ -395,7 +396,11 @@ class ProductController extends Controller
                     'message' => 'Product not found'
                 ], 200);
             }
+
+            $this->deleteImages($product);
+
             $product->delete();
+
             return response()->json([
                 'success' => true,
                 'message' => 'Product deleted successfully'
@@ -409,6 +414,15 @@ class ProductController extends Controller
         }
     }
 
+    protected function deleteImages($product)
+    {
+        $images = $product->images()->pluck('url');
+        foreach($images as $image){
+            if(Storage::exists($image)){
+                Storage::delete($image);
+            }
+        }
+    }
     /**
     * @OA\Get(
     *     path="/api/product/search",
@@ -525,7 +539,11 @@ class ProductController extends Controller
      *         description="Successful operation",
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean"),
-     *             @OA\Property(property="data", type="object"),
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(ref="#/components/schemas/ProductResource")
+     *             ),
      *             @OA\Property(property="message", type="string")
      *         )
      *     ),
@@ -542,36 +560,38 @@ class ProductController extends Controller
     public function getByCategory($category_id)
     {
         try {
-            $category = Category::find($category_id);
+            $category = Category::findOrFail($category_id);
 
-            if (!$category) {
+            $products = Product::with([
+                    'category',
+                    'shop',
+                    'images',
+                    'brands',
+                ])
+                ->where('category_id', $category_id)
+                ->where('status', true)
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            if ($products->isEmpty()) {
                 return response()->json([
-                    'success' => false,
-                    'message' => 'Category not found'
-                ], 404);
+                    'success' => true,
+                    'data' => [],
+                    'message' => 'No products found in this category'
+                ], 200);
             }
-
-            $products = Product::where('category_id', $category_id)
-                ->with(['category', 'shop', 'images', 'compositions'])
-                ->paginate(10);
-
-            // Fetch all brand IDs from the products
-            $brandIds = $products->pluck('brand_ids')->flatten()->unique()->filter();
-
-            // Fetch all brands that are associated with these products
-            $brands = Brand::whereIn('id', $brandIds)->get();
-
-            // Associate the brands with their respective products
-            $products->getCollection()->transform(function ($product) use ($brands) {
-                $product->brands = $brands->whereIn('id', $product->brand_ids);
-                return $product;
-            });
 
             return response()->json([
                 'success' => true,
-                'data' => $products,
+                'data' => ProductResource::collection($products),
                 'message' => 'Products retrieved successfully'
             ], 200);
+
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Category not found'
+            ], 404);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
