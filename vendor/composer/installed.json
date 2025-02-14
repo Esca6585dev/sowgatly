@@ -1,6 +1,63 @@
 {
     "packages": [
         {
+            "name": "alexandr-mironov/php-smpp",
+            "version": "1.3.0.9",
+            "version_normalized": "1.3.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexandr-mironov/php-smpp.git",
+                "reference": "1d3b53c2d2b63d51ab70009d956914b7f8903118"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexandr-mironov/php-smpp/zipball/1d3b53c2d2b63d51ab70009d956914b7f8903118",
+                "reference": "1d3b53c2d2b63d51ab70009d956914b7f8903118",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-sockets": "*",
+                "php": ">=5.4"
+            },
+            "time": "2022-12-02T20:14:38+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "smpp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandr Mironov",
+                    "email": "alex@hyptrex.com"
+                },
+                {
+                    "name": "Hans Duedal",
+                    "email": "hd@oc.dk",
+                    "homepage": "http://oc.dk"
+                }
+            ],
+            "description": "PHP SMPP client lib, fork of onlinecity/php-smpp",
+            "homepage": "https://github.com/alexandr-mironov/php-smpp",
+            "keywords": [
+                "gsm",
+                "smpp",
+                "sms",
+                "texting"
+            ],
+            "support": {
+                "issues": "https://github.com/alexandr-mironov/php-smpp/issues",
+                "source": "https://github.com/alexandr-mironov/php-smpp/tree/1.3.0.9"
+            },
+            "install-path": "../alexandr-mironov/php-smpp"
+        },
+        {
             "name": "bacon/bacon-qr-code",
             "version": "2.0.8",
             "version_normalized": "2.0.8.0",
@@ -4924,6 +4981,61 @@
                 "source": "https://github.com/dompdf/php-svg-lib/tree/0.5.4"
             },
             "install-path": "../phenx/php-svg-lib"
+        },
+        {
+            "name": "php-smpp/php-smpp",
+            "version": "1.2",
+            "version_normalized": "1.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/onlinecity/php-smpp.git",
+                "reference": "b8632357b4bf48668aa461d9004c70be9c99de9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/onlinecity/php-smpp/zipball/b8632357b4bf48668aa461d9004c70be9c99de9e",
+                "reference": "b8632357b4bf48668aa461d9004c70be9c99de9e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-sockets": "*",
+                "php": ">=5.3.3"
+            },
+            "time": "2015-01-26T10:59:22+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "gsmencoder.class.php",
+                    "sockettransport.class.php",
+                    "smppclient.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Hans Duedal",
+                    "email": "hd@oc.dk",
+                    "homepage": "http://oc.dk"
+                }
+            ],
+            "description": "PHP-based SMPP client lib",
+            "homepage": "http://github.com/onlinecity/php-smpp",
+            "keywords": [
+                "gsm",
+                "smpp",
+                "sms",
+                "texting"
+            ],
+            "support": {
+                "issues": "https://github.com/onlinecity/php-smpp/issues",
+                "source": "https://github.com/onlinecity/php-smpp/tree/master"
+            },
+            "install-path": "../php-smpp/php-smpp"
         },
         {
             "name": "php-webdriver/webdriver",

@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'smpp' => [
+        'host' => env('SMPP_HOST'), // Your SMPP server host
+        'port' => env('SMPP_PORT'), // Your SMPP server port
+        'system_id' => env('SMPP_SYSTEM_ID'), // Your SMPP username/login
+        'password' => env('SMPP_PASSWORD'), // Your SMPP password
+    ],
+
 ];

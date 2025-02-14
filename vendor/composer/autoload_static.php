@@ -39,6 +39,9 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'a1cfe24d14977df6878b9bf804af2d1c' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
+        'b40d5dea6a08c80f1af08c54a22442f0' => __DIR__ . '/..' . '/php-smpp/php-smpp/gsmencoder.class.php',
+        '47ba1f2b1ec0aed7dae0cba523779a90' => __DIR__ . '/..' . '/php-smpp/php-smpp/sockettransport.class.php',
+        'ae077a5d814ebdff35b7d1ce2b950fd9' => __DIR__ . '/..' . '/php-smpp/php-smpp/smppclient.class.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
@@ -48,6 +51,10 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'v' => 
         array (
             'voku\\' => 5,
+        ),
+        's' => 
+        array (
+            'smpp\\' => 5,
         ),
         'Z' => 
         array (
@@ -233,6 +240,10 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
+        'smpp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src',
         ),
         'ZipStream\\' => 
         array (
@@ -823,17 +834,21 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'App\\Http\\Requests\\CategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryRequest.php',
         'App\\Http\\Requests\\MessageRequest' => __DIR__ . '/../..' . '/app/Http/Requests/MessageRequest.php',
         'App\\Http\\Requests\\PermissionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PermissionRequest.php',
-        'App\\Http\\Requests\\ProductRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductRequest.php',
+        'App\\Http\\Requests\\ProductStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductStoreRequest.php',
+        'App\\Http\\Requests\\ProductUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductUpdateRequest.php',
         'App\\Http\\Requests\\RegionRequest' => __DIR__ . '/../..' . '/app/Http/Requests/RegionRequest.php',
         'App\\Http\\Requests\\RoleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/RoleRequest.php',
         'App\\Http\\Requests\\ShopRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ShopRequest.php',
         'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
+        'App\\Http\\Requests\\UserStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserStoreRequest.php',
+        'App\\Http\\Requests\\UserUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserUpdateRequest.php',
         'App\\Http\\Resources\\AddressResource' => __DIR__ . '/../..' . '/app/Http/Resources/AddressResource.php',
         'App\\Http\\Resources\\BrandResource' => __DIR__ . '/../..' . '/app/Http/Resources/BrandResource.php',
         'App\\Http\\Resources\\CategoryResource' => __DIR__ . '/../..' . '/app/Http/Resources/CategoryResource.php',
         'App\\Http\\Resources\\CompositionResource' => __DIR__ . '/../..' . '/app/Http/Resources/CompositionResource.php',
         'App\\Http\\Resources\\DeviceResource' => __DIR__ . '/../..' . '/app/Http/Resources/DeviceResource.php',
         'App\\Http\\Resources\\ImageResource' => __DIR__ . '/../..' . '/app/Http/Resources/ImageResource.php',
+        'App\\Http\\Resources\\ProductBrandResource' => __DIR__ . '/../..' . '/app/Http/Resources/ProductBrandResource.php',
         'App\\Http\\Resources\\ProductResource' => __DIR__ . '/../..' . '/app/Http/Resources/ProductResource.php',
         'App\\Http\\Resources\\RegionResource' => __DIR__ . '/../..' . '/app/Http/Resources/RegionResource.php',
         'App\\Http\\Resources\\ShopResource' => __DIR__ . '/../..' . '/app/Http/Resources/ShopResource.php',
@@ -854,6 +869,7 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'App\\Models\\Order' => __DIR__ . '/../..' . '/app/Models/Order.php',
         'App\\Models\\OrderItem' => __DIR__ . '/../..' . '/app/Models/OrderItem.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
+        'App\\Models\\ProductAttribute' => __DIR__ . '/../..' . '/app/Models/ProductAttribute.php',
         'App\\Models\\ProductComposition' => __DIR__ . '/../..' . '/app/Models/ProductComposition.php',
         'App\\Models\\Region' => __DIR__ . '/../..' . '/app/Models/Region.php',
         'App\\Models\\Section' => __DIR__ . '/../..' . '/app/Models/Section.php',
@@ -862,6 +878,7 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'App\\Models\\Text' => __DIR__ . '/../..' . '/app/Models/Text.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\UserOtp' => __DIR__ . '/../..' . '/app/Models/UserOtp.php',
+        'App\\Policies\\UserPolicy' => __DIR__ . '/../..' . '/app/Policies/UserPolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -870,6 +887,7 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Rules\\ImageOrBase64' => __DIR__ . '/../..' . '/app/Rules/ImageOrBase64.php',
         'App\\Rules\\TurkmenistanPhoneNumber' => __DIR__ . '/../..' . '/app/Rules/TurkmenistanPhoneNumber.php',
+        'App\\Services\\TmCellSmsService' => __DIR__ . '/../..' . '/app/Services/TmCellSmsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'BaconQrCode\\Common\\BitArray' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitArray.php',
         'BaconQrCode\\Common\\BitMatrix' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitMatrix.php',
@@ -1071,6 +1089,7 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'DASPRiD\\Enum\\Exception\\UnserializeNotSupportedException' => __DIR__ . '/..' . '/dasprid/enum/src/Exception/UnserializeNotSupportedException.php',
         'DASPRiD\\Enum\\NullValue' => __DIR__ . '/..' . '/dasprid/enum/src/NullValue.php',
         'Database\\Factories\\AddressFactory' => __DIR__ . '/../..' . '/database/factories/AddressFactory.php',
+        'Database\\Factories\\BrandFactory' => __DIR__ . '/../..' . '/database/factories/BrandFactory.php',
         'Database\\Factories\\CategoryFactory' => __DIR__ . '/../..' . '/database/factories/CategoryFactory.php',
         'Database\\Factories\\CompositionFactory' => __DIR__ . '/../..' . '/database/factories/CompositionFactory.php',
         'Database\\Factories\\ImageFactory' => __DIR__ . '/../..' . '/database/factories/ImageFactory.php',
@@ -1084,6 +1103,9 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'Database\\Seeders\\CategorySeeder' => __DIR__ . '/../..' . '/database/seeders/CategorySeeder.php',
         'Database\\Seeders\\CompositionSeeder' => __DIR__ . '/../..' . '/database/seeders/CompositionSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\ImageSeeder' => __DIR__ . '/../..' . '/database/seeders/ImageSeeder.php',
+        'Database\\Seeders\\ProductAttributeSeeder' => __DIR__ . '/../..' . '/database/seeders/ProductAttributeSeeder.php',
+        'Database\\Seeders\\ProductParentCategorySeeder' => __DIR__ . '/../..' . '/database/seeders/ProductParentCategorySeeder.php',
         'Database\\Seeders\\ProductSeeder' => __DIR__ . '/../..' . '/database/seeders/ProductSeeder.php',
         'Database\\Seeders\\RegionSeeder' => __DIR__ . '/../..' . '/database/seeders/RegionSeeder.php',
         'Database\\Seeders\\ShopAddressSeeder' => __DIR__ . '/../..' . '/database/seeders/ShopAddressSeeder.php',
@@ -11210,6 +11232,17 @@ class ComposerStaticInit2b6cc67ac0b4cf6a0f0344a2959cb018
         'ZipStream\\Zip64\\ExtendedInformationExtraField' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/Zip64/ExtendedInformationExtraField.php',
         'ZipStream\\ZipStream' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/ZipStream.php',
         'ZipStream\\Zs\\ExtendedInformationExtraField' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/Zs/ExtendedInformationExtraField.php',
+        'smpp\\Address' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/Address.php',
+        'smpp\\Client' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/Client.php',
+        'smpp\\DeliveryReceipt' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/DeliveryReceipt.php',
+        'smpp\\Pdu' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/Pdu.php',
+        'smpp\\SMPP' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/SMPP.php',
+        'smpp\\Sms' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/Sms.php',
+        'smpp\\Tag' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/Tag.php',
+        'smpp\\exceptions\\SmppException' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/exceptions/SmppException.php',
+        'smpp\\exceptions\\SocketTransportException' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/exceptions/SocketTransportException.php',
+        'smpp\\helpers\\GsmEncoderHelper' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/helpers/GsmEncoderHelper.php',
+        'smpp\\transport\\Socket' => __DIR__ . '/..' . '/alexandr-mironov/php-smpp/src/transport/Socket.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
     );
 
