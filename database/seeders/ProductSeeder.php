@@ -18,26 +18,30 @@ class ProductSeeder extends Seeder
 
         foreach (range(1, 500) as $index) {  // Create 500 products
             DB::table('products')->insert([
-                'name' => $faker->words(3, true),
+                'name_tm' => $faker->words(3, true) . '_tm',
+                'name_en' => $faker->words(3, true) . '_en',
+                'name_ru' => $faker->words(3, true) . '_ru',
+                
                 'price' => $faker->randomFloat(2, 10, 1000),
                 'discount' => $faker->optional(0.3)->numberBetween(5, 50),
-                'description' => $faker->paragraph,
-                'gender' => $faker->randomElement(['Men', 'Women', 'Children']),
-                'sizes' => json_encode($faker->randomElements(range(42, 50), $faker->numberBetween(1, 5))),
-                'separated_sizes' => json_encode($faker->randomElements(['S', 'M', 'L', 'XL', 'XXL'], $faker->numberBetween(1, 5))),
-                'color' => $faker->safeColorName,
-                'manufacturer' => $faker->country,
-                'width' => $faker->randomFloat(2, 10, 100),
-                'height' => $faker->randomFloat(2, 10, 100),
-                'weight' => $faker->numberBetween(100, 5000),  // in grams
+                
+                'description_tm' => $faker->paragraph . '_tm',
+                'description_en' => $faker->paragraph . '_en',
+                'description_ru' => $faker->paragraph . '_ru',
+
                 'production_time' => $faker->numberBetween(60, 1440),  // in minutes (1 hour to 24 hours)
                 'min_order' => $faker->optional()->numberBetween(1, 10),
+                
                 'seller_status' => $faker->boolean,
                 'status' => $faker->boolean,
+                
+                'stock' => $faker->numberBetween(1, 100),
+
                 'shop_id' => $faker->randomElement($shopIds),
                 'category_id' => $faker->randomElement($categoryIds),
-                'created_at' => $faker->dateTimeBetween('-1 year', 'now'),
-                'updated_at' => $faker->dateTimeBetween('-1 year', 'now'),
+
+                'created_at' => $faker->dateTimeBetween('-1 month', 'now'),
+                'updated_at' => $faker->dateTimeBetween('-1 month', 'now'),
             ]);
         }
     }

@@ -11,6 +11,8 @@ class ShopFactory extends Factory
 {
     protected $model = Shop::class;
 
+    public $images = ['shop/shop-seeder/sowgatly-logo.png', 'shop/shop-seeder/modahouse-logo.jpg', 'shop/shop-seeder/logo.png'];
+
     public function definition()
     {
         return [
@@ -20,7 +22,7 @@ class ShopFactory extends Factory
             'mon_fri_close' => $this->faker->time('H:i'),
             'sat_sun_open' => $this->faker->time('H:i'),
             'sat_sun_close' => $this->faker->time('H:i'),
-            'image' => $this->faker->imageUrl(),
+            'image' => $this->images[mt_rand(0, 2)],
             'user_id' => User::factory(),
             'region_id' => Region::factory(),
         ];

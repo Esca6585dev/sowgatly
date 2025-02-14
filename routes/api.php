@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('chess')->group(function () {
+    Route::post('/games', [App\Http\Controllers\GameController::class, 'create']);
+    Route::post('/games/{gameId}/move', [App\Http\Controllers\GameController::class, 'makeMove']);
+    Route::get('/games/{gameId}', [App\Http\Controllers\GameController::class, 'show']);
+});
+
 Route::controller(App\Http\Controllers\Api\AuthOtpController::class)->group(function(){
     // OTP Generate route
     Route::post('otp/generate', 'generate');

@@ -91,4 +91,25 @@ class Product extends Model
     {
         return $query->with(['category', 'shop', 'brands', 'images', 'compositions']);
     }
+
+    public function attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
+    }
+
+    public function getAttributeValues($key)
+    {
+        $attribute = $this->attributes()->where('attribute_key', $key)->first();
+        return $attribute ? json_decode($attribute->attribute_value, true) : null; 
+    }
+
+    public function getSizes() 
+    {
+        return $this->getAttributeValues('size');
+    }
+
+    public function getColors() 
+    {
+        return $this->getAttributeValues('color');
+    }
 }
