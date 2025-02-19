@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use PharData;
 use PharFileInfo;
 use RecursiveIteratorIterator;
+use RuntimeException;
 use Stevebauman\Location\Position;
 use Stevebauman\Location\Request;
 
@@ -38,8 +39,13 @@ class MaxMind extends Driver implements Updatable
             $tarFileName = 'maxmind.tar.gz'
         );
 
-        Http::withOptions(['sink' => $tarFilePath])->throw()->get(
+        $response = Http::withOptions(['sink' => $tarFilePath])->get(
             $this->getDatabaseUrl()
+        );
+
+        throw_if(
+            $response->failed(),
+            new RuntimeException('Failed to download MaxMind database. Response: '.$response->body())
         );
 
         $archive = new PharData($tarFilePath);
@@ -124,7 +130,7 @@ class MaxMind extends Driver implements Updatable
                 'country' => $record->country->name,
                 'country_code' => $record->country->isoCode,
             ]);
-        }, false);
+        }, false, false);
     }
 
     /**

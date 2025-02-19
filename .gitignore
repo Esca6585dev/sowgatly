@@ -1,2 +1,51 @@
+# Laravel specific files/folders
+/storage/*
+/bootstrap/cache/*
+/config/app.php  # Or keep it out if you prefer to manage config via .env only
+/.env
+/vendor/*
+/node_modules/*
+/public/build/*  # For Vite
+/public/hot     # For Vite hot reloading
+/public/mix-manifest.json # If using Laravel Mix
+/public/vite.config.js # If using Vite and you don't want to track changes
 
+# General files/folders
+.DS_Store
+.idea/      # PhpStorm/IntelliJ
+.vscode/    # VS Code
+*.log
+*.tmp
+*~         # Backup files
+Thumbs.db
+
+# OS specific (optional)
+.AppleDouble
+__MACOSX
+
+# Package manager files
+composer.lock
+
+# Deployment related (optional)
+.env.example
+
+# Testing
+/phpunit.xml
+/tests/_output/*  # If you have an output directory for tests
+
+# Cache and temporary files
+*.cache
+*.swp # Swap files
+.phpunit.result.cache # PHPUnit result cache
+
+# Other
+.history
+.local
+.bash_history
+.zsh_history
+
+# Laravel Sail (if used)
+/vendor/sail
+
+# CodeGPT (If you don't want to track its changes)
 .codegpt
