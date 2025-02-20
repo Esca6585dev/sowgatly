@@ -1955,7 +1955,10 @@
                                             "type": "boolean"
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ProductResource"
+                                            }
                                         },
                                         "message": {
                                             "type": "string"

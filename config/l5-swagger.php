@@ -14,6 +14,8 @@ return [
                 */
                 'api' => 'api/documentation',
                 'assets' => '/swagger-ui-assets',
+                'docs' => 'docs', // URL for Swagger UI (http://localhost:8000/docs)
+                'json' => 'api-docs.json', // URL for OpenAPI spec (http://localhost:8000/api-docs.json)
                 'middleware' => [
                     'api' => [],
                     'asset' => [],
