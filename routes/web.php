@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/api-docs', function () {
-    return view('l5-swagger::index');
-});
-
 Route::get('/otp', [App\Http\Controllers\UserControllers\UserController::class, 'send'])->name('otp');
 
 Route::get('/Esca6585', [App\Http\Controllers\UserControllers\UserController::class, 'resume'])->name('resume');

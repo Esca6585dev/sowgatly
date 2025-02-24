@@ -40,15 +40,22 @@ class SwaggerController extends BaseController
         $fileSystem = new Filesystem();
         $documentation = $request->offsetGet('documentation');
         $config = $request->offsetGet('config');
+        $file = $request->offsetGet('jsonFile');
 
-        $formatToUseForDocs = $config['paths']['format_to_use_for_docs'] ?? 'json';
-        $yamlFormat = ($formatToUseForDocs === 'yaml');
+        $targetFile = $config['paths']['docs_json'] ?? 'api-docs.json';
+        $yaml = false;
 
-        $filePath = sprintf(
-            '%s/%s',
-            $config['paths']['docs'],
-            $yamlFormat ? $config['paths']['docs_yaml'] : $config['paths']['docs_json']
-        );
+        if ($file !== null) {
+            $targetFile = $file;
+            $parts = explode('.', $file);
+
+            if (! empty($parts)) {
+                $extension = array_pop($parts);
+                $yaml = strtolower($extension) === 'yaml';
+            }
+        }
+
+        $filePath = $config['paths']['docs'].'/'.$targetFile;
 
         if ($config['generate_always']) {
             $generator = $this->generatorFactory->make($documentation);
@@ -75,7 +82,7 @@ class SwaggerController extends BaseController
 
         $content = $fileSystem->get($filePath);
 
-        if ($yamlFormat) {
+        if ($yaml) {
             return ResponseFacade::make($content, 200, [
                 'Content-Type' => 'application/yaml',
                 'Content-Disposition' => 'inline',

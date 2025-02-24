@@ -6,6 +6,7 @@ return [
         'default' => [
             'api' => [
                 'title' => 'Sowgatly Swagger UI',
+                'url' => env('L5_SWAGGER_API_URL', 'http://localhost:8000/api')
             ],
 
             'routes' => [
@@ -14,8 +15,8 @@ return [
                 */
                 'api' => 'api/documentation',
                 'assets' => '/swagger-ui-assets',
-                'docs' => 'docs', // URL for Swagger UI (http://localhost:8000/docs)
-                'json' => 'api-docs.json', // URL for OpenAPI spec (http://localhost:8000/api-docs.json)
+                'docs' => 'api/documentation', // So, your Swagger UI will be at /api/documentation
+                'json' => 'api/json',       // Or null if you don't want a separate JSON route
                 'middleware' => [
                     'api' => [],
                     'asset' => [],
