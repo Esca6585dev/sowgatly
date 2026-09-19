@@ -423,7 +423,6 @@ class AuthOtpController extends Controller
      */
     public function logout(Request $request)
     {
-        return $request->user()->tokens();
         try {
             // Check if the user is authenticated
             if (!$request->user()) {
