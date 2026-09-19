@@ -29,12 +29,12 @@ Route::controller(App\Http\Controllers\Api\AuthOtpController::class)->group(func
 
     // Register with otp route
     Route::post('register', 'registerWithOtp');
-
-    // logout route
-    Route::post('logout', 'logout');
 });
 
 Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
+    // logout route
+    Route::post('logout', [App\Http\Controllers\Api\AuthOtpController::class, 'logout']);
+
     // Products routes
     Route::apiResource('products', App\Http\Controllers\Api\ProductController::class);
     Route::get('product/search', [App\Http\Controllers\Api\ProductController::class , 'search']);
