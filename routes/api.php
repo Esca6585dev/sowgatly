@@ -66,7 +66,11 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     Route::post('favorites/toggle', [App\Http\Controllers\Api\FavoriteController::class, 'toggle']);
 
     // Order routes
-    Route::apiResource('orders', App\Http\Controllers\Api\OrderController::class);
+    // Not an apiResource: OrderController exposes createOrder/getUserOrders/getOrder
+    // rather than the store/index/show names apiResource expects.
+    Route::post('orders', [App\Http\Controllers\Api\OrderController::class, 'createOrder']);
+    Route::get('orders', [App\Http\Controllers\Api\OrderController::class, 'getUserOrders']);
+    Route::get('orders/{id}', [App\Http\Controllers\Api\OrderController::class, 'getOrder']);
     Route::get('user/orders', [App\Http\Controllers\Api\OrderController::class, 'getUserOrders']);
 
     // Address routes

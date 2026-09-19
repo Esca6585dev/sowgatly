@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Rules\TurkmenistanPhoneNumber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @OA\Tag(
@@ -21,12 +23,16 @@ class OrderController extends Controller
     /**
      * @OA\Post(
      *     path="/api/orders",
-     *     summary="Create a new order from cart",
+     *     summary="Create a new order from the current cart",
      *     tags={"Orders"},
      *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         @OA\JsonContent(
-     *             @OA\Property(property="shop_id", type="integer")
+     *             required={"delivery_type", "recipient_phone"},
+     *             @OA\Property(property="delivery_type", type="string", enum={"asap", "scheduled"}, example="asap"),
+     *             @OA\Property(property="scheduled_at", type="string", format="date-time", nullable=true),
+     *             @OA\Property(property="recipient_phone", type="string", example="65656585"),
+     *             @OA\Property(property="note", type="string", nullable=true)
      *         )
      *     ),
      *     @OA\Response(response="201", description="Order created"),
@@ -37,19 +43,34 @@ class OrderController extends Controller
      */
     public function createOrder(Request $request)
     {
-        $request->validate([
-            'shop_id' => 'required|exists:shops,id'
+        $validator = Validator::make($request->all(), [
+            'delivery_type' => 'required|in:asap,scheduled',
+            'scheduled_at' => 'required_if:delivery_type,scheduled|nullable|date|after:now',
+            'recipient_phone' => ['required', new TurkmenistanPhoneNumber],
+            'note' => 'nullable|string|max:500',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ], 422);
+        }
 
         $user = Auth::user();
         $cart = Cart::with('items.product')->where('user_id', $user->id)->first();
 
         if (!$cart || $cart->items->isEmpty()) {
-            return response()->json(['message' => 'Cart is empty'], 400);
+            return response()->json(['success' => false, 'message' => 'Cart is empty'], 400);
         }
 
+        // This app currently only supports single-shop checkout: every item
+        // in the cart is expected to come from the same shop, taken from the
+        // first item rather than trusted from the client.
+        $shopId = $cart->items->first()->product->shop_id;
+
         $totalAmount = $cart->items->sum(function ($item) {
-            return $item->quantity * $item->product->getDiscountPrice();
+            return $item->quantity * $item->product->getDiscountedPrice();
         });
 
         DB::beginTransaction();
@@ -57,9 +78,13 @@ class OrderController extends Controller
         try {
             $order = Order::create([
                 'user_id' => $user->id,
-                'shop_id' => $request->shop_id,
+                'shop_id' => $shopId,
                 'total_amount' => $totalAmount,
-                'status' => 'pending'
+                'status' => 'pending',
+                'delivery_type' => $request->delivery_type,
+                'scheduled_at' => $request->delivery_type === 'scheduled' ? $request->scheduled_at : null,
+                'recipient_phone' => $request->recipient_phone,
+                'note' => $request->note,
             ]);
 
             foreach ($cart->items as $item) {
@@ -67,7 +92,7 @@ class OrderController extends Controller
                     'order_id' => $order->id,
                     'product_id' => $item->product_id,
                     'quantity' => $item->quantity,
-                    'price' => $item->product->getDiscountPrice()
+                    'price' => $item->product->getDiscountedPrice()
                 ]);
 
                 $item->product->decrement('stock', $item->quantity);
@@ -79,12 +104,13 @@ class OrderController extends Controller
             DB::commit();
 
             return response()->json([
+                'success' => true,
                 'message' => 'Order created successfully',
                 'order' => $order->load('items.product')
             ], 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Order creation failed'], 500);
+            return response()->json(['success' => false, 'message' => 'Order creation failed'], 500);
         }
     }
 

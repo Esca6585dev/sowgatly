@@ -81,7 +81,7 @@ class CartController extends Controller
         }
 
         $totalAmount = $cart->items->sum(function ($item) {
-            return $item->quantity * $item->product->getDiscountPrice();
+            return $item->quantity * $item->product->getDiscountedPrice();
         });
 
         return response()->json([
