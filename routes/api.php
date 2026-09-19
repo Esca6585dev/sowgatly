@@ -61,6 +61,10 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     Route::post('cart/add', [App\Http\Controllers\Api\CartController::class, 'addToCart']);
     Route::get('cart', [App\Http\Controllers\Api\CartController::class, 'getCart']);
 
+    // Favorites routes
+    Route::get('favorites', [App\Http\Controllers\Api\FavoriteController::class, 'index']);
+    Route::post('favorites/toggle', [App\Http\Controllers\Api\FavoriteController::class, 'toggle']);
+
     // Order routes
     Route::apiResource('orders', App\Http\Controllers\Api\OrderController::class);
     Route::get('user/orders', [App\Http\Controllers\Api\OrderController::class, 'getUserOrders']);
