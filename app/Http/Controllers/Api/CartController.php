@@ -74,7 +74,7 @@ class CartController extends Controller
     public function getCart()
     {
         $user = Auth::user();
-        $cart = Cart::with('items.product')->where('user_id', $user->id)->first();
+        $cart = Cart::with('items.product.images')->where('user_id', $user->id)->first();
 
         if (!$cart) {
             return response()->json(['message' => 'Cart is empty']);
