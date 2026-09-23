@@ -60,6 +60,8 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     // Carts routes
     Route::post('cart/add', [App\Http\Controllers\Api\CartController::class, 'addToCart']);
     Route::get('cart', [App\Http\Controllers\Api\CartController::class, 'getCart']);
+    Route::put('cart/items/{id}', [App\Http\Controllers\Api\CartController::class, 'updateItem']);
+    Route::delete('cart/items/{id}', [App\Http\Controllers\Api\CartController::class, 'removeItem']);
 
     // Customer delivery addresses
     Route::get('me/addresses', [App\Http\Controllers\Api\UserAddressController::class, 'index']);

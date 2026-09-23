@@ -47,15 +47,28 @@ class CartController extends Controller
 
         $cart = Cart::firstOrCreate(['user_id' => $user->id]);
 
-        $cartItem = CartItem::updateOrCreate(
-            [
-                'user_id' => $user->id,
-                'product_id' => $product->id
-            ],
-            ['quantity' => $request->quantity]
-        );
+        // cart_items is keyed by cart_id (there is no user_id column) and
+        // requires a price. Adding a product that is already in the cart
+        // increases its quantity.
+        $cartItem = CartItem::firstOrNew([
+            'cart_id' => $cart->id,
+            'product_id' => $product->id,
+        ]);
+
+        $quantity = ($cartItem->exists ? $cartItem->quantity : 0) + (int) $request->quantity;
+        if ($product->stock !== null && $quantity > $product->stock) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Not enough stock',
+            ], 422);
+        }
+
+        $cartItem->quantity = $quantity;
+        $cartItem->price = $product->getDiscountedPrice();
+        $cartItem->save();
 
         return response()->json([
+            'success' => true,
             'message' => 'Product added to cart',
             'cart_item' => $cartItem->load('product')
         ]);
@@ -71,6 +84,46 @@ class CartController extends Controller
      *     security={{"bearerAuth": {}}}
      * )
      */
+    public function updateItem(Request $request, $id)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $cartItem = $this->findUserItem($id);
+        if (!$cartItem) {
+            return response()->json(['success' => false, 'message' => 'Cart item not found'], 404);
+        }
+
+        $product = $cartItem->product;
+        if ($product && $product->stock !== null && $request->quantity > $product->stock) {
+            return response()->json(['success' => false, 'message' => 'Not enough stock'], 422);
+        }
+
+        $cartItem->update(['quantity' => $request->quantity]);
+
+        return $this->getCart();
+    }
+
+    public function removeItem($id)
+    {
+        $cartItem = $this->findUserItem($id);
+        if (!$cartItem) {
+            return response()->json(['success' => false, 'message' => 'Cart item not found'], 404);
+        }
+
+        $cartItem->delete();
+
+        return $this->getCart();
+    }
+
+    private function findUserItem($id)
+    {
+        $cart = Cart::where('user_id', Auth::id())->first();
+
+        return $cart ? $cart->items()->with('product')->find($id) : null;
+    }
+
     public function getCart()
     {
         $user = Auth::user();
