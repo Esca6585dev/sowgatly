@@ -157,7 +157,7 @@ class OrderController extends Controller
     public function getOrder($id)
     {
         $user = Auth::user();
-        $order = Order::with('items.product', 'shop')
+        $order = Order::with('items.product.images', 'shop')
             ->where('user_id', $user->id)
             ->findOrFail($id);
 
