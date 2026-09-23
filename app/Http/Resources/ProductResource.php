@@ -89,6 +89,8 @@ class ProductResource extends JsonResource
             'min_order' => $this->min_order,
             'seller_status' => $this->seller_status,
             'stock' => $this->stock,
+            'width' => $this->width,
+            'height' => $this->height,
             'shop_id' => $this->shop_id,
             'category_id' => $this->category_id,
             'created_at' => $this->created_at,
@@ -98,6 +100,7 @@ class ProductResource extends JsonResource
             'images' => $this->images,
             'category' => $this->category,
             'shop' => $this->shop,
+            'compositions' => $this->whenLoaded('compositions'),
         ];
     }
 

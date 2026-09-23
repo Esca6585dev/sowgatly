@@ -475,25 +475,47 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         try {
-            $query = Product::query();
+            $query = Product::query()->where('status', true);
 
-            if ($request->has('name')) {
-                $query->where('name', 'like', '%' . $request->input('name') . '%');
+            // Names are stored per language (name_tm / name_ru / name_en);
+            // there is no plain `name` column, so match any of them.
+            if ($request->filled('name')) {
+                $term = '%' . $request->input('name') . '%';
+                $query->where(function ($q) use ($term) {
+                    $q->where('name_tm', 'like', $term)
+                        ->orWhere('name_ru', 'like', $term)
+                        ->orWhere('name_en', 'like', $term);
+                });
             }
 
-            if ($request->has('min_price')) {
+            if ($request->filled('min_price')) {
                 $query->where('price', '>=', $request->input('min_price'));
             }
 
-            if ($request->has('max_price')) {
+            if ($request->filled('max_price')) {
                 $query->where('price', '<=', $request->input('max_price'));
             }
 
-            if ($request->has('category_id')) {
+            if ($request->filled('category_id')) {
                 $query->where('category_id', $request->input('category_id'));
             }
 
-            $products = $query->with(['category', 'shop', 'images', 'compositions'])->paginate(10);
+            if ($request->filled('shop_id')) {
+                $query->where('shop_id', $request->input('shop_id'));
+            }
+
+            switch ($request->input('sort')) {
+                case 'price_asc':
+                    $query->orderBy('price');
+                    break;
+                case 'price_desc':
+                    $query->orderByDesc('price');
+                    break;
+                default:
+                    $query->latest();
+            }
+
+            $products = $query->with(['category', 'shop', 'images', 'compositions'])->paginate(20);
 
             // Fetch all brand IDs from the products
             $brandIds = $products->pluck('brand_ids')->flatten()->unique()->filter();
@@ -509,7 +531,12 @@ class ProductController extends Controller
 
             return response()->json([
                 'success' => true,
-                'data' => $products,
+                'data' => ProductResource::collection($products->getCollection()),
+                'meta' => [
+                    'current_page' => $products->currentPage(),
+                    'last_page' => $products->lastPage(),
+                    'total' => $products->total(),
+                ],
                 'message' => 'Products retrieved successfully'
             ], 200);
         } catch (\Exception $e) {
