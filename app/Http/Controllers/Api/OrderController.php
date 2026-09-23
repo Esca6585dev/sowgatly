@@ -47,6 +47,7 @@ class OrderController extends Controller
             'delivery_type' => 'required|in:asap,scheduled',
             'scheduled_at' => 'required_if:delivery_type,scheduled|nullable|date|after:now',
             'recipient_phone' => ['required', new TurkmenistanPhoneNumber],
+            'delivery_address' => 'required|string|max:500',
             'note' => 'nullable|string|max:500',
         ]);
 
@@ -84,6 +85,7 @@ class OrderController extends Controller
                 'delivery_type' => $request->delivery_type,
                 'scheduled_at' => $request->delivery_type === 'scheduled' ? $request->scheduled_at : null,
                 'recipient_phone' => $request->recipient_phone,
+                'delivery_address' => $request->delivery_address,
                 'note' => $request->note,
             ]);
 

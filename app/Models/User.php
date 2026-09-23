@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->hasMany(Device::class);
     }
 
+    public function deliveryAddresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
     public function favorites()
     {
         return $this->hasMany(Favorite::class);

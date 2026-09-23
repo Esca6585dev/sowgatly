@@ -61,6 +61,12 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     Route::post('cart/add', [App\Http\Controllers\Api\CartController::class, 'addToCart']);
     Route::get('cart', [App\Http\Controllers\Api\CartController::class, 'getCart']);
 
+    // Customer delivery addresses
+    Route::get('me/addresses', [App\Http\Controllers\Api\UserAddressController::class, 'index']);
+    Route::post('me/addresses', [App\Http\Controllers\Api\UserAddressController::class, 'store']);
+    Route::put('me/addresses/{id}', [App\Http\Controllers\Api\UserAddressController::class, 'update']);
+    Route::delete('me/addresses/{id}', [App\Http\Controllers\Api\UserAddressController::class, 'destroy']);
+
     // Favorites routes
     Route::get('favorites', [App\Http\Controllers\Api\FavoriteController::class, 'index']);
     Route::post('favorites/toggle', [App\Http\Controllers\Api\FavoriteController::class, 'toggle']);

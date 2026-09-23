@@ -17,6 +17,7 @@ class Order extends Model
         'delivery_type',
         'scheduled_at',
         'recipient_phone',
+        'delivery_address',
         'note',
     ];
 
