@@ -13,7 +13,7 @@ class CheckForValidToken
             return response()->json([
                 'message' => 'Unauthenticated.',
                 'status' => 'error'
-            ], 200);
+            ], 401);
         }
 
         return $next($request);

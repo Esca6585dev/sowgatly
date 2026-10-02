@@ -92,6 +92,14 @@ class ShopController extends Controller
      */
     public function store(ShopRequest $request)
     {
+        // One shop per account (User::shop is hasOne).
+        if ($request->user()->shop) {
+            return response()->json([
+                'status' => false,
+                'message' => 'You already have a shop',
+            ], 422);
+        }
+
         DB::beginTransaction();
 
         try {
@@ -298,7 +306,7 @@ class ShopController extends Controller
      *     )
      * )
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $shop = Shop::find($id);
 
@@ -307,6 +315,13 @@ class ShopController extends Controller
                 'status' => false,
                 'message' => 'Shop not found'
             ], 404);
+        }
+
+        if ($request->user()->id !== $shop->user_id) {
+            return response()->json([
+                'status' => false,
+                'message' => 'You can only delete your own shop'
+            ], 403);
         }
 
         try {

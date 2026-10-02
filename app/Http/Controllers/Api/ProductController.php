@@ -166,10 +166,18 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
+        $shop = $request->user()->shop;
+        if (!$shop) {
+            return $this->forbidden('Only shop owners can add products');
+        }
+
         try {
             DB::beginTransaction();
 
             $data = $request->validated();
+            // A product always belongs to the caller's own shop, whatever
+            // shop_id the client sent.
+            $data['shop_id'] = $shop->id;
 
             $arrayFields = ['sizes', 'separated_sizes'];
             
@@ -303,10 +311,15 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
+        if (!$this->ownsProduct($request, $product)) {
+            return $this->forbidden('You can only edit products of your own shop');
+        }
+
         try {
             DB::beginTransaction();
 
             $data = $request->validated();
+            $data['shop_id'] = $product->shop_id;
 
             // Handle array fields
             $arrayFields = ['sizes', 'separated_sizes'];
@@ -388,7 +401,7 @@ class ProductController extends Controller
      *     @OA\Response(response="404", description="Product not found")
      * )
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         try {
             $product = Product::find($id);
@@ -396,7 +409,11 @@ class ProductController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Product not found'
-                ], 200);
+                ], 404);
+            }
+
+            if (!$this->ownsProduct($request, $product)) {
+                return $this->forbidden('You can only delete products of your own shop');
             }
 
             $this->deleteImages($product);
@@ -637,6 +654,18 @@ class ProductController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    private function ownsProduct(Request $request, Product $product): bool
+    {
+        $shop = $request->user()->shop;
+
+        return $shop && (int) $product->shop_id === (int) $shop->id;
+    }
+
+    private function forbidden(string $message)
+    {
+        return response()->json(['success' => false, 'message' => $message], 403);
     }
 
     private function filterByRegion($query, $regionId)

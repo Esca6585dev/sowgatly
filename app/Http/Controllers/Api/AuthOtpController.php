@@ -91,6 +91,29 @@ class AuthOtpController extends Controller
      * @return UserOtp|null
      * @throws \Exception
      */
+    /**
+     * A fixed code when OTP_DEBUG_CODE is set, otherwise a random 4-digit one.
+     */
+    private function newOtpCode(): string
+    {
+        $debug = config('app.otp_debug_code');
+        if ($debug !== null && $debug !== '') {
+            return str_pad((string) $debug, 4, '0', STR_PAD_LEFT);
+        }
+
+        return str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+    }
+
+    private function deliverOtp(UserOtp $userOtp, string $phoneNumber): void
+    {
+        // Nothing to send in debug mode: the tester already knows the code.
+        if (config('app.otp_debug_code')) {
+            return;
+        }
+
+        $userOtp->sendSMS($phoneNumber);
+    }
+
     protected function generateOtp($phone_number)
     {
         DB::beginTransaction();
@@ -115,11 +138,14 @@ class AuthOtpController extends Controller
             // Create a new OTP
             $newOtp = UserOtp::create([
                 'user_id' => $user->id,
-                'otp' => "0000", // Set default OTP to "0000" // str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT), // Generate a random 4-digit OTP
+                'otp' => $this->newOtpCode(),
                 'expire_at' => $now->addMinutes(10)
             ]);
 
             DB::commit();
+
+            $this->deliverOtp($newOtp, $user->phone_number);
+
             return $newOtp;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -337,9 +363,9 @@ class AuthOtpController extends Controller
                 'email' => $request->email,
             ]);
 
-            $otpCode = "0000"; // For testing purposes, use a fixed OTP
+            $otpCode = $this->newOtpCode();
 
-            UserOtp::create([
+            $userOtp = UserOtp::create([
                 'user_id' => $user->id,
                 'otp' => $otpCode,
                 'expire_at' => now()->addMinutes(10),
@@ -361,11 +387,15 @@ class AuthOtpController extends Controller
 
             DB::commit();
 
+            $this->deliverOtp($userOtp, $user->phone_number);
+
             return response()->json([
                 'success' => true,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'otp' => $otpCode,
+                // The code is only echoed back in debug mode; in production
+                // it must reach the user through SMS alone.
+                'otp' => config('app.otp_debug_code') ? $otpCode : null,
                 'user' => new UserResource($user),
                 'shops' => $user->shops ? ShopResource::collection($user->shops) : [],
                 'device' => new DeviceResource($device),

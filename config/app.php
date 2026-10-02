@@ -255,4 +255,18 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Login code (OTP) debug override
+    |--------------------------------------------------------------------------
+    |
+    | When set (e.g. OTP_DEBUG_CODE=0000) every login code is this value and
+    | no SMS is sent, so the app can be tested without an SMS gateway. Leave
+    | it EMPTY in production: with a fixed code anyone can sign in as any
+    | phone number.
+    |
+    */
+
+    'otp_debug_code' => env('OTP_DEBUG_CODE'),
+
 ];
