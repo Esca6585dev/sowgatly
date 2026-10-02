@@ -126,6 +126,29 @@ class OrderController extends Controller
      *     security={{"bearerAuth": {}}}
      * )
      */
+    public function cancel($id)
+    {
+        $order = Order::where('user_id', Auth::id())->find($id);
+        if (!$order) {
+            return response()->json(['success' => false, 'message' => 'Order not found'], 404);
+        }
+
+        // Customers can only cancel before the shop starts preparing it.
+        if ($order->status !== 'pending') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Only pending orders can be cancelled',
+            ], 422);
+        }
+
+        DB::transaction(function () use ($order) {
+            $order->restock();
+            $order->update(['status' => 'cancelled']);
+        });
+
+        return response()->json(['success' => true, 'order' => $order->fresh()->load('items.product.images', 'shop')]);
+    }
+
     public function getUserOrders()
     {
         $user = Auth::user();

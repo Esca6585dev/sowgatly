@@ -82,6 +82,15 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     Route::post('orders', [App\Http\Controllers\Api\OrderController::class, 'createOrder']);
     Route::get('orders', [App\Http\Controllers\Api\OrderController::class, 'getUserOrders']);
     Route::get('orders/{id}', [App\Http\Controllers\Api\OrderController::class, 'getOrder']);
+    Route::post('orders/{id}/cancel', [App\Http\Controllers\Api\OrderController::class, 'cancel']);
+
+    // Orders for the signed-in user's own shop
+    Route::get('shop/orders', [App\Http\Controllers\Api\ShopOrderController::class, 'index']);
+    Route::put('shop/orders/{id}/status', [App\Http\Controllers\Api\ShopOrderController::class, 'updateStatus']);
+
+    // In-app notifications
+    Route::get('me/notifications', [App\Http\Controllers\Api\UserNotificationController::class, 'index']);
+    Route::post('me/notifications/read', [App\Http\Controllers\Api\UserNotificationController::class, 'markAllRead']);
     Route::get('user/orders', [App\Http\Controllers\Api\OrderController::class, 'getUserOrders']);
 
     // Address routes
