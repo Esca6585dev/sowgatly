@@ -45,6 +45,9 @@ class ShopResource extends JsonResource
             'region' => $this->when($this->region, function () {
                 return new RegionResource($this->region);
             }),
+            'address' => $this->whenLoaded('address', function () {
+                return $this->address ? $this->address->address_name : null;
+            }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
