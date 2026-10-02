@@ -39,6 +39,8 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     Route::apiResource('products', App\Http\Controllers\Api\ProductController::class);
     Route::get('product/search', [App\Http\Controllers\Api\ProductController::class , 'search']);
     Route::get('product/category/{category_id}', [App\Http\Controllers\Api\ProductController::class , 'getByCategory']);
+    Route::get('products/{id}/reviews', [App\Http\Controllers\Api\ProductReviewController::class, 'index']);
+    Route::post('products/{id}/reviews', [App\Http\Controllers\Api\ProductReviewController::class, 'store']);
 
     // Compositions routes
     Route::apiResource('compositions', App\Http\Controllers\Api\CompositionController::class);
