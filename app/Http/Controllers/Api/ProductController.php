@@ -8,6 +8,8 @@ use App\Models\ProductBrand;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Image;
+use App\Models\Region;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\ProductUpdateRequest;
@@ -504,6 +506,10 @@ class ProductController extends Controller
                 $query->where('shop_id', $request->input('shop_id'));
             }
 
+            if ($request->filled('region_id')) {
+                $this->filterByRegion($query, $request->input('region_id'));
+            }
+
             switch ($request->input('sort')) {
                 case 'price_asc':
                     $query->orderBy('price');
@@ -584,12 +590,12 @@ class ProductController extends Controller
      *     )
      * )
      */
-    public function getByCategory($category_id)
+    public function getByCategory(Request $request, $category_id)
     {
         try {
             $category = Category::findOrFail($category_id);
 
-            $products = Product::with([
+            $query = Product::with([
                     'category',
                     'shop',
                     'images',
@@ -597,8 +603,13 @@ class ProductController extends Controller
                 ])
                 ->where('category_id', $category_id)
                 ->where('status', true)
-                ->orderBy('created_at', 'desc')
-                ->get();
+                ->orderBy('created_at', 'desc');
+
+            if ($request->filled('region_id')) {
+                $this->filterByRegion($query, $request->input('region_id'));
+            }
+
+            $products = $query->get();
 
             if ($products->isEmpty()) {
                 return response()->json([
@@ -626,5 +637,14 @@ class ProductController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    private function filterByRegion($query, $regionId)
+    {
+        $regionIds = Region::selfAndDescendantIds($regionId);
+
+        $query->whereHas('shop', function ($q) use ($regionIds) {
+            $q->whereIn('region_id', $regionIds);
+        });
     }
 }

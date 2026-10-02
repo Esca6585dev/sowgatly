@@ -25,4 +25,22 @@ class Region extends Model
     {
         return $this->hasMany(Region::class, 'parent_id');
     }
+
+    /**
+     * IDs of this region and everything under it (province -> city ->
+     * village), so filtering by a province also matches shops placed in
+     * one of its cities or villages.
+     */
+    public static function selfAndDescendantIds($regionId): array
+    {
+        $ids = [(int) $regionId];
+        $frontier = [(int) $regionId];
+
+        while (!empty($frontier)) {
+            $frontier = static::whereIn('parent_id', $frontier)->pluck('id')->all();
+            $ids = array_merge($ids, $frontier);
+        }
+
+        return $ids;
+    }
 }

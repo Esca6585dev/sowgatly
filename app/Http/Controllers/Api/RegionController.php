@@ -39,9 +39,16 @@ class RegionController extends Controller
      *     )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
-        $regions = Region::all();
+        $query = Region::query();
+
+        // ?types=province,city lets the app list only pickable regions.
+        if ($request->filled('types')) {
+            $query->whereIn('type', explode(',', $request->input('types')));
+        }
+
+        $regions = $query->orderBy('name')->get();
         return RegionResource::collection($regions);
     }
 
