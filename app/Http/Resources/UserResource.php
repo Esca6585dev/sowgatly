@@ -43,6 +43,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'phone_number' => $this->phone_number,
+            'email' => $this->email,
             'image' => $this->image ? asset($this->image) : null,
             'status' => $this->status,
             'created_at' => $this->created_at->toDateTimeString(),

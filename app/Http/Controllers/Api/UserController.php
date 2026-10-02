@@ -13,6 +13,7 @@ use App\Http\Requests\UserStoreRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -243,6 +244,37 @@ class UserController extends Controller
             'success' => true,
             'message' => 'User retrieved successfully',
             'user' => new UserResource($user)
+        ]);
+    }
+
+    /**
+     * Update the signed-in user's own name and email. The phone number is
+     * the login identity and is not editable here.
+     */
+    public function updateMe(Request $request)
+    {
+        $user = $request->user();
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ], 422);
+        }
+
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email') ?: null,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'user' => new UserResource($user->fresh()),
         ]);
     }
 
