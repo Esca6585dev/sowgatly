@@ -1,7 +1,6 @@
 # Laravel specific files/folders
 /storage/*
 /bootstrap/cache/*
-/config/app.php  # Or keep it out if you prefer to manage config via .env only
 /.env
 /vendor/*
 /node_modules/*
@@ -26,8 +25,6 @@ __MACOSX
 # Package manager files
 composer.lock
 
-# Deployment related (optional)
-.env.example
 
 # Testing
 /phpunit.xml
