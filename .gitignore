@@ -1,48 +1,41 @@
-# Laravel specific files/folders
+# Laravel
 /storage/*
+!/storage/api-docs
 /bootstrap/cache/*
 /.env
-/vendor/*
-/node_modules/*
-/public/build/*  # For Vite
-/public/hot     # For Vite hot reloading
-/public/mix-manifest.json # If using Laravel Mix
-/public/vite.config.js # If using Vite and you don't want to track changes
-
-# General files/folders
-.DS_Store
-.idea/      # PhpStorm/IntelliJ
-.vscode/    # VS Code
-*.log
-*.tmp
-*~         # Backup files
-Thumbs.db
-
-# OS specific (optional)
-.AppleDouble
-__MACOSX
-
-# Package manager files
-composer.lock
-
+/vendor
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/public/mix-manifest.json
 
 # Testing
-/phpunit.xml
-/tests/_output/*  # If you have an output directory for tests
-
-# Cache and temporary files
+/tests/_output
+.phpunit.result.cache
 *.cache
-*.swp # Swap files
-.phpunit.result.cache # PHPUnit result cache
 
-# Other
+# Editors / OS
+.idea
+.vscode
+.DS_Store
+.AppleDouble
+__MACOSX
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*~
+
+# Shell history and local tooling
 .history
 .local
 .bash_history
 .zsh_history
+.codegpt
 
-# Laravel Sail (if used)
+# Laravel Sail
 /vendor/sail
 
-# CodeGPT (If you don't want to track its changes)
-.codegpt
+# Dependency lock (not committed in this project)
+composer.lock
