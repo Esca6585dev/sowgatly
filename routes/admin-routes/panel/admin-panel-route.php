@@ -31,5 +31,14 @@ Route::group([
             '/permission' => App\Http\Controllers\AdminControllers\Permission\PermissionController::class,
             '/cart' => App\Http\Controllers\AdminControllers\Cart\CartController::class,
         ]);
+
+        // Orders, chats and shop applications are created by customers; the
+        // admin panel only lists, inspects and changes their status.
+        Route::resource('/order', App\Http\Controllers\AdminControllers\Order\OrderController::class)
+            ->only(['index', 'show', 'update']);
+        Route::resource('/chat', App\Http\Controllers\AdminControllers\Chat\ChatController::class)
+            ->only(['index', 'show']);
+        Route::resource('/shop-application', App\Http\Controllers\AdminControllers\ShopApplication\ShopApplicationController::class)
+            ->only(['index', 'show', 'update']);
     });
 });

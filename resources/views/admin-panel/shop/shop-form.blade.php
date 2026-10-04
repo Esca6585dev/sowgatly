@@ -234,14 +234,14 @@
 
                                                     <div class="col-4">
                                                         <div class="form-group">
-                                                            <label>{{ __('Address') }}</label>
+                                                            <label>{{ __('Phone number') }}</label>
 
                                                             <input type="text"
-                                                                class="form-control @error('address') is-invalid @enderror"
-                                                                name="address" placeholder="{{ __('Address') }}"
-                                                                value="{{ $shop->address ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('address') : '' }}" />
+                                                                class="form-control @error('phone') is-invalid @enderror"
+                                                                name="phone" placeholder="65656565"
+                                                                value="{{ old('phone', $shop->phone ?? '') }}" />
 
-                                                            @error('address')
+                                                            @error('phone')
                                                             <div class="fv-plugins-message-container invalid-feedback">
                                                                 <div data-field="address" data-validator="notEmpty">
                                                                     {{ $message }}
@@ -365,24 +365,68 @@
 
                                                     <div class="col-4">
                                                         <div class="form-group">
-                                                            <label>{{ __('seller_id') }}</label>
-
-                                                            <select
-                                                                class="form-control @error('seller_id') is-invalid @enderror"
-                                                                name="seller_id">
+                                                            <label>{{ __('Owner') }}</label>
+                                                            <select class="form-control @error('user_id') is-invalid @enderror" name="user_id">
+                                                                <option value="">—</option>
                                                                 @foreach($sellers as $seller)
-                                                                <option value="{{ $seller->id }}">{{ $seller->name }}
-                                                                    +993 {{ $seller->phone_number }}</option>
+                                                                <option value="{{ $seller->id }}" {{ (int) old('user_id', $shop->user_id ?? 0) === $seller->id ? 'selected' : '' }}>{{ $seller->name }} +993 {{ $seller->phone_number }}</option>
                                                                 @endforeach
                                                             </select>
+                                                            @error('user_id')<div class="fv-plugins-message-container invalid-feedback"><div>{{ $message }}</div></div>@enderror
+                                                        </div>
+                                                    </div>
 
-                                                            @error('seller_id')
-                                                            <div class="fv-plugins-message-container invalid-feedback">
-                                                                <div data-field="seller_id" data-validator="notEmpty">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            </div>
-                                                            @enderror
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <label>{{ __('Region') }}</label>
+                                                            <select class="form-control @error('region_id') is-invalid @enderror" name="region_id">
+                                                                <option value="">—</option>
+                                                                @foreach($regions ?? [] as $region)
+                                                                <option value="{{ $region->id }}" {{ (int) old('region_id', $shop->region_id ?? 0) === $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('region_id')<div class="fv-plugins-message-container invalid-feedback"><div>{{ $message }}</div></div>@enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <label>{{ __('Status') }}</label>
+                                                            <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                                                @foreach(\App\Models\Shop::STATUSES as $status)
+                                                                <option value="{{ $status }}" {{ old('status', $shop->status ?? 'approved') === $status ? 'selected' : '' }}>{{ __(ucfirst($status)) }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('status')<div class="fv-plugins-message-container invalid-feedback"><div>{{ $message }}</div></div>@enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <label>{{ __('Delivery fee') }} (TMT)</label>
+                                                            <input type="number" step="0.01" min="0" class="form-control @error('delivery_fee') is-invalid @enderror"
+                                                                name="delivery_fee" value="{{ old('delivery_fee', $shop->delivery_fee ?? 20) }}" />
+                                                            @error('delivery_fee')<div class="fv-plugins-message-container invalid-feedback"><div>{{ $message }}</div></div>@enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <label>{{ __('Minimum order amount') }} (TMT)</label>
+                                                            <input type="number" step="0.01" min="0" class="form-control @error('min_order_amount') is-invalid @enderror"
+                                                                name="min_order_amount" value="{{ old('min_order_amount', $shop->min_order_amount ?? '') }}" />
+                                                            @error('min_order_amount')<div class="fv-plugins-message-container invalid-feedback"><div>{{ $message }}</div></div>@enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <label class="d-block">{{ __('Pickup available') }}</label>
+                                                            <input type="hidden" name="pickup_available" value="0">
+                                                            <label class="checkbox checkbox-lg">
+                                                                <input type="checkbox" name="pickup_available" value="1" {{ old('pickup_available', $shop->pickup_available ?? false) ? 'checked' : '' }}>
+                                                                <span></span>&nbsp;{{ __('Customers may pick up at the shop') }}
+                                                            </label>
                                                         </div>
                                                     </div>
 
