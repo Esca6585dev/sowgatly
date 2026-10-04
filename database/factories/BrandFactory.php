@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Image;
 use App\Models\Brand;
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BrandFactory extends Factory
@@ -13,7 +13,7 @@ class BrandFactory extends Factory
     public function definition()
     {
         return [
-            'name' => Brand::factory(),
+            'name' => $this->faker->unique()->company,
             'description' => $this->faker->paragraph(),
             'logo' => $this->generateImageUrl(),
             'status' => $this->faker->boolean,

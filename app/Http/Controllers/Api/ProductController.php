@@ -112,19 +112,16 @@ class ProductController extends Controller
      *     tags={"Products"},
      *     @OA\RequestBody(
      *         @OA\JsonContent(
-     *             required={"name","price","description","seller_status","status","shop_id","category_id"},
-     *             @OA\Property(property="name", type="string", example="Stylish T-Shirt"),
+     *             required={"name_tm","name_en","name_ru","price","description_tm","description_en","description_ru","seller_status","status","category_id"},
+     *             @OA\Property(property="name_tm", type="string", example="Bägül çemeni"),
+     *             @OA\Property(property="name_en", type="string", example="Rose bouquet"),
+     *             @OA\Property(property="name_ru", type="string", example="Букет роз"),
      *             @OA\Property(property="price", type="number", format="float", example=29.99),
      *             @OA\Property(property="discount", type="integer", example=10),
-     *             @OA\Property(property="description", type="string", example="A comfortable and stylish t-shirt for everyday wear."),
-     *             @OA\Property(property="gender", type="string", example="Unisex"),
-     *             @OA\Property(property="sizes", type="array", @OA\Items(type="integer"), example={42, 43, 44, 45}),
-     *             @OA\Property(property="separated_sizes", type="array", @OA\Items(type="string"), example={"S", "M", "L", "XL"}),
-     *             @OA\Property(property="color", type="string", example="Blue"),
-     *             @OA\Property(property="manufacturer", type="string", example="FashionCo"),
-     *             @OA\Property(property="width", type="number", format="float", example=30.5),
-     *             @OA\Property(property="height", type="number", format="float", example=50.0),
-     *             @OA\Property(property="weight", type="number", format="float", example=200),
+     *             @OA\Property(property="description_tm", type="string", example="Gyzyl bägüller"),
+     *             @OA\Property(property="description_en", type="string", example="Red roses"),
+     *             @OA\Property(property="description_ru", type="string", example="Красные розы"),
+     *             @OA\Property(property="stock", type="integer", example=20),
      *             @OA\Property(property="production_time", type="integer", example=300),
      *             @OA\Property(property="min_order", type="integer", example=1),
      *             @OA\Property(property="seller_status", type="boolean", example=true),
@@ -180,21 +177,15 @@ class ProductController extends Controller
             // shop_id the client sent.
             $data['shop_id'] = $shop->id;
 
-            $arrayFields = ['sizes', 'separated_sizes'];
-            
-            foreach ($arrayFields as $field) {
-                if (isset($data[$field]) && is_array($data[$field])) {
-                    $data[$field] = implode(',', $data[$field]);
-                }
-            }
-
-            // Remove images from data array
             $images = $data['images'] ?? [];
-            unset($data['images']);
-            
+            $brandIds = $data['brand_ids'] ?? [];
+            unset($data['images'], $data['brand_ids']);
+
             $product = Product::create($data);
 
-            $product->brands()->attach($data['brand_ids']);
+            if (!empty($brandIds)) {
+                $product->brands()->attach($brandIds);
+            }
 
             // Handle image uploads
             foreach ($images as $base64Image) {
@@ -204,13 +195,18 @@ class ProductController extends Controller
 
             DB::commit();
 
+            $resource = new ProductResource($product->load(['images', 'brands']));
+
             return response()->json([
+                'success' => true,
                 'message' => 'Product created successfully',
-                'product' => new ProductResource($product),
+                'product' => $resource,
+                'data' => $resource,
             ], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
+                'success' => false,
                 'message' => 'An error occurred while creating the product',
                 'error' => $e->getMessage()
             ], 500);
@@ -253,18 +249,15 @@ class ProductController extends Controller
      *     ),
      *     @OA\RequestBody(
      *         @OA\JsonContent(
-     *             @OA\Property(property="name", type="string", example="Updated Stylish T-Shirt"),
-     *             @OA\Property(property="price", type="number", format="float", example=34.99),
-     *             @OA\Property(property="discount", type="integer", example=15),
-     *             @OA\Property(property="description", type="string", example="An updated comfortable and stylish t-shirt for everyday wear."),
-     *             @OA\Property(property="gender", type="string", example="Unisex"),
-     *             @OA\Property(property="sizes", type="array", @OA\Items(type="integer"), example={42, 43, 44, 45, 46}),
-     *             @OA\Property(property="separated_sizes", type="array", @OA\Items(type="string"), example={"S", "M", "L", "XL", "XXL"}),
-     *             @OA\Property(property="color", type="string", example="Red"),
-     *             @OA\Property(property="manufacturer", type="string", example="UpdatedFashionCo"),
-     *             @OA\Property(property="width", type="number", format="float", example=31.0),
-     *             @OA\Property(property="height", type="number", format="float", example=51.0),
-     *             @OA\Property(property="weight", type="number", format="float", example=210),
+     *             @OA\Property(property="name_tm", type="string", example="Updated Bägül çemeni"),
+     *             @OA\Property(property="name_en", type="string", example="Updated Rose bouquet"),
+     *             @OA\Property(property="name_ru", type="string", example="Updated Букет роз"),
+     *             @OA\Property(property="price", type="number", format="float", example=29.99),
+     *             @OA\Property(property="discount", type="integer", example=10),
+     *             @OA\Property(property="description_tm", type="string", example="Gyzyl bägüller"),
+     *             @OA\Property(property="description_en", type="string", example="Red roses"),
+     *             @OA\Property(property="description_ru", type="string", example="Красные розы"),
+     *             @OA\Property(property="stock", type="integer", example=20),
      *             @OA\Property(property="production_time", type="integer", example=280),
      *             @OA\Property(property="min_order", type="integer", example=2),
      *             @OA\Property(property="seller_status", type="boolean", example=true),
@@ -322,33 +315,24 @@ class ProductController extends Controller
             $data = $request->validated();
             $data['shop_id'] = $product->shop_id;
 
-            // Handle array fields
-            $arrayFields = ['sizes', 'separated_sizes'];
-            foreach ($arrayFields as $field) {
-                if (isset($data[$field]) && is_array($data[$field])) {
-                    $data[$field] = implode(',', $data[$field]);
-                }
-            }
-
-            // Remove images from data array
             $images = $data['images'] ?? [];
-            unset($data['images']);
+            // Only touch the brand list when the client sent one.
+            $brandIds = array_key_exists('brand_ids', $data) ? ($data['brand_ids'] ?? []) : null;
+            unset($data['images'], $data['brand_ids']);
 
-            // Update product details
             $product->update($data);
 
-            $product->brands()->sync($data['brand_ids']);
+            if ($brandIds !== null) {
+                $product->brands()->sync($brandIds);
+            }
 
-            // Handle images
-            if (!empty($images)) {
-                foreach ($images as $imageBase64) {
-                    if ($imageBase64) {
-                        try {
-                            $imagePath = $this->uploadBase64Image($imageBase64);
-                            $product->images()->create(['product_images' => $imagePath]);
-                        } catch (\Exception $e) {
-                            \Log::error('Failed to save image: ' . $e->getMessage());
-                        }
+            foreach ($images as $imageBase64) {
+                if ($imageBase64) {
+                    try {
+                        $imagePath = $this->uploadBase64Image($imageBase64);
+                        $product->images()->create(['url' => $imagePath]);
+                    } catch (\Exception $e) {
+                        \Log::error('Failed to save image: ' . $e->getMessage());
                     }
                 }
             }
@@ -356,12 +340,14 @@ class ProductController extends Controller
             DB::commit();
 
             return response()->json([
+                'success' => true,
                 'message' => 'Product updated successfully',
-                'data' => new ProductResource($product->load('images'))
+                'data' => new ProductResource($product->load(['images', 'brands']))
             ], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
+                'success' => false,
                 'message' => 'An error occurred while updating the product',
                 'error' => $e->getMessage()
             ], 500);
@@ -537,9 +523,14 @@ class ProductController extends Controller
 
             $query->withRatingSummary();
 
-            // min_rating filters on the aggregated average, hence HAVING.
+            // min_rating filters on the average rating. A correlated subquery in
+            // WHERE (instead of HAVING on the withAvg alias) also works for the
+            // paginator's COUNT(*) wrapper on SQLite.
             if ($request->filled('min_rating')) {
-                $query->having('reviews_avg', '>=', (float) $request->input('min_rating'));
+                // Inlined as a float literal: a bound parameter arrives as text and
+                // SQLite would then compare the numeric average against a string.
+                $minRating = sprintf('%.2F', (float) $request->input('min_rating'));
+                $query->whereRaw("(select avg(rating) from product_reviews where product_reviews.product_id = products.id) >= {$minRating}");
             }
 
             switch ($request->input('sort')) {
@@ -556,19 +547,7 @@ class ProductController extends Controller
                     $query->latest();
             }
 
-            $products = $query->with(['category', 'shop', 'images', 'compositions'])->paginate(20);
-
-            // Fetch all brand IDs from the products
-            $brandIds = $products->pluck('brand_ids')->flatten()->unique()->filter();
-
-            // Fetch all brands that are associated with these products
-            $brands = Brand::whereIn('id', $brandIds)->get();
-
-            // Associate the brands with their respective products
-            $products->getCollection()->transform(function ($product) use ($brands) {
-                $product->brands = $brands->whereIn('id', $product->brand_ids);
-                return $product;
-            });
+            $products = $query->with(['category', 'shop', 'images', 'brands', 'compositions'])->paginate(20);
 
             return response()->json([
                 'success' => true,

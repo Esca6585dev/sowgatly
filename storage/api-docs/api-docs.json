@@ -11,7 +11,7 @@
             "description": "Local server"
         },
         {
-            "url": "https://sowgatly.app",
+            "url": "http://localhost:8000",
             "description": "Remote server"
         }
     ],
@@ -2427,18 +2427,29 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "name",
+                                    "name_tm",
+                                    "name_en",
+                                    "name_ru",
                                     "price",
-                                    "description",
+                                    "description_tm",
+                                    "description_en",
+                                    "description_ru",
                                     "seller_status",
                                     "status",
-                                    "shop_id",
                                     "category_id"
                                 ],
                                 "properties": {
-                                    "name": {
+                                    "name_tm": {
                                         "type": "string",
-                                        "example": "Stylish T-Shirt"
+                                        "example": "Bägül çemeni"
+                                    },
+                                    "name_en": {
+                                        "type": "string",
+                                        "example": "Rose bouquet"
+                                    },
+                                    "name_ru": {
+                                        "type": "string",
+                                        "example": "Букет роз"
                                     },
                                     "price": {
                                         "type": "number",
@@ -2449,60 +2460,21 @@
                                         "type": "integer",
                                         "example": 10
                                     },
-                                    "description": {
+                                    "description_tm": {
                                         "type": "string",
-                                        "example": "A comfortable and stylish t-shirt for everyday wear."
+                                        "example": "Gyzyl bägüller"
                                     },
-                                    "gender": {
+                                    "description_en": {
                                         "type": "string",
-                                        "example": "Unisex"
+                                        "example": "Red roses"
                                     },
-                                    "sizes": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "integer"
-                                        },
-                                        "example": [
-                                            42,
-                                            43,
-                                            44,
-                                            45
-                                        ]
-                                    },
-                                    "separated_sizes": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "example": [
-                                            "S",
-                                            "M",
-                                            "L",
-                                            "XL"
-                                        ]
-                                    },
-                                    "color": {
+                                    "description_ru": {
                                         "type": "string",
-                                        "example": "Blue"
+                                        "example": "Красные розы"
                                     },
-                                    "manufacturer": {
-                                        "type": "string",
-                                        "example": "FashionCo"
-                                    },
-                                    "width": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 30.5
-                                    },
-                                    "height": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 50
-                                    },
-                                    "weight": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 200
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 20
                                     },
                                     "production_time": {
                                         "type": "integer",
@@ -2655,75 +2627,42 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "name": {
+                                    "name_tm": {
                                         "type": "string",
-                                        "example": "Updated Stylish T-Shirt"
+                                        "example": "Updated Bägül çemeni"
+                                    },
+                                    "name_en": {
+                                        "type": "string",
+                                        "example": "Updated Rose bouquet"
+                                    },
+                                    "name_ru": {
+                                        "type": "string",
+                                        "example": "Updated Букет роз"
                                     },
                                     "price": {
                                         "type": "number",
                                         "format": "float",
-                                        "example": 34.99
+                                        "example": 29.99
                                     },
                                     "discount": {
                                         "type": "integer",
-                                        "example": 15
+                                        "example": 10
                                     },
-                                    "description": {
+                                    "description_tm": {
                                         "type": "string",
-                                        "example": "An updated comfortable and stylish t-shirt for everyday wear."
+                                        "example": "Gyzyl bägüller"
                                     },
-                                    "gender": {
+                                    "description_en": {
                                         "type": "string",
-                                        "example": "Unisex"
+                                        "example": "Red roses"
                                     },
-                                    "sizes": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "integer"
-                                        },
-                                        "example": [
-                                            42,
-                                            43,
-                                            44,
-                                            45,
-                                            46
-                                        ]
-                                    },
-                                    "separated_sizes": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "example": [
-                                            "S",
-                                            "M",
-                                            "L",
-                                            "XL",
-                                            "XXL"
-                                        ]
-                                    },
-                                    "color": {
+                                    "description_ru": {
                                         "type": "string",
-                                        "example": "Red"
+                                        "example": "Красные розы"
                                     },
-                                    "manufacturer": {
-                                        "type": "string",
-                                        "example": "UpdatedFashionCo"
-                                    },
-                                    "width": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 31
-                                    },
-                                    "height": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 51
-                                    },
-                                    "weight": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 210
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 20
                                     },
                                     "production_time": {
                                         "type": "integer",

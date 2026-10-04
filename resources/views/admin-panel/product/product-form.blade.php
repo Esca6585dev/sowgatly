@@ -192,296 +192,243 @@
                                         <div class="card-body">
                                             <div class="container">
                                                 <div class="row">
-                                                    <div class="col-4">
-                                                        <div class="form-group">
-                                                            <label>{{ __('Name') }}</label>
-
-                                                            <input type="text"
-                                                                class="form-control @error('name') is-invalid @enderror"
-                                                                name="name" placeholder="{{ __('Name') }}"
-                                                                value="{{ $product->{ 'name' } ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('name') : '' }}" />
-
-                                                            @error('name')
-                                                            <div class="fv-plugins-message-container invalid-feedback">
-                                                                <div data-field="name" data-validator="notEmpty">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            </div>
-                                                            @enderror
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Name (TM)') }}</label>
+                                                        <input type="text" 
+                                                            class="form-control @error('name_tm') is-invalid @enderror"
+                                                            name="name_tm" placeholder="{{ __('Name (TM)') }}"
+                                                            value="{{ old('name_tm', $product->name_tm) }}" />
+                                                        @error('name_tm')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="name_tm" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
+                                                        @enderror
                                                     </div>
-
-                                                    <div class="col-4">
-                                                        <div class="form-group">
-                                                            <label>{{ __('Categories') }}</label>
-                                                            <select
-                                                                class="form-control @error('category_id') is-invalid @enderror"
-                                                                id="exampleSelect1" name="category_id">
-                                                                <option value="">---{{ __('unselected') }}---
-                                                                </option>
-                                                                @foreach($parentCategories as $parentCategory)
-                                                                <option value="{{ $parentCategory->id }}"
-                                                                    {{ $parentCategory->id == $product->category_id ? 'selected=selected' : '' }}>
-                                                                    {{ $parentCategory->id }})
-                                                                    {{ $parentCategory->{ 'name_' . app()->getlocale() } }}
-                                                                </option>
-                                                                @foreach($parentCategory->categories as $category)
-                                                                <option value="{{ $category->id }}"
-                                                                    {{ $category->id == $product->category_id ? 'selected=selected' : '' }}>
-                                                                    --
-                                                                    ({{ $parentCategory->{ 'name_' . app()->getlocale() } }})
-                                                                    > {{ $category->id }})
-                                                                    {{ $category->{ 'name_' . app()->getlocale() } }} <
-                                                                        </option> @endforeach @endforeach </select>
-                                                                        </div> </div> <div class="col-4">
-                                                                        <div class="form-group">
-                                                                            <label>{{ __('Images') }}</label>
-
-                                                                            <input type="file"
-                                                                                class="form-control @error('images') is-invalid @enderror"
-                                                                                accept="image/gif, image/jpeg, image/png"
-                                                                                onchange="loadImages(event)"
-                                                                                name="images[]" multiple />
-
-                                                                            @error('images')
-                                                                            <div
-                                                                                class="fv-plugins-message-container invalid-feedback">
-                                                                                <div data-field="images"
-                                                                                    data-validator="notEmpty">
-                                                                                    {{ $message }}
-                                                                                </div>
-                                                                            </div>
-                                                                            @enderror
-                                                                        </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Name (EN)') }}</label>
+                                                        <input type="text" 
+                                                            class="form-control @error('name_en') is-invalid @enderror"
+                                                            name="name_en" placeholder="{{ __('Name (EN)') }}"
+                                                            value="{{ old('name_en', $product->name_en) }}" />
+                                                        @error('name_en')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="name_en" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Description') }}</label>
-
-                                                                <textarea
-                                                                    class="summernote @error('description') is-invalid @enderror"
-                                                                    id="kt_summernote_1"
-                                                                    name="description">{{ $product->description ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('description') : '' }}</textarea>
-
-                                                                @error('description')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="description"
-                                                                        data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Name (RU)') }}</label>
+                                                        <input type="text" 
+                                                            class="form-control @error('name_ru') is-invalid @enderror"
+                                                            name="name_ru" placeholder="{{ __('Name (RU)') }}"
+                                                            value="{{ old('name_ru', $product->name_ru) }}" />
+                                                        @error('name_ru')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="name_ru" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Color') }} {{ __('Code') }}</label>
-
-                                                                <input type="color" class="form-control" id="color_code"
-                                                                    onchange="getColorName(event)">
-
-                                                                @error('color_name')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="color_name"
-                                                                        data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Description (TM)') }}</label>
+                                                        <textarea rows="4"
+                                                            class="form-control @error('description_tm') is-invalid @enderror"
+                                                            name="description_tm">{{ old('description_tm', $product->description_tm) }}</textarea>
+                                                        @error('description_tm')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="description_tm" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Color') }} {{ __('Name') }}</label>
-
-
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Enter your color:"
-                                                                    onkeyup="getColorName(event)">
-
-                                                                @error('color_name')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="color_name"
-                                                                        data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Description (EN)') }}</label>
+                                                        <textarea rows="4"
+                                                            class="form-control @error('description_en') is-invalid @enderror"
+                                                            name="description_en">{{ old('description_en', $product->description_en) }}</textarea>
+                                                        @error('description_en')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="description_en" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Color') }}</label>
-
-                                                                <div class="form-control" id="colorName"
-                                                                    name="color_name">Reňk</div>
-
-                                                                @error('color_name')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="color_name"
-                                                                        data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Description (RU)') }}</label>
+                                                        <textarea rows="4"
+                                                            class="form-control @error('description_ru') is-invalid @enderror"
+                                                            name="description_ru">{{ old('description_ru', $product->description_ru) }}</textarea>
+                                                        @error('description_ru')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="description_ru" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Color') }}</label>
-
-                                                                <select class="form-control"
-                                                                    onchange="colorChange(event)" name="color_name">
-                                                                    @foreach(config('colors') as $key => $color)
-                                                                    <option value="{{ $key }}">{{ $key }} >
-                                                                        {{ $color[ '' . app()->getlocale() . '' ] }}
-                                                                    </option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                                @error('color_name')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="color_name"
-                                                                        data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Categories') }}</label>
+                                                        <select class="form-control @error('category_id') is-invalid @enderror" name="category_id">
+                                                            <option value="">---{{ __('unselected') }}---</option>
+                                                            @foreach($parentCategories as $parentCategory)
+                                                            <option value="{{ $parentCategory->id }}" {{ old('category_id', $product->category_id) == $parentCategory->id ? 'selected' : '' }}>
+                                                                {{ $parentCategory->id }}) {{ $parentCategory->{ 'name_' . app()->getlocale() } }}
+                                                            </option>
+                                                            @foreach($parentCategory->categories as $category)
+                                                            <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                                                                -- {{ $category->id }}) {{ $category->{ 'name_' . app()->getlocale() } }}
+                                                            </option>
+                                                            @endforeach
+                                                            @endforeach
+                                                        </select>
+                                                        @error('category_id')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="category_id" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Shops') }}</label>
-
-                                                                <select class="form-control" name="shop_id">
-                                                                    @foreach($shops as $shop)
-                                                                    <option value="{{ $shop->id }}" {{ $product->shop_id == $shop->id ? 'selected' : '' }}>
-                                                                        {{ $shop->name }}
-                                                                    </option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                                @error('shop_id')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="shop_id"
-                                                                        data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Shops') }}</label>
+                                                        <select class="form-control @error('shop_id') is-invalid @enderror" name="shop_id">
+                                                            <option value="">---{{ __('unselected') }}---</option>
+                                                            @foreach($shops as $shop)
+                                                            <option value="{{ $shop->id }}" {{ old('shop_id', $product->shop_id) == $shop->id ? 'selected' : '' }}>{{ $shop->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('shop_id')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="shop_id" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Price') }}</label>
-
-                                                                <input type="text"
-                                                                    class="form-control @error('price') is-invalid @enderror"
-                                                                    name="price" placeholder="{{ __('Price') }}"
-                                                                    value="{{ $product->{ 'price' } ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('price') : '' }}" />
-
-                                                                @error('price')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="price" data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Images') }}</label>
+                                                        <input type="file"
+                                                            class="form-control @error('images') is-invalid @enderror"
+                                                            accept="image/gif, image/jpeg, image/png, image/webp"
+                                                            onchange="loadImages(event)"
+                                                            name="images[]" multiple />
+                                                        @error('images')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="images" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Discount') }} %</label>
-
-                                                                <input type="text"
-                                                                    class="form-control @error('discount') is-invalid @enderror"
-                                                                    name="discount" placeholder="{{ __('Discount') }}"
-                                                                    value="{{ $product->{ 'discount' } ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('discount') : '' }}" />
-
-                                                                @error('discount')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="discount"
-                                                                        data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                        @error('images.*')
+                                                        <div class="fv-plugins-message-container invalid-feedback d-block">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Price') }}</label>
+                                                        <input type="number" step="0.01" min="0"
+                                                            class="form-control @error('price') is-invalid @enderror"
+                                                            name="price" placeholder="{{ __('Price') }}"
+                                                            value="{{ old('price', $product->price) }}" />
+                                                        @error('price')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="price" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-                                                        
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Status') }}</label>
-
-                                                                <select
-                                                                    class="form-control @error('status') is-invalid @enderror"
-                                                                    name="status">
-                                                                    @if($product->id)
-                                                                    <option value="1"
-                                                                        {{ $product->status == 1 ? 'selected' : '' }}>
-                                                                        {{ __('Active') }}</option>
-                                                                    <option value="0"
-                                                                        {{ $product->status == 0 ? 'selected' : '' }}>
-                                                                        {{ __('Inactive') }}</option>
-                                                                    @else
-                                                                    <option value="1">
-                                                                        {{ __('Active') }}</option>
-                                                                    <option value="0" >
-                                                                        {{ __('Inactive') }}</option>
-                                                                    @endif
-                                                                </select>
-
-                                                                @error('status')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="status" data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Discount %') }}</label>
+                                                        <input type="number" min="0" max="100"
+                                                            class="form-control @error('discount') is-invalid @enderror"
+                                                            name="discount" placeholder="{{ __('Discount %') }}"
+                                                            value="{{ old('discount', $product->discount) }}" />
+                                                        @error('discount')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="discount" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-
-                                                        @if($product->id)
-                                                        <div class="col-2">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Code') }}</label>
-
-                                                                <span class="form-control @error('code') is-invalid @enderror badge badge-warning span-flex">
-                                                                    {{ $product->code }}
-                                                                </span>
-
-                                                                @error('code')
-                                                                <div
-                                                                    class="fv-plugins-message-container invalid-feedback">
-                                                                    <div data-field="code" data-validator="notEmpty">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Stock') }}</label>
+                                                        <input type="number" min="0"
+                                                            class="form-control @error('stock') is-invalid @enderror"
+                                                            name="stock" placeholder="{{ __('Stock') }}"
+                                                            value="{{ old('stock', $product->stock) }}" />
+                                                        @error('stock')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="stock" data-validator="notEmpty">{{ $message }}</div>
                                                         </div>
-                                                        @endif
-
-                                                        <div class="col-12" id="outputDiv"></div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Production time (min)') }}</label>
+                                                        <input type="number" min="0"
+                                                            class="form-control @error('production_time') is-invalid @enderror"
+                                                            name="production_time" placeholder="{{ __('Production time (min)') }}"
+                                                            value="{{ old('production_time', $product->production_time) }}" />
+                                                        @error('production_time')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="production_time" data-validator="notEmpty">{{ $message }}</div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Min order') }}</label>
+                                                        <input type="number" min="1"
+                                                            class="form-control @error('min_order') is-invalid @enderror"
+                                                            name="min_order" placeholder="{{ __('Min order') }}"
+                                                            value="{{ old('min_order', $product->min_order) }}" />
+                                                        @error('min_order')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="min_order" data-validator="notEmpty">{{ $message }}</div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Status') }}</label>
+                                                        <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                                            <option value="1" {{ (string) old('status', $product->id ? (int) $product->status : 1) === '1' ? 'selected' : '' }}>{{ __('Active') }}</option>
+                                                            <option value="0" {{ (string) old('status', $product->id ? (int) $product->status : 1) === '0' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
+                                                        </select>
+                                                        @error('status')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="status" data-validator="notEmpty">{{ $message }}</div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Seller status') }}</label>
+                                                        <select class="form-control @error('seller_status') is-invalid @enderror" name="seller_status">
+                                                            <option value="1" {{ (string) old('seller_status', $product->id ? (int) $product->seller_status : 1) === '1' ? 'selected' : '' }}>{{ __('Active') }}</option>
+                                                            <option value="0" {{ (string) old('seller_status', $product->id ? (int) $product->seller_status : 1) === '0' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
+                                                        </select>
+                                                        @error('seller_status')
+                                                        <div class="fv-plugins-message-container invalid-feedback">
+                                                            <div data-field="seller_status" data-validator="notEmpty">{{ $message }}</div>
+                                                        </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-12" id="outputDiv"></div>
                                                         <div class="row mb-6">
                                                             <!--begin::Image-->
                                                             @if($product->images)
@@ -491,7 +438,7 @@
                                                                     id="kt_image_1" data-image-count=""
                                                                     style="background-image: url();">
                                                                     <div class="image-input-wrapper"
-                                                                        style="background-image: url({{ asset($image->image) }})">
+                                                                        style="background-image: url({{ asset($image->url) }})">
                                                                     </div>
 
                                                                     <label
