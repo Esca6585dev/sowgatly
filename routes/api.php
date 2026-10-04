@@ -33,26 +33,51 @@ Route::controller(App\Http\Controllers\Api\AuthOtpController::class)->middleware
     Route::post('register', 'registerWithOtp');
 });
 
-Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
+/*
+ * Read-only catalog. With APP_API_GUEST_BROWSING=true (default) these routes
+ * are public: a bearer token is still honoured when present (auth.optional),
+ * so authenticated responses are identical to before. With the flag off they
+ * stay inside the authenticated group below, exactly as they used to be.
+ */
+$catalogReadRoutes = function () {
+    Route::get('products/{product}', [App\Http\Controllers\Api\ProductController::class, 'show']);
+    Route::get('product/search', [App\Http\Controllers\Api\ProductController::class, 'search']);
+    Route::get('product/category/{category_id}', [App\Http\Controllers\Api\ProductController::class, 'getByCategory']);
+    Route::get('products/{id}/reviews', [App\Http\Controllers\Api\ProductReviewController::class, 'index']);
+
+    Route::apiResource('compositions', App\Http\Controllers\Api\CompositionController::class)->only(['index', 'show']);
+
+    Route::apiResource('categories', App\Http\Controllers\Api\CategoryController::class)->only(['index', 'show']);
+    Route::get('/categories/{id}/subcategories', [App\Http\Controllers\Api\CategoryController::class, 'getSubcategories']);
+
+    Route::get('shops/{shop}', [App\Http\Controllers\Api\ShopController::class, 'show']);
+
+    Route::apiResource('brands', App\Http\Controllers\Api\BrandController::class)->only(['index', 'show']);
+
+    Route::apiResource('regions', App\Http\Controllers\Api\RegionController::class)->only(['index', 'show']);
+    Route::get('/regions/parent/{parent_id}', [App\Http\Controllers\Api\RegionController::class, 'getByParentId']);
+};
+
+$guestBrowsing = config('app.api_guest_browsing');
+
+if ($guestBrowsing) {
+    Route::middleware(['throttle:120,1', 'auth.optional'])->group($catalogReadRoutes);
+}
+
+Route::middleware(['auth:sanctum', 'check.token'])->group(function () use ($catalogReadRoutes, $guestBrowsing) {
     // logout route
     Route::post('logout', [App\Http\Controllers\Api\AuthOtpController::class, 'logout']);
 
-    // Catalog: anyone signed in may read. Writes to products/shops are
-    // limited to the owning shop inside the controllers; categories,
-    // compositions, brands, regions and shop addresses are managed from the
-    // admin panel only, so the API exposes them read-only.
-    Route::apiResource('products', App\Http\Controllers\Api\ProductController::class);
-    Route::get('product/search', [App\Http\Controllers\Api\ProductController::class , 'search']);
-    Route::get('product/category/{category_id}', [App\Http\Controllers\Api\ProductController::class , 'getByCategory']);
-    Route::get('products/{id}/reviews', [App\Http\Controllers\Api\ProductReviewController::class, 'index']);
+    if (!$guestBrowsing) {
+        $catalogReadRoutes();
+    }
+
+    // Catalog writes are limited to the owning shop inside the controllers;
+    // categories, compositions, brands, regions and shop addresses are
+    // managed from the admin panel only, so the API exposes them read-only.
+    // GET products lists the caller's own shop products, so it stays here.
+    Route::apiResource('products', App\Http\Controllers\Api\ProductController::class)->except(['show']);
     Route::post('products/{id}/reviews', [App\Http\Controllers\Api\ProductReviewController::class, 'store']);
-
-    // Compositions routes
-    Route::apiResource('compositions', App\Http\Controllers\Api\CompositionController::class)->only(['index', 'show']);
-
-    // Categories routes
-    Route::apiResource('categories', App\Http\Controllers\Api\CategoryController::class)->only(['index', 'show']);
-    Route::get('/categories/{id}/subcategories', [App\Http\Controllers\Api\CategoryController::class, 'getSubcategories']);
 
     // Users: only the caller's own profile. Listing/editing other users
     // (phone numbers, passwords) is admin-panel work, not API work.
@@ -85,10 +110,7 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     Route::post('shop/chats/{id}/read', [App\Http\Controllers\Api\ShopChatController::class, 'read']);
 
     // Shops routes
-    Route::apiResource('shops', App\Http\Controllers\Api\ShopController::class);
-
-    // Brand routes
-    Route::apiResource('brands', App\Http\Controllers\Api\BrandController::class)->only(['index', 'show']);
+    Route::apiResource('shops', App\Http\Controllers\Api\ShopController::class)->except(['show']);
 
     // Carts routes
     Route::post('cart/add', [App\Http\Controllers\Api\CartController::class, 'addToCart']);
@@ -126,8 +148,4 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
 
     // Address routes
     Route::apiResource('addresses', App\Http\Controllers\Api\AddressController::class)->only(['index', 'show']);
-
-    // Regions routes
-    Route::apiResource('regions', App\Http\Controllers\Api\RegionController::class)->only(['index', 'show']);
-    Route::get('/regions/parent/{parent_id}', [App\Http\Controllers\Api\RegionController::class, 'getByParentId']);
 });

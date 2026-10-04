@@ -269,4 +269,18 @@ return [
 
     'otp_debug_code' => env('OTP_DEBUG_CODE'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Guest browsing of the catalog
+    |--------------------------------------------------------------------------
+    |
+    | When true the read-only catalog endpoints (product search and details,
+    | categories, shops, regions, brands, compositions, reviews) are served
+    | without a token so the apps can show the storefront before login.
+    | Set APP_API_GUEST_BROWSING=false to require a token again.
+    |
+    */
+
+    'api_guest_browsing' => (bool) env('APP_API_GUEST_BROWSING', true),
+
 ];

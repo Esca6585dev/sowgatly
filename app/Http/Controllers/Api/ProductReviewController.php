@@ -37,7 +37,8 @@ class ProductReviewController extends Controller
             ->selectRaw('COUNT(*) as count, AVG(rating) as average')
             ->first();
 
-        $userId = $request->user()->id;
+        // Guests may read reviews (public catalog); they can never review.
+        $userId = $request->user()?->id;
 
         return response()->json([
             'success' => true,
@@ -45,8 +46,10 @@ class ProductReviewController extends Controller
             'meta' => [
                 'count' => (int) $stats->count,
                 'average' => $stats->average !== null ? round((float) $stats->average, 1) : null,
-                'can_review' => $this->hasOrdered($userId, $productId),
-                'my_review' => ProductReview::where('product_id', $productId)->where('user_id', $userId)->first(),
+                'can_review' => $userId !== null && $this->hasOrdered($userId, $productId),
+                'my_review' => $userId !== null
+                    ? ProductReview::where('product_id', $productId)->where('user_id', $userId)->first()
+                    : null,
             ],
         ]);
     }

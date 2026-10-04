@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check.token' => \App\Http\Middleware\CheckForValidToken::class,
+        'auth.optional' => \App\Http\Middleware\OptionalSanctumAuth::class,
     ];
 
     protected $commands = [
