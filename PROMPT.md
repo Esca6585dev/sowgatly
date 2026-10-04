@@ -195,7 +195,77 @@ Commit: `Add EAS build profiles and APK instructions`.
 
 ---
 
-## Phase 4 — Final pass
+## Phase 4 — Close the gaps between the Figma design and the backend
+
+The Figma file (`figma.com/design/amTVuTZbUOhu2avAmuXa8I`) shows features the API,
+database and admin panel do not have yet. Everything below is **additive**: new
+columns get defaults, new fields in JSON responses are added next to the existing ones,
+existing endpoints keep working for the current mobile app.
+
+### 4.1 Checkout: pickup, delivery fee, payment
+
+- `orders.fulfillment_type` enum `delivery|pickup` (default `delivery`). For `pickup`
+  no address is required and the delivery fee is 0.
+- `shops.delivery_fee` decimal, default 20 TMT, editable in the admin shop form.
+  `orders.subtotal`, `orders.delivery_fee`, `orders.total_amount = subtotal + delivery_fee`.
+- Payment: `orders.payment_method` enum `cash|online`, `orders.payment_provider`
+  string nullable (bank code, e.g. `rysgal`), `orders.payment_status` enum
+  `unpaid|paid|failed|refunded` (default `unpaid`), `orders.paid_at`.
+  `GET /api/payment-methods` returns the configured providers from `config/payments.php`
+  (Rysgal and the other banks shown in the design). The real bank gateway is not
+  available yet: implement a `PaymentGateway` interface with a `ManualGateway` that
+  leaves the order `unpaid`, so the bank driver can be dropped in later without touching
+  the controllers.
+- `POST /api/orders` accepts the new fields; the response includes them. Validation:
+  `fulfillment_type`, `payment_method`, `payment_provider` required when `online`.
+
+### 4.2 Orders
+
+- Add the `delivering` status: `pending → processing → delivering → completed`,
+  `cancelled` from pending/processing. Update `Order::TRANSITIONS`, the shop-side
+  status endpoint, notifications and the admin panel.
+- `GET /api/orders?q=` searches by order id and product name.
+- Admin panel: an **Orders** section (list with status/payment filters, detail page,
+  status change). It does not exist today.
+
+### 4.3 Profile
+
+- Avatar upload: `POST /api/users/me/avatar` (multipart `image`, reuse the
+  `ImageOrBase64` rule and the storage used for product images); `UserResource`
+  returns `image_url`. `DELETE /api/users/me/avatar` removes it.
+- "Разместить свой магазин": shop moderation. `shops.status` enum
+  `pending|approved|rejected` (existing rows `approved`, shops created through
+  `POST /api/shops` start as `pending`). Only approved shops and their products are
+  listed publicly; the owner always sees their own. Admin shop form gets the status
+  field and approve/reject actions; the owner gets an in-app notification on decision.
+- "Лист ожидания" (waiting list) is not defined. **Ask the product owner** what it
+  means before building it (wishlist? notify-when-available? pending orders?).
+
+### 4.4 Chat with a manager
+
+- Tables `conversations` (`user_id`, `admin_id` nullable, `last_message_at`,
+  `user_unread`, `admin_unread`) and `chat_messages` (`conversation_id`,
+  `sender_type` `user|admin`, `sender_id`, `body`, `read_at`). One conversation per
+  customer.
+- API: `GET /api/me/chat` (messages, newest last, paginated, marks admin messages
+  read), `POST /api/me/chat` (`body`), `GET /api/me/chat/unread-count`.
+- Admin panel: **Chats** section, list ordered by `last_message_at` with unread badge,
+  conversation page with reply form. Admin replies create an in-app notification for
+  the customer.
+- Delivery is polling for now (the app refreshes every few seconds while the chat
+  screen is open); keep the code ready for Pusher/WebSockets later.
+
+### 4.5 Mobile app
+
+Wire the new API into the Expo app: pickup/delivery toggle, delivery fee and total,
+payment method picker, `delivering` status label, order search, avatar upload, shop
+request flow, Chats tab backed by the real API.
+
+Commit per sub-section; push after the phase.
+
+---
+
+## Phase 5 — Final pass
 
 - Run both READMEs against reality and fix anything that drifted.
 - `php artisan test`, `npm run build` (backend assets) and `npx expo export --platform web`
