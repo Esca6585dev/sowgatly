@@ -557,6 +557,49 @@
                 ]
             }
         },
+        "/api/banners": {
+            "get": {
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Active promo banners for the home screen",
+                "operationId": "9f718c7db0d13e4b5be26b80595f4cf1",
+                "parameters": [
+                    {
+                        "name": "region_id",
+                        "in": "query",
+                        "description": "City; global banners are always included",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Banners ordered by position",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BannerResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/brands": {
             "get": {
                 "tags": [
@@ -786,13 +829,97 @@
                 ]
             }
         },
+        "/api/cart/items/{id}": {
+            "put": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Change the quantity of a cart item",
+                "operationId": "b3a18e4d10d861ac5816c469ff8d70dc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "quantity": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "example": 2
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated cart"
+                    },
+                    "404": {
+                        "description": "Cart item not found"
+                    },
+                    "422": {
+                        "description": "Not enough stock"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Remove an item from the cart",
+                "operationId": "cb4f3d58ed218976bb461f6783c70b30",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Removed"
+                    },
+                    "404": {
+                        "description": "Cart item not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/cart": {
             "get": {
                 "tags": [
                     "Cart"
                 ],
                 "summary": "Get user's cart",
-                "operationId": "b28dbe690a4b99c97c2f0e55e32e2f81",
+                "operationId": "f5a6af9d859f5af3146dd7e0f33f80c2",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -1451,6 +1578,320 @@
                 ]
             }
         },
+        "/api/me/collections": {
+            "get": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "The caller's favorite collections with cover images",
+                "operationId": "4b7c295dd87a9c65fae52cdd4d9f40fe",
+                "responses": {
+                    "200": {
+                        "description": "Collections ordered by position",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "position": {
+                                                        "type": "integer"
+                                                    },
+                                                    "items_count": {
+                                                        "type": "integer"
+                                                    },
+                                                    "covers": {
+                                                        "description": "Up to four product image URLs",
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Create a collection",
+                "operationId": "7a5d68b945530b7fbadd82df96154aba",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Что я хочу"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "422": {
+                        "description": "Duplicate name or too many collections"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/collections/{id}": {
+            "get": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "A collection with its products (paginated, 20 per page)",
+                "operationId": "ba4cc3cd5930bfebe849f75bdc44a33b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Collection and products"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Rename or reorder a collection",
+                "operationId": "1f8494e7dfc8380ec29a299b7a35c642",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 100
+                                    },
+                                    "position": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Delete a collection (its products stay in the catalog and in /favorites)",
+                "operationId": "b9dbd5a49fe7e7976d9925518fd2d64d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/collections/{id}/products": {
+            "post": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Add a product to a collection (idempotent)",
+                "operationId": "8c5c682ed06ddffb1dba2dd8ede79b0d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "product_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Added"
+                    },
+                    "200": {
+                        "description": "Was already in the collection"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Collection is full"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/collections/{id}/products/{product_id}": {
+            "delete": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Remove a product from a collection",
+                "operationId": "686afc14d2fbbce2582570fa2395870c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Removed"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/favorites": {
             "get": {
                 "tags": [
@@ -1505,6 +1946,112 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/home": {
+            "get": {
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Home screen feed: categories, banners and product sections for a city",
+                "operationId": "d65ef76cbb32ae304c5a24c525b95adb",
+                "parameters": [
+                    {
+                        "name": "region_id",
+                        "in": "query",
+                        "description": "City to show products for; omit for all cities",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_section",
+                        "in": "query",
+                        "description": "Products per section, 1-20 (default 6)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Feed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "region": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "categories": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CategoryResource"
+                                            }
+                                        },
+                                        "banners": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BannerResource"
+                                            }
+                                        },
+                                        "sections": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string",
+                                                        "example": "category:3"
+                                                    },
+                                                    "title": {
+                                                        "properties": {
+                                                            "tm": {
+                                                                "type": "string"
+                                                            },
+                                                            "ru": {
+                                                                "type": "string"
+                                                            },
+                                                            "en": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "category_id": {
+                                                        "type": "integer",
+                                                        "nullable": true
+                                                    },
+                                                    "products": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "$ref": "#/components/schemas/ProductResource"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/orders": {
@@ -1670,6 +2217,25 @@
                     },
                     "422": {
                         "description": "Order is no longer pending"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Legacy alias of GET /api/orders",
+                "operationId": "98ff3e4fa7abc93fdf76421a03a40dfd",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
                     }
                 },
                 "security": [
@@ -2347,6 +2913,43 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "min_rating",
+                        "in": "query",
+                        "description": "Only products whose average rating is at least this (1-5)",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "delivery_today",
+                        "in": "query",
+                        "description": "1 = production time of three hours or less",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "price_asc",
+                                "price_desc",
+                                "popular",
+                                "newest"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -2435,6 +3038,119 @@
                 "security": [
                     {
                         "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{id}/reviews": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Reviews of a product (public). Send `page` for a paginated list.",
+                "operationId": "83d3abb23ec8d3f8ba035b73ec250361",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reviews with rating_match / rating_value / rating_service, author and meta (count, average, can_review, my_review)"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Review a product you have ordered (one review per product, updates replace it)",
+                "operationId": "355b3f3f624ae313c3587c942ab160b7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "rating": {
+                                        "description": "Optional when the three criteria are given; then it is their rounded average",
+                                        "type": "integer",
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "rating_match": {
+                                        "description": "Соответствие",
+                                        "type": "integer",
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "rating_value": {
+                                        "description": "Цена / качество",
+                                        "type": "integer",
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "rating_service": {
+                                        "description": "Сервис магазина",
+                                        "type": "integer",
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "comment": {
+                                        "type": "string",
+                                        "maxLength": 1000,
+                                        "nullable": true
+                                    },
+                                    "order_id": {
+                                        "description": "One of the caller's orders containing the product",
+                                        "type": "integer",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Saved review"
+                    },
+                    "403": {
+                        "description": "Not a buyer of this product / order mismatch"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ]
             }
@@ -3467,38 +4183,61 @@
                 ]
             }
         },
-        "/api/users": {
-            "post": {
+        "/api/shop/orders": {
+            "get": {
                 "tags": [
-                    "Users"
+                    "Shop orders"
                 ],
-                "summary": "Create a new user",
-                "operationId": "be551c1d694a01c164966f58bfa77013",
+                "summary": "Orders placed with the caller's own shop",
+                "operationId": "a0f36b66b633c58586fbe2f004e802d4",
+                "responses": {
+                    "200": {
+                        "description": "Orders, newest first"
+                    },
+                    "403": {
+                        "description": "The caller has no shop"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/shop/orders/{id}/status": {
+            "put": {
+                "tags": [
+                    "Shop orders"
+                ],
+                "summary": "Move one of the shop's orders to the next status",
+                "operationId": "3c8d14b94937e7154a3d2c0871e586c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
+                                "required": [
+                                    "status"
+                                ],
                                 "properties": {
-                                    "name": {
+                                    "status": {
                                         "type": "string",
-                                        "example": "Esen"
-                                    },
-                                    "phone_number": {
-                                        "type": "string",
-                                        "example": "65123456"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "example": "info@tds.gov.tm"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "password"
-                                    },
-                                    "image": {
-                                        "description": "Image file",
-                                        "type": "string",
-                                        "format": "binary"
+                                        "enum": [
+                                            "processing",
+                                            "delivering",
+                                            "completed",
+                                            "cancelled"
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -3508,7 +4247,32 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "User creation response",
+                        "description": "Updated order"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    },
+                    "422": {
+                        "description": "Transition not allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/addresses": {
+            "get": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "The caller's delivery addresses (default first)",
+                "operationId": "98a1a707728e8f6894fab782507d3333",
+                "responses": {
+                    "200": {
+                        "description": "Addresses",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3516,29 +4280,26 @@
                                         "success": {
                                             "type": "boolean"
                                         },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "user": {
-                                            "$ref": "#/components/schemas/UserResource"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "errors": {
-                                            "type": "object"
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "nullable": true
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    },
+                                                    "is_default": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -3549,18 +4310,117 @@
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Add a delivery address (the first one becomes the default)",
+                "operationId": "8e7dbcd0ba5b3871520f5a7386f8cede",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "address"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Home",
+                                        "nullable": true
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "maxLength": 500,
+                                        "example": "Aşgabat, Parahat 7"
+                                    },
+                                    "is_default": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ]
             }
         },
-        "/api/users/{id}": {
-            "get": {
+        "/api/me/addresses/{id}": {
+            "put": {
                 "tags": [
-                    "Users"
+                    "Addresses"
                 ],
-                "summary": "Get user by ID",
-                "operationId": "6f51bd5fa2dddcd25e44cfa53dcbd10a",
+                "summary": "Edit a delivery address",
+                "operationId": "983faa19fb7c7596a8abb6b4e52d5fbf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "is_default": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated"
+                    },
+                    "404": {
+                        "description": "Address not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Delete a delivery address (another one becomes default if needed)",
+                "operationId": "2517eeaaeef2c6b1e754a7c0aa105d1a",
                 "parameters": [
                     {
                         "name": "id",
@@ -3573,160 +4433,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "User details response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "user": {
-                                            "$ref": "#/components/schemas/UserResource"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Deleted"
                     },
                     "404": {
-                        "description": "User not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Address not found"
                     }
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "bearerAuth": []
                     }
                 ]
-            },
-            "put": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Update an existing user",
-                "operationId": "070e37fc9aff78ae73860751bc990ed3",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of the user to update",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Esen"
-                                    },
-                                    "phone_number": {
-                                        "type": "string",
-                                        "example": "64123456"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "example": "info@tds.gov.tm"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "passwordupdated"
-                                    },
-                                    "image": {
-                                        "type": "string",
-                                        "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAyCAYAAAAZUZThAAAGz0lEQVR4nO2de4hVRRzHP3vdNDXNMnpYWWmUpZlp9iAigiKiKKQHQa+/IqLoQRQFRRBBf0UPISJK6EEUlVFEZFIUZWVlZfawzB6amrnmY3Vz94+Z4547d+6cM3PmnDnnnt8HFvbemTNzZn7z/c3v95uZC4ZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZ"
-                                    },
-                                    "_method": {
-                                        "type": "string",
-                                        "example": "PUT"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User updated successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "User updated successfully"
-                                        },
-                                        "user": {
-                                            "$ref": "#/components/schemas/UserResource"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "User not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "User not found"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "The given data was invalid."
-                                        },
-                                        "errors": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
             }
         },
         "/api/users/me/image": {
@@ -3777,6 +4494,86 @@
                 ]
             }
         },
+        "/api/me/notifications": {
+            "get": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "The caller's last 50 in-app notifications",
+                "operationId": "f71fa8593bc3110e7334dedc31ba3856",
+                "responses": {
+                    "200": {
+                        "description": "Notifications, newest first",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "order_created",
+                                                            "order_status",
+                                                            "product_available",
+                                                            "chat_message",
+                                                            "shop_application"
+                                                        ]
+                                                    },
+                                                    "data": {
+                                                        "description": "Keys depend on type, see docs/notifications.md",
+                                                        "type": "object"
+                                                    },
+                                                    "title": {
+                                                        "description": "Localized by Accept-Language",
+                                                        "type": "string"
+                                                    },
+                                                    "body": {
+                                                        "type": "string"
+                                                    },
+                                                    "read_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "nullable": true
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "unread": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/me/notifications/unread-count": {
             "get": {
                 "tags": [
@@ -3799,6 +4596,25 @@
                                 }
                             }
                         }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/notifications/read": {
+            "post": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Mark every notification as read",
+                "operationId": "6e6ba05cf6028e5fb32755deb5d7c2e7",
+                "responses": {
+                    "200": {
+                        "description": "Done"
                     }
                 },
                 "security": [
@@ -3991,6 +4807,68 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2023-06-07T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "BannerResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "properties": {
+                            "tm": {
+                                "type": "string"
+                            },
+                            "ru": {
+                                "type": "string"
+                            },
+                            "en": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "subtitle": {
+                        "properties": {
+                            "tm": {
+                                "type": "string"
+                            },
+                            "ru": {
+                                "type": "string"
+                            },
+                            "en": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object",
+                        "nullable": true
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "https://sowgatly.app/storage/banners/x.jpg",
+                        "nullable": true
+                    },
+                    "link_type": {
+                        "type": "string",
+                        "enum": [
+                            "none",
+                            "category",
+                            "product",
+                            "shop",
+                            "url"
+                        ]
+                    },
+                    "link_value": {
+                        "type": "string",
+                        "example": "3",
+                        "nullable": true
+                    },
+                    "position": {
+                        "type": "integer",
+                        "example": 0
                     }
                 },
                 "type": "object"
@@ -4431,8 +5309,24 @@
             "description": "Products the customer wants to be notified about"
         },
         {
+            "name": "Home",
+            "description": "Home"
+        },
+        {
             "name": "Categories",
             "description": "Categories"
+        },
+        {
+            "name": "Collections",
+            "description": "Collections"
+        },
+        {
+            "name": "Reviews",
+            "description": "Reviews"
+        },
+        {
+            "name": "Shop orders",
+            "description": "Shop orders"
         },
         {
             "name": "Users",

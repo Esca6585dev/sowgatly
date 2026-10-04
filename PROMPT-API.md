@@ -15,17 +15,19 @@
 > Prompt iňlisçe ýazylan, sebäbi model tehniki tabşyrygy iňlisçe has takyk ýerine ýetirýär.
 
 
-> **Progress (2026-10-04):** Phase 0 (test base, factories, `RespondsWithJson`, chess
-> routes, catalog bug fixes, rebuilt feature tests), Phase 4 (pickup, delivery fee,
-> payment method, waitlist — plus a `delivering` order status and `GET /api/orders?q=`),
-> Phase 5 (birth date, avatar), Phase 7 (chats, incl. the admin read-only page) and
-> Phase 8.1 (shop applications + admin page) are **implemented and covered by tests under
-> `tests/Feature/Api` and `tests/Feature/Admin`** (`php artisan test` is green).
-> Differences from the text below: `shops.delivery_fee` defaults to **20** (the fee in the
-> design), `shops.status` (pending/approved/rejected) exists, `ShopApplication` has an
-> `admin_note`. Still open: Phase 1 (guest browsing), 2 (home feed, banners, ratings),
-> 3 (three-criteria reviews), 6 (collections), 8.2–8.5 (notification texts, push,
-> Swagger coverage test, README section), 9.
+> **Progress (2026-10-04): all phases are implemented** and covered by tests under
+> `tests/Feature/Api`, `tests/Feature/Admin` and `tests/Feature/SwaggerCoversRoutesTest.php`
+> (`php artisan test` is green, Swagger regenerated). Differences from the text below:
+> `shops.delivery_fee` defaults to **20** (the fee in the design); `shops.status`
+> (pending/approved/rejected) exists; `ShopApplication` has an `admin_note`; checkout is
+> still **single-shop** (all cart items go into one order under the first item's shop —
+> per-shop splitting would change the `order` response and is left for a later decision);
+> a review's `order_id` must belong to the caller and not be cancelled (not necessarily
+> `completed`); `product_reviews` pagination only switches on when `page` is sent; the
+> API locale comes from `Accept-Language` (`SetApiLocale` middleware); push uses FCM
+> HTTP v1 with a service-account file (`FCM_SERVICE_ACCOUNT_FILE`), and the old controller
+> with a hard-coded legacy FCM server key was removed (rotate that key in Firebase).
+> See `README.md` → "API for the Flutter app" and `docs/notifications.md`.
 
 ---
 

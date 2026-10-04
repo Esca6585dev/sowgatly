@@ -59,6 +59,8 @@ Copy `.env.example` and fill in what you need. Everything else has a working def
 | `OTP_DEBUG_CODE` | **Development only.** When set (for example `0000`) every login code equals this value and no SMS is sent. Leave empty in production. |
 | `SANCTUM_STATEFUL_DOMAINS` | Origins allowed to use cookie auth (the Expo web build runs on `localhost:19006`). |
 | `SWAGGER_TOKEN` | Pre-filled bearer token in the Swagger UI. |
+| `APP_API_GUEST_BROWSING` | `true` (default) serves the read-only catalog without a token so the apps can browse before login; `false` requires a token again. |
+| `FCM_SERVICE_ACCOUNT_FILE`, `FCM_PROJECT_ID` | Firebase Cloud Messaging (HTTP v1) service-account JSON for push notifications. Empty = no push, everything else keeps working. |
 
 ## Seeded accounts
 
@@ -83,8 +85,15 @@ Login endpoints are rate limited to 10 requests per minute per IP.
 
 ## API overview
 
-All routes below require a bearer token. Full request and response schemas are in
-Swagger at **`/api/documentation`** (JSON at `/api/json`).
+Full request and response schemas are in Swagger at **`/api/documentation`**
+(JSON at `/api/json`). Responses are localized by the `Accept-Language` header
+(`tm` default, `ru`, `en`).
+
+**Public (no token, with `APP_API_GUEST_BROWSING=true`):** `GET /home`, `GET /banners`,
+`GET /product/search`, `GET /product/category/{id}`, `GET /products/{id}`,
+`GET /products/{id}/reviews`, `GET /categories*`, `GET /shops/{id}`, `GET /regions*`,
+`GET /brands*`, `GET /compositions*`, `GET /payment-methods`, `POST /shop-applications`.
+A bearer token is still honoured on these routes. Everything else needs a token.
 
 | Area | Endpoints |
 |------|-----------|
@@ -102,6 +111,19 @@ Swagger at **`/api/documentation`** (JSON at `/api/json`).
 | Chats | Customer: `GET/POST /me/chats`, `GET/POST /me/chats/{id}/messages`, `POST /me/chats/{id}/read`, `GET /me/chats/unread-count`. Shop owner: the same under `/shop/chats` |
 | Shop applications | `POST /shop-applications` (guests too), `GET /me/shop-applications` |
 | Avatar | `PUT`/`POST /users/me` with `image` (file or base64) and `birth_date`; `DELETE /users/me/image` |
+
+### API for the Flutter app
+
+Added for the new mobile client (see the app's `PROMPT.md` and this repo's `PROMPT-API.md`):
+
+| Area | Endpoints |
+|------|-----------|
+| Home feed | `GET /home?region_id=&per_section=` → root categories, active banners and product sections (`delivery_today`, `popular`, one per root category), cached 5 min per city |
+| Banners | `GET /banners?region_id=`; managed in the admin panel under **Banners** |
+| Ratings | every product carries `reviews_avg` / `reviews_count`, every shop `rating_avg` / `reviews_count`; `GET /product/search` accepts `min_rating`, `delivery_today=1`, `sort=popular` |
+| Reviews | `POST /products/{id}/reviews` with `rating_match`, `rating_value`, `rating_service` (the design's three criteria; `rating` becomes their average) and `order_id`; `GET /orders/{id}` marks `items[].reviewed` |
+| Collections | `GET/POST /me/collections`, `GET/PUT/DELETE /me/collections/{id}`, `POST /me/collections/{id}/products`, `DELETE /me/collections/{id}/products/{product_id}` |
+| Notifications | items carry a localized `title` and `body`; types and `data` keys are listed in [`docs/notifications.md`](docs/notifications.md); pushed over FCM when configured |
 
 Categories, brands, compositions, regions and shop addresses are read-only in the
 API and managed from the admin panel.
@@ -148,4 +170,5 @@ php artisan test
 - `vendor/` is **not** committed. Run `composer install` after cloning or pulling.
 - Never commit `.env`. Add new variables to `.env.example` with an empty or safe value.
 - Regenerate Swagger after changing API annotations: `php artisan l5-swagger:generate`.
+  `SwaggerCoversRoutesTest` fails when an `/api` route is missing from the spec.
 - Feature branches are merged into `main`; `main` is the only long-lived branch.

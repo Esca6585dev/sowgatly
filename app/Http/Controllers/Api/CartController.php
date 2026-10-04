@@ -75,13 +75,16 @@ class CartController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/cart",
-     *     summary="Get user's cart",
+     * @OA\Put(
+     *     path="/api/cart/items/{id}",
+     *     summary="Change the quantity of a cart item",
      *     tags={"Cart"},
-     *     security={{"sanctum":{}}},
-     *     @OA\Response(response="200", description="Successful operation"),
-     *     security={{"bearerAuth": {}}}
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\RequestBody(@OA\JsonContent(required={"quantity"}, @OA\Property(property="quantity", type="integer", minimum=1, example=2))),
+     *     @OA\Response(response="200", description="Updated cart"),
+     *     @OA\Response(response="404", description="Cart item not found"),
+     *     @OA\Response(response="422", description="Not enough stock")
      * )
      */
     public function updateItem(Request $request, $id)
@@ -105,6 +108,17 @@ class CartController extends Controller
         return $this->getCart();
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/cart/items/{id}",
+     *     summary="Remove an item from the cart",
+     *     tags={"Cart"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response="200", description="Removed"),
+     *     @OA\Response(response="404", description="Cart item not found")
+     * )
+     */
     public function removeItem($id)
     {
         $cartItem = $this->findUserItem($id);
@@ -124,6 +138,16 @@ class CartController extends Controller
         return $cart ? $cart->items()->with('product')->find($id) : null;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/cart",
+     *     summary="Get user's cart",
+     *     tags={"Cart"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Response(response="200", description="Successful operation"),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
     public function getCart()
     {
         $user = Auth::user();

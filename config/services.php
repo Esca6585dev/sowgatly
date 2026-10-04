@@ -38,4 +38,13 @@ return [
         'password' => env('SMPP_PASSWORD'), // Your SMPP password
     ],
 
+    /*
+     * Firebase Cloud Messaging (HTTP v1). Push is skipped entirely until a
+     * service-account JSON file is configured.
+     */
+    'fcm' => [
+        'service_account_file' => env('FCM_SERVICE_ACCOUNT_FILE'),
+        'project_id' => env('FCM_PROJECT_ID'),
+    ],
+
 ];

@@ -210,6 +210,13 @@ class OrderController extends Controller
      *     @OA\Response(response="200", description="Successful operation"),
      *     security={{"bearerAuth": {}}}
      * )
+     * @OA\Get(
+     *     path="/api/user/orders",
+     *     summary="Legacy alias of GET /api/orders",
+     *     tags={"Orders"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="200", description="Successful operation")
+     * )
      */
     public function getUserOrders(Request $request)
     {

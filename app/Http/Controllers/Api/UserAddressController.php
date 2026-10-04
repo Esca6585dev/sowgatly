@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Validator;
  */
 class UserAddressController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/me/addresses",
+     *     summary="The caller's delivery addresses (default first)",
+     *     tags={"Addresses"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="200", description="Addresses", @OA\JsonContent(@OA\Property(property="success", type="boolean"), @OA\Property(property="data", type="array", @OA\Items(
+     *         @OA\Property(property="id", type="integer"), @OA\Property(property="title", type="string", nullable=true), @OA\Property(property="address", type="string"), @OA\Property(property="is_default", type="boolean")))))
+     * )
+     */
     public function index(Request $request)
     {
         $addresses = UserAddress::where('user_id', $request->user()->id)
@@ -24,6 +34,17 @@ class UserAddressController extends Controller
         return response()->json(['success' => true, 'data' => $addresses]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/me/addresses",
+     *     summary="Add a delivery address (the first one becomes the default)",
+     *     tags={"Addresses"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(@OA\JsonContent(required={"address"}, @OA\Property(property="title", type="string", maxLength=100, nullable=true, example="Home"), @OA\Property(property="address", type="string", maxLength=500, example="Aşgabat, Parahat 7"), @OA\Property(property="is_default", type="boolean"))),
+     *     @OA\Response(response="201", description="Created"),
+     *     @OA\Response(response="422", description="Validation error")
+     * )
+     */
     public function store(Request $request)
     {
         $validator = $this->validator($request);
@@ -51,6 +72,18 @@ class UserAddressController extends Controller
         return response()->json(['success' => true, 'data' => $address], 201);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/me/addresses/{id}",
+     *     summary="Edit a delivery address",
+     *     tags={"Addresses"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\RequestBody(@OA\JsonContent(@OA\Property(property="title", type="string", nullable=true), @OA\Property(property="address", type="string"), @OA\Property(property="is_default", type="boolean"))),
+     *     @OA\Response(response="200", description="Updated"),
+     *     @OA\Response(response="404", description="Address not found")
+     * )
+     */
     public function update(Request $request, $id)
     {
         $address = UserAddress::where('user_id', $request->user()->id)->find($id);
@@ -78,6 +111,17 @@ class UserAddressController extends Controller
         return response()->json(['success' => true, 'data' => $address->fresh()]);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/me/addresses/{id}",
+     *     summary="Delete a delivery address (another one becomes default if needed)",
+     *     tags={"Addresses"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response="200", description="Deleted"),
+     *     @OA\Response(response="404", description="Address not found")
+     * )
+     */
     public function destroy(Request $request, $id)
     {
         $address = UserAddress::where('user_id', $request->user()->id)->find($id);

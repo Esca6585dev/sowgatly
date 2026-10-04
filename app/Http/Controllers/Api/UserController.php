@@ -19,48 +19,6 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    /**
-     * @OA\Post(
-     *     path="/api/users",
-     *     summary="Create a new user",
-     *     tags={"Users"},
-     *     security={{"sanctum":{}}},
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                 @OA\Property(property="name", type="string", example="Esen"),
-     *                 @OA\Property(property="phone_number", type="string", example="65123456"),
-     *                 @OA\Property(property="email", type="string", example="info@tds.gov.tm"),
-     *                 @OA\Property(property="password", type="string", example="password"),
-     *                 @OA\Property(
-     *                     property="image",
-     *                     type="string",
-     *                     format="binary",
-     *                     description="Image file"
-     *                 ),
-     *             )
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="User creation response",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean"),
-     *             @OA\Property(property="message", type="string"),
-     *             @OA\Property(property="user", ref="#/components/schemas/UserResource")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="422",
-     *         description="Validation error",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string"),
-     *             @OA\Property(property="errors", type="object")
-     *         )
-     *     )
-     * )
-     */
     public function store(UserStoreRequest $request)
     {
         $validatedData = $request->validated();
@@ -85,54 +43,7 @@ class UserController extends Controller
         ], 200);
     }
 
-     /**
-     * @OA\Put(
-     *     path="/api/users/{id}",
-     *     summary="Update an existing user",
-     *     tags={"Users"},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID of the user to update",
-     *         @OA\Schema(type="integer", format="int64")
-     *     ),
-     *     @OA\RequestBody(
-     *         @OA\JsonContent(
-     *             @OA\Property(property="name", type="string", example="Esen"),
-     *             @OA\Property(property="phone_number", type="string", example="64123456"),
-     *             @OA\Property(property="email", type="string", example="info@tds.gov.tm"),
-     *             @OA\Property(property="password", type="string", example="passwordupdated"),
-     *             @OA\Property(property="image", type="string", example="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAyCAYAAAAZUZThAAAGz0lEQVR4nO2de4hVRRzHP3vdNDXNMnpYWWmUpZlp9iAigiKiKKQHQa+/IqLoQRQFRRBBf0UPISJK6EEUlVFEZFIUZWVlZfawzB6amrnmY3Vz94+Z4547d+6cM3PmnDnnnt8HFvbemTNzZn7z/c3v95uZC4ZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZ"),
-     *             @OA\Property(property="_method", type="string", example="PUT"),
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="User updated successfully",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="User updated successfully"),
-     *             @OA\Property(property="user", ref="#/components/schemas/UserResource")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="User not found",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="User not found")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Validation error",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="The given data was invalid."),
-     *             @OA\Property(property="errors", type="object")
-     *         )
-     *     )
-     * )
-     */
-    public function update(UserUpdateRequest $request, $id)
+     public function update(UserUpdateRequest $request, $id)
     {
         try {
             DB::beginTransaction();
@@ -207,37 +118,6 @@ class UserController extends Controller
         return Storage::url($filePath);
     }
 
-    /**
-     * @OA\Get(
-     *     path="/api/users/{id}",
-     *     summary="Get user by ID",
-     *     tags={"Users"},
-     *     security={{"sanctum":{}}},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response="200",
-     *         description="User details response",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean"),
-     *             @OA\Property(property="message", type="string"),
-     *             @OA\Property(property="user", ref="#/components/schemas/UserResource")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="404",
-     *         description="User not found",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean"),
-     *             @OA\Property(property="message", type="string")
-     *         )
-     *     )
-     * )
-     */
     public function show($id): JsonResponse
     {
         $user = User::with('shop')->findOrFail($id);

@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Validator;
  */
 class ShopOrderController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/shop/orders",
+     *     summary="Orders placed with the caller's own shop",
+     *     tags={"Shop orders"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="200", description="Orders, newest first"),
+     *     @OA\Response(response="403", description="The caller has no shop")
+     * )
+     */
     public function index(Request $request)
     {
         $shop = $request->user()->shop;
@@ -32,6 +42,19 @@ class ShopOrderController extends Controller
         return response()->json(['success' => true, 'data' => $query->limit(100)->get()]);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/shop/orders/{id}/status",
+     *     summary="Move one of the shop's orders to the next status",
+     *     tags={"Shop orders"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\RequestBody(@OA\JsonContent(required={"status"}, @OA\Property(property="status", type="string", enum={"processing","delivering","completed","cancelled"}))),
+     *     @OA\Response(response="200", description="Updated order"),
+     *     @OA\Response(response="404", description="Order not found"),
+     *     @OA\Response(response="422", description="Transition not allowed")
+     * )
+     */
     public function updateStatus(Request $request, $id)
     {
         $shop = $request->user()->shop;

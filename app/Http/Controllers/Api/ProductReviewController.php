@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductReviewController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/products/{id}/reviews",
+     *     summary="Reviews of a product (public). Send `page` for a paginated list.",
+     *     tags={"Reviews"},
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Parameter(name="page", in="query", required=false, @OA\Schema(type="integer")),
+     *     @OA\Response(response="200", description="Reviews with rating_match / rating_value / rating_service, author and meta (count, average, can_review, my_review)"),
+     *     @OA\Response(response="404", description="Product not found")
+     * )
+     */
     public function index(Request $request, $productId)
     {
         if (!Product::whereKey($productId)->exists()) {
@@ -80,6 +91,26 @@ class ProductReviewController extends Controller
      * Create or replace the signed-in user's review. Only customers who
      * have ordered the product (and not had that order cancelled) may
      * review it.
+     */
+    /**
+     * @OA\Post(
+     *     path="/api/products/{id}/reviews",
+     *     summary="Review a product you have ordered (one review per product, updates replace it)",
+     *     tags={"Reviews"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\RequestBody(@OA\JsonContent(
+     *         @OA\Property(property="rating", type="integer", minimum=1, maximum=5, description="Optional when the three criteria are given; then it is their rounded average"),
+     *         @OA\Property(property="rating_match", type="integer", minimum=1, maximum=5, description="Соответствие"),
+     *         @OA\Property(property="rating_value", type="integer", minimum=1, maximum=5, description="Цена / качество"),
+     *         @OA\Property(property="rating_service", type="integer", minimum=1, maximum=5, description="Сервис магазина"),
+     *         @OA\Property(property="comment", type="string", maxLength=1000, nullable=true),
+     *         @OA\Property(property="order_id", type="integer", nullable=true, description="One of the caller's orders containing the product")
+     *     )),
+     *     @OA\Response(response="201", description="Saved review"),
+     *     @OA\Response(response="403", description="Not a buyer of this product / order mismatch"),
+     *     @OA\Response(response="422", description="Validation error")
+     * )
      */
     public function store(Request $request, $productId)
     {
