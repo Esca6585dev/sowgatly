@@ -1,7 +1,9 @@
 # CLAUDE.md — Sowgatly backend (Laravel 10)
 
-Read `README.md` first. Open work is listed in `PROMPT.md` (website, cleanup, APK)
-and `PROMPT-API.md` (API for the Flutter app); each starts with a status note.
+Read `README.md` first. Open work is listed in `PROMPT.md` (website, cleanup, APK),
+`PROMPT-API.md` (API for the Flutter app) and `PROMPT-CLIENT.md` (customer website and
+account panel in four languages, prototype in `docs/client-design/`); each starts with a
+status note.
 
 ## Model routing (save Fable / Opus limits)
 

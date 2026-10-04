@@ -1,0 +1,846 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body><title>Sowgatly Storefront</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap">
+<style>
+/* Layout: sticky store header → banner rail → category rail → product shelves; account = side tabs + content. Mobile adds a bottom tab bar. */
+:root{
+  --brand-1:#FF6A00; --brand-2:#FF2A00; --brand:#F5470F; --brand-soft:#FFF0E8; --brand-ink:#C2360A;
+  --bg:#FAF7F4; --surface:#FFFFFF; --surface-2:#F5F0EC; --line:#EFE7E1;
+  --text:#1E1714; --muted:#857870; --shadow:0 1px 2px rgba(60,30,10,.04),0 10px 30px rgba(60,30,10,.07);
+  --ok:#14A06B; --ok-bg:#E6F6EF; --info:#2F6FEB; --info-bg:#E8F0FE; --warn:#C77700; --warn-bg:#FFF3DC;
+  --violet:#7A4CE0; --violet-bg:#F0EAFD; --bad:#D9334A; --bad-bg:#FDE8EB; --star:#F5A524;
+  --f-display:"Unbounded","Manrope",system-ui,sans-serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r-lg:22px; --r-md:16px; --r-sm:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --brand:#FF6A2B; --brand-soft:#3A1E12; --brand-ink:#FF9A6B;
+  --bg:#13100E; --surface:#1C1815; --surface-2:#25201C; --line:#2E2823;
+  --text:#F4EDE8; --muted:#A3958C; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.3);
+  --ok:#3CCB8F; --ok-bg:#12291F; --info:#6E9BFF; --info-bg:#162238; --warn:#F2B04A; --warn-bg:#2E2412;
+  --violet:#A98BFF; --violet-bg:#231B38; --bad:#FF6B7F; --bad-bg:#33171C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --brand:#FF6A2B; --brand-soft:#3A1E12; --brand-ink:#FF9A6B;
+  --bg:#13100E; --surface:#1C1815; --surface-2:#25201C; --line:#2E2823;
+  --text:#F4EDE8; --muted:#A3958C; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.3);
+  --ok:#3CCB8F; --ok-bg:#12291F; --info:#6E9BFF; --info-bg:#162238; --warn:#F2B04A; --warn-bg:#2E2412;
+  --violet:#A98BFF; --violet-bg:#231B38; --bad:#FF6B7F; --bad-bg:#33171C; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
+.ico{display:inline-flex;width:20px;height:20px;flex:none}.ico svg{width:100%;height:100%}
+.shell{width:100%;min-width:0;max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,3vw,32px)}
+.cats,.grid,.banners{min-width:0;max-width:100%}
+h1,h2,h3{text-wrap:balance;margin:0}
+.display{font-family:var(--f-display);letter-spacing:-.01em}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .shell{display:flex;align-items:center;gap:14px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0}
+.logo svg{width:40px;height:40px}
+.logo b{font-family:var(--f-display);font-size:19px;font-weight:600;letter-spacing:-.02em}
+.city{display:flex;align-items:center;gap:6px;border:0;background:var(--surface-2);border-radius:999px;padding:8px 12px;font-weight:600;font-size:13px;color:var(--text)}
+.city .ico{width:16px;height:16px;color:var(--brand)}
+.search{flex:1;display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid transparent;border-radius:14px;padding:0 14px;min-width:0}
+.search:focus-within{border-color:var(--brand);background:var(--surface)}
+.search .ico{color:var(--muted)}
+.search input{flex:1;min-width:0;border:0;background:transparent;outline:0;padding:12px 0}
+.langs{display:flex;background:var(--surface-2);border-radius:12px;padding:3px;gap:2px}
+.langs button{border:0;background:transparent;padding:6px 9px;border-radius:9px;font-size:12px;font-weight:700;color:var(--muted)}
+.langs button.on{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.iconbtn{position:relative;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--text);flex:none}
+.iconbtn:hover{border-color:var(--brand);color:var(--brand)}
+.badge{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--brand);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;border:2px solid var(--surface)}
+.me-btn{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:4px 12px 4px 4px;font-weight:600;font-size:14px}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--brand-1),var(--brand-2));font-size:13px;flex:none}
+
+/* sections */
+main{padding-block:22px 110px;display:flex;flex-direction:column;gap:34px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.sec-h h2{font-family:var(--f-display);font-size:20px;font-weight:600}
+.link{border:0;background:none;color:var(--brand-ink);font-weight:700;font-size:14px;padding:4px}
+
+/* banners */
+.banners{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:16px}
+.ban{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:26px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;min-height:170px;color:#fff;border:0;text-align:left}
+.ban.hero{grid-row:span 2;min-height:360px;background:linear-gradient(135deg,var(--brand-1),var(--brand-2))}
+.ban.hero h1{font-family:var(--f-display);font-size:clamp(26px,3.4vw,40px);font-weight:700;line-height:1.08;max-width:15ch;letter-spacing:-.02em}
+.ban.hero p{max-width:38ch;opacity:.92;margin:0}
+.ban .art{position:absolute;right:0;top:0;bottom:0;width:min(46%,340px);pointer-events:none;display:flex;align-items:center}
+.ban .art svg,.ban .art-sm svg{width:100%;height:auto;display:block}
+.ban .art svg>rect:first-of-type,.ban .art-sm svg>rect:first-of-type{fill:transparent}
+.ban .art svg>circle:first-of-type,.ban .art-sm svg>circle:first-of-type{opacity:.25}
+.ban .cta{align-self:flex-start;margin-top:8px;border:0;border-radius:12px;background:#fff;color:var(--brand-ink);font-weight:800;padding:12px 18px}
+.ban.b2{background:linear-gradient(135deg,#7A4CE0,#C06CFF)}
+.ban.b3{background:linear-gradient(135deg,#14A06B,#5BD6A2)}
+.ban small{font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:11px;opacity:.9}
+.ban h3{font-family:var(--f-display);font-size:19px;font-weight:600;max-width:16ch}
+.ban .code{align-self:flex-start;display:inline-block;margin-top:4px;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.2);font-weight:800;letter-spacing:.06em;font-size:13px}
+.ban .art-sm{position:absolute;right:4px;bottom:0;width:128px}
+.ban h1,.ban h3,.ban p,.ban small,.ban .cta,.ban .code{position:relative}
+
+/* categories */
+.cats{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:12px}
+.cat{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;color:var(--text)}
+.cat .disc{width:100%;aspect-ratio:1;max-width:96px;border-radius:26px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);color:var(--brand);transition:transform .15s ease,border-color .15s}
+.cat .disc .ico{width:34px;height:34px}
+.cat span{font-size:12.5px;font-weight:600;text-align:center;line-height:1.25}
+.cat:hover .disc,.cat.on .disc{border-color:var(--brand);background:var(--brand-soft)}
+.cat:hover .disc{transform:translateY(-2px)}
+
+/* products */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card .pic{position:relative;aspect-ratio:1;background:var(--surface-2)}
+.picbtn{border:0;padding:0;background:none;display:block;width:100%;height:100%}
+.card .pic svg{display:block;width:100%;height:100%}
+.tag{position:absolute;left:10px;top:10px;background:var(--brand);color:#fff;font-size:12px;font-weight:800;border-radius:8px;padding:3px 8px}
+.heart{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.9);display:grid;place-items:center;color:#1E1714}
+.heart .ico{width:18px;height:18px}
+.heart.on{color:#E5484D}.heart.on svg path{fill:currentColor}
+.card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card .name{font-weight:700;font-size:15px;line-height:1.3;border:0;background:none;padding:0;text-align:left}
+.meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12.5px}
+.stars{display:inline-flex;align-items:center;gap:3px;color:var(--text);font-weight:700}
+.stars .ico{width:14px;height:14px;color:var(--star)}.stars svg path{fill:currentColor}
+.eta{display:inline-flex;align-items:center;gap:4px;background:var(--ok-bg);color:var(--ok);font-weight:700;border-radius:999px;padding:2px 8px;font-size:12px}
+.eta .ico{width:13px;height:13px}
+.price-row{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:6px}
+.price{font-family:var(--f-display);font-weight:600;font-size:17px;white-space:nowrap}
+.old{color:var(--muted);text-decoration:line-through;font-size:12.5px;font-weight:600;display:block;font-family:var(--f-body)}
+.add{border:0;width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--brand-1),var(--brand-2));color:#fff;display:grid;place-items:center;flex:none;box-shadow:0 6px 14px rgba(255,74,0,.25)}
+.step{display:flex;align-items:center;background:var(--brand-soft);border-radius:13px;height:42px}
+.step button{border:0;background:none;width:34px;height:42px;color:var(--brand-ink);display:grid;place-items:center}
+.step b{min-width:18px;text-align:center;color:var(--brand-ink)}
+.step .ico{width:16px;height:16px}
+
+/* buttons, forms */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:13px 20px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--brand-1),var(--brand-2));box-shadow:0 8px 18px rgba(255,74,0,.25)}
+.btn.ghost{background:var(--surface-2);color:var(--text);box-shadow:none}
+.btn.block{width:100%}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-size:12.5px;font-weight:700;color:var(--muted)}
+.field input,.field select,.field textarea{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:12px 14px;outline:0;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brand);background:var(--surface)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg button{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:12px;font-weight:700;text-align:left;display:flex;align-items:center;gap:10px}
+.seg button.on{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-ink)}
+
+/* product page */
+.crumbs{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;flex-wrap:wrap}
+.crumbs button{border:0;background:none;padding:0;color:var(--muted);font-weight:600}
+.pdp{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:32px;align-items:start}
+.pdp .big{border-radius:28px;overflow:hidden;border:1px solid var(--line);position:relative}
+.pdp .big svg{display:block;width:100%;height:auto}
+.thumbs{display:flex;gap:10px;margin-top:12px}
+.thumbs div{width:72px;border-radius:14px;overflow:hidden;border:2px solid transparent}
+.thumbs div.on{border-color:var(--brand)}
+.thumbs svg{display:block;width:100%;height:auto}
+.pdp h1{font-family:var(--f-display);font-size:clamp(24px,3vw,32px);font-weight:600;line-height:1.15}
+.pdp .price{font-size:28px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:14px}
+.kv dt{color:var(--muted);font-weight:600}.kv dd{margin:0;font-weight:600}
+.shopcard{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:16px}
+.shopcard .avatar{width:44px;height:44px;font-size:15px}
+.shopcard b{display:block}.shopcard small{color:var(--muted)}
+.buybar{display:flex;gap:10px;align-items:center}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:14px;height:50px}
+.qty button{border:0;background:none;width:44px;height:50px;display:grid;place-items:center}
+.qty b{min-width:26px;text-align:center}
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.perk{background:var(--surface-2);border-radius:14px;padding:12px;font-size:13px;display:flex;flex-direction:column;gap:4px}
+.perk .ico{color:var(--brand)}
+.perk b{font-size:13px}
+
+/* cart & checkout */
+.two{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+.line{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:0}
+.line .thumb{width:78px;border-radius:14px;overflow:hidden;flex:none}
+.line .thumb svg{display:block;width:100%;height:auto}
+.line .info{flex:1;min-width:0}
+.line .info b{display:block}
+.line .info small{color:var(--muted)}
+.sum{display:flex;flex-direction:column;gap:10px;position:sticky;top:96px}
+.sum .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.sum .row.total{font-family:var(--f-display);font-size:19px;font-weight:600;border-top:1px solid var(--line);padding-top:12px}
+.promo{display:flex;gap:8px}.promo input{flex:1;min-width:0}
+.empty{text-align:center;padding:48px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--muted)}
+.empty .ico{width:56px;height:56px;color:var(--brand)}
+.empty h3{color:var(--text);font-family:var(--f-display);font-weight:600}
+
+/* account */
+.acc{display:grid;grid-template-columns:260px minmax(0,1fr);gap:22px;align-items:start}
+.acc-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px;padding:14px}
+.acc-user{display:flex;align-items:center;gap:12px;padding:6px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.acc-user .avatar{width:46px;height:46px;font-size:16px}
+.acc-user b{display:block}.acc-user small{color:var(--muted);font-size:13px}
+.tab{display:flex;align-items:center;gap:12px;border:0;background:none;padding:11px 12px;border-radius:12px;font-weight:600;color:var(--muted);text-align:left}
+.tab:hover{background:var(--surface-2);color:var(--text)}
+.tab.on{background:var(--brand-soft);color:var(--brand-ink)}
+.tab .cnt{margin-left:auto;background:var(--brand);color:#fff;font-size:11px;border-radius:999px;padding:1px 8px;font-weight:800}
+.tab.out{color:var(--bad)}
+.acc-main{display:flex;flex-direction:column;gap:18px;min-width:0}
+.acc-main>h2{font-family:var(--f-display);font-size:22px;font-weight:600}
+.order{display:flex;flex-direction:column;gap:14px}
+.order-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.order-h b{font-family:var(--f-display);font-weight:600}
+.order-h small{color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-pending{color:var(--warn);background:var(--warn-bg)}.p-processing{color:var(--violet);background:var(--violet-bg)}
+.p-delivering{color:var(--info);background:var(--info-bg)}.p-completed{color:var(--ok);background:var(--ok-bg)}.p-cancelled{color:var(--bad);background:var(--bad-bg)}
+.order-items{display:flex;gap:8px;flex-wrap:wrap}
+.order-items div{width:56px;border-radius:12px;overflow:hidden}
+.order-items svg{display:block;width:100%;height:auto}
+.order-f{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.order-f .num{font-family:var(--f-display);font-weight:600}
+.track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:4px}
+.track .st{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;position:relative;font-size:12px;color:var(--muted);font-weight:600}
+.track .st::before{content:"";position:absolute;top:13px;left:-50%;right:50%;height:3px;background:var(--line)}
+.track .st:first-child::before{display:none}
+.track .st.done::before,.track .st.now::before{background:linear-gradient(90deg,var(--brand-1),var(--brand-2))}
+.track .dot{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:2px solid var(--line);position:relative;z-index:1;color:var(--muted)}
+.track .dot .ico{width:14px;height:14px}
+.track .done .dot{background:var(--brand);border-color:var(--brand);color:#fff}
+.track .now .dot{background:var(--surface);border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 5px var(--brand-soft)}
+.track .done,.track .now{color:var(--text)}
+.track time{font-size:11px;color:var(--muted);font-weight:600}
+.courier{display:flex;align-items:center;gap:12px;background:var(--info-bg);border-radius:14px;padding:12px 14px}
+.courier .ico{color:var(--info)}
+.courier b{display:block}.courier small{color:var(--muted)}
+.addr{display:flex;gap:14px;align-items:flex-start}
+.addr .ico{color:var(--brand);margin-top:2px}
+.addr .txt{flex:1;min-width:0}
+.addr .txt b{display:flex;align-items:center;gap:8px}
+.chip{font-size:11px;font-weight:800;background:var(--ok-bg);color:var(--ok);border-radius:999px;padding:2px 8px}
+.small-btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:7px 12px;font-weight:700;font-size:13px}
+.small-btn.danger{color:var(--bad)}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.switch:last-child{border-bottom:0}
+.switch small{display:block;color:var(--muted)}
+.tgl{width:46px;height:28px;border-radius:999px;border:0;background:var(--line);position:relative;flex:none}
+.tgl::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tgl.on{background:var(--brand)}.tgl.on::after{left:21px}
+.lang-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.lang-pick button{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:10px;font-weight:700}
+.lang-pick button.on{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-ink)}
+.signin{max-width:420px;margin-inline:auto;display:flex;flex-direction:column;gap:14px;text-align:center}
+.signin .logo{justify-content:center}
+
+/* footer, toast, bottom bar */
+footer{border-top:1px solid var(--line);padding-block:26px;color:var(--muted);font-size:13px}
+footer .shell{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--surface);padding:12px 18px;border-radius:14px;font-weight:700;opacity:0;transition:.2s;z-index:60;pointer-events:none;display:flex;align-items:center;gap:8px;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.tabbar{display:none}
+
+@media (max-width:980px){
+  .langs,.city,.me-btn .nm{display:none}
+  .banners{grid-template-columns:1fr;grid-template-rows:auto}
+  .ban.hero{grid-row:auto;min-height:300px;padding-top:150px}
+  .ban.hero .art{left:auto;right:8px;top:8px;bottom:auto;width:150px}
+  .ban h3{max-width:12ch}
+  .cats{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+  .pdp,.two,.acc{grid-template-columns:1fr}
+  .acc-side{position:static;flex-direction:row;overflow-x:auto;padding:8px;scrollbar-width:none}
+  .acc-user{display:none}
+  .tab{white-space:nowrap}
+  .sum{position:static}
+}
+@media (max-width:640px){
+  .top .shell{flex-wrap:wrap;min-height:0;padding-block:10px;gap:10px}
+  .search{order:5;flex-basis:100%}
+  .top .hide-sm{display:none}
+  .logo{margin-right:auto}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .card .body{padding:10px 10px 12px}
+  .card .name{font-size:14px}
+  .price{font-size:15px}
+  .form-grid,.perks{grid-template-columns:1fr}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+  .tabbar button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:700;color:var(--muted);position:relative;padding:4px 0}
+  .tabbar button.on{color:var(--brand)}
+  .tabbar .badge{top:-2px;right:calc(50% - 22px)}
+  .track .st span{font-size:11px}
+  .lang-pick{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="shell">
+    <button class="logo" data-go="home" aria-label="Sowgatly">
+      <svg viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF6A00"/><stop offset="1" stop-color="#FF2A00"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#lg)"/><rect x="120" y="200" width="272" height="66" rx="16" fill="#fff"/><rect x="142" y="278" width="228" height="138" rx="16" fill="#fff"/><rect x="242" y="200" width="28" height="216" fill="url(#lg)"/><path d="M256 196C214 196 160 182 170 142C180 104 236 126 256 196Z" fill="#fff"/><path d="M256 196C298 196 352 182 342 142C332 104 276 126 256 196Z" fill="#fff"/><circle cx="256" cy="194" r="20" fill="#fff"/></svg>
+      <b>sowgatly</b>
+    </button>
+    <button class="city" id="city"></button>
+    <label class="search" id="searchBox"><input id="q" type="search" autocomplete="off"></label>
+    <div class="langs" id="langs"></div>
+    <button class="iconbtn hide-sm" id="themeBtn" data-act="theme"><span class="ico" data-i="moon"></span></button>
+    <button class="iconbtn hide-sm" data-go="favorites" id="favBtn"><span class="ico" data-i="heart"></span></button>
+    <button class="iconbtn" data-go="cart" id="cartBtn"><span class="ico" data-i="bag"></span></button>
+    <button class="me-btn hide-sm" data-go="account" id="meBtn"></button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer><div class="shell"><span id="foot1"></span><span id="foot2"></span></div></footer>
+<nav class="tabbar" id="tabbar"></nav>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------------- icons ---------------- */
+const I={
+ search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+ pin:'<path d="M12 22s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/>',
+ heart:'<path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.2 3.8 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.4 0 5.6 3.2 4.4 6.7C19.5 15.4 12 20 12 20z"/>',
+ bag:'<path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+ home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>',
+ grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>', minus:'<path d="M5 12h14"/>',
+ star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ truck:'<path d="M2 6h11v10H2zM13 10h4l4 4v2h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+ check:'<path d="m5 12 5 5 9-10"/>', box:'<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
+ flower:'<circle cx="12" cy="9" r="2.5"/><path d="M12 6.5a3 3 0 1 1 3.2 2.3M12 6.5a3 3 0 1 0-3.2 2.3M14.4 10.6a3 3 0 1 1-1.4 3.4M9.6 10.6a3 3 0 1 0 1.4 3.4M12 12v9M12 17c-2-2-4-2-5-1M12 18c2-2 4-2 5-1"/>',
+ sparkle:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/><circle cx="12" cy="12" r="2"/>',
+ basket:'<path d="M3 10h18l-2 10H5z"/><path d="M8 10 11 4M16 10l-3-6M8 14v3M12 14v3M16 14v3"/>',
+ gift:'<rect x="3" y="8" width="18" height="5" rx="1"/><path d="M5 13v8h14v-8M12 8v13M12 8c-2 0-5-1-4-3s4 0 4 3zM12 8c2 0 5-1 4-3s-4 0-4 3z"/>',
+ balloon:'<path d="M12 15c3.3 0 6-3 6-6.5S15.3 2 12 2 6 5 6 8.5 8.7 15 12 15z"/><path d="M12 15v1.5M11 16.5h2M12 16.5c0 2-2 2.5-1 5.5"/>',
+ ring:'<circle cx="12" cy="15" r="6"/><path d="m9 5 3-3 3 3-3 4z"/>',
+ bear:'<circle cx="7" cy="6" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="12" cy="13" r="7"/><circle cx="9.5" cy="12" r=".6"/><circle cx="14.5" cy="12" r=".6"/><path d="M10.5 15.5c1 .8 2 .8 3 0"/>',
+ plant:'<path d="M6 14h12l-1.5 7h-9z"/><path d="M12 14V9M12 9c0-3 2-5 5-5 0 3-2 5-5 5zM12 11c0-2.5-1.8-4-4.5-4 0 2.5 1.8 4 4.5 4z"/>',
+ receipt:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/>',
+ history:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>',
+ map:'<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+ gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.8 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3.1 14H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 3.1V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+ logout:'<path d="M15 4h4v16h-4M10 17l5-5-5-5M15 12H3"/>',
+ moon:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+ chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
+ shield:'<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+ card:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/>', cash:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/>',
+ edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>', trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
+ repeat:'<path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/>',
+ bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+};
+const ico=(n,cls='')=>`<span class="ico ${cls}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${I[n]||''}</svg></span>`;
+const paintIcons=(root=document)=>root.querySelectorAll('[data-i]').forEach(el=>{el.outerHTML=ico(el.dataset.i)});
+
+/* ---------------- translations ---------------- */
+const LANGS=[['tm','TM','Türkmençe'],['ru','RU','Русский'],['en','EN','English'],['tr','TR','Türkçe']];
+const T={
+ city:['Aşgabat','Ашхабад','Ashgabat','Aşkabat'],
+ searchPh:['Gül, sowgat ýa-da dükan gözle','Цветы, подарки или магазин','Search flowers, gifts or shops','Çiçek, hediye veya mağaza ara'],
+ heroKick:['Sowgatly · eltip bermek','Sowgatly · доставка','Sowgatly · delivery','Sowgatly · teslimat'],
+ heroTitle:['Güller 60 minutda gapyňyzda','Цветы у двери за 60 минут','Flowers at your door in 60 minutes','Çiçekler 60 dakikada kapınızda'],
+ heroText:['Aşgabadyň iň gowy gül dükanlaryndan buketler, sowgat sebetleri we şarlar.','Букеты, подарочные корзины и шары от лучших цветочных магазинов Ашхабада.','Bouquets, gift baskets and balloons from the best flower shops in Ashgabat.','Aşkabat\'ın en iyi çiçekçilerinden buketler, hediye sepetleri ve balonlar.'],
+ heroCta:['Buket saýla','Выбрать букет','Choose a bouquet','Buket seç'],
+ b2kick:['Ilkinji sargyt','Первый заказ','First order','İlk sipariş'],
+ b2title:['Ilkinji sargyda −15%','−15% на первый заказ','15% off your first order','İlk siparişe %15 indirim'],
+ b3kick:['Toý möwsümi','Свадебный сезон','Wedding season','Düğün sezonu'],
+ b3title:['Gelin buketleri we bezegler','Букеты невесты и декор','Bridal bouquets and decor','Gelin buketleri ve süsleme'],
+ categories:['Kategoriýalar','Категории','Categories','Kategoriler'],
+ today:['Şu gün eltip beriler','Доставим сегодня','Delivered today','Bugün teslim'],
+ popular:['Meşhur','Популярное','Popular','Popüler'],
+ all:['Ählisi','Все','See all','Tümü'],
+ min:['min','мин','min','dk'],
+ reviews:['syn','отз.','reviews','yorum'],
+ added:['Sebede goşuldy','Добавлено в корзину','Added to cart','Sepete eklendi'],
+ favAdded:['Halananlara goşuldy','Добавлено в избранное','Saved to favorites','Favorilere eklendi'],
+ favRemoved:['Halananlardan aýryldy','Удалено из избранного','Removed from favorites','Favorilerden çıkarıldı'],
+ favorites:['Halananlar','Избранное','Favorites','Favoriler'],
+ noFav:['Halanan haryt ýok','В избранном пусто','No favorites yet','Henüz favori yok'],
+ noFavText:['Harydyň ýüregine basyň, ol şu ýerde peýda bolar.','Нажмите на сердце у товара, и он появится здесь.','Tap the heart on a product and it will show up here.','Üründeki kalbe dokunun, burada görünecek.'],
+ home:['Baş sahypa','Главная','Home','Ana sayfa'],
+ catalog:['Katalog','Каталог','Catalog','Katalog'],
+ cart:['Sebet','Корзина','Cart','Sepet'],
+ account:['Hasabym','Профиль','Account','Hesabım'],
+ results:['«{q}» boýunça netijeler','Результаты по «{q}»','Results for “{q}”','“{q}” için sonuçlar'],
+ nothing:['Hiç zat tapylmady','Ничего не найдено','Nothing found','Sonuç bulunamadı'],
+ nothingText:['Başga söz bilen gözläp görüň ýa-da kategoriýany saýlaň.','Попробуйте другой запрос или выберите категорию.','Try another word or pick a category.','Başka bir kelime deneyin veya kategori seçin.'],
+ composition:['Düzümi','Состав','Composition','İçerik'],
+ size:['Ölçegi','Размер','Size','Boyut'],
+ shop:['Dükan','Магазин','Shop','Mağaza'],
+ rating:['Reýting','Рейтинг','Rating','Puan'],
+ deliveryTime:['Eltip bermek','Доставка','Delivery','Teslimat'],
+ writeShop:['Dükana ýaz','Написать магазину','Message the shop','Mağazaya yaz'],
+ addToCart:['Sebede goş','В корзину','Add to cart','Sepete ekle'],
+ buyNow:['Häzir satyn al','Купить сейчас','Buy now','Hemen al'],
+ perk1:['Mugt otkrytka','Открытка в подарок','Free greeting card','Ücretsiz kart'],
+ perk1s:['Ýazgyňyzy goşarys','Добавим ваш текст','We add your message','Mesajınızı ekleriz'],
+ perk2:['Surat ibereris','Фото перед доставкой','Photo before delivery','Teslimattan önce fotoğraf'],
+ perk2s:['Eltip bermezden öň','Пришлём в чат','Sent to your chat','Sohbetinize göndeririz'],
+ perk3:['Täzeligine kepil','Гарантия свежести','Freshness guarantee','Tazelik garantisi'],
+ perk3s:['3 günüň dowamynda','В течение 3 дней','For 3 days','3 gün boyunca'],
+ shopsCount:['{n} sargyt · 4.9 ★','{n} заказов · 4.9 ★','{n} orders · 4.9 ★','{n} sipariş · 4.9 ★'],
+ emptyCart:['Sebediňiz boş','Корзина пуста','Your cart is empty','Sepetiniz boş'],
+ emptyCartText:['Buket ýa-da sowgat saýlaň, biz ony gapyňyza eltip bereris.','Выберите букет или подарок, и мы доставим его к двери.','Pick a bouquet or a gift and we will bring it to the door.','Bir buket veya hediye seçin, kapınıza getirelim.'],
+ shopNow:['Söwda başla','Перейти к покупкам','Start shopping','Alışverişe başla'],
+ items:['Harytlar','Товары','Items','Ürünler'],
+ delivery:['Eltip bermek','Доставка','Delivery','Teslimat'],
+ discount:['Arzanladyş','Скидка','Discount','İndirim'],
+ total:['Jemi','Итого','Total','Toplam'],
+ promo:['Promokod','Промокод','Promo code','Promosyon kodu'],
+ apply:['Ulan','Применить','Apply','Uygula'],
+ promoOk:['Promokod ulanyldy: −15%','Промокод применён: −15%','Promo code applied: −15%','Kod uygulandı: %15 indirim'],
+ promoBad:['Bu promokod tapylmady','Такой промокод не найден','That promo code was not found','Bu kod bulunamadı'],
+ checkout:['Sargydy resmileşdir','Оформить заказ','Go to checkout','Siparişi tamamla'],
+ remove:['Aýyr','Убрать','Remove','Kaldır'],
+ recipient:['Alyjy','Получатель','Recipient','Alıcı'],
+ recipientName:['Alyjynyň ady','Имя получателя','Recipient name','Alıcının adı'],
+ phone:['Telefon belgisi','Телефон','Phone number','Telefon numarası'],
+ address:['Salgy','Адрес','Address','Adres'],
+ when:['Haçan eltmeli','Когда доставить','When to deliver','Ne zaman teslim'],
+ asap:['Mümkin boldugyça çalt','Как можно скорее','As soon as possible','En kısa sürede'],
+ asapS:['60–90 minut','60–90 минут','60–90 minutes','60–90 dakika'],
+ scheduled:['Wagt saýla','Ко времени','At a set time','Belirli saatte'],
+ scheduledS:['Ertir 10:00–12:00','Завтра 10:00–12:00','Tomorrow 10:00–12:00','Yarın 10:00–12:00'],
+ payment:['Töleg','Оплата','Payment','Ödeme'],
+ cash:['Nagt','Наличными','Cash','Nakit'],
+ cashS:['Kurýere tölemek','Курьеру при получении','Pay the courier','Kuryeye öde'],
+ online:['Kart bilen','Картой онлайн','Card online','Kartla online'],
+ onlineS:['Altyn Asyr, Rysgal','Алтын Асыр, Рысгал','Altyn Asyr, Rysgal','Altyn Asyr, Rysgal'],
+ note:['Otkrytka üçin ýazgy','Текст открытки','Card message','Kart mesajı'],
+ notePh:['Mysal: Doglan günüň gutly bolsun!','Например: С днём рождения!','For example: Happy birthday!','Örneğin: Doğum günün kutlu olsun!'],
+ placeOrder:['Sargyt et','Оформить заказ','Place order','Siparişi ver'],
+ orderPlaced:['Sargyt kabul edildi','Заказ оформлен','Order placed','Sipariş alındı'],
+ back:['Yza','Назад','Back','Geri'],
+ hello:['Salam, {n}!','Здравствуйте, {n}!','Hi, {n}!','Merhaba, {n}!'],
+ myOrders:['Sargytlarym','Мои заказы','My orders','Siparişlerim'],
+ history:['Sargyt taryhy','История заказов','Order history','Sipariş geçmişi'],
+ addresses:['Salgylarym','Мои адреса','Addresses','Adreslerim'],
+ profile:['Profil','Профиль','Profile','Profil'],
+ settings:['Sazlamalar','Настройки','Settings','Ayarlar'],
+ logout:['Çykmak','Выйти','Log out','Çıkış yap'],
+ activeOrders:['Işjeň sargytlar','Активные заказы','Active orders','Aktif siparişler'],
+ order:['Sargyt','Заказ','Order','Sipariş'],
+ st_pending:['Kabul edildi','Принят','Received','Alındı'],
+ st_processing:['Taýýarlanýar','Собирается','Being prepared','Hazırlanıyor'],
+ st_delivering:['Ýolda','В пути','On the way','Yolda'],
+ st_completed:['Gowşuryldy','Доставлен','Delivered','Teslim edildi'],
+ st_cancelled:['Ýatyryldy','Отменён','Cancelled','İptal edildi'],
+ courier:['Kurýer','Курьер','Courier','Kurye'],
+ eta:['gelmeli wagty','прибудет в','arrives at','varış'],
+ call:['Jaň et','Позвонить','Call','Ara'],
+ track:['Yzarla','Отследить','Track','Takip et'],
+ details:['Jikme-jik','Подробнее','Details','Detaylar'],
+ cancel:['Ýatyr','Отменить','Cancel','İptal et'],
+ reorder:['Gaýtadan sargyt et','Повторить заказ','Order again','Tekrar sipariş ver'],
+ leaveReview:['Syn ýaz','Оставить отзыв','Write a review','Yorum yaz'],
+ noActive:['Işjeň sargyt ýok','Активных заказов нет','No active orders','Aktif sipariş yok'],
+ addAddress:['Salgy goş','Добавить адрес','Add address','Adres ekle'],
+ default:['Esasy','Основной','Default','Varsayılan'],
+ makeDefault:['Esasy et','Сделать основным','Make default','Varsayılan yap'],
+ edit:['Üýtget','Изменить','Edit','Düzenle'],
+ del:['Poz','Удалить','Delete','Sil'],
+ addrLabel:['Ady (Öý, Iş…)','Название (Дом, Работа…)','Label (Home, Work…)','Etiket (Ev, İş…)'],
+ addrLine:['Köçe, jaý, öý','Улица, дом, квартира','Street, building, flat','Sokak, bina, daire'],
+ saveAddr:['Salgyny ýatda sakla','Сохранить адрес','Save address','Adresi kaydet'],
+ addrSaved:['Salgy goşuldy','Адрес добавлен','Address added','Adres eklendi'],
+ addrDeleted:['Salgy pozuldy','Адрес удалён','Address deleted','Adres silindi'],
+ name:['Adyňyz','Имя','Name','Ad'],
+ email:['E-poçta','Эл. почта','Email','E-posta'],
+ birthday:['Doglan güni','Дата рождения','Birthday','Doğum tarihi'],
+ save:['Ýatda sakla','Сохранить','Save','Kaydet'],
+ saved:['Ýatda saklandy','Сохранено','Saved','Kaydedildi'],
+ phoneNote:['Täze belgä SMS kod ibereris.','Отправим SMS-код на новый номер.','We will text a code to the new number.','Yeni numaraya SMS kodu göndereceğiz.'],
+ language:['Dil','Язык','Language','Dil'],
+ theme:['Tema','Тема','Theme','Tema'],
+ light:['Ýagty','Светлая','Light','Açık'],
+ dark:['Garaňky','Тёмная','Dark','Koyu'],
+ notifications:['Bildirişler','Уведомления','Notifications','Bildirimler'],
+ nOrders:['Sargyt ýagdaýy','Статус заказа','Order status','Sipariş durumu'],
+ nOrdersS:['Kurýer ýola çykanda habar bereris','Сообщим, когда курьер выедет','We tell you when the courier leaves','Kurye yola çıkınca haber veririz'],
+ nPromo:['Arzanladyşlar','Скидки и акции','Discounts and offers','İndirimler ve kampanyalar'],
+ nPromoS:['Aýda iki gezekden köp däl','Не чаще двух раз в месяц','No more than twice a month','Ayda en fazla iki kez'],
+ nDates:['Möhüm seneler','Важные даты','Important dates','Önemli tarihler'],
+ nDatesS:['Ýakynlaryňyzyň doglan günlerini ýatladarys','Напомним о днях рождения близких','We remind you of loved ones’ birthdays','Sevdiklerinizin doğum günlerini hatırlatırız'],
+ deleteAccount:['Hasaby pozmak','Удалить аккаунт','Delete account','Hesabı sil'],
+ signedOut:['Siz hasabyňyzdan çykdyňyz','Вы вышли из аккаунта','You are signed out','Oturumunuz kapatıldı'],
+ signIn:['Içeri gir','Войти','Sign in','Giriş yap'],
+ signInText:['Telefon belgiňize SMS kod ibereris','Отправим SMS-код на ваш номер','We will text a code to your number','Numaranıza SMS kodu göndereceğiz'],
+ getCode:['Kody al','Получить код','Get code','Kod al'],
+ code:['SMS kod','SMS-код','SMS code','SMS kodu'],
+ codeHint:['Prototipde islendik 4 san bolýar','В прототипе подойдут любые 4 цифры','Any 4 digits work in this prototype','Prototipte herhangi 4 rakam olur'],
+ welcome:['Hoş geldiňiz!','Добро пожаловать!','Welcome back!','Tekrar hoş geldiniz!'],
+ placed:['Sargyt edildi','Оформлен','Placed','Verildi'],
+ orders:['sargyt','заказов','orders','sipariş'],
+ spent:['jemi','всего','spent','toplam'],
+ foot1:['© 2026 Sowgatly · Aşgabat','© 2026 Sowgatly · Ашхабад','© 2026 Sowgatly · Ashgabat','© 2026 Sowgatly · Aşkabat'],
+ foot2:['Prototip: harytlar we sargytlar mysal üçin','Прототип: товары и заказы — примеры','Prototype: products and orders are sample data','Prototip: ürünler ve siparişler örnektir'],
+ messageSent:['Dükan bilen çat açyldy','Открыт чат с магазином','Chat with the shop opened','Mağazayla sohbet açıldı'],
+ cancelled:['Sargyt ýatyryldy','Заказ отменён','Order cancelled','Sipariş iptal edildi'],
+ reordered:['Harytlar sebede goşuldy','Товары добавлены в корзину','Items added to the cart','Ürünler sepete eklendi'],
+ free:['Mugt','Бесплатно','Free','Ücretsiz'],
+ cm:['sm','см','cm','cm'],
+};
+let lang='tm';
+const L=()=>LANGS.findIndex(l=>l[0]===lang);
+const t=(k,vars={})=>{let s=(T[k]||[k])[L()]??T[k][0];for(const v in vars)s=s.replace('{'+v+'}',vars[v]);return s};
+const nm=o=>o[lang]||o.tm;
+
+/* ---------------- data (sample) ---------------- */
+const CATS=[
+ {id:1,i:'flower',tm:'Monobuketler',ru:'Монобукеты',en:'Mono bouquets',tr:'Tek tür buketler'},
+ {id:2,i:'sparkle',tm:'Awtoryň buketleri',ru:'Авторские букеты',en:'Designer bouquets',tr:'Tasarım buketler'},
+ {id:3,i:'box',tm:'Gutydaky güller',ru:'Цветы в коробке',en:'Flowers in a box',tr:'Kutuda çiçekler'},
+ {id:4,i:'basket',tm:'Sebetdäki güller',ru:'Цветы в корзине',en:'Flowers in a basket',tr:'Sepette çiçekler'},
+ {id:5,i:'gift',tm:'Sowgat sebetleri',ru:'Подарочные корзины',en:'Gift baskets',tr:'Hediye sepetleri'},
+ {id:6,i:'balloon',tm:'Şarlar',ru:'Воздушные шары',en:'Balloons',tr:'Balonlar'},
+ {id:7,i:'ring',tm:'Toý buketleri',ru:'Свадебные букеты',en:'Wedding bouquets',tr:'Gelin buketleri'},
+ {id:8,i:'bear',tm:'Ýumşak oýunjaklar',ru:'Мягкие игрушки',en:'Soft toys',tr:'Peluş oyuncaklar'},
+ {id:9,i:'plant',tm:'Içki güller',ru:'Комнатные растения',en:'Houseplants',tr:'Saksı bitkileri'},
+];
+const SHOPS={1:'Roza Flowers',2:'Gül dünýäsi',3:'Lale öýi',4:'Moda House',5:'Sowgatly Market'};
+// art: style, flower colors, wrap color, background
+const P=[
+ {id:1,cat:1,shop:1,price:1820,disc:0,rate:4.9,rev:128,eta:45,size:'45 × 60',art:{k:'rose',c:['#D81E3A','#B5122C','#E8344E'],w:'#F3E4D3',bg:'#FCE9E6',n:12},
+  tm:'51 gyzyl bägül',ru:'51 красная роза',en:'51 red roses',tr:'51 kırmızı gül',
+  comp:{tm:'Gyzyl bägül 51 sany, kraft kagyz, lenta',ru:'Красная роза 51 шт., крафт, лента',en:'51 red roses, kraft paper, ribbon',tr:'51 kırmızı gül, kraft kağıt, kurdele'}},
+ {id:2,cat:1,shop:2,price:2000,disc:10,rate:4.8,rev:86,eta:60,size:'40 × 50',art:{k:'peony',c:['#F7A8C0','#F38BAA','#FBC6D6'],w:'#FFFFFF',bg:'#FDEFF3',n:7},
+  tm:'Pion monobuketi',ru:'Монобукет из пионов',en:'Peony bouquet',tr:'Şakayık buketi',
+  comp:{tm:'Pion 11 sany, ewkalipt, fetr',ru:'Пион 11 шт., эвкалипт, фетр',en:'11 peonies, eucalyptus, felt wrap',tr:'11 şakayık, okaliptüs, keçe'}},
+ {id:3,cat:2,shop:3,price:2350,disc:0,rate:4.9,rev:54,eta:90,size:'50 × 55',art:{k:'mix',c:['#F38BAA','#FFFFFF','#9B7BD8','#F7C6D4'],w:'#E9DDF7',bg:'#F4EEFB',n:10},
+  tm:'Romantik duýgy',ru:'Романтическое настроение',en:'Romantic mood',tr:'Romantik his',
+  comp:{tm:'Bägül, eustoma, lizianthus, gipsofila',ru:'Роза, эустома, лизиантус, гипсофила',en:'Roses, eustoma, lisianthus, gypsophila',tr:'Gül, lisianthus, eustoma, cipso'}},
+ {id:4,cat:3,shop:4,price:1450,disc:0,rate:4.7,rev:41,eta:60,size:'25 × 25',art:{k:'box',c:['#FFFFFF','#F4EDE4','#FFE2E8'],w:'#2B2522',bg:'#F2ECE6',n:9},
+  tm:'Gutydaky ak güller',ru:'Белые цветы в коробке',en:'White flowers in a box',tr:'Kutuda beyaz çiçekler',
+  comp:{tm:'Ak bägül, hrizantema, şlýapa guty',ru:'Белая роза, хризантема, шляпная коробка',en:'White roses, chrysanthemums, hat box',tr:'Beyaz gül, krizantem, şapka kutusu'}},
+ {id:5,cat:4,shop:3,price:1250,disc:15,rate:4.8,rev:73,eta:45,size:'35 × 40',art:{k:'tulip',c:['#FF7A45','#FFB020','#F04A6A'],w:'#C9A06A',bg:'#FFF4E5',n:9},
+  tm:'Lale sebedi',ru:'Корзина тюльпанов',en:'Tulip basket',tr:'Lale sepeti',
+  comp:{tm:'Lale 25 sany, ýüpek sebet',ru:'Тюльпан 25 шт., плетёная корзина',en:'25 tulips, wicker basket',tr:'25 lale, hasır sepet'}},
+ {id:6,cat:5,shop:5,price:980,disc:0,rate:4.6,rev:39,eta:90,size:'30 × 40',art:{k:'fruit',c:['#F2542D','#FFB020','#7BC043','#F38BAA'],w:'#C9A06A',bg:'#FFF1E6',n:8},
+  tm:'Miweli sowgat sebedi',ru:'Фруктовая подарочная корзина',en:'Fruit gift basket',tr:'Meyve hediye sepeti',
+  comp:{tm:'Alma, nar, üzüm, şokolad, güller',ru:'Яблоки, гранат, виноград, шоколад, цветы',en:'Apples, pomegranate, grapes, chocolate, flowers',tr:'Elma, nar, üzüm, çikolata, çiçek'}},
+ {id:7,cat:6,shop:5,price:450,disc:0,rate:4.9,rev:162,eta:30,size:'30 sm',art:{k:'balloon',c:['#FF2A55','#FF6A88','#FFFFFF','#FF9AB0'],w:'#FFFFFF',bg:'#FFEFF2',n:7},
+  tm:'Ýürek şarlary, 15 sany',ru:'Шары-сердца, 15 шт.',en:'Heart balloons, 15 pcs',tr:'Kalp balonlar, 15 adet',
+  comp:{tm:'Folga we lateks şarlar, geliý',ru:'Фольгированные и латексные шары, гелий',en:'Foil and latex balloons, helium',tr:'Folyo ve lateks balon, helyum'}},
+ {id:8,cat:7,shop:2,price:2100,disc:0,rate:5.0,rev:31,eta:120,size:'25 × 30',art:{k:'peony',c:['#FFFFFF','#F7EFE6','#EEE3D6'],w:'#F7F2EC',bg:'#F4F0EA',n:8},
+  tm:'Gelin buketi «Ak ýüpek»',ru:'Букет невесты «Белый шёлк»',en:'Bridal bouquet “White silk”',tr:'Gelin buketi “Beyaz ipek”',
+  comp:{tm:'Ak pion, ranunkulýus, atlas lenta',ru:'Белый пион, ранункулюс, атласная лента',en:'White peonies, ranunculus, satin ribbon',tr:'Beyaz şakayık, düğün çiçeği, saten kurdele'}},
+ {id:9,cat:8,shop:4,price:990,disc:10,rate:4.7,rev:58,eta:60,size:'40 sm',art:{k:'bear',c:['#D81E3A','#E8344E','#B5122C'],w:'#C8946A',bg:'#FBEDE5',n:5},
+  tm:'Aýy we bägüller',ru:'Мишка с розами',en:'Teddy with roses',tr:'Ayıcık ve güller',
+  comp:{tm:'Ýumşak aýy 40 sm, bägül 7 sany',ru:'Мишка 40 см, роза 7 шт.',en:'40 cm teddy, 7 roses',tr:'40 cm ayıcık, 7 gül'}},
+ {id:10,cat:9,shop:2,price:760,disc:0,rate:4.8,rev:47,eta:60,size:'60 sm',art:{k:'orchid',c:['#E7B6F2','#C77DDB','#FFFFFF'],w:'#FFFFFF',bg:'#F6EEF9',n:6},
+  tm:'Orhideýa falenopsis',ru:'Орхидея фаленопсис',en:'Phalaenopsis orchid',tr:'Orkide falenopsis',
+  comp:{tm:'Iki şahaly orhideýa, keramiki gap',ru:'Орхидея 2 ветки, керамическое кашпо',en:'Two-stem orchid, ceramic pot',tr:'İki dallı orkide, seramik saksı'}},
+ {id:11,cat:2,shop:1,price:690,disc:0,rate:4.6,rev:66,eta:45,size:'35 × 45',art:{k:'sun',c:['#FFC21A','#FFFFFF','#FFD84D'],w:'#E9F3DD',bg:'#FFF8E1',n:9},
+  tm:'Günebakar we romaşka',ru:'Подсолнухи и ромашки',en:'Sunflowers and daisies',tr:'Ayçiçeği ve papatya',
+  comp:{tm:'Günebakar 5 sany, romaşka, gök ösümlik',ru:'Подсолнух 5 шт., ромашка, зелень',en:'5 sunflowers, daisies, greenery',tr:'5 ayçiçeği, papatya, yeşillik'}},
+ {id:12,cat:1,shop:3,price:540,disc:0,rate:4.5,rev:22,eta:30,size:'30 × 40',art:{k:'mum',c:['#B5124E','#D6336C','#8E0E3E'],w:'#F3E4D3',bg:'#FBE9F0',n:11},
+  tm:'Gyrmyzy hrizantemalar',ru:'Малиновые хризантемы',en:'Crimson chrysanthemums',tr:'Kızıl krizantemler',
+  comp:{tm:'Hrizantema 9 şaha, kagyz',ru:'Хризантема 9 веток, бумага',en:'9 chrysanthemum stems, paper',tr:'9 dal krizantem, kağıt'}},
+];
+const byId=id=>P.find(p=>p.id===id);
+const finalPrice=p=>Math.round(p.price*(1-p.disc/100));
+const money=v=>v.toLocaleString('ru-RU').replace(/ /g,' ')+' TMT';
+
+/* ---------------- product art ---------------- */
+function rng(seed){let s=seed%2147483647;if(s<=0)s+=2147483646;return()=>(s=s*16807%2147483647)/2147483647}
+function art(p,uid){
+  const a=p.art,r=rng(p.id*7919+11),g='g'+uid;
+  let s=`<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${nm(p).replace(/"/g,'')}"><defs><radialGradient id="${g}" cx="50%" cy="38%" r="65%"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><rect width="200" height="200" fill="${a.bg}"/><circle cx="100" cy="86" r="86" fill="url(#${g})"/>`;
+  const leaf=(x,y,ang,len=26)=>`<ellipse cx="${x}" cy="${y}" rx="${len}" ry="${len*.32}" fill="#5E8C4A" transform="rotate(${ang} ${x} ${y})"/><path d="M${x-len*.8} ${y}L${x+len*.8} ${y}" stroke="#4C7A3B" stroke-width="1" transform="rotate(${ang} ${x} ${y})"/>`;
+  const pos=[];for(let i=0;i<a.n;i++){const t=i/a.n*Math.PI*2+r()*.6,rr=(i%3===0?.25:.75)*r()*0+(.35+r()*.65);pos.push([100+Math.cos(t)*38*rr,86+Math.sin(t)*26*rr])}
+  pos.sort((u,v)=>u[1]-v[1]);
+  const flower=(x,y,c,k,sc=1)=>{
+    const dk=shade(c,-28);
+    if(k==='rose'){return `<circle cx="${x}" cy="${y}" r="${13*sc}" fill="${c}"/><path d="M${x-7*sc} ${y}a${7*sc} ${7*sc} 0 1 1 ${8*sc} ${6*sc}M${x-3*sc} ${y-1*sc}a${3.5*sc} ${3.5*sc} 0 1 1 ${4*sc} ${3*sc}" fill="none" stroke="${dk}" stroke-width="${1.6*sc}" stroke-linecap="round"/>`}
+    if(k==='peony'){let o='';for(let j=0;j<7;j++){const an=j/7*Math.PI*2;o+=`<circle cx="${x+Math.cos(an)*8*sc}" cy="${y+Math.sin(an)*8*sc}" r="${9*sc}" fill="${c}"/>`}return o+`<circle cx="${x}" cy="${y}" r="${9*sc}" fill="${shade(c,-12)}"/><circle cx="${x}" cy="${y}" r="${4.5*sc}" fill="${shade(c,-24)}"/>`}
+    if(k==='tulip'){return `<path d="M${x-9*sc} ${y-4*sc}q0 ${16*sc} ${9*sc} ${16*sc}q${9*sc} 0 ${9*sc} ${-16*sc}l${-4.5*sc} ${4*sc}-${4.5*sc}-${7*sc}-${4.5*sc} ${7*sc}z" fill="${c}"/><path d="M${x} ${y+12*sc}v${14*sc}" stroke="#5E8C4A" stroke-width="2"/>`}
+    if(k==='daisy'||k==='sun'){let o='';const n=k==='sun'?14:10,pr=k==='sun'?13:10;for(let j=0;j<n;j++){const an=j/n*Math.PI*2;o+=`<ellipse cx="${x+Math.cos(an)*pr*sc}" cy="${y+Math.sin(an)*pr*sc}" rx="${6*sc}" ry="${2.8*sc}" fill="${c}" transform="rotate(${an*57.3} ${x+Math.cos(an)*pr*sc} ${y+Math.sin(an)*pr*sc})"/>`}return o+`<circle cx="${x}" cy="${y}" r="${(k==='sun'?8:5)*sc}" fill="${k==='sun'?'#6B3F1D':'#F5B90A'}"/>`}
+    if(k==='mum'){let o='';for(let j=0;j<16;j++){const an=j/16*Math.PI*2;o+=`<ellipse cx="${x+Math.cos(an)*7*sc}" cy="${y+Math.sin(an)*7*sc}" rx="${6*sc}" ry="${2.4*sc}" fill="${c}" transform="rotate(${an*57.3} ${x+Math.cos(an)*7*sc} ${y+Math.sin(an)*7*sc})"/>`}return o+`<circle cx="${x}" cy="${y}" r="${5*sc}" fill="${dk}"/>`}
+    if(k==='orchid'){let o='';for(let j=0;j<5;j++){const an=j/5*Math.PI*2-Math.PI/2;o+=`<ellipse cx="${x+Math.cos(an)*7*sc}" cy="${y+Math.sin(an)*7*sc}" rx="${7.5*sc}" ry="${5*sc}" fill="${c}" transform="rotate(${an*57.3} ${x+Math.cos(an)*7*sc} ${y+Math.sin(an)*7*sc})"/>`}return o+`<circle cx="${x}" cy="${y}" r="${3.5*sc}" fill="#F5B90A"/>`}
+    return `<circle cx="${x}" cy="${y}" r="${11*sc}" fill="${c}"/>`;
+  };
+  const k=a.k;
+  if(k==='balloon'){
+    a.c.concat(a.c).slice(0,7).forEach((c,i)=>{const x=46+i*18+(i%2?6:-4),y=58+(i%3)*22;s+=`<path d="M${x} ${y+18}q-6 30 ${100-x>0?6:-6} 92" stroke="#C9B9AE" stroke-width="1.2" fill="none"/><path d="M${x} ${y+16}c-14-10-20-26-8-32 6-3 8 1 8 4 0-3 2-7 8-4 12 6 6 22-8 32z" fill="${c}" ${c==='#FFFFFF'?'stroke="#F1D3DA" stroke-width="1.5"':''}/><ellipse cx="${x-5}" cy="${y-6}" rx="3" ry="5" fill="#fff" opacity=".45"/>`});
+    return s+`<rect x="86" y="168" width="28" height="14" rx="4" fill="#FF6A88"/></svg>`;
+  }
+  if(k==='orchid'){
+    s+=`<path d="M100 150V70c0-14 16-22 30-20" stroke="#6E8B3D" stroke-width="3" fill="none"/><path d="M100 110c-6-14-22-18-34-14" stroke="#6E8B3D" stroke-width="3" fill="none"/>`;
+    [[130,52],[148,64],[118,72],[66,96],[80,86],[54,112]].forEach(([x,y],i)=>s+=flower(x,y,a.c[i%a.c.length],'orchid',.9));
+    s+=leaf(84,160,-25,24)+leaf(118,160,25,24)+`<path d="M70 150h60l-8 36H78z" fill="#F2EDE8" stroke="#E2D8CF" stroke-width="1.5"/><path d="M70 150h60" stroke="#D9CEC4" stroke-width="3"/>`;
+    return s+'</svg>';
+  }
+  // greenery
+  for(let i=0;i<7;i++){const an=-150+i*20+r()*10;const x=100+Math.cos(an/57.3)*44,y=92+Math.sin(an/57.3)*30;s+=leaf(x,y+8,an,24+r()*6)}
+  if(k==='box'){
+    s+=`<rect x="48" y="104" width="104" height="70" rx="10" fill="${a.w}"/><ellipse cx="100" cy="104" rx="52" ry="10" fill="${shade(a.w,18)}"/>`;
+    pos.forEach(([x,y],i)=>s+=flower(x,Math.min(y+8,104),a.c[i%a.c.length],i%3?'rose':'peony',.95));
+    s+=`<text x="100" y="146" text-anchor="middle" font-family="Unbounded,sans-serif" font-size="11" fill="#fff" opacity=".85">sowgatly</text></svg>`;return s;
+  }
+  if(k==='tulip'||k==='fruit'){
+    s+=`<path d="M38 110h124l-14 62H52z" fill="${a.w}"/><path d="M38 110h124" stroke="${shade(a.w,-25)}" stroke-width="4"/><path d="M54 110c0-40 92-40 92 0" fill="none" stroke="${shade(a.w,-25)}" stroke-width="5"/>`;
+    for(let i=0;i<5;i++)s+=`<path d="M${50+i*25} 116l-3 52" stroke="${shade(a.w,-15)}" stroke-width="2"/>`;
+    if(k==='fruit'){[[70,104,'#F2542D',14],[94,98,'#FFB020',13],[118,104,'#7BC043',12],[136,100,'#8E2E5A',11],[82,90,'#F38BAA',10],[110,86,'#D81E3A',11]].forEach(([x,y,c,rr])=>s+=`<circle cx="${x}" cy="${y}" r="${rr}" fill="${c}"/><circle cx="${x-rr*.35}" cy="${y-rr*.35}" r="${rr*.25}" fill="#fff" opacity=".35"/>`);s+=`<rect x="122" y="76" width="22" height="30" rx="3" fill="#5A2E1B" transform="rotate(12 133 91)"/>`;return s+'</svg>'}
+    pos.forEach(([x,y],i)=>s+=flower(x,Math.min(y+6,100),a.c[i%a.c.length],'tulip',1));
+    return s+'</svg>';
+  }
+  if(k==='bear'){
+    s+=`<circle cx="120" cy="120" r="34" fill="${a.w}"/><circle cx="120" cy="76" r="26" fill="${a.w}"/><circle cx="100" cy="56" r="10" fill="${a.w}"/><circle cx="140" cy="56" r="10" fill="${a.w}"/><circle cx="100" cy="56" r="5" fill="${shade(a.w,-20)}"/><circle cx="140" cy="56" r="5" fill="${shade(a.w,-20)}"/><ellipse cx="120" cy="86" rx="11" ry="8" fill="${shade(a.w,25)}"/><circle cx="111" cy="72" r="3" fill="#2B1A12"/><circle cx="129" cy="72" r="3" fill="#2B1A12"/><circle cx="120" cy="83" r="3.5" fill="#2B1A12"/><path d="M106 102l14 8 14-8" fill="#D81E3A"/>`;
+    [[58,96],[72,84],[48,112],[70,110],[60,128]].forEach(([x,y],i)=>s+=flower(x,y,a.c[i%a.c.length],'rose',.8));
+    return s+`<path d="M44 132l30 0-10 44h-12z" fill="#F3E4D3"/></svg>`;
+  }
+  // paper cone wrap
+  s+=`<path d="M52 108h96l-34 76h-28z" fill="${a.w}"/><path d="M52 108l40 76M148 108l-40 76" stroke="${shade(a.w,-12)}" stroke-width="1.5" fill="none"/>`;
+  const kind=k==='mix'?null:(k==='sun'?'sun':k);
+  pos.forEach(([x,y],i)=>{const kk=kind||['rose','peony','daisy','rose'][i%4];s+=flower(x,y,a.c[i%a.c.length],kk,k==='peony'?1.15:1)});
+  if(k==='sun'||k==='mix')for(let i=0;i<6;i++){const x=60+r()*80,y=58+r()*50;s+=`<circle cx="${x}" cy="${y}" r="2.2" fill="#fff"/>`}
+  s+=`<path d="M84 150q16 10 32 0l-4 10q-12 6-24 0z" fill="#F5470F"/><path d="M100 152l-12 22M100 152l12 22" stroke="#F5470F" stroke-width="3" stroke-linecap="round"/>`;
+  return s+'</svg>';
+}
+function shade(hex,amt){const n=parseInt(hex.slice(1),16);let r=(n>>16)+amt,g=(n>>8&255)+amt,b=(n&255)+amt;const c=v=>Math.max(0,Math.min(255,v));return '#'+((1<<24)+(c(r)<<16)+(c(g)<<8)+c(b)).toString(16).slice(1)}
+let uid=0;const pic=p=>art(p,++uid);
+
+/* ---------------- state ---------------- */
+const S={view:'home',cat:null,pid:null,q:'',tab:'orders',cart:[{id:2,q:1},{id:7,q:1}],fav:new Set([3,10]),promo:false,when:'asap',pay:'online',signedIn:true,addrSel:0,
+  user:{name:'Aýna Orazowa',email:'ayna.orazowa@mail.tm',phone:'+993 65 656585',birthday:'1996-03-14'},
+  addresses:[{label:{tm:'Öý',ru:'Дом',en:'Home',tr:'Ev'},line:'Aşgabat, Parahat 7/2, 14-nji jaý, 21-nji öý',def:true},{label:{tm:'Iş',ru:'Работа',en:'Work',tr:'İş'},line:'Aşgabat, Bitarap Türkmenistan şaýoly 45, 3-nji gat',def:false}],
+  notif:{orders:true,promo:false,dates:true},
+  orders:[
+    {no:'0000148',st:'delivering',date:'2026-10-04T13:05',items:[{id:1,q:1}],fee:20,courier:'Merdan A.',eta:'15:40',times:['13:05','13:22','14:58',''],addr:0},
+    {no:'0000146',st:'processing',date:'2026-10-04T11:40',items:[{id:5,q:1},{id:7,q:1}],fee:20,courier:null,eta:'17:00',times:['11:40','12:05','',''],addr:1},
+    {no:'0000120',st:'completed',date:'2026-09-28T10:15',items:[{id:3,q:1}],fee:0,times:['10:15','10:40','11:30','12:24'],addr:0},
+    {no:'0000102',st:'cancelled',date:'2026-09-12T18:20',items:[{id:9,q:1}],fee:20,times:['18:20','','',''],addr:0},
+    {no:'0000097',st:'completed',date:'2026-09-01T09:00',items:[{id:10,q:1},{id:11,q:2}],fee:20,times:['09:00','09:30','10:20','11:05'],addr:1},
+  ]};
+const orderTotal=o=>o.items.reduce((s,it)=>s+finalPrice(byId(it.id))*it.q,0)+o.fee;
+const cartCount=()=>S.cart.reduce((s,i)=>s+i.q,0);
+const initials=n=>n.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+const fmtDate=iso=>{const d=new Date(iso);const m=[['Ýan','Few','Mar','Apr','Maý','Iýun','Iýul','Awg','Sen','Okt','Noý','Dek'],['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'],['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara']][L()];return `${d.getDate()} ${m[d.getMonth()]} · ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
+
+/* ---------------- render ---------------- */
+const app=document.getElementById('app');
+function go(view,extra={}){Object.assign(S,{view},extra);render();window.scrollTo({top:0,behavior:'instant'})}
+function toast(msg){const el=document.getElementById('toast');el.innerHTML=ico('check')+msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),1800)}
+
+function chrome(){
+  document.documentElement.lang=lang==='tm'?'tk':lang;
+  document.getElementById('city').innerHTML=ico('pin')+t('city');
+  const sb=document.getElementById('searchBox');if(!sb.querySelector('.ico'))sb.insertAdjacentHTML('afterbegin',ico('search'));
+  const q=document.getElementById('q');q.placeholder=t('searchPh');if(document.activeElement!==q)q.value=S.q;
+  document.getElementById('langs').innerHTML=LANGS.map(([c,s,full])=>`<button class="${c===lang?'on':''}" data-lang="${c}" title="${full}" aria-pressed="${c===lang}">${s}</button>`).join('');
+  const cnt=cartCount();
+  document.getElementById('cartBtn').innerHTML=ico('bag')+(cnt?`<span class="badge num">${cnt}</span>`:'');
+  document.getElementById('cartBtn').setAttribute('aria-label',t('cart'));
+  document.getElementById('favBtn').innerHTML=ico('heart')+(S.fav.size?`<span class="badge num">${S.fav.size}</span>`:'');
+  document.getElementById('favBtn').setAttribute('aria-label',t('favorites'));
+  const dark=document.documentElement.dataset.theme==='dark'||(!document.documentElement.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);
+  document.getElementById('themeBtn').innerHTML=ico(dark?'sun':'moon');
+  document.getElementById('themeBtn').setAttribute('aria-label',t('theme'));
+  document.getElementById('meBtn').innerHTML=S.signedIn?`<span class="avatar">${initials(S.user.name)}</span><span class="nm">${S.user.name.split(' ')[0]}</span>`:`<span class="avatar">${ico('user')}</span><span class="nm">${t('signIn')}</span>`;
+  document.getElementById('foot1').textContent=t('foot1');document.getElementById('foot2').textContent=t('foot2');
+  const tabs=[['home','home','home'],['catalog','grid','catalog'],['cart','bag','cart'],['favorites','heart','favorites'],['account','user','account']];
+  document.getElementById('tabbar').innerHTML=tabs.map(([v,i,k])=>`<button data-go="${v}" class="${(S.view===v||(v==='catalog'&&S.view==='catalog'))?'on':''}">${ico(i)}${t(k)}${v==='cart'&&cnt?`<span class="badge num">${cnt}</span>`:''}</button>`).join('');
+}
+
+function card(p){
+  const inCart=S.cart.find(c=>c.id===p.id);
+  return `<article class="card">
+    <div class="pic"><button class="picbtn" data-pid="${p.id}" aria-label="${nm(p)}">${pic(p)}</button>${p.disc?`<span class="tag">−${p.disc}%</span>`:''}<button class="heart ${S.fav.has(p.id)?'on':''}" data-fav="${p.id}" aria-label="${t('favorites')}">${ico('heart')}</button></div>
+    <div class="body">
+      <button class="name" data-pid="${p.id}">${nm(p)}</button>
+      <div class="meta"><span>${SHOPS[p.shop]}</span></div>
+      <div class="meta"><span class="stars">${ico('star')}${p.rate.toFixed(1)}</span><span>${p.rev} ${t('reviews')}</span><span class="eta">${ico('clock')}${p.eta} ${t('min')}</span></div>
+      <div class="price-row"><div class="price num">${p.disc?`<span class="old">${money(p.price)}</span>`:''}${money(finalPrice(p))}</div>
+      ${inCart?`<div class="step"><button data-dec="${p.id}" aria-label="−">${ico('minus')}</button><b class="num">${inCart.q}</b><button data-inc="${p.id}" aria-label="+">${ico('plus')}</button></div>`:`<button class="add" data-add="${p.id}" aria-label="${t('addToCart')}">${ico('plus')}</button>`}</div>
+    </div></article>`;
+}
+
+function vHome(){
+  const today=P.filter(p=>p.eta<=60).slice(0,8),pop=[...P].sort((a,b)=>b.rev-a.rev).slice(0,8);
+  return `<div class="shell" style="display:flex;flex-direction:column;gap:34px">
+  <section class="banners">
+    <div class="ban hero"><div class="art">${pic(byId(3))}</div><small>${t('heroKick')}</small><h1>${t('heroTitle')}</h1><p>${t('heroText')}</p><button class="cta" data-go="catalog">${t('heroCta')}</button></div>
+    <button class="ban b2" data-go="catalog"><div class="art-sm">${pic(byId(7))}</div><small>${t('b2kick')}</small><h3>${t('b2title')}</h3><span class="code">SOWGAT15</span></button>
+    <button class="ban b3" data-cat="7"><div class="art-sm">${pic(byId(8))}</div><small>${t('b3kick')}</small><h3>${t('b3title')}</h3></button>
+  </section>
+  <section><div class="sec-h"><h2>${t('categories')}</h2><button class="link" data-go="catalog">${t('all')}</button></div>
+    <div class="cats">${CATS.map(c=>`<button class="cat" data-cat="${c.id}"><span class="disc">${ico(c.i)}</span><span>${nm(c)}</span></button>`).join('')}</div></section>
+  <section><div class="sec-h"><h2>${t('today')}</h2><button class="link" data-go="catalog">${t('all')}</button></div><div class="grid">${today.map(card).join('')}</div></section>
+  <section><div class="sec-h"><h2>${t('popular')}</h2><button class="link" data-go="catalog">${t('all')}</button></div><div class="grid">${pop.map(card).join('')}</div></section>
+  </div>`;
+}
+function vCatalog(){
+  const q=S.q.trim().toLowerCase();
+  let list=P.filter(p=>!S.cat||p.cat===S.cat);
+  if(q)list=list.filter(p=>['tm','ru','en','tr'].some(l=>p[l].toLowerCase().includes(q))||SHOPS[p.shop].toLowerCase().includes(q)||CATS.find(c=>c.id===p.cat)[lang].toLowerCase().includes(q));
+  const title=q?t('results',{q:S.q}):S.cat?nm(CATS.find(c=>c.id===S.cat)):t('catalog');
+  return `<div class="shell" style="display:flex;flex-direction:column;gap:22px">
+   <div class="crumbs"><button data-go="home">${t('home')}</button>›<span>${title}</span></div>
+   <h2 class="display" style="font-size:26px;font-weight:600">${title}</h2>
+   <div class="cats">${CATS.map(c=>`<button class="cat ${S.cat===c.id?'on':''}" data-cat="${c.id}"><span class="disc">${ico(c.i)}</span><span>${nm(c)}</span></button>`).join('')}</div>
+   ${list.length?`<div class="grid">${list.map(card).join('')}</div>`:`<div class="panel empty">${ico('search')}<h3>${t('nothing')}</h3><p>${t('nothingText')}</p></div>`}
+  </div>`;
+}
+function vProduct(){
+  const p=byId(S.pid),inCart=S.cart.find(c=>c.id===p.id),c=CATS.find(x=>x.id===p.cat);
+  const similar=P.filter(x=>x.cat===p.cat&&x.id!==p.id).concat(P.filter(x=>x.cat!==p.cat)).slice(0,4);
+  return `<div class="shell" style="display:flex;flex-direction:column;gap:22px">
+   <div class="crumbs"><button data-go="home">${t('home')}</button>›<button data-cat="${c.id}">${nm(c)}</button>›<span>${nm(p)}</span></div>
+   <section class="pdp">
+     <div><div class="big">${pic(p)}${p.disc?`<span class="tag">−${p.disc}%</span>`:''}<button class="heart ${S.fav.has(p.id)?'on':''}" data-fav="${p.id}" aria-label="${t('favorites')}">${ico('heart')}</button></div>
+       <div class="thumbs"><div class="on">${pic(p)}</div><div>${pic(Object.assign({},p,{art:Object.assign({},p.art,{bg:'#F5F0EC'})}))}</div><div>${pic(Object.assign({},p,{id:p.id+40}))}</div></div></div>
+     <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+       <div style="display:flex;flex-direction:column;gap:8px"><h1>${nm(p)}</h1>
+         <div class="meta"><span class="stars">${ico('star')}${p.rate.toFixed(1)}</span><span>${p.rev} ${t('reviews')}</span><span class="eta">${ico('clock')}${p.eta} ${t('min')}</span></div></div>
+       <div class="price num">${p.disc?`<span class="old">${money(p.price)}</span>`:''}${money(finalPrice(p))}</div>
+       <div class="buybar">
+         <div class="qty"><button data-dec="${p.id}" aria-label="−">${ico('minus')}</button><b class="num">${inCart?inCart.q:0}</b><button data-inc="${p.id}" aria-label="+">${ico('plus')}</button></div>
+         <button class="btn" style="flex:1" data-add="${p.id}">${ico('bag')}${t('addToCart')}</button>
+       </div>
+       <button class="btn ghost block" data-buy="${p.id}">${t('buyNow')}</button>
+       <dl class="kv"><dt>${t('composition')}</dt><dd>${nm(p.comp)}</dd><dt>${t('size')}</dt><dd>${p.size.replace('sm',t('cm'))} ${p.size.includes('×')?t('cm'):''}</dd><dt>${t('deliveryTime')}</dt><dd>${p.eta}–${p.eta+30} ${t('min')} · ${t('city')}</dd></dl>
+       <div class="shopcard"><span class="avatar">${initials(SHOPS[p.shop])}</span><div style="flex:1;min-width:0"><b>${SHOPS[p.shop]}</b><small>${t('shopsCount',{n:(p.rev*7).toLocaleString('ru-RU')})}</small></div><button class="small-btn" data-msg="1">${t('writeShop')}</button></div>
+       <div class="perks"><div class="perk">${ico('card')}<b>${t('perk1')}</b><span>${t('perk1s')}</span></div><div class="perk">${ico('chat')}<b>${t('perk2')}</b><span>${t('perk2s')}</span></div><div class="perk">${ico('shield')}<b>${t('perk3')}</b><span>${t('perk3s')}</span></div></div>
+     </div>
+   </section>
+   <section><div class="sec-h"><h2>${t('popular')}</h2></div><div class="grid">${similar.map(card).join('')}</div></section>
+  </div>`;
+}
+function sums(){const items=S.cart.reduce((s,c)=>s+finalPrice(byId(c.id))*c.q,0);const disc=S.promo?Math.round(items*.15):0;const fee=items-disc>=1500?0:20;return{items,disc,fee,total:items-disc+fee}}
+function summary(btn){const s=sums();return `<aside class="panel sum">
+  <div class="row"><span>${t('items')} (${cartCount()})</span><span class="num">${money(s.items)}</span></div>
+  ${s.disc?`<div class="row" style="color:var(--ok)"><span>${t('discount')}</span><span class="num">−${money(s.disc)}</span></div>`:''}
+  <div class="row"><span>${t('delivery')}</span><span class="num">${s.fee?money(s.fee):t('free')}</span></div>
+  <div class="row total"><span>${t('total')}</span><span class="num">${money(s.total)}</span></div>
+  ${btn}</aside>`}
+function vCart(){
+  if(!S.cart.length)return `<div class="shell"><div class="panel empty">${ico('bag')}<h3>${t('emptyCart')}</h3><p>${t('emptyCartText')}</p><button class="btn" data-go="catalog">${t('shopNow')}</button></div></div>`;
+  return `<div class="shell" style="display:flex;flex-direction:column;gap:18px"><h2 class="display" style="font-size:26px;font-weight:600">${t('cart')}</h2>
+  <div class="two"><section class="panel">${S.cart.map(c=>{const p=byId(c.id);return `<div class="line"><button class="thumb" data-pid="${p.id}" style="border:0;padding:0;background:none">${pic(p)}</button><div class="info"><b>${nm(p)}</b><small>${SHOPS[p.shop]} · ${p.eta} ${t('min')}</small><div style="margin-top:6px"><button class="small-btn danger" data-rm="${p.id}">${ico('trash')}</button></div></div>
+   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px"><b class="num">${money(finalPrice(p)*c.q)}</b><div class="step"><button data-dec="${p.id}" aria-label="−">${ico('minus')}</button><b class="num">${c.q}</b><button data-inc="${p.id}" aria-label="+">${ico('plus')}</button></div></div></div>`}).join('')}
+   <div class="field" style="margin-top:14px"><label for="promo">${t('promo')}</label><div class="promo"><input id="promo" value="${S.promo?'SOWGAT15':''}" placeholder="SOWGAT15"><button class="btn ghost" data-act="promo">${t('apply')}</button></div></div>
+  </section>${summary(`<button class="btn block" data-go="checkout">${t('checkout')}</button>`)}</div></div>`;
+}
+function vCheckout(){
+  if(!S.cart.length)return vCart();
+  return `<div class="shell" style="display:flex;flex-direction:column;gap:18px"><div class="crumbs"><button data-go="cart">${t('cart')}</button>›<span>${t('checkout')}</span></div><h2 class="display" style="font-size:26px;font-weight:600">${t('checkout')}</h2>
+  <div class="two"><form class="panel" id="checkoutForm" style="display:flex;flex-direction:column;gap:18px" novalidate>
+   <h3>${t('recipient')}</h3>
+   <div class="form-grid"><div class="field"><label for="rname">${t('recipientName')}</label><input id="rname" value="${S.user.name}" required></div><div class="field"><label for="rphone">${t('phone')}</label><input id="rphone" value="${S.user.phone}" inputmode="tel" required></div></div>
+   <div class="field"><label for="raddr">${t('address')}</label><select id="raddr">${S.addresses.map((a,i)=>`<option value="${i}" ${i===S.addrSel?'selected':''}>${nm(a.label)} — ${a.line}</option>`).join('')}</select></div>
+   <h3>${t('when')}</h3>
+   <div class="seg"><button type="button" class="${S.when==='asap'?'on':''}" data-when="asap">${ico('clock')}<span><b>${t('asap')}</b><br><small>${t('asapS')}</small></span></button><button type="button" class="${S.when==='later'?'on':''}" data-when="later">${ico('truck')}<span><b>${t('scheduled')}</b><br><small>${t('scheduledS')}</small></span></button></div>
+   <h3>${t('payment')}</h3>
+   <div class="seg"><button type="button" class="${S.pay==='online'?'on':''}" data-pay="online">${ico('card')}<span><b>${t('online')}</b><br><small>${t('onlineS')}</small></span></button><button type="button" class="${S.pay==='cash'?'on':''}" data-pay="cash">${ico('cash')}<span><b>${t('cash')}</b><br><small>${t('cashS')}</small></span></button></div>
+   <div class="field"><label for="rnote">${t('note')}</label><textarea id="rnote" rows="3" placeholder="${t('notePh')}"></textarea></div>
+  </form>${summary(`<button class="btn block" data-act="place">${t('placeOrder')}</button>`)}</div></div>`;
+}
+function vFavorites(){
+  const list=P.filter(p=>S.fav.has(p.id));
+  return `<div class="shell" style="display:flex;flex-direction:column;gap:18px"><h2 class="display" style="font-size:26px;font-weight:600">${t('favorites')}</h2>
+  ${list.length?`<div class="grid">${list.map(card).join('')}</div>`:`<div class="panel empty">${ico('heart')}<h3>${t('noFav')}</h3><p>${t('noFavText')}</p><button class="btn" data-go="catalog">${t('shopNow')}</button></div>`}</div>`;
+}
+const STEPS=['pending','processing','delivering','completed'];
+function track(o){
+  const idx=o.st==='cancelled'?0:STEPS.indexOf(o.st);
+  return `<div class="track">${STEPS.map((s,i)=>{const cls=o.st==='completed'||i<idx?'done':i===idx?'now':'';const icon=['receipt','gift','truck','check'][i];return `<div class="st ${cls}"><span class="dot">${ico(cls==='done'?'check':icon)}</span><span>${t('st_'+s)}</span><time>${o.times[i]||'—'}</time></div>`}).join('')}</div>`;
+}
+function orderCard(o,full){
+  const pill=`<span class="pill p-${o.st}">${t('st_'+o.st)}</span>`;
+  return `<article class="panel order">
+   <div class="order-h"><b>${t('order')} № ${o.no}</b>${pill}<small style="margin-left:auto">${fmtDate(o.date)}</small></div>
+   ${full&&o.st!=='cancelled'?track(o):''}
+   ${full&&o.st==='delivering'?`<div class="courier">${ico('truck')}<div style="flex:1"><b>${t('courier')}: ${o.courier}</b><small>${t('eta')} ${o.eta} · ${nm(S.addresses[o.addr].label)}</small></div><button class="small-btn">${t('call')}</button></div>`:''}
+   <div class="order-items">${o.items.map(it=>`<div title="${nm(byId(it.id))}">${pic(byId(it.id))}</div>`).join('')}</div>
+   <div class="order-f"><span class="num">${money(orderTotal(o))}</span><div style="display:flex;gap:8px;flex-wrap:wrap">
+    ${o.st==='pending'||o.st==='processing'?`<button class="small-btn danger" data-cancel="${o.no}">${t('cancel')}</button>`:''}
+    ${o.st==='completed'?`<button class="small-btn">${t('leaveReview')}</button>`:''}
+    ${o.st==='completed'||o.st==='cancelled'?`<button class="small-btn" data-reorder="${o.no}">${ico('repeat')} ${t('reorder')}</button>`:''}
+    <button class="small-btn" data-msg="1">${t('writeShop')}</button></div></div>
+  </article>`;
+}
+function vAccount(){
+  if(!S.signedIn)return `<div class="shell"><form class="panel signin" id="signinForm" novalidate>
+    <h2 class="display" style="font-size:22px;font-weight:600">${t('signedOut')}</h2><p style="color:var(--muted);margin:0">${t('signInText')}</p>
+    <div class="field" style="text-align:left"><label for="sphone">${t('phone')}</label><input id="sphone" value="+993 " inputmode="tel"></div>
+    <div class="field" style="text-align:left"><label for="scode">${t('code')}</label><input id="scode" inputmode="numeric" maxlength="4" placeholder="0000"><small style="color:var(--muted)">${t('codeHint')}</small></div>
+    <button class="btn block" data-act="signin">${t('signIn')}</button></form></div>`;
+  const active=S.orders.filter(o=>['pending','processing','delivering'].includes(o.st));
+  const past=S.orders.filter(o=>!['pending','processing','delivering'].includes(o.st));
+  const tabs=[['orders','receipt','myOrders',active.length],['history','history','history'],['addresses','map','addresses'],['profile','user','profile'],['settings','gear','settings']];
+  let body='';
+  if(S.tab==='orders')body=`<h2>${t('activeOrders')}</h2>${active.length?active.map(o=>orderCard(o,true)).join(''):`<div class="panel empty">${ico('receipt')}<h3>${t('noActive')}</h3><button class="btn" data-go="catalog">${t('shopNow')}</button></div>`}`;
+  if(S.tab==='history'){const spent=past.filter(o=>o.st==='completed').reduce((s,o)=>s+orderTotal(o),0);body=`<h2>${t('history')}</h2><p style="color:var(--muted);margin:-8px 0 0">${S.orders.length} ${t('orders')} · ${money(spent)} ${t('spent')}</p>${past.map(o=>orderCard(o,false)).join('')}`}
+  if(S.tab==='addresses')body=`<h2>${t('addresses')}</h2>${S.addresses.map((a,i)=>`<div class="panel addr">${ico('pin')}<div class="txt"><b>${nm(a.label)}${a.def?`<span class="chip">${t('default')}</span>`:''}</b><span style="color:var(--muted)">${a.line}</span></div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">${a.def?'':`<button class="small-btn" data-def="${i}">${t('makeDefault')}</button>`}<button class="small-btn danger" data-deladdr="${i}">${t('del')}</button></div></div>`).join('')}
+    <form class="panel" id="addrForm" style="display:flex;flex-direction:column;gap:14px" novalidate><h3>${t('addAddress')}</h3><div class="form-grid"><div class="field"><label for="alabel">${t('addrLabel')}</label><input id="alabel" placeholder="${t('addrLabel')}"></div><div class="field"><label for="aline">${t('addrLine')}</label><input id="aline" placeholder="Aşgabat, …"></div></div><button class="btn" data-act="addaddr" style="align-self:flex-start">${ico('plus')}${t('saveAddr')}</button></form>`;
+  if(S.tab==='profile')body=`<h2>${t('profile')}</h2><form class="panel" id="profileForm" style="display:flex;flex-direction:column;gap:16px" novalidate>
+    <div style="display:flex;align-items:center;gap:14px"><span class="avatar" style="width:64px;height:64px;font-size:22px">${initials(S.user.name)}</span><div><b style="font-size:18px">${S.user.name}</b><div style="color:var(--muted);font-size:13px">${S.user.phone}</div></div></div>
+    <div class="form-grid"><div class="field"><label for="pname">${t('name')}</label><input id="pname" value="${S.user.name}"></div><div class="field"><label for="pemail">${t('email')}</label><input id="pemail" type="email" value="${S.user.email}"></div>
+    <div class="field"><label for="pphone">${t('phone')}</label><input id="pphone" value="${S.user.phone}" inputmode="tel"><small style="color:var(--muted)">${t('phoneNote')}</small></div><div class="field"><label for="pbday">${t('birthday')}</label><input id="pbday" type="date" value="${S.user.birthday}"></div></div>
+    <button class="btn" data-act="saveprofile" style="align-self:flex-start">${t('save')}</button></form>`;
+  if(S.tab==='settings'){const dark=document.documentElement.dataset.theme==='dark';body=`<h2>${t('settings')}</h2>
+    <section class="panel" style="display:flex;flex-direction:column;gap:12px"><h3>${t('language')}</h3><div class="lang-pick">${LANGS.map(([c,,full])=>`<button class="${c===lang?'on':''}" data-lang="${c}">${full}</button>`).join('')}</div></section>
+    <section class="panel" style="display:flex;flex-direction:column;gap:12px"><h3>${t('theme')}</h3><div class="seg"><button class="${!dark?'on':''}" data-settheme="light">${ico('sun')}<b>${t('light')}</b></button><button class="${dark?'on':''}" data-settheme="dark">${ico('moon')}<b>${t('dark')}</b></button></div></section>
+    <section class="panel"><h3 style="margin-bottom:4px">${t('notifications')}</h3>${[['orders','nOrders','nOrdersS'],['promo','nPromo','nPromoS'],['dates','nDates','nDatesS']].map(([k,a,b])=>`<div class="switch"><div><b>${t(a)}</b><small>${t(b)}</small></div><button class="tgl ${S.notif[k]?'on':''}" data-notif="${k}" role="switch" aria-checked="${S.notif[k]}" aria-label="${t(a)}"></button></div>`).join('')}</section>
+    <button class="small-btn danger" style="align-self:flex-start">${t('deleteAccount')}</button>`}
+  return `<div class="shell"><div class="acc">
+   <aside class="panel acc-side"><div class="acc-user"><span class="avatar">${initials(S.user.name)}</span><div style="min-width:0"><b>${t('hello',{n:S.user.name.split(' ')[0]})}</b><small>${S.user.phone}</small></div></div>
+    ${tabs.map(([k,i,l,c])=>`<button class="tab ${S.tab===k?'on':''}" data-tab="${k}">${ico(i)}${t(l)}${c?`<span class="cnt">${c}</span>`:''}</button>`).join('')}
+    <button class="tab out" data-act="logout">${ico('logout')}${t('logout')}</button></aside>
+   <section class="acc-main">${body}</section></div></div>`;
+}
+function render(){
+  uid=0;chrome();
+  const v={home:vHome,catalog:vCatalog,product:vProduct,cart:vCart,checkout:vCheckout,favorites:vFavorites,account:vAccount}[S.view]||vHome;
+  app.innerHTML=v();
+  try{localStorage.setItem('sg-store',JSON.stringify({lang}))}catch(e){}
+}
+
+/* ---------------- actions ---------------- */
+function addToCart(id,n=1){const c=S.cart.find(x=>x.id===id);if(c)c.q+=n;else S.cart.push({id,q:n});}
+document.addEventListener('click',e=>{
+  const el=e.target.closest('button,[data-go]');if(!el)return;const d=el.dataset;
+  if(d.lang){lang=d.lang;render();return}
+  if(d.go){if(d.go==='catalog')S.cat=null,S.q='';go(d.go);return}
+  if(d.cat){go('catalog',{cat:+d.cat,q:''});return}
+  if(d.pid){go('product',{pid:+d.pid});return}
+  if(d.fav){const id=+d.fav;S.fav.has(id)?(S.fav.delete(id),toast(t('favRemoved'))):(S.fav.add(id),toast(t('favAdded')));render();return}
+  if(d.add){addToCart(+d.add);toast(t('added'));render();return}
+  if(d.buy){if(!S.cart.find(c=>c.id===+d.buy))addToCart(+d.buy);go('checkout');return}
+  if(d.inc){addToCart(+d.inc);render();return}
+  if(d.dec){const c=S.cart.find(x=>x.id===+d.dec);if(c){c.q--;if(c.q<=0)S.cart=S.cart.filter(x=>x!==c)}render();return}
+  if(d.rm){S.cart=S.cart.filter(x=>x.id!==+d.rm);render();return}
+  if(d.when){S.when=d.when;render();return}
+  if(d.pay){S.pay=d.pay;render();return}
+  if(d.tab){S.tab=d.tab;render();return}
+  if(d.msg){toast(t('messageSent'));return}
+  if(d.cancel){const o=S.orders.find(x=>x.no===d.cancel);o.st='cancelled';toast(t('cancelled'));render();return}
+  if(d.reorder){S.orders.find(x=>x.no===d.reorder).items.forEach(it=>addToCart(it.id,it.q));toast(t('reordered'));go('cart');return}
+  if(d.def){S.addresses.forEach((a,i)=>a.def=i===+d.def);render();return}
+  if(d.deladdr){S.addresses.splice(+d.deladdr,1);if(S.addresses.length&&!S.addresses.some(a=>a.def))S.addresses[0].def=true;toast(t('addrDeleted'));render();return}
+  if(d.notif){S.notif[d.notif]=!S.notif[d.notif];render();return}
+  if(d.settheme){document.documentElement.dataset.theme=d.settheme;render();return}
+  if(d.act==='theme'){const r=document.documentElement;const dark=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);r.dataset.theme=dark?'light':'dark';render();return}
+  if(d.act==='promo'){e.preventDefault();const v=(document.getElementById('promo').value||'').trim().toUpperCase();S.promo=v==='SOWGAT15';toast(S.promo?t('promoOk'):t('promoBad'));render();return}
+  if(d.act==='place'){e.preventDefault();const no=String(149+S.orders.filter(o=>+o.no>=149).length).padStart(7,'0');const now=new Date();const hh=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    S.orders.unshift({no,st:'pending',date:now.toISOString(),items:S.cart.map(c=>({...c})),fee:sums().fee,courier:null,eta:'—',times:[hh,'','',''],addr:+document.getElementById('raddr').value});S.cart=[];S.promo=false;S.signedIn=true;toast(t('orderPlaced')+' № '+no);go('account',{tab:'orders'});return}
+  if(d.act==='addaddr'){e.preventDefault();const lb=document.getElementById('alabel').value.trim(),ln=document.getElementById('aline').value.trim();if(!ln){document.getElementById('aline').focus();return}S.addresses.push({label:{tm:lb||'Salgy',ru:lb||'Адрес',en:lb||'Address',tr:lb||'Adres'},line:ln,def:!S.addresses.length});toast(t('addrSaved'));render();return}
+  if(d.act==='saveprofile'){e.preventDefault();S.user.name=document.getElementById('pname').value.trim()||S.user.name;S.user.email=document.getElementById('pemail').value.trim();S.user.phone=document.getElementById('pphone').value.trim()||S.user.phone;S.user.birthday=document.getElementById('pbday').value;toast(t('saved'));render();return}
+  if(d.act==='logout'){S.signedIn=false;render();return}
+  if(d.act==='signin'){e.preventDefault();S.signedIn=true;S.tab='orders';toast(t('welcome'));render();return}
+});
+document.addEventListener('submit',e=>e.preventDefault());
+const qEl=document.getElementById('q');
+qEl.addEventListener('input',()=>{S.q=qEl.value;if(S.q.trim()){if(S.view!=='catalog'){S.view='catalog';S.cat=null}app.innerHTML=vCatalog();}else if(S.view==='catalog'){app.innerHTML=vCatalog()}});
+qEl.addEventListener('keydown',e=>{if(e.key==='Enter'){qEl.blur();render()}});
+try{const saved=JSON.parse(localStorage.getItem('sg-store')||'{}');if(saved.lang&&LANGS.some(l=>l[0]===saved.lang))lang=saved.lang}catch(e){}
+const h=(location.hash||'').slice(1);if(['catalog','cart','checkout','favorites','account'].includes(h))S.view=h;
+render();
+</script>
+</body></html>
