@@ -351,6 +351,45 @@
                 </a>
             </li>
             <!--end::Cart-->
+            <li class="menu-item {{ Request::is('*/admin/order*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{ route('order.index', app()->getlocale() ) }}" class="menu-link">
+                    <span class="svg-icon menu-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"></rect>
+                                <path d="M4.5,3 L19.5,3 C20.3284271,3 21,3.67157288 21,4.5 L21,19.5 C21,20.3284271 20.3284271,21 19.5,21 L4.5,21 C3.67157288,21 3,20.3284271 3,19.5 L3,4.5 C3,3.67157288 3.67157288,3 4.5,3 Z" fill="#000000" opacity="0.3"></path><path d="M7,8 L17,8 L17,10 L7,10 Z M7,12 L14,12 L14,14 L7,14 Z M7,16 L12,16 L12,18 L7,18 Z" fill="#000000"></path>
+                            </g>
+                        </svg>
+                    </span>
+                    <span class="menu-text">{{ __('Orders') }}</span>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('*/admin/chat*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{ route('chat.index', app()->getlocale() ) }}" class="menu-link">
+                    <span class="svg-icon menu-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"></rect>
+                                <path d="M4.875,20.75 C4.63541667,20.75 4.39583333,20.6541667 4.20416667,20.4625 L2.2875,18.5458333 C1.90416667,18.1625 1.90416667,17.5875 2.2875,17.2041667 L8.75,10.7416667 L8.75,4 C8.75,3.44771525 9.19771525,3 9.75,3 L20,3 C20.5522847,3 21,3.44771525 21,4 L21,14.25 C21,14.8022847 20.5522847,15.25 20,15.25 L13.2583333,15.25 L6.79583333,21.7125 C6.4125,22.0958333 5.8375,22.0958333 5.45416667,21.7125 L4.875,20.75 Z" fill="#000000" opacity="0.3" transform="translate(11.500000, 12.500000) scale(-1, 1) translate(-11.500000, -12.500000)"></path><path d="M7,8 L17,8 L17,10 L7,10 Z M7,11 L13,11 L13,13 L7,13 Z" fill="#000000"></path>
+                            </g>
+                        </svg>
+                    </span>
+                    <span class="menu-text">{{ __('Chats') }}</span>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::is('*/admin/shop-application*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{ route('shop-application.index', app()->getlocale() ) }}" class="menu-link">
+                    <span class="svg-icon menu-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"></rect>
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" opacity="0.3"></path><path d="M8,12 L16,12 L16,14 L8,14 Z M8,16 L13,16 L13,18 L8,18 Z" fill="#000000"></path>
+                            </g>
+                        </svg>
+                    </span>
+                    <span class="menu-text">{{ __('Shop applications') }}</span>
+                </a>
+            </li>
         </ul>
         <!--end::Menu Nav-->
     </div>

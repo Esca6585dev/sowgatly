@@ -20,14 +20,14 @@ class ProductFactory extends Factory
             'name_tm' => $name,
             'name_en' => $name,
             'name_ru' => $name,
+            'description_tm' => $this->faker->sentence(),
+            'description_en' => $this->faker->sentence(),
+            'description_ru' => $this->faker->sentence(),
             'price' => $this->faker->randomFloat(2, 10, 1000),
-            'discount' => $this->faker->optional()->numberBetween(5, 50),
-            'description_tm' => $this->faker->paragraph(),
-            'description_en' => $this->faker->paragraph(),
-            'description_ru' => $this->faker->paragraph(),
+            'discount' => 0,
             'production_time' => $this->faker->numberBetween(60, 1440),
             'min_order' => 1,
-            'stock' => $this->faker->numberBetween(1, 50),
+            'stock' => 10,
             'seller_status' => true,
             'status' => true,
             'shop_id' => Shop::factory(),
@@ -35,17 +35,17 @@ class ProductFactory extends Factory
         ];
     }
 
+    /** Every product gets three images, like real catalog entries. */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Product $product) {
+            Image::factory()->count(3)->forProduct($product)->create();
+        });
+    }
+
     /** Product that is hidden from the storefront. */
     public function inactive(): static
     {
         return $this->state(fn () => ['status' => false]);
-    }
-
-    /** Product with its images already attached. */
-    public function withImages(int $count = 2): static
-    {
-        return $this->afterCreating(function (Product $product) use ($count) {
-            Image::factory()->count($count)->forProduct($product)->create();
-        });
     }
 }

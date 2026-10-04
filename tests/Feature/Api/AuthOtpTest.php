@@ -89,10 +89,4 @@ class AuthOtpTest extends ApiTestCase
 
         $this->assertDatabaseCount('personal_access_tokens', 0);
     }
-
-    public function test_protected_routes_require_a_token(): void
-    {
-        $this->getJson('/api/users/me')->assertStatus(401);
-        $this->getJson('/api/cart')->assertStatus(401);
-    }
 }

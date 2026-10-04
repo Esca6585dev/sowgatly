@@ -56,8 +56,7 @@ Delete, do not comment out. Make sure nothing else references what you remove
 
 Backend (`sowgatly`):
 
-1. **Chess API**: the `Route::prefix('chess')` block in `routes/api.php` points at
-   `App\Http\Controllers\GameController`, which does not exist. Remove the block.
+1. ~~**Chess API**~~ — done, the block is gone from `routes/api.php`.
 2. **Resume / letterhead generator**: remove the `HomeController` routes
    (`/{locale}/home`, `/{locale}/email`, `/{locale}/profile/*`), `HomeController.php`,
    the models `Application`, `Letterhead`, `Section`, `Standart` (no migrations exist
@@ -76,17 +75,20 @@ Backend (`sowgatly`):
 5. `DatabaseSeeder` lists `ProductSeeder` twice; keep one.
 6. Remove `public/base64.txt` and `public/docs/api-docs.json` (a stale copy of the
    Swagger spec; the live one is served from `storage/api-docs`).
-7. **Missing `messages` table**: `App\Models\Message` and the admin `MessageController`
-   exist but no migration creates the table, so the admin "Messages" page crashes.
-   Add a migration (`id, username, email, messages, user_id nullable, timestamps`) and
-   confirm the admin CRUD works. The website contact form in Phase 1 writes here.
+7. ~~**Missing `messages` table**~~ — done (`2026_10_04_000007_create_messages_table`).
 8. **Orphan `Text` model**: `App\Models\Text` and `resources/views/admin-panel/text/`
    have no route or controller. Remove them.
 9. `public/metronic-template/` (206 MB, 5 841 files) is the admin theme. Keep only the
    CSS/JS/font/image files the admin Blade views actually reference (grep the 44 views
    that mention it) and delete the rest of the template (demo pages, docs, unused
    plugins).
-10. Update `README.md` so it no longer mentions anything you removed.
+10. `app/Exceptions/Handler.php` turns every `AuthenticationException` into a JSON
+    `{"message":"Unauthenticated."}` with **HTTP 200**, for the admin panel and the API
+    alike. Guests on `/{locale}/admin/*` therefore see raw JSON instead of the login
+    page, and API clients cannot rely on 401 (only `check.token` sends a real 401).
+    Make web requests redirect to `route('login')` and API requests return 401. Check
+    the mobile app's sign-out-on-401 logic still works afterwards.
+11. Update `README.md` so it no longer mentions anything you removed.
 
 Mobile (`sowgatly-app-react-native`):
 
@@ -195,7 +197,43 @@ Commit: `Add EAS build profiles and APK instructions`.
 
 ---
 
-## Phase 4 — Final pass
+## Phase 4 — Close the gaps between the Figma design and the backend
+
+> **Status: backend and admin parts are DONE** (see `README.md` → "API overview" and
+> "Order lifecycle"). The column and endpoint names follow `PROMPT-API.md`
+> (`fulfillment`, `payment_bank`, `waitlist_items`, `chat_threads`, `shop_applications`),
+> which is the detailed spec for the Flutter client. What remains here is the
+> **mobile wiring** (4.5) and the website pages that use the same data (Phase 1).
+
+Done in the backend:
+
+- Checkout: `fulfillment` delivery/pickup, `shops.delivery_fee` (default 20 TMT,
+  editable per shop in the admin form), `shops.pickup_available`, `items_total`,
+  `delivery_fee`, `payment_method` cash/online, `payment_bank` from
+  `GET /api/payment-methods` (`config/payments.php`), `payment_status`, `paid_at`,
+  `recipient_name`. Online payment is a stub (order stays `unpaid`) until a bank gateway exists.
+- Orders: `delivering` status, `number` accessor (`0000001`), `GET /api/orders?q=`,
+  admin **Orders** section with filters, detail page, status and payment changes.
+- Profile: `birth_date`, avatar upload (multipart or base64) via `PUT`/`POST /api/users/me`,
+  `DELETE /api/users/me/image`.
+- Waiting list ("Лист ожидания"): `/api/me/waitlist`, `product_available` notification
+  when stock or status comes back.
+- Chats: customer ↔ shop threads (`/api/me/chats*`, `/api/shop/chats*`), unread counters,
+  `chat_message` notifications, read-only admin **Chats** section. Polling for now.
+- "Разместить свой магазин": `POST /api/shop-applications` (guests too), admin
+  **Shop applications** section with status + note, `shop_application` notification.
+- `shops.status` pending/approved/rejected with `Shop::approved()` scope (admin form).
+- `messages` table created so the admin "Messages" page works; chess routes removed.
+
+### 4.5 Mobile app (still to do)
+
+Wire the new API into the Expo app: pickup/delivery toggle, delivery fee and total,
+payment method picker, `delivering` status label, order search, avatar upload, shop
+application form, Chats tab backed by `/api/me/chats`, waiting list screen.
+
+---
+
+## Phase 5 — Final pass
 
 - Run both READMEs against reality and fix anything that drifted.
 - `php artisan test`, `npm run build` (backend assets) and `npx expo export --platform web`

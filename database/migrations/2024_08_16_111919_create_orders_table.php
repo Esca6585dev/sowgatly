@@ -14,7 +14,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('shop_id');
             $table->unsignedBigInteger('address_id')->nullable();
             $table->decimal('total_amount', 10, 2);
-            $table->enum('status', ['pending', 'processing', 'completed', 'cancelled']);
+            $table->enum('status', ['pending', 'processing', 'delivering', 'completed', 'cancelled']);
             $table->timestamps();
         
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

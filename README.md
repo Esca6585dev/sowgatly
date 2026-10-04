@@ -6,7 +6,7 @@ It serves three things from one codebase:
 - **REST API** under `/api` used by the mobile app
   ([sowgatly-app-react-native](https://github.com/Esca6585dev/sowgatly-app-react-native)).
 - **Admin panel** under `/{locale}/admin` (categories, brands, regions, shops,
-  products, users, roles and permissions).
+  products, users, roles and permissions, plus orders, chats and shop applications).
 - **Public website** under `/{locale}/sowgatly` (Blade views).
 
 ## Requirements
@@ -97,8 +97,24 @@ Swagger at **`/api/documentation`** (JSON at `/api/json`).
 | Shop owners | `GET /shops`, `POST/PUT/DELETE /shops/{id}` (own shop only), `POST/PUT/DELETE /products` (own shop only), `GET /shop/orders`, `PUT /shop/orders/{id}/status` |
 | Notifications | `GET /me/notifications`, `POST /me/notifications/read` |
 
+| Checkout extras | `GET /payment-methods` (cash + online banks), `POST /orders` accepts `fulfillment` (`delivery`/`pickup`), `payment_method` (`cash`/`online`), `payment_bank`, `recipient_name`; `GET /orders?q=` searches by number or product |
+| Waiting list | `GET/POST /me/waitlist`, `DELETE /me/waitlist/{product_id}`; a `product_available` notification is created when the product is back |
+| Chats | Customer: `GET/POST /me/chats`, `GET/POST /me/chats/{id}/messages`, `POST /me/chats/{id}/read`, `GET /me/chats/unread-count`. Shop owner: the same under `/shop/chats` |
+| Shop applications | `POST /shop-applications` (guests too), `GET /me/shop-applications` |
+| Avatar | `PUT`/`POST /users/me` with `image` (file or base64) and `birth_date`; `DELETE /users/me/image` |
+
 Categories, brands, compositions, regions and shop addresses are read-only in the
 API and managed from the admin panel.
+
+### Order lifecycle
+
+Statuses: `pending → processing → delivering → completed`, `cancelled` from pending
+or processing. Customers may cancel while `pending`; the shop moves the order forward
+(`PUT /shop/orders/{id}/status`) and so can an admin. Every order carries
+`items_total`, `delivery_fee` (the shop's fee, 0 for pickup), `total_amount`,
+`payment_method`, `payment_bank`, `payment_status` (`unpaid`/`paid`/`refunded`) and a
+zero-padded `number`. Online payment is not connected to a bank gateway yet: the
+chosen bank is stored and the order stays `unpaid` until an admin marks it paid.
 
 ## Project layout
 

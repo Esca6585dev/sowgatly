@@ -37,7 +37,7 @@ class CatalogTest extends ApiTestCase
                 'id', 'name' => ['tm', 'ru', 'en'], 'price', 'discount', 'description' => ['tm', 'ru', 'en'],
                 'production_time', 'stock', 'shop_id', 'category_id', 'images', 'category', 'shop',
             ]])
-            ->assertJsonCount(1, 'data.images');
+            ->assertJsonCount(3, 'data.images');
     }
 
     public function test_product_show_404_for_unknown_id(): void
@@ -49,8 +49,8 @@ class CatalogTest extends ApiTestCase
     {
         $ashgabat = $this->cityRegion('Aşgabat');
         $mary = $this->cityRegion('Mary');
-        $shopA = $this->shopWithProducts(2, $ashgabat);
-        $this->shopWithProducts(2, $mary);
+        $shopA = $this->shopWithProducts(2, ['region_id' => $ashgabat->id]);
+        $this->shopWithProducts(2, ['region_id' => $mary->id]);
 
         $this->productsOf($shopA)->first()->update(['name_tm' => 'Gyzyl bägül', 'name_ru' => 'Красная роза', 'name_en' => 'Red rose']);
 
@@ -81,7 +81,7 @@ class CatalogTest extends ApiTestCase
     public function test_products_by_category(): void
     {
         $category = Category::factory()->create();
-        $this->shopWithProducts(2, null, $category);
+        $this->shopWithProducts(2, [], ['category_id' => $category->id]);
         $this->shopWithProducts(1);
 
         $this->actingAsCustomer()

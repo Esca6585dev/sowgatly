@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use App\Models\User;
+use App\Rules\ImageOrBase64;
+use App\Support\ImageUploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserUpdateRequest;
@@ -258,6 +260,9 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
+            'birth_date' => 'nullable|date|before:today',
+            // Multipart file or "data:image/...;base64," string.
+            'image' => ['nullable', new ImageOrBase64],
         ]);
 
         if ($validator->fails()) {
@@ -267,10 +272,47 @@ class UserController extends Controller
             ], 422);
         }
 
-        $user->update([
+        $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email') ?: null,
+        ];
+
+        if ($request->has('birth_date')) {
+            $data['birth_date'] = $request->input('birth_date') ?: null;
+        }
+
+        if ($request->hasFile('image') || is_string($request->input('image'))) {
+            $data['image'] = ImageUploader::store(
+                $request->hasFile('image') ? $request->file('image') : $request->input('image'),
+                'users/' . $user->id
+            );
+            ImageUploader::delete($user->image);
+        }
+
+        $user->update($data);
+
+        return response()->json([
+            'success' => true,
+            'user' => new UserResource($user->fresh()),
         ]);
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/api/users/me/image",
+     *     summary="Remove the authenticated user's avatar",
+     *     tags={"Users"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Response(response="200", description="Avatar removed"),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
+    public function destroyImage(Request $request)
+    {
+        $user = $request->user();
+
+        ImageUploader::delete($user->image);
+        $user->update(['image' => null]);
 
         return response()->json([
             'success' => true,

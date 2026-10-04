@@ -81,8 +81,10 @@ class CartAndOrderTest extends ApiTestCase
             ->assertJsonCount(2, 'order.items');
 
         $order = Order::where('user_id', $this->user->id)->firstOrFail();
-        // 2 × 80 (20 % off) + 1 × 40
-        $this->assertEquals(200, $order->total_amount);
+        // 2 × 80 (20 % off) + 1 × 40, plus the shop's default 20 TMT delivery fee
+        $this->assertEquals(200, $order->items_total);
+        $this->assertEquals(20, $order->delivery_fee);
+        $this->assertEquals(220, $order->total_amount);
         $this->assertEquals(80, $order->items->where('product_id', $a->id)->first()->price);
         $this->assertSame('pending', $order->status);
         $this->assertSame(3, $a->fresh()->stock);

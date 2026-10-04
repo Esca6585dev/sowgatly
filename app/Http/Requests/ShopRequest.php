@@ -36,6 +36,16 @@ class ShopRequest extends FormRequest
             'sat_sun_close' => 'sometimes|required|date_format:H:i|after:sat_sun_open',
             'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'region_id' => 'sometimes|nullable|exists:regions,id',
+            'phone' => 'sometimes|nullable|string|max:20',
+            'delivery_fee' => 'sometimes|nullable|numeric|min:0|max:99999',
+            'pickup_available' => 'sometimes|boolean',
+            'min_order_amount' => 'sometimes|nullable|numeric|min:0',
+            'description_tm' => 'sometimes|nullable|string|max:5000',
+            'description_ru' => 'sometimes|nullable|string|max:5000',
+            'description_en' => 'sometimes|nullable|string|max:5000',
+            // Only the admin panel sends these two; the API ignores them.
+            'status' => 'sometimes|in:pending,approved,rejected',
+            'user_id' => 'sometimes|nullable|exists:users,id',
         ];
     }
 

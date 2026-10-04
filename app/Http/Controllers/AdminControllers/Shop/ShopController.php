@@ -5,7 +5,8 @@ namespace App\Http\Controllers\AdminControllers\Shop;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shop;
-use App\Models\Seller;
+use App\Models\User;
+use App\Models\Region;
 use App\Http\Requests\ShopRequest;
 use Str;
 
@@ -53,9 +54,11 @@ class ShopController extends Controller
      */
     public function create($lang, Shop $shop)
     {
-        $sellers = Seller::all();
+        $sellers = User::orderBy('name')->get(['id', 'name', 'phone_number']);
 
-        return view('admin-panel.shop.shop-form', compact('shop', 'sellers'));
+        $regions = Region::orderBy('name')->get(['id', 'name']);
+
+        return view('admin-panel.shop.shop-form', compact('shop', 'sellers', 'regions'));
     }
 
     /**
@@ -72,12 +75,17 @@ class ShopController extends Controller
         
         $shop->name = $request->name;
         $shop->email = $request->email;
-        $shop->address = $request->address;
+        $shop->phone = $request->phone;
         $shop->mon_fri_open = $request->mon_fri_open;
         $shop->mon_fri_close = $request->mon_fri_close;
         $shop->sat_sun_open = $request->sat_sun_open;
         $shop->sat_sun_close = $request->sat_sun_close;
-        $shop->seller_id = $request->seller_id;
+        $shop->user_id = $request->user_id ?: $shop->user_id;
+        $shop->region_id = $request->region_id ?: $shop->region_id;
+        $shop->delivery_fee = $request->filled('delivery_fee') ? $request->delivery_fee : ($shop->delivery_fee ?? 20);
+        $shop->pickup_available = $request->boolean('pickup_available');
+        $shop->min_order_amount = $request->filled('min_order_amount') ? $request->min_order_amount : null;
+        $shop->status = $request->input('status', $shop->status ?? 'approved');
 
         $shop->save();
 
@@ -90,11 +98,13 @@ class ShopController extends Controller
      * @param  \App\Models\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function show($lang, Shop $Shop)
+    public function show($lang, Shop $shop)
     {
-        $sellers = Seller::all();
+        $sellers = User::orderBy('name')->get(['id', 'name', 'phone_number']);
 
-        return view('admin-panel.shop.shop-form', compact('shop', 'sellers'));
+        $regions = Region::orderBy('name')->get(['id', 'name']);
+
+        return view('admin-panel.shop.shop-form', compact('shop', 'sellers', 'regions'));
     }
 
     /**
@@ -105,9 +115,11 @@ class ShopController extends Controller
      */
     public function edit($lang, Shop $shop)
     {
-        $sellers = Seller::all();
+        $sellers = User::orderBy('name')->get(['id', 'name', 'phone_number']);
 
-        return view('admin-panel.shop.shop-form', compact('shop', 'sellers'));
+        $regions = Region::orderBy('name')->get(['id', 'name']);
+
+        return view('admin-panel.shop.shop-form', compact('shop', 'sellers', 'regions'));
     }
 
     /**
@@ -123,12 +135,17 @@ class ShopController extends Controller
         
         $shop->name = $request->name;
         $shop->email = $request->email;
-        $shop->address = $request->address;
+        $shop->phone = $request->phone;
         $shop->mon_fri_open = $request->mon_fri_open;
         $shop->mon_fri_close = $request->mon_fri_close;
         $shop->sat_sun_open = $request->sat_sun_open;
         $shop->sat_sun_close = $request->sat_sun_close;
-        $shop->seller_id = $request->seller_id;
+        $shop->user_id = $request->user_id ?: $shop->user_id;
+        $shop->region_id = $request->region_id ?: $shop->region_id;
+        $shop->delivery_fee = $request->filled('delivery_fee') ? $request->delivery_fee : ($shop->delivery_fee ?? 20);
+        $shop->pickup_available = $request->boolean('pickup_available');
+        $shop->min_order_amount = $request->filled('min_order_amount') ? $request->min_order_amount : null;
+        $shop->status = $request->input('status', $shop->status ?? 'approved');
 
         $shop->update();
 
