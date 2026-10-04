@@ -14,6 +14,19 @@
 >
 > Prompt iňlisçe ýazylan, sebäbi model tehniki tabşyrygy iňlisçe has takyk ýerine ýetirýär.
 
+
+> **Progress (2026-10-04):** Phase 0 item 1 (chess routes) and the `RespondsWithJson`
+> trait, Phase 4 (pickup, delivery fee, payment method, waitlist — plus a `delivering`
+> order status and `GET /api/orders?q=`), Phase 5 (birth date, avatar), Phase 7 (chats,
+> incl. the admin read-only page) and Phase 8.1 (shop applications + admin page) are
+> **implemented and covered by tests under `tests/Feature/Api` and `tests/Feature/Admin`**.
+> Differences from the text below: `shops.delivery_fee` defaults to **20** (the fee in the
+> design), `shops.status` (pending/approved/rejected) exists, `ShopApplication` has an
+> `admin_note`. Still open: Phase 1 (guest browsing), 2 (home feed, banners, ratings),
+> 3 (three-criteria reviews), 6 (collections), 8.2–8.5 (notification texts, push,
+> Swagger coverage test, README section) and the `tests/Feature/Api/ApiTestCase` helpers
+> beyond `shopWithProducts()`/`cityRegion()`.
+
 ---
 
 ## Context
@@ -186,7 +199,7 @@ Design (`41:31`): "Доставка | Самовывоз", "Доставка 20 
 with a bank list (Рысгал, Сенагат, Внешэкономбанк, Халкбанк), "Итого". Orders screens have a
 "Лист ожидания" tab and the profile has a "Лист ожидания" row.
 
-1. **Shops:** migration adds `delivery_fee decimal(10,2) default 0`, `pickup_available
+1. **Shops:** migration adds `delivery_fee decimal(10,2) default 20`, `pickup_available
    bool default false`, `min_order_amount decimal(10,2) nullable`, `phone string nullable`,
    `description_tm/ru/en text nullable`, `rating`-related nothing (computed in Phase 2).
    Expose them in `ShopResource` (additive) and in the admin shop form.

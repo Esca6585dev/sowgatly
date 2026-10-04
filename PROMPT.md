@@ -56,8 +56,7 @@ Delete, do not comment out. Make sure nothing else references what you remove
 
 Backend (`sowgatly`):
 
-1. **Chess API**: the `Route::prefix('chess')` block in `routes/api.php` points at
-   `App\Http\Controllers\GameController`, which does not exist. Remove the block.
+1. ~~**Chess API**~~ — done, the block is gone from `routes/api.php`.
 2. **Resume / letterhead generator**: remove the `HomeController` routes
    (`/{locale}/home`, `/{locale}/email`, `/{locale}/profile/*`), `HomeController.php`,
    the models `Application`, `Letterhead`, `Section`, `Standart` (no migrations exist
@@ -76,17 +75,20 @@ Backend (`sowgatly`):
 5. `DatabaseSeeder` lists `ProductSeeder` twice; keep one.
 6. Remove `public/base64.txt` and `public/docs/api-docs.json` (a stale copy of the
    Swagger spec; the live one is served from `storage/api-docs`).
-7. **Missing `messages` table**: `App\Models\Message` and the admin `MessageController`
-   exist but no migration creates the table, so the admin "Messages" page crashes.
-   Add a migration (`id, username, email, messages, user_id nullable, timestamps`) and
-   confirm the admin CRUD works. The website contact form in Phase 1 writes here.
+7. ~~**Missing `messages` table**~~ — done (`2026_10_04_000007_create_messages_table`).
 8. **Orphan `Text` model**: `App\Models\Text` and `resources/views/admin-panel/text/`
    have no route or controller. Remove them.
 9. `public/metronic-template/` (206 MB, 5 841 files) is the admin theme. Keep only the
    CSS/JS/font/image files the admin Blade views actually reference (grep the 44 views
    that mention it) and delete the rest of the template (demo pages, docs, unused
    plugins).
-10. Update `README.md` so it no longer mentions anything you removed.
+10. `app/Exceptions/Handler.php` turns every `AuthenticationException` into a JSON
+    `{"message":"Unauthenticated."}` with **HTTP 200**, for the admin panel and the API
+    alike. Guests on `/{locale}/admin/*` therefore see raw JSON instead of the login
+    page, and API clients cannot rely on 401 (only `check.token` sends a real 401).
+    Make web requests redirect to `route('login')` and API requests return 401. Check
+    the mobile app's sign-out-on-401 logic still works afterwards.
+11. Update `README.md` so it no longer mentions anything you removed.
 
 Mobile (`sowgatly-app-react-native`):
 
@@ -197,71 +199,37 @@ Commit: `Add EAS build profiles and APK instructions`.
 
 ## Phase 4 — Close the gaps between the Figma design and the backend
 
-The Figma file (`figma.com/design/amTVuTZbUOhu2avAmuXa8I`) shows features the API,
-database and admin panel do not have yet. Everything below is **additive**: new
-columns get defaults, new fields in JSON responses are added next to the existing ones,
-existing endpoints keep working for the current mobile app.
+> **Status: backend and admin parts are DONE** (see `README.md` → "API overview" and
+> "Order lifecycle"). The column and endpoint names follow `PROMPT-API.md`
+> (`fulfillment`, `payment_bank`, `waitlist_items`, `chat_threads`, `shop_applications`),
+> which is the detailed spec for the Flutter client. What remains here is the
+> **mobile wiring** (4.5) and the website pages that use the same data (Phase 1).
 
-### 4.1 Checkout: pickup, delivery fee, payment
+Done in the backend:
 
-- `orders.fulfillment_type` enum `delivery|pickup` (default `delivery`). For `pickup`
-  no address is required and the delivery fee is 0.
-- `shops.delivery_fee` decimal, default 20 TMT, editable in the admin shop form.
-  `orders.subtotal`, `orders.delivery_fee`, `orders.total_amount = subtotal + delivery_fee`.
-- Payment: `orders.payment_method` enum `cash|online`, `orders.payment_provider`
-  string nullable (bank code, e.g. `rysgal`), `orders.payment_status` enum
-  `unpaid|paid|failed|refunded` (default `unpaid`), `orders.paid_at`.
-  `GET /api/payment-methods` returns the configured providers from `config/payments.php`
-  (Rysgal and the other banks shown in the design). The real bank gateway is not
-  available yet: implement a `PaymentGateway` interface with a `ManualGateway` that
-  leaves the order `unpaid`, so the bank driver can be dropped in later without touching
-  the controllers.
-- `POST /api/orders` accepts the new fields; the response includes them. Validation:
-  `fulfillment_type`, `payment_method`, `payment_provider` required when `online`.
+- Checkout: `fulfillment` delivery/pickup, `shops.delivery_fee` (default 20 TMT,
+  editable per shop in the admin form), `shops.pickup_available`, `items_total`,
+  `delivery_fee`, `payment_method` cash/online, `payment_bank` from
+  `GET /api/payment-methods` (`config/payments.php`), `payment_status`, `paid_at`,
+  `recipient_name`. Online payment is a stub (order stays `unpaid`) until a bank gateway exists.
+- Orders: `delivering` status, `number` accessor (`0000001`), `GET /api/orders?q=`,
+  admin **Orders** section with filters, detail page, status and payment changes.
+- Profile: `birth_date`, avatar upload (multipart or base64) via `PUT`/`POST /api/users/me`,
+  `DELETE /api/users/me/image`.
+- Waiting list ("Лист ожидания"): `/api/me/waitlist`, `product_available` notification
+  when stock or status comes back.
+- Chats: customer ↔ shop threads (`/api/me/chats*`, `/api/shop/chats*`), unread counters,
+  `chat_message` notifications, read-only admin **Chats** section. Polling for now.
+- "Разместить свой магазин": `POST /api/shop-applications` (guests too), admin
+  **Shop applications** section with status + note, `shop_application` notification.
+- `shops.status` pending/approved/rejected with `Shop::approved()` scope (admin form).
+- `messages` table created so the admin "Messages" page works; chess routes removed.
 
-### 4.2 Orders
-
-- Add the `delivering` status: `pending → processing → delivering → completed`,
-  `cancelled` from pending/processing. Update `Order::TRANSITIONS`, the shop-side
-  status endpoint, notifications and the admin panel.
-- `GET /api/orders?q=` searches by order id and product name.
-- Admin panel: an **Orders** section (list with status/payment filters, detail page,
-  status change). It does not exist today.
-
-### 4.3 Profile
-
-- Avatar upload: `POST /api/users/me/avatar` (multipart `image`, reuse the
-  `ImageOrBase64` rule and the storage used for product images); `UserResource`
-  returns `image_url`. `DELETE /api/users/me/avatar` removes it.
-- "Разместить свой магазин": shop moderation. `shops.status` enum
-  `pending|approved|rejected` (existing rows `approved`, shops created through
-  `POST /api/shops` start as `pending`). Only approved shops and their products are
-  listed publicly; the owner always sees their own. Admin shop form gets the status
-  field and approve/reject actions; the owner gets an in-app notification on decision.
-- "Лист ожидания" (waiting list) is not defined. **Ask the product owner** what it
-  means before building it (wishlist? notify-when-available? pending orders?).
-
-### 4.4 Chat with a manager
-
-- Tables `conversations` (`user_id`, `admin_id` nullable, `last_message_at`,
-  `user_unread`, `admin_unread`) and `chat_messages` (`conversation_id`,
-  `sender_type` `user|admin`, `sender_id`, `body`, `read_at`). One conversation per
-  customer.
-- API: `GET /api/me/chat` (messages, newest last, paginated, marks admin messages
-  read), `POST /api/me/chat` (`body`), `GET /api/me/chat/unread-count`.
-- Admin panel: **Chats** section, list ordered by `last_message_at` with unread badge,
-  conversation page with reply form. Admin replies create an in-app notification for
-  the customer.
-- Delivery is polling for now (the app refreshes every few seconds while the chat
-  screen is open); keep the code ready for Pusher/WebSockets later.
-
-### 4.5 Mobile app
+### 4.5 Mobile app (still to do)
 
 Wire the new API into the Expo app: pickup/delivery toggle, delivery fee and total,
 payment method picker, `delivering` status label, order search, avatar upload, shop
-request flow, Chats tab backed by the real API.
-
-Commit per sub-section; push after the phase.
+application form, Chats tab backed by `/api/me/chats`, waiting list screen.
 
 ---
 
