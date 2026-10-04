@@ -21,12 +21,26 @@ window.ICONS = {
   plus:'<path d="M12 5v14M5 12h14"/>',
   filter:'<path d="M3 5h18l-7 8v6l-4 2v-8z"/>',
   chevron:'<path d="m9 6 6 6-6 6"/>',
+  sidebar:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 10l-2 2 2 2"/>',
+  menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
   logout:'<path d="M15 4h4v16h-4M10 17l5-5-5-5M15 12H3"/>',
 };
 document.querySelectorAll('[data-i]').forEach(el => {
   el.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[el.dataset.i]||''}</svg>`;
 });
 document.querySelectorAll('[data-theme-toggle]').forEach(b => b.addEventListener('click', () => {
-  const r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark';
+  const r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('sg-theme', r.dataset.theme); } catch (e) {}
 }));
-const q = new URLSearchParams(location.search).get('theme'); if (q) document.documentElement.dataset.theme = q;
+const R = document.documentElement, store = (k, v) => { try { v === undefined ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} };
+const read = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const P = new URLSearchParams(location.search);
+const theme = P.get('theme') || read('sg-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+R.dataset.theme = theme;
+if ((P.get('collapsed') ?? read('sg-collapsed')) === '1') R.dataset.collapsed = '';
+document.querySelectorAll('[data-collapse]').forEach(b => b.addEventListener('click', () => {
+  if ('collapsed' in R.dataset) { delete R.dataset.collapsed; store('sg-collapsed', '0'); } else { R.dataset.collapsed = ''; store('sg-collapsed', '1'); }
+}));
+document.querySelectorAll('[data-drawer]').forEach(b => b.addEventListener('click', () => {
+  if ('drawerOpen' in R.dataset) delete R.dataset.drawerOpen; else R.dataset.drawerOpen = '';
+}));
+if (P.get('drawer') === '1') R.dataset.drawerOpen = '';

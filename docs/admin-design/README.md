@@ -1,4 +1,11 @@
-# Admin panel redesign — two concepts
+# Admin panel redesign
+
+**Chosen: concept A**, with a collapsible sidebar (full ↔ icon rail with tooltips, state
+remembered), light/dark theme (follows the OS, switch remembered), a mobile drawer and the
+gift-box logo. Screenshots: `a-light.png`, `a-light-collapsed.png`, `a-dark.png`,
+`a-dark-collapsed.png`, `a-mobile-light.png`, `a-mobile-dark-menu.png`.
+
+## Concepts
 
 Static mockups for replacing the Metronic admin theme. Colours come from the logo
 gradient (`#FF6A00 → #FF2A00`); both concepts have light and dark themes driven by CSS

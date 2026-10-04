@@ -92,33 +92,71 @@ td,th{white-space:nowrap}.who .avatar{font-size:11px;flex:none}
 .chat .meta{margin-left:auto;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
 .chat .meta i{font-style:normal;font-size:11px;font-weight:700;background:var(--brand);color:#fff;border-radius:999px;padding:0 7px}
 .a2{background:linear-gradient(135deg,#7A4CE0,#B07CFF)!important}.a3{background:linear-gradient(135deg,#14A06B,#4FD39E)!important}.a4{background:linear-gradient(135deg,#2F6FEB,#6EA1FF)!important}
+
+/* --- collapsible sidebar --- */
+.app{transition:grid-template-columns .25s ease}
+.side{position:sticky;top:0;height:100vh;overflow:hidden;transition:padding .25s ease}
+.brand{position:relative}
+.collapse{margin-left:auto;width:32px;height:32px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;flex:none}
+.collapse:hover{color:var(--brand);border-color:var(--brand)}
+.nav a{position:relative;white-space:nowrap}
+.t{transition:opacity .15s ease}
+.nav h6{height:16px;display:flex;align-items:center}
+[data-collapsed] .app{grid-template-columns:84px 1fr}
+[data-collapsed] .side{padding:22px 14px;overflow:visible;z-index:10}
+[data-collapsed] .t{opacity:0;width:0;overflow:hidden;pointer-events:none}
+[data-collapsed] .brand{flex-direction:column;gap:14px;padding:0}
+[data-collapsed] .brand .collapse{margin:0;transform:scaleX(-1)}
+[data-collapsed] .nav a{justify-content:center;padding:11px 0;gap:0}
+[data-collapsed] .nav h6{margin:12px 10px 6px;border-top:1px solid var(--line);height:0}
+[data-collapsed] .nav .cnt{position:absolute;top:4px;right:6px;margin:0;padding:0 5px;font-size:10px;line-height:16px;border:2px solid var(--surface)}
+[data-collapsed] .me{justify-content:center;padding:8px;gap:0}
+[data-collapsed] .nav a:hover::after{content:attr(data-tip);position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);background:var(--text);color:var(--surface);font-size:12px;font-weight:600;padding:5px 10px;border-radius:8px;white-space:nowrap;z-index:5}
+/* --- mobile drawer --- */
+.burger,.scrim{display:none}
+@media (max-width:900px){
+  .app,[data-collapsed] .app{grid-template-columns:1fr}
+  .side{position:fixed;left:0;top:0;bottom:0;width:270px;z-index:20;transform:translateX(-100%);transition:transform .25s ease}
+  [data-drawer-open] .side{transform:none;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  [data-drawer-open] .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:15}
+  [data-collapsed] .t{opacity:1;width:auto}
+  .collapse{display:none}
+  .burger{display:grid}
+  .main{padding:16px}
+  .top{flex-wrap:wrap}.top>div{order:2;width:100%}.search{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr}
+  .stat .val{font-size:21px}
+  .card-h{flex-wrap:wrap}.chips{margin-left:0;width:100%;overflow-x:auto}
+  .top h1{font-size:21px}
+}
 </style>
 </head>
 <body>
-<div class="app">
+<div class="app"><div class="scrim" data-drawer></div>
   <aside class="side">
-    <div class="brand"><img src="logo.png" alt=""><div><b>sowgatly</b><small>Admin panel</small></div></div>
+    <div class="brand"><img src="logo.png" alt=""><div class="t"><b>sowgatly</b><small>Admin panel</small></div><button class="collapse" data-collapse title="Menýuny kiçelt"><span data-i="sidebar"></span></button></div>
     <nav class="nav">
-      <a class="on" href="#"><span data-i="home"></span>Dolandyryş paneli</a>
-      <h6>Söwda</h6>
-      <a href="#"><span data-i="orders"></span>Sargytlar<span class="cnt">12</span></a>
-      <a href="#"><span data-i="box"></span>Harytlar</a>
-      <a href="#"><span data-i="shop"></span>Dükanlar</a>
-      <a href="#"><span data-i="inbox"></span>Dükan arzalary<span class="cnt">3</span></a>
-      <a href="#"><span data-i="chat"></span>Çatlar<span class="cnt">5</span></a>
-      <h6>Katalog</h6>
-      <a href="#"><span data-i="grid"></span>Kategoriýalar</a>
-      <a href="#"><span data-i="image"></span>Bannerler</a>
-      <a href="#"><span data-i="map"></span>Sebitler</a>
-      <h6>Ulgam</h6>
-      <a href="#"><span data-i="users"></span>Ulanyjylar</a>
-      <a href="#"><span data-i="gear"></span>Sazlamalar</a>
+      <a class="on" href="#" data-tip="Dolandyryş paneli"><span data-i="home"></span><span class="t">Dolandyryş paneli</span></a>
+      <h6><span class="t">Söwda</span></h6>
+      <a href="#" data-tip="Sargytlar"><span data-i="orders"></span><span class="t">Sargytlar</span><span class="cnt">12</span></a>
+      <a href="#" data-tip="Harytlar"><span data-i="box"></span><span class="t">Harytlar</span></a>
+      <a href="#" data-tip="Dükanlar"><span data-i="shop"></span><span class="t">Dükanlar</span></a>
+      <a href="#" data-tip="Dükan arzalary"><span data-i="inbox"></span><span class="t">Dükan arzalary</span><span class="cnt">3</span></a>
+      <a href="#" data-tip="Çatlar"><span data-i="chat"></span><span class="t">Çatlar</span><span class="cnt">5</span></a>
+      <h6><span class="t">Katalog</span></h6>
+      <a href="#" data-tip="Kategoriýalar"><span data-i="grid"></span><span class="t">Kategoriýalar</span></a>
+      <a href="#" data-tip="Bannerler"><span data-i="image"></span><span class="t">Bannerler</span></a>
+      <a href="#" data-tip="Sebitler"><span data-i="map"></span><span class="t">Sebitler</span></a>
+      <h6><span class="t">Ulgam</span></h6>
+      <a href="#" data-tip="Ulanyjylar"><span data-i="users"></span><span class="t">Ulanyjylar</span></a>
+      <a href="#" data-tip="Sazlamalar"><span data-i="gear"></span><span class="t">Sazlamalar</span></a>
     </nav>
-    <div class="me"><div class="avatar">A</div><div><b>Admin</b><small>admin-sowgatly</small></div><span data-i="logout"></span></div>
+    <div class="me"><div class="avatar">A</div><div class="t"><b>Admin</b><small>admin-sowgatly</small></div><span class="t" data-i="logout"></span></div>
   </aside>
 
   <main class="main">
-    <header class="top">
+    <header class="top"><button class="icon-btn burger" data-drawer><span data-i="menu"></span></button>
       <div><h1>Salam, Admin 👋</h1><p>Şenbe, 4-nji oktýabr · Aşgabat</p></div>
       <label class="search"><span data-i="search"></span>Sargyt, haryt ýa-da müşderi gözle…</label>
       <button class="icon-btn" data-theme-toggle title="Tema"><span class="sun" data-i="moon"></span><span class="moon" data-i="sun"></span></button>
