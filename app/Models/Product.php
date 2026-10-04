@@ -12,44 +12,27 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        // Columns that exist in the products table.
         'name_tm',
         'name_en',
         'name_ru',
         'description_tm',
         'description_en',
         'description_ru',
-        'stock',
-        // Legacy keys kept for the shop-owner product endpoints.
-        'name', 
-        'description',
         'price',
         'discount',
-        'code', 
-        'category_id',
-        'shop_id',
-        'status',
-        'gender',
-        'sizes',
-        'separated_sizes',
-        'color',
-        'manufacturer',
-        'width',
-        'height',
-        'weight',
+        'stock',
         'production_time',
         'min_order',
-        'seller_status'
+        'seller_status',
+        'status',
+        'shop_id',
+        'category_id',
     ];
     
     protected $casts = [
         'price' => 'decimal:2',
         'discount' => 'integer',
-        'sizes' => 'array',
-        'separated_sizes' => 'array',
-        'width' => 'double',
-        'height' => 'double',
-        'weight' => 'double',
+        'stock' => 'integer',
         'production_time' => 'integer',
         'min_order' => 'integer',
         'seller_status' => 'boolean',

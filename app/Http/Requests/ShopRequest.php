@@ -20,20 +20,26 @@ class ShopRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+    /**
+     * Creating a shop needs the core fields; updating may send any subset,
+     * so on PUT/PATCH the same rules are prefixed with "sometimes".
+     */
     public function rules(): array
     {
+        $prefix = $this->isMethod('POST') ? '' : 'sometimes|';
+
         return [
-            'name' => 'sometimes|required|string|max:255',
+            'name' => $prefix.'required|string|max:255',
             'email' => [
                 'sometimes',
                 'nullable',
                 'email',
-                Rule::unique('shops')->ignore($this->shop)
+                Rule::unique('shops')->ignore($this->shop),
             ],
-            'mon_fri_open' => 'sometimes|required|date_format:H:i',
-            'mon_fri_close' => 'sometimes|required|date_format:H:i|after:mon_fri_open',
-            'sat_sun_open' => 'sometimes|required|date_format:H:i',
-            'sat_sun_close' => 'sometimes|required|date_format:H:i|after:sat_sun_open',
+            'mon_fri_open' => $prefix.'required|date_format:H:i',
+            'mon_fri_close' => $prefix.'required|date_format:H:i|after:mon_fri_open',
+            'sat_sun_open' => $prefix.'required|date_format:H:i',
+            'sat_sun_close' => $prefix.'required|date_format:H:i|after:sat_sun_open',
             'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'region_id' => 'sometimes|nullable|exists:regions,id',
             'phone' => 'sometimes|nullable|string|max:20',

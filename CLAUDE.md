@@ -33,9 +33,8 @@ Ask the user to switch the main session to Fable only for the third row.
 - Migrations are additive (nullable or with defaults).
 - New controllers use `Api\Concerns\RespondsWithJson`; every new endpoint gets `@OA`
   annotations and a feature test.
-- Tests without MySQL:
-  `touch /tmp/t.sqlite && DB_CONNECTION=sqlite DB_DATABASE=/tmp/t.sqlite php artisan test tests/Feature/Api tests/Feature/Admin`
-  The five older files in `tests/Feature/*.php` fail on `main` already; do not count them.
+- Tests: `php artisan test`. `phpunit.xml` uses an in-memory SQLite database, so no
+  MySQL is needed (export `DB_CONNECTION=mysql` to run them against MySQL instead).
 - After API changes: `php artisan l5-swagger:generate` and commit the JSON.
 - Never commit `.env`, `vendor/`, `node_modules/`, keystores or keys.
 - The owner merges straight to `main`; commit per feature with an English message.

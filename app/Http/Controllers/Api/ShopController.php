@@ -124,12 +124,15 @@ class ShopController extends Controller
 
             DB::commit();
 
-            $shop = $shop->fresh('region');
-
-            return new ShopResource($shop);
+            return (new ShopResource($shop->load('region')))
+                ->additional(['success' => true, 'message' => 'Shop created successfully'])
+                ->response()
+                ->setStatusCode(201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => 'An error occurred while creating the shop: ' . $e->getMessage()], 500);
+            $message = 'An error occurred while creating the shop: ' . $e->getMessage();
+
+            return response()->json(['success' => false, 'message' => $message, 'error' => $message], 500);
         }
     }
     /**
@@ -233,7 +236,9 @@ class ShopController extends Controller
     {
         // Check if the authenticated user owns this shop
         if ($request->user()->id !== $shop->user_id) {
-            return response()->json(['error' => 'You do not have permission to update this shop'], 403);
+            $message = 'You do not have permission to update this shop';
+
+            return response()->json(['success' => false, 'message' => $message, 'error' => $message], 403);
         }
 
         DB::beginTransaction();
@@ -250,7 +255,9 @@ class ShopController extends Controller
             return new ShopResource($shop->load('region'));
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => 'An error occurred while updating the shop: ' . $e->getMessage()], 500);
+            $message = 'An error occurred while updating the shop: ' . $e->getMessage();
+
+            return response()->json(['success' => false, 'message' => $message, 'error' => $message], 500);
         }
     }
 

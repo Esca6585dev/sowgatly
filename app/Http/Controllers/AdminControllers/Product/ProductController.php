@@ -34,12 +34,10 @@ class ProductController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
                 
-                $requestData = Product::fillableData();
-    
-                $products = Product::where(function($q) use($requestData, $searchQuery) {
-                                        foreach ($requestData as $field)
+                $products = Product::where(function($q) use($searchQuery) {
+                                        foreach (['name_tm', 'name_en', 'name_ru', 'description_tm', 'description_en', 'description_ru'] as $field)
                                         $q->orWhere($field, 'like', "%{$searchQuery}%");
-                                })->paginate($pagination);
+                                })->orderByDesc('id')->paginate($pagination);
             }
             
             return view('admin-panel.product.product-table', compact('products', 'pagination'))->render();
@@ -68,28 +66,11 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store($lang, ProductRequest $request)
-    {   
-        $product = new Product;
+    {
+        $product = Product::create($this->productData($request));
 
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->discount = $request->discount;
-        $product->category_id = $request->category_id;
-        $product->status = $request->status;
+        $this->uploadImages($product, $request);
 
-        $product->attributes = [
-            'color' => $request->color_name,
-            'size' => $request->size,
-            'weight' => $request->weight,
-        ];
-
-        $product->code = Str::random(6);
-
-        $product->save();
-
-        $this->uploadImages($product->id, $request);
-        
         return redirect()->route('product.index', app()->getlocale() )->with('success-create', 'The resource was created!');
     }
 
@@ -130,24 +111,24 @@ class ProductController extends Controller
      */
     public function update($lang, ProductRequest $request, Product $product)
     {
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->discount = $request->discount;
-        $product->category_id = $request->category_id;
-        $product->status = $request->status;
+        $product->update($this->productData($request));
 
-        $product->attributes = [
-            'color' => $request->color_name,
-            'size' => $request->size,
-            'weight' => $request->weight,
-        ];
+        $this->uploadImages($product, $request);
 
-        $product->update();
-
-        $this->uploadImages($product->id, $request);
-        
         return redirect()->route('product.index', [ app()->getlocale() ])->with('success-update', 'The resource was updated!');
+    }
+
+    /**
+     * Columns of the products table that the form may set.
+     */
+    private function productData(ProductRequest $request): array
+    {
+        return $request->only([
+            'name_tm', 'name_en', 'name_ru',
+            'description_tm', 'description_en', 'description_ru',
+            'price', 'discount', 'stock', 'production_time', 'min_order',
+            'shop_id', 'category_id', 'status', 'seller_status',
+        ]);
     }
 
     /**
@@ -158,57 +139,45 @@ class ProductController extends Controller
      */
     public function destroy($lang, Product $product)
     {
-        $this->deleteFolder($product->id);
-
+        $this->deleteImages($product);
         $product->delete();
 
         return redirect()->route('product.index', [ app()->getlocale() ])->with('success-delete', 'The resource was deleted!');
     }
 
-    public function deleteFolder($product_id)
+    /**
+     * Remove the product's uploaded images (files and rows). Seeder images
+     * under product/product-seeder are shared and never deleted.
+     */
+    public function deleteImages(Product $product)
     {
-        $image = Image::where('product_id', $product_id)->first();
-        $images = Image::where('product_id', $product_id)->get();
-        
-        if($image){
-            $folder = explode('/', $image->image);
-            
-            if($folder[1] != 'product-seeder'){
-                \File::deleteDirectory($folder[0] . '/' . $folder[1]);
+        foreach ($product->images as $image) {
+            $path = (string) $image->url;
+            if ($path !== '' && !str_starts_with($path, 'http') && !str_contains($path, 'product-seeder')) {
+                \File::delete(public_path($path));
             }
-
-            $images->each->delete();
+            $image->delete();
         }
     }
 
-    public function uploadImages($product_id, $request)
+    public function uploadImages(Product $product, $request)
     {
-        if($request->file('images')){
-            $this->deleteFolder($product_id);
+        if (!$request->hasFile('images')) {
+            return;
+        }
 
-            $images = $request->file('images');
+        $this->deleteImages($product);
 
-            foreach($images as $image){
-                $date = date("d-m-Y-H-i-s");
+        $folder = 'product/' . Str::slug($product->name_en . '-' . date('d-m-Y-H-i-s')) . '/';
 
-                $fileRandName = Str::random(10);
-                $fileExt = $image->getClientOriginalExtension();
-    
-                $fileName = $fileRandName . '.' . $fileExt;
-                
-                $path = 'product/' . Str::slug($request->name . '-' . $date ) . '/';
-    
-                $image->move($path, $fileName);
-                
-                $originalImage = $path . $fileName;
+        foreach ($request->file('images') as $file) {
+            $fileName = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path($folder), $fileName);
 
-                $image = new Image;
-
-                $image->image = $originalImage;
-                $image->product_id = $product_id;
-
-                $image->save();
-            }
+            Image::create([
+                'product_id' => $product->id,
+                'url' => $folder . $fileName,
+            ]);
         }
     }
 }

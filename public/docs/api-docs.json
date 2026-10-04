@@ -11,7 +11,7 @@
             "description": "Local server"
         },
         {
-            "url": "https://sowgatly.app",
+            "url": "http://localhost:8000",
             "description": "Remote server"
         }
     ],
@@ -557,6 +557,49 @@
                 ]
             }
         },
+        "/api/banners": {
+            "get": {
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Active promo banners for the home screen",
+                "operationId": "9f718c7db0d13e4b5be26b80595f4cf1",
+                "parameters": [
+                    {
+                        "name": "region_id",
+                        "in": "query",
+                        "description": "City; global banners are always included",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Banners ordered by position",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BannerResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/brands": {
             "get": {
                 "tags": [
@@ -777,6 +820,90 @@
                     },
                     "422": {
                         "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/cart/items/{id}": {
+            "put": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Change the quantity of a cart item",
+                "operationId": "b3a18e4d10d861ac5816c469ff8d70dc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "quantity": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "example": 2
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated cart"
+                    },
+                    "404": {
+                        "description": "Cart item not found"
+                    },
+                    "422": {
+                        "description": "Not enough stock"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Remove an item from the cart",
+                "operationId": "cb4f3d58ed218976bb461f6783c70b30",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Removed"
+                    },
+                    "404": {
+                        "description": "Cart item not found"
                     }
                 },
                 "security": [
@@ -1071,6 +1198,230 @@
                 ]
             }
         },
+        "/api/me/chats": {
+            "get": {
+                "tags": [
+                    "Chats"
+                ],
+                "summary": "The customer's chat threads, most recent first",
+                "operationId": "603decf2309c9e39b24fbea46e4dffb8",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chats"
+                ],
+                "summary": "Open (or reuse) a chat with a shop",
+                "operationId": "21c24032f1d609d5b29b0a4329904ab7",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "shop_id"
+                                ],
+                                "properties": {
+                                    "shop_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "order_id": {
+                                        "type": "integer",
+                                        "example": 15,
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Existing thread"
+                    },
+                    "201": {
+                        "description": "Thread created"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/chats/{id}/messages": {
+            "get": {
+                "tags": [
+                    "Chats"
+                ],
+                "summary": "Messages of a thread (oldest first)",
+                "operationId": "21fece6b15091117a2d183f66d769a3e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "after",
+                        "in": "query",
+                        "description": "Return only messages with id greater than this",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 50,
+                            "maximum": 100
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Thread not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chats"
+                ],
+                "summary": "Send a message to the shop",
+                "operationId": "a6f86f3ad656f108c3b084569aeb7904",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "body"
+                                ],
+                                "properties": {
+                                    "body": {
+                                        "type": "string",
+                                        "maxLength": 2000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Message sent"
+                    },
+                    "404": {
+                        "description": "Thread not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/chats/{id}/read": {
+            "post": {
+                "tags": [
+                    "Chats"
+                ],
+                "summary": "Mark the shop's messages in this thread as read",
+                "operationId": "e0d3cf56aded04385e391606e053965e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Marked read"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/chats/unread-count": {
+            "get": {
+                "tags": [
+                    "Chats"
+                ],
+                "summary": "Total unread chat messages for the customer",
+                "operationId": "90f87624fb62acc8bc4f9592c54f3fa2",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "unread": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/compositions": {
             "get": {
                 "tags": [
@@ -1227,6 +1578,482 @@
                 ]
             }
         },
+        "/api/me/collections": {
+            "get": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "The caller's favorite collections with cover images",
+                "operationId": "4b7c295dd87a9c65fae52cdd4d9f40fe",
+                "responses": {
+                    "200": {
+                        "description": "Collections ordered by position",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "position": {
+                                                        "type": "integer"
+                                                    },
+                                                    "items_count": {
+                                                        "type": "integer"
+                                                    },
+                                                    "covers": {
+                                                        "description": "Up to four product image URLs",
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Create a collection",
+                "operationId": "7a5d68b945530b7fbadd82df96154aba",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Что я хочу"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "422": {
+                        "description": "Duplicate name or too many collections"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/collections/{id}": {
+            "get": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "A collection with its products (paginated, 20 per page)",
+                "operationId": "ba4cc3cd5930bfebe849f75bdc44a33b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Collection and products"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Rename or reorder a collection",
+                "operationId": "1f8494e7dfc8380ec29a299b7a35c642",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 100
+                                    },
+                                    "position": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Delete a collection (its products stay in the catalog and in /favorites)",
+                "operationId": "b9dbd5a49fe7e7976d9925518fd2d64d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/collections/{id}/products": {
+            "post": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Add a product to a collection (idempotent)",
+                "operationId": "8c5c682ed06ddffb1dba2dd8ede79b0d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "product_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Added"
+                    },
+                    "200": {
+                        "description": "Was already in the collection"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Collection is full"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/collections/{id}/products/{product_id}": {
+            "delete": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Remove a product from a collection",
+                "operationId": "686afc14d2fbbce2582570fa2395870c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Removed"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/favorites": {
+            "get": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "List the authenticated user's favorite products",
+                "operationId": "bc433e786ab5a0bec81c53c578e0b6aa",
+                "responses": {
+                    "200": {
+                        "description": "List of favorite products"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/favorites/toggle": {
+            "post": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Add or remove a product from the authenticated user's favorites",
+                "operationId": "c4cb21639a868dcedea199141c109a18",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "product_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Favorite toggled"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/home": {
+            "get": {
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Home screen feed: categories, banners and product sections for a city",
+                "operationId": "d65ef76cbb32ae304c5a24c525b95adb",
+                "parameters": [
+                    {
+                        "name": "region_id",
+                        "in": "query",
+                        "description": "City to show products for; omit for all cities",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_section",
+                        "in": "query",
+                        "description": "Products per section, 1-20 (default 6)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Feed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "region": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "categories": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CategoryResource"
+                                            }
+                                        },
+                                        "banners": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BannerResource"
+                                            }
+                                        },
+                                        "sections": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string",
+                                                        "example": "category:3"
+                                                    },
+                                                    "title": {
+                                                        "properties": {
+                                                            "tm": {
+                                                                "type": "string"
+                                                            },
+                                                            "ru": {
+                                                                "type": "string"
+                                                            },
+                                                            "en": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "category_id": {
+                                                        "type": "integer",
+                                                        "nullable": true
+                                                    },
+                                                    "products": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "$ref": "#/components/schemas/ProductResource"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/orders": {
             "get": {
                 "tags": [
@@ -1234,6 +2061,32 @@
                 ],
                 "summary": "Get user's orders",
                 "operationId": "f641842a2abf975fee5362d88c320539",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Search by order number or product name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pending",
+                                "processing",
+                                "delivering",
+                                "completed",
+                                "cancelled"
+                            ]
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -1249,15 +2102,70 @@
                 "tags": [
                     "Orders"
                 ],
-                "summary": "Create a new order from cart",
+                "summary": "Create a new order from the current cart",
                 "operationId": "b0f5daac05dcbd2f54bd761f92afcbf6",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "delivery_type",
+                                    "recipient_phone"
+                                ],
                                 "properties": {
-                                    "shop_id": {
-                                        "type": "integer"
+                                    "delivery_type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "asap",
+                                            "scheduled"
+                                        ],
+                                        "example": "asap"
+                                    },
+                                    "scheduled_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "nullable": true
+                                    },
+                                    "recipient_phone": {
+                                        "type": "string",
+                                        "example": "65656585"
+                                    },
+                                    "recipient_name": {
+                                        "type": "string",
+                                        "example": "Aýna",
+                                        "nullable": true
+                                    },
+                                    "delivery_address": {
+                                        "description": "Required unless fulfillment is pickup",
+                                        "type": "string",
+                                        "example": "Aýtakow köç. 17",
+                                        "nullable": true
+                                    },
+                                    "fulfillment": {
+                                        "type": "string",
+                                        "default": "delivery",
+                                        "enum": [
+                                            "delivery",
+                                            "pickup"
+                                        ]
+                                    },
+                                    "payment_method": {
+                                        "type": "string",
+                                        "default": "cash",
+                                        "enum": [
+                                            "cash",
+                                            "online"
+                                        ]
+                                    },
+                                    "payment_bank": {
+                                        "description": "Required when payment_method is online; a code from GET /api/payment-methods",
+                                        "type": "string",
+                                        "example": "rysgal",
+                                        "nullable": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "nullable": true
                                     }
                                 },
                                 "type": "object"
@@ -1274,6 +2182,60 @@
                     },
                     "422": {
                         "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/{id}/cancel": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Cancel a pending order",
+                "operationId": "4bff05b82387c6b20976c7b82ae2c9ba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order cancelled"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    },
+                    "422": {
+                        "description": "Order is no longer pending"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Legacy alias of GET /api/orders",
+                "operationId": "98ff3e4fa7abc93fdf76421a03a40dfd",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
                     }
                 },
                 "security": [
@@ -1313,6 +2275,66 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/payment-methods": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "List payment methods (cash and the online banks)",
+                "operationId": "a959c227d7b72f2f51a3a871ae5db980",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "string",
+                                                        "example": "rysgal"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "cash",
+                                                            "online"
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "properties": {
+                                                            "tm": {
+                                                                "type": "string"
+                                                            },
+                                                            "ru": {
+                                                                "type": "string"
+                                                            },
+                                                            "en": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/products": {
@@ -1405,18 +2427,29 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "name",
+                                    "name_tm",
+                                    "name_en",
+                                    "name_ru",
                                     "price",
-                                    "description",
+                                    "description_tm",
+                                    "description_en",
+                                    "description_ru",
                                     "seller_status",
                                     "status",
-                                    "shop_id",
                                     "category_id"
                                 ],
                                 "properties": {
-                                    "name": {
+                                    "name_tm": {
                                         "type": "string",
-                                        "example": "Stylish T-Shirt"
+                                        "example": "Bägül çemeni"
+                                    },
+                                    "name_en": {
+                                        "type": "string",
+                                        "example": "Rose bouquet"
+                                    },
+                                    "name_ru": {
+                                        "type": "string",
+                                        "example": "Букет роз"
                                     },
                                     "price": {
                                         "type": "number",
@@ -1427,60 +2460,21 @@
                                         "type": "integer",
                                         "example": 10
                                     },
-                                    "description": {
+                                    "description_tm": {
                                         "type": "string",
-                                        "example": "A comfortable and stylish t-shirt for everyday wear."
+                                        "example": "Gyzyl bägüller"
                                     },
-                                    "gender": {
+                                    "description_en": {
                                         "type": "string",
-                                        "example": "Unisex"
+                                        "example": "Red roses"
                                     },
-                                    "sizes": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "integer"
-                                        },
-                                        "example": [
-                                            42,
-                                            43,
-                                            44,
-                                            45
-                                        ]
-                                    },
-                                    "separated_sizes": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "example": [
-                                            "S",
-                                            "M",
-                                            "L",
-                                            "XL"
-                                        ]
-                                    },
-                                    "color": {
+                                    "description_ru": {
                                         "type": "string",
-                                        "example": "Blue"
+                                        "example": "Красные розы"
                                     },
-                                    "manufacturer": {
-                                        "type": "string",
-                                        "example": "FashionCo"
-                                    },
-                                    "width": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 30.5
-                                    },
-                                    "height": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 50
-                                    },
-                                    "weight": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 200
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 20
                                     },
                                     "production_time": {
                                         "type": "integer",
@@ -1633,75 +2627,42 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "name": {
+                                    "name_tm": {
                                         "type": "string",
-                                        "example": "Updated Stylish T-Shirt"
+                                        "example": "Updated Bägül çemeni"
+                                    },
+                                    "name_en": {
+                                        "type": "string",
+                                        "example": "Updated Rose bouquet"
+                                    },
+                                    "name_ru": {
+                                        "type": "string",
+                                        "example": "Updated Букет роз"
                                     },
                                     "price": {
                                         "type": "number",
                                         "format": "float",
-                                        "example": 34.99
+                                        "example": 29.99
                                     },
                                     "discount": {
                                         "type": "integer",
-                                        "example": 15
+                                        "example": 10
                                     },
-                                    "description": {
+                                    "description_tm": {
                                         "type": "string",
-                                        "example": "An updated comfortable and stylish t-shirt for everyday wear."
+                                        "example": "Gyzyl bägüller"
                                     },
-                                    "gender": {
+                                    "description_en": {
                                         "type": "string",
-                                        "example": "Unisex"
+                                        "example": "Red roses"
                                     },
-                                    "sizes": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "integer"
-                                        },
-                                        "example": [
-                                            42,
-                                            43,
-                                            44,
-                                            45,
-                                            46
-                                        ]
-                                    },
-                                    "separated_sizes": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "example": [
-                                            "S",
-                                            "M",
-                                            "L",
-                                            "XL",
-                                            "XXL"
-                                        ]
-                                    },
-                                    "color": {
+                                    "description_ru": {
                                         "type": "string",
-                                        "example": "Red"
+                                        "example": "Красные розы"
                                     },
-                                    "manufacturer": {
-                                        "type": "string",
-                                        "example": "UpdatedFashionCo"
-                                    },
-                                    "width": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 31
-                                    },
-                                    "height": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 51
-                                    },
-                                    "weight": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 210
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 20
                                     },
                                     "production_time": {
                                         "type": "integer",
@@ -1891,6 +2852,43 @@
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "min_rating",
+                        "in": "query",
+                        "description": "Only products whose average rating is at least this (1-5)",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "delivery_today",
+                        "in": "query",
+                        "description": "1 = production time of three hours or less",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "price_asc",
+                                "price_desc",
+                                "popular",
+                                "newest"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -1979,6 +2977,119 @@
                 "security": [
                     {
                         "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{id}/reviews": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Reviews of a product (public). Send `page` for a paginated list.",
+                "operationId": "83d3abb23ec8d3f8ba035b73ec250361",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reviews with rating_match / rating_value / rating_service, author and meta (count, average, can_review, my_review)"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Review a product you have ordered (one review per product, updates replace it)",
+                "operationId": "355b3f3f624ae313c3587c942ab160b7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "rating": {
+                                        "description": "Optional when the three criteria are given; then it is their rounded average",
+                                        "type": "integer",
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "rating_match": {
+                                        "description": "Соответствие",
+                                        "type": "integer",
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "rating_value": {
+                                        "description": "Цена / качество",
+                                        "type": "integer",
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "rating_service": {
+                                        "description": "Сервис магазина",
+                                        "type": "integer",
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "comment": {
+                                        "type": "string",
+                                        "maxLength": 1000,
+                                        "nullable": true
+                                    },
+                                    "order_id": {
+                                        "description": "One of the caller's orders containing the product",
+                                        "type": "integer",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Saved review"
+                    },
+                    "403": {
+                        "description": "Not a buyer of this product / order mismatch"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ]
             }
@@ -2408,6 +3519,244 @@
                 ]
             }
         },
+        "/api/shop-applications": {
+            "post": {
+                "tags": [
+                    "Shop applications"
+                ],
+                "summary": "Apply to open a shop (guests and signed-in users)",
+                "operationId": "bcb448f7441b3031d271540966984d9d",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Gül dünýäsi"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "65656585"
+                                    },
+                                    "region_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Application received"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "429": {
+                        "description": "Too many applications"
+                    }
+                }
+            }
+        },
+        "/api/me/shop-applications": {
+            "get": {
+                "tags": [
+                    "Shop applications"
+                ],
+                "summary": "The signed-in user's own shop applications",
+                "operationId": "3dbe94ac4656681989639c97b76bffd4",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/shop/chats": {
+            "get": {
+                "tags": [
+                    "Shop chats"
+                ],
+                "summary": "Threads of my shop",
+                "operationId": "913d3c2ddfd0a977fa5755bf3ac40bea",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "403": {
+                        "description": "User has no shop"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/shop/chats/{id}/messages": {
+            "get": {
+                "tags": [
+                    "Shop chats"
+                ],
+                "summary": "Messages of a thread",
+                "operationId": "755f230aebdc0880eea8653d8b9cc71b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "after",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 50
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Thread not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Shop chats"
+                ],
+                "summary": "Reply to the customer",
+                "operationId": "216b1e2e7e206d7352f6a379bceb6b19",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "body"
+                                ],
+                                "properties": {
+                                    "body": {
+                                        "type": "string",
+                                        "maxLength": 2000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Message sent"
+                    },
+                    "404": {
+                        "description": "Thread not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/shop/chats/{id}/read": {
+            "post": {
+                "tags": [
+                    "Shop chats"
+                ],
+                "summary": "Mark the customer's messages as read",
+                "operationId": "3834909805fad0871c8803e740e42a52",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Marked read"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/shop/chats/unread-count": {
+            "get": {
+                "tags": [
+                    "Shop chats"
+                ],
+                "summary": "Unread messages for my shop",
+                "operationId": "ecfccf23714ff0311334e56f97488a61",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/shops": {
             "get": {
                 "tags": [
@@ -2773,38 +4122,61 @@
                 ]
             }
         },
-        "/api/users": {
-            "post": {
+        "/api/shop/orders": {
+            "get": {
                 "tags": [
-                    "Users"
+                    "Shop orders"
                 ],
-                "summary": "Create a new user",
-                "operationId": "be551c1d694a01c164966f58bfa77013",
+                "summary": "Orders placed with the caller's own shop",
+                "operationId": "a0f36b66b633c58586fbe2f004e802d4",
+                "responses": {
+                    "200": {
+                        "description": "Orders, newest first"
+                    },
+                    "403": {
+                        "description": "The caller has no shop"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/shop/orders/{id}/status": {
+            "put": {
+                "tags": [
+                    "Shop orders"
+                ],
+                "summary": "Move one of the shop's orders to the next status",
+                "operationId": "3c8d14b94937e7154a3d2c0871e586c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
+                                "required": [
+                                    "status"
+                                ],
                                 "properties": {
-                                    "name": {
+                                    "status": {
                                         "type": "string",
-                                        "example": "Esen"
-                                    },
-                                    "phone_number": {
-                                        "type": "string",
-                                        "example": "65123456"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "example": "info@tds.gov.tm"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "password"
-                                    },
-                                    "image": {
-                                        "description": "Image file",
-                                        "type": "string",
-                                        "format": "binary"
+                                        "enum": [
+                                            "processing",
+                                            "delivering",
+                                            "completed",
+                                            "cancelled"
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -2814,7 +4186,32 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "User creation response",
+                        "description": "Updated order"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    },
+                    "422": {
+                        "description": "Transition not allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/addresses": {
+            "get": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "The caller's delivery addresses (default first)",
+                "operationId": "98a1a707728e8f6894fab782507d3333",
+                "responses": {
+                    "200": {
+                        "description": "Addresses",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2822,29 +4219,26 @@
                                         "success": {
                                             "type": "boolean"
                                         },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "user": {
-                                            "$ref": "#/components/schemas/UserResource"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "errors": {
-                                            "type": "object"
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "nullable": true
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    },
+                                                    "is_default": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -2855,18 +4249,117 @@
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Add a delivery address (the first one becomes the default)",
+                "operationId": "8e7dbcd0ba5b3871520f5a7386f8cede",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "address"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Home",
+                                        "nullable": true
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "maxLength": 500,
+                                        "example": "Aşgabat, Parahat 7"
+                                    },
+                                    "is_default": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ]
             }
         },
-        "/api/users/{id}": {
-            "get": {
+        "/api/me/addresses/{id}": {
+            "put": {
                 "tags": [
-                    "Users"
+                    "Addresses"
                 ],
-                "summary": "Get user by ID",
-                "operationId": "6f51bd5fa2dddcd25e44cfa53dcbd10a",
+                "summary": "Edit a delivery address",
+                "operationId": "983faa19fb7c7596a8abb6b4e52d5fbf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "is_default": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated"
+                    },
+                    "404": {
+                        "description": "Address not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Delete a delivery address (another one becomes default if needed)",
+                "operationId": "2517eeaaeef2c6b1e754a7c0aa105d1a",
                 "parameters": [
                     {
                         "name": "id",
@@ -2879,160 +4372,36 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "User details response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "user": {
-                                            "$ref": "#/components/schemas/UserResource"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Deleted"
                     },
                     "404": {
-                        "description": "User not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Address not found"
                     }
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "bearerAuth": []
                     }
                 ]
-            },
-            "put": {
+            }
+        },
+        "/api/users/me/image": {
+            "delete": {
                 "tags": [
                     "Users"
                 ],
-                "summary": "Update an existing user",
-                "operationId": "070e37fc9aff78ae73860751bc990ed3",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of the user to update",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Esen"
-                                    },
-                                    "phone_number": {
-                                        "type": "string",
-                                        "example": "64123456"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "example": "info@tds.gov.tm"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "passwordupdated"
-                                    },
-                                    "image": {
-                                        "type": "string",
-                                        "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAyCAYAAAAZUZThAAAGz0lEQVR4nO2de4hVRRzHP3vdNDXNMnpYWWmUpZlp9iAigiKiKKQHQa+/IqLoQRQFRRBBf0UPISJK6EEUlVFEZFIUZWVlZfawzB6amrnmY3Vz94+Z4547d+6cM3PmnDnnnt8HFvbemTNzZn7z/c3v95uZC4ZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZ"
-                                    },
-                                    "_method": {
-                                        "type": "string",
-                                        "example": "PUT"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
+                "summary": "Remove the authenticated user's avatar",
+                "operationId": "b193f29afbccf361fba23e9d5b65812c",
                 "responses": {
                     "200": {
-                        "description": "User updated successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "User updated successfully"
-                                        },
-                                        "user": {
-                                            "$ref": "#/components/schemas/UserResource"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "User not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "User not found"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "The given data was invalid."
-                                        },
-                                        "errors": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Avatar removed"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/users/me": {
@@ -3060,6 +4429,230 @@
                 "security": [
                     {
                         "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/me/notifications": {
+            "get": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "The caller's last 50 in-app notifications",
+                "operationId": "f71fa8593bc3110e7334dedc31ba3856",
+                "responses": {
+                    "200": {
+                        "description": "Notifications, newest first",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "order_created",
+                                                            "order_status",
+                                                            "product_available",
+                                                            "chat_message",
+                                                            "shop_application"
+                                                        ]
+                                                    },
+                                                    "data": {
+                                                        "description": "Keys depend on type, see docs/notifications.md",
+                                                        "type": "object"
+                                                    },
+                                                    "title": {
+                                                        "description": "Localized by Accept-Language",
+                                                        "type": "string"
+                                                    },
+                                                    "body": {
+                                                        "type": "string"
+                                                    },
+                                                    "read_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "nullable": true
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "unread": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/notifications/unread-count": {
+            "get": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Number of unread in-app notifications",
+                "operationId": "8cb5d181bf4ce1691fec49ba71382130",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "unread": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/notifications/read": {
+            "post": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Mark every notification as read",
+                "operationId": "6e6ba05cf6028e5fb32755deb5d7c2e7",
+                "responses": {
+                    "200": {
+                        "description": "Done"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/waitlist": {
+            "get": {
+                "tags": [
+                    "Waitlist"
+                ],
+                "summary": "Products on the customer's waiting list",
+                "operationId": "4637c3909f6922bd35970beff272e6fd",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Waitlist"
+                ],
+                "summary": "Add a product to the waiting list",
+                "operationId": "b108c151d834e6b627ee2aa71da00699",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "product_id": {
+                                        "type": "integer",
+                                        "example": 12
+                                    },
+                                    "region_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Added"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/me/waitlist/{product_id}": {
+            "delete": {
+                "tags": [
+                    "Waitlist"
+                ],
+                "summary": "Remove a product from the waiting list",
+                "operationId": "708d3fb4cb4c17c1596a919287a81024",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Removed"
+                    },
+                    "404": {
+                        "description": "Not on the list"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ]
             }
@@ -3153,6 +4746,68 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2023-06-07T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "BannerResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "properties": {
+                            "tm": {
+                                "type": "string"
+                            },
+                            "ru": {
+                                "type": "string"
+                            },
+                            "en": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "subtitle": {
+                        "properties": {
+                            "tm": {
+                                "type": "string"
+                            },
+                            "ru": {
+                                "type": "string"
+                            },
+                            "en": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object",
+                        "nullable": true
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "https://sowgatly.app/storage/banners/x.jpg",
+                        "nullable": true
+                    },
+                    "link_type": {
+                        "type": "string",
+                        "enum": [
+                            "none",
+                            "category",
+                            "product",
+                            "shop",
+                            "url"
+                        ]
+                    },
+                    "link_value": {
+                        "type": "string",
+                        "example": "3",
+                        "nullable": true
+                    },
+                    "position": {
+                        "type": "integer",
+                        "example": 0
                     }
                 },
                 "type": "object"
@@ -3481,6 +5136,12 @@
                         "type": "string",
                         "example": "+1234567890"
                     },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1995-04-21",
+                        "nullable": true
+                    },
                     "image": {
                         "type": "string",
                         "example": "https://example.com/image.jpg",
@@ -3543,12 +5204,24 @@
             "description": "API Endpoints for Cart operations"
         },
         {
+            "name": "Chats",
+            "description": "Customer chats with shops"
+        },
+        {
             "name": "Compositions",
             "description": "API Endpoints of Compositions"
         },
         {
+            "name": "Favorites",
+            "description": "API Endpoints for the current user's saved/favorite products"
+        },
+        {
             "name": "Orders",
             "description": "API Endpoints for Order operations"
+        },
+        {
+            "name": "Payments",
+            "description": "Payment methods offered at checkout"
         },
         {
             "name": "Products",
@@ -3559,16 +5232,48 @@
             "description": "API Endpoints of Regions"
         },
         {
+            "name": "Shop applications",
+            "description": "Requests to open a shop on Sowgatly"
+        },
+        {
+            "name": "Shop chats",
+            "description": "Chats of the signed-in user's shop"
+        },
+        {
             "name": "Shops",
             "description": "API Endpoints of shops"
+        },
+        {
+            "name": "Waitlist",
+            "description": "Products the customer wants to be notified about"
+        },
+        {
+            "name": "Home",
+            "description": "Home"
         },
         {
             "name": "Categories",
             "description": "Categories"
         },
         {
+            "name": "Collections",
+            "description": "Collections"
+        },
+        {
+            "name": "Reviews",
+            "description": "Reviews"
+        },
+        {
+            "name": "Shop orders",
+            "description": "Shop orders"
+        },
+        {
             "name": "Users",
             "description": "Users"
+        },
+        {
+            "name": "Notifications",
+            "description": "Notifications"
         }
     ],
     "security": [

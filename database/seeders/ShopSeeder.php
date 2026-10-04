@@ -31,7 +31,9 @@ class ShopSeeder extends Seeder
      */
     private function getOrCreateRegion(): Region
     {
-        return Region::firstOrCreate(['name' => 'Default Region']);
+        // regions.type is NOT NULL; reuse a seeded city when there is one.
+        return Region::where('type', 'city')->first()
+            ?? Region::firstOrCreate(['name' => 'Default Region'], ['type' => 'city']);
     }
 
     /**

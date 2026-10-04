@@ -256,13 +256,9 @@ class AuthOtpController extends Controller
 
         $token = $user->createToken('api-token')->plainTextToken;
 
-        // Debug: Check if user has shops
-        \Log::info('User shops: ' . json_encode($user->shops));
-
-        $shops = $user->shops;
-        if ($shops === null) {
-            $shops = collect(); // Create an empty collection if shops is null
-        }
+        // A user owns at most one shop (User::shop is hasOne); the response
+        // keeps the historical `shops` array shape for the apps.
+        $shops = $user->shop ? collect([$user->shop]) : collect();
 
         try {
             return response()->json([
@@ -397,7 +393,7 @@ class AuthOtpController extends Controller
                 // it must reach the user through SMS alone.
                 'otp' => config('app.otp_debug_code') ? $otpCode : null,
                 'user' => new UserResource($user),
-                'shops' => $user->shops ? ShopResource::collection($user->shops) : [],
+                'shops' => [],
                 'device' => new DeviceResource($device),
             ], 200);
         } catch (\Exception $e) {

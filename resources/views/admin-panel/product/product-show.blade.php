@@ -172,7 +172,7 @@
                                                 <div class="card-body p-0 rounded px-10 py-15 d-flex align-items-center justify-content-center">
                                                     <h1>
                                                         <a href="/" target="_blank">
-                                                            {{ $product->name }}
+                                                            {{ $product->{ 'name_' . app()->getlocale() } }}
                                                         </a>
                                                     </h1>
                                                 </div>
@@ -180,10 +180,10 @@
                                             <!--end::Image-->
                                         </div>
                                         <div class="col-xxl-7 pl-xxl-11">
-                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $product->name }}</h4>
-                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $product->description }}</h4>
+                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $product->{ 'name_' . app()->getlocale() } }}</h4>
+                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $product->{ 'description_' . app()->getlocale() } }}</h4>
                                         </div>
-                                        {{ dump($product->brands->first()) }}
+                                        
                                         
                                         <div id="datatable">
                                             <table class="table table-separate table-head-custom table-checkable">
@@ -204,12 +204,12 @@
                                                 <tbody>
                                                 <tr id="datatable">
                                                         <td>{{ $product->id }}</td>
-                                                        <td>{{ $product->name }}</td>
-                                                        <td>{!! Str::limit($product->description, 10) !!}</td>
+                                                        <td>{{ $product->{ 'name_' . app()->getlocale() } }}</td>
+                                                        <td>{!! Str::limit($product->{ 'description_' . app()->getlocale() }, 40) !!}</td>
                                                         <td>{{ $product->price }} TMT</td>
                                                         <td>{{ $product->discount }}%</td>
                                                         <td>{{ $product->getDiscountedPrice() }} TMT</td>
-                                                        <td><a href="{{ route('product.show', [app()->getlocale(), $product->shop->id]) }}">{{ $product->shop->name }}</a></td>
+                                                        <td><a href="{{ route('shop.show', [app()->getlocale(), $product->shop->id]) }}">{{ $product->shop->name }}</a></td>
                                                         <td>
                                                             <span
                                                                 class="badge badge-primary">{{ $product->category->{ 'name_' . app()->getlocale() } }}</span>
