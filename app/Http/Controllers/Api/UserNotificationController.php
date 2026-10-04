@@ -26,6 +26,24 @@ class UserNotificationController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/me/notifications/unread-count",
+     *     summary="Number of unread in-app notifications",
+     *     tags={"Notifications"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Response(response="200", description="Successful operation", @OA\JsonContent(@OA\Property(property="unread", type="integer"))),
+     *     security={{"bearerAuth": {}}}
+     * )
+     */
+    public function unreadCount(Request $request)
+    {
+        return response()->json([
+            'success' => true,
+            'unread' => UserNotification::where('user_id', $request->user()->id)->whereNull('read_at')->count(),
+        ]);
+    }
+
     public function markAllRead(Request $request)
     {
         UserNotification::where('user_id', $request->user()->id)

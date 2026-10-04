@@ -42,6 +42,16 @@ class ShopResource extends JsonResource
             'sat_sun_open' => $this->sat_sun_open,
             'sat_sun_close' => $this->sat_sun_close,
             'image' => $this->image ? asset('storage/' . $this->image) : null,
+            'phone' => $this->phone,
+            'delivery_fee' => $this->delivery_fee !== null ? (float) $this->delivery_fee : null,
+            'pickup_available' => (bool) $this->pickup_available,
+            'min_order_amount' => $this->min_order_amount !== null ? (float) $this->min_order_amount : null,
+            'description' => [
+                'tm' => $this->description_tm,
+                'ru' => $this->description_ru,
+                'en' => $this->description_en,
+            ],
+            'status' => $this->status,
             'region' => $this->when($this->region, function () {
                 return new RegionResource($this->region);
             }),

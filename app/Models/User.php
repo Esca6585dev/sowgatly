@@ -19,6 +19,7 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
+        'birth_date',
     ];
 
     /**
@@ -29,6 +30,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $casts = [
+        'birth_date' => 'date:Y-m-d',
     ];
 
     protected function fillableData()
@@ -59,6 +64,16 @@ class User extends Authenticatable
     public function deliveryAddresses()
     {
         return $this->hasMany(UserAddress::class);
+    }
+
+    public function waitlistItems()
+    {
+        return $this->hasMany(WaitlistItem::class);
+    }
+
+    public function chatThreads()
+    {
+        return $this->hasMany(ChatThread::class);
     }
 
     public function favorites()

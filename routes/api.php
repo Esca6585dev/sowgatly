@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('chess')->group(function () {
-    Route::post('/games', [App\Http\Controllers\GameController::class, 'create']);
-    Route::post('/games/{gameId}/move', [App\Http\Controllers\GameController::class, 'makeMove']);
-    Route::get('/games/{gameId}', [App\Http\Controllers\GameController::class, 'show']);
-});
+// Public, read-only reference data.
+Route::get('payment-methods', [App\Http\Controllers\Api\PaymentMethodController::class, 'index']);
+
+// Anyone may apply to open a shop; the admin panel handles the applications.
+Route::post('shop-applications', [App\Http\Controllers\Api\ShopApplicationController::class, 'store'])
+    ->middleware('throttle:5,60');
 
 // Login endpoints are rate limited: 4-digit codes are brute-forceable otherwise.
 Route::controller(App\Http\Controllers\Api\AuthOtpController::class)->middleware('throttle:10,1')->group(function(){
@@ -57,6 +58,31 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     // (phone numbers, passwords) is admin-panel work, not API work.
     Route::get('users/me', [App\Http\Controllers\Api\UserController::class, 'me']);
     Route::put('users/me', [App\Http\Controllers\Api\UserController::class, 'updateMe']);
+    // Multipart uploads cannot be sent with PUT from every client: POST with
+    // the same handler (optionally with _method=PUT) does the same thing.
+    Route::post('users/me', [App\Http\Controllers\Api\UserController::class, 'updateMe']);
+    Route::delete('users/me/image', [App\Http\Controllers\Api\UserController::class, 'destroyImage']);
+    Route::get('me/shop-applications', [App\Http\Controllers\Api\ShopApplicationController::class, 'mine']);
+
+    // Waiting list ("Лист ожидания"): notify me when a product is back.
+    Route::get('me/waitlist', [App\Http\Controllers\Api\WaitlistController::class, 'index']);
+    Route::post('me/waitlist', [App\Http\Controllers\Api\WaitlistController::class, 'store']);
+    Route::delete('me/waitlist/{product_id}', [App\Http\Controllers\Api\WaitlistController::class, 'destroy']);
+
+    // Customer <-> shop chats. unread-count is declared before {id} so the
+    // literal segment is not captured as an id.
+    Route::get('me/chats/unread-count', [App\Http\Controllers\Api\ChatController::class, 'unreadCount']);
+    Route::get('me/chats', [App\Http\Controllers\Api\ChatController::class, 'index']);
+    Route::post('me/chats', [App\Http\Controllers\Api\ChatController::class, 'store']);
+    Route::get('me/chats/{id}/messages', [App\Http\Controllers\Api\ChatController::class, 'messages']);
+    Route::post('me/chats/{id}/messages', [App\Http\Controllers\Api\ChatController::class, 'send'])->middleware('throttle:30,1');
+    Route::post('me/chats/{id}/read', [App\Http\Controllers\Api\ChatController::class, 'read']);
+
+    Route::get('shop/chats/unread-count', [App\Http\Controllers\Api\ShopChatController::class, 'unreadCount']);
+    Route::get('shop/chats', [App\Http\Controllers\Api\ShopChatController::class, 'index']);
+    Route::get('shop/chats/{id}/messages', [App\Http\Controllers\Api\ShopChatController::class, 'messages']);
+    Route::post('shop/chats/{id}/messages', [App\Http\Controllers\Api\ShopChatController::class, 'send'])->middleware('throttle:30,1');
+    Route::post('shop/chats/{id}/read', [App\Http\Controllers\Api\ShopChatController::class, 'read']);
 
     // Shops routes
     Route::apiResource('shops', App\Http\Controllers\Api\ShopController::class);
@@ -93,6 +119,7 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () {
     Route::put('shop/orders/{id}/status', [App\Http\Controllers\Api\ShopOrderController::class, 'updateStatus']);
 
     // In-app notifications
+    Route::get('me/notifications/unread-count', [App\Http\Controllers\Api\UserNotificationController::class, 'unreadCount']);
     Route::get('me/notifications', [App\Http\Controllers\Api\UserNotificationController::class, 'index']);
     Route::post('me/notifications/read', [App\Http\Controllers\Api\UserNotificationController::class, 'markAllRead']);
     Route::get('user/orders', [App\Http\Controllers\Api\OrderController::class, 'getUserOrders']);

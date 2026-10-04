@@ -17,13 +17,33 @@ class Order extends Model
         'delivery_type',
         'scheduled_at',
         'recipient_phone',
+        'recipient_name',
         'delivery_address',
         'note',
+        'fulfillment',
+        'items_total',
+        'delivery_fee',
+        'payment_method',
+        'payment_bank',
+        'payment_status',
+        'paid_at',
     ];
 
     protected $casts = [
         'scheduled_at' => 'datetime',
+        'paid_at' => 'datetime',
+        'total_amount' => 'decimal:2',
+        'items_total' => 'decimal:2',
+        'delivery_fee' => 'decimal:2',
     ];
+
+    /**
+     * "number" is the zero-padded id shown to customers ("Заказ № 0000001").
+     * Appended so every existing order payload gains it without shape changes.
+     */
+    protected $appends = ['number'];
+
+    public const STATUSES = ['pending', 'processing', 'delivering', 'completed', 'cancelled'];
 
     /**
      * Allowed status changes. Customers may only cancel a pending order;
@@ -31,10 +51,36 @@ class Order extends Model
      */
     public const TRANSITIONS = [
         'pending' => ['processing', 'cancelled'],
-        'processing' => ['completed', 'cancelled'],
+        'processing' => ['delivering', 'completed', 'cancelled'],
+        'delivering' => ['completed'],
         'completed' => [],
         'cancelled' => [],
     ];
+
+    public function getNumberAttribute(): string
+    {
+        return str_pad((string) $this->id, 7, '0', STR_PAD_LEFT);
+    }
+
+    public function scopeSearch($query, ?string $term)
+    {
+        $term = trim((string) $term);
+        if ($term === '') {
+            return $query;
+        }
+
+        return $query->where(function ($q) use ($term) {
+            if (ctype_digit($term)) {
+                $q->orWhere('id', (int) $term);
+            }
+            $like = '%' . $term . '%';
+            $q->orWhereHas('items.product', function ($p) use ($like) {
+                $p->where('name_tm', 'like', $like)
+                  ->orWhere('name_ru', 'like', $like)
+                  ->orWhere('name_en', 'like', $like);
+            });
+        });
+    }
 
     protected static function booted()
     {
@@ -90,5 +136,10 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function chatThread()
+    {
+        return $this->hasOne(ChatThread::class);
     }
 }

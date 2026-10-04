@@ -22,6 +22,7 @@ class ShopOrderController extends Controller
 
         $query = Order::with('items.product.images', 'user:id,name,phone_number')
             ->where('shop_id', $shop->id)
+            ->search($request->query('q'))
             ->latest();
 
         if ($request->filled('status')) {
@@ -39,7 +40,7 @@ class ShopOrderController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'status' => 'required|in:processing,completed,cancelled',
+            'status' => 'required|in:processing,delivering,completed,cancelled',
         ]);
         if ($validator->fails()) {
             return response()->json(['success' => false, 'message' => $validator->errors()->first()], 422);
