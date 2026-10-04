@@ -18,10 +18,14 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+            // API clients get a real 401 so token refresh / login redirects
+            // work; the legacy 200 body is kept for non-JSON web requests.
+            $status = ($request->is('api/*') || $request->expectsJson()) ? 401 : 200;
+
             return response()->json([
                 'message' => 'Unauthenticated.',
                 'status' => 'error'
-            ], 200);
+            ], $status);
         }
 
         return parent::render($request, $exception);

@@ -14,12 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('chess')->group(function () {
-    Route::post('/games', [App\Http\Controllers\GameController::class, 'create']);
-    Route::post('/games/{gameId}/move', [App\Http\Controllers\GameController::class, 'makeMove']);
-    Route::get('/games/{gameId}', [App\Http\Controllers\GameController::class, 'show']);
-});
-
 // Login endpoints are rate limited: 4-digit codes are brute-forceable otherwise.
 Route::controller(App\Http\Controllers\Api\AuthOtpController::class)->middleware('throttle:10,1')->group(function(){
     // OTP Generate route

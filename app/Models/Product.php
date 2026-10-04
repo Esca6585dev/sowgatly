@@ -12,6 +12,15 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
+        // Columns that exist in the products table.
+        'name_tm',
+        'name_en',
+        'name_ru',
+        'description_tm',
+        'description_en',
+        'description_ru',
+        'stock',
+        // Legacy keys kept for the shop-owner product endpoints.
         'name', 
         'description',
         'price',
@@ -60,7 +69,7 @@ class Product extends Model
 
     public function brands()
     {
-        return $this->belongsToMany(Product::class, 'brands_products', 'products_id', 'brands_id');
+        return $this->belongsToMany(Brand::class, 'brands_products', 'products_id', 'brands_id');
     }
 
     public function images()
@@ -70,7 +79,7 @@ class Product extends Model
 
     public function compositions()
     {
-        return $this->belongsToMany(Composition::class, 'product_compositions')
+        return $this->belongsToMany(Composition::class, 'compositions_products')
                     ->withPivot('qty', 'qty_type')
                     ->withTimestamps();
     }

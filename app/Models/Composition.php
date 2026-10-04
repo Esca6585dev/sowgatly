@@ -23,7 +23,7 @@ class Composition extends Model
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_compositions')
+        return $this->belongsToMany(Product::class, 'compositions_products')
                     ->withPivot('qty', 'qty_type');
     }
 

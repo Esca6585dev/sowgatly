@@ -23,6 +23,8 @@
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
+        <!-- Fixed login code so tests never reach the SMS gateway. -->
+        <env name="OTP_DEBUG_CODE" value="0000"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="APP_LOCALE" value="en"/>
     </php>

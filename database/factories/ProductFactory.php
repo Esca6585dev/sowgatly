@@ -2,46 +2,50 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Shop;
-use App\Models\Category;
-use App\Models\Brand;
-use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
 {
     protected $model = Product::class;
 
-    public function definition()
+    public function definition(): array
     {
+        $name = $this->faker->words(3, true);
+
         return [
-            'name' => $this->faker->words(3, true),
+            'name_tm' => $name,
+            'name_en' => $name,
+            'name_ru' => $name,
             'price' => $this->faker->randomFloat(2, 10, 1000),
             'discount' => $this->faker->optional()->numberBetween(5, 50),
-            'description' => $this->faker->paragraph(),
-            'gender' => $this->faker->randomElement(['Men', 'Women', 'Children']),
-            'sizes' => json_encode($this->faker->randomElements(['42', '43', '44', '45', '46', '47', '48', '49', '50'], $this->faker->numberBetween(1, 5))),
-            'separated_sizes' => json_encode($this->faker->randomElements(['S', 'M', 'L', 'XL', 'XXL'], $this->faker->numberBetween(1, 5))),
-            'color' => $this->faker->colorName,
-            'manufacturer' => $this->faker->country,
-            'width' => $this->faker->randomFloat(2, 10, 100),
-            'height' => $this->faker->randomFloat(2, 10, 100),
-            'weight' => $this->faker->numberBetween(100, 5000),
+            'description_tm' => $this->faker->paragraph(),
+            'description_en' => $this->faker->paragraph(),
+            'description_ru' => $this->faker->paragraph(),
             'production_time' => $this->faker->numberBetween(60, 1440),
-            'min_order' => $this->faker->numberBetween(1, 10),
-            'seller_status' => $this->faker->boolean,
-            'status' => $this->faker->boolean,
-            'shop_id' => 1,
+            'min_order' => 1,
+            'stock' => $this->faker->numberBetween(1, 50),
+            'seller_status' => true,
+            'status' => true,
+            'shop_id' => Shop::factory(),
             'category_id' => Category::factory(),
-            'brand_id' => Brand::factory(),
         ];
     }
 
-    public function configure()
+    /** Product that is hidden from the storefront. */
+    public function inactive(): static
     {
-        return $this->afterCreating(function (Product $product) {
-            Image::factory()->count(3)->forProduct($product)->create();
+        return $this->state(fn () => ['status' => false]);
+    }
+
+    /** Product with its images already attached. */
+    public function withImages(int $count = 2): static
+    {
+        return $this->afterCreating(function (Product $product) use ($count) {
+            Image::factory()->count($count)->forProduct($product)->create();
         });
     }
 }
