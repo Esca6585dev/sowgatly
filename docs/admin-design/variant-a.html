@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="tk" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sowgatly Admin · A</title>
+<style>
+:root{
+  --brand-1:#FF6A00; --brand-2:#FF2A00; --brand:#F5470F; --brand-soft:#FFF0E8; --brand-ink:#C2360A;
+  --bg:#FAF7F4; --surface:#FFFFFF; --surface-2:#F5F0EC; --line:#EFE7E1;
+  --text:#1E1714; --muted:#8A7D75; --shadow:0 1px 2px rgba(60,30,10,.04),0 8px 24px rgba(60,30,10,.06);
+  --ok:#14A06B; --ok-bg:#E6F6EF; --info:#2F6FEB; --info-bg:#E8F0FE; --warn:#C77700; --warn-bg:#FFF3DC;
+  --violet:#7A4CE0; --violet-bg:#F0EAFD; --bad:#D9334A; --bad-bg:#FDE8EB;
+}
+[data-theme=dark]{
+  --brand:#FF6A2B; --brand-soft:#3A1E12; --brand-ink:#FF9A6B;
+  --bg:#13100E; --surface:#1C1815; --surface-2:#25201C; --line:#2E2823;
+  --text:#F4EDE8; --muted:#A3958C; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  --ok:#3CCB8F; --ok-bg:#12291F; --info:#6E9BFF; --info-bg:#162238; --warn:#F2B04A; --warn-bg:#2E2412;
+  --violet:#A98BFF; --violet-bg:#231B38; --bad:#FF6B7F; --bad-bg:#33171C;
+}
+*{box-sizing:border-box;margin:0}
+body{font:14px/1.45 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+[data-i]{display:inline-flex;width:20px;height:20px}[data-i] svg{width:100%;height:100%}
+/* sidebar */
+.side{background:var(--surface);border-right:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px}
+.brand img{width:40px;height:40px;border-radius:12px}
+.brand b{font-size:18px;letter-spacing:-.01em}.brand small{display:block;color:var(--muted);font-size:12px}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav h6{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:14px 12px 6px}
+.nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;color:var(--muted);text-decoration:none;font-weight:500}
+.nav a:hover{background:var(--surface-2);color:var(--text)}
+.nav a.on{background:var(--brand-soft);color:var(--brand-ink)}
+.nav a.on [data-i]{color:var(--brand)}
+.nav .cnt{margin-left:auto;font-size:12px;font-weight:600;background:var(--brand);color:#fff;border-radius:999px;padding:1px 8px}
+.side .me{margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;background:var(--surface-2)}
+.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--brand-1),var(--brand-2))}
+.me small{display:block;color:var(--muted);font-size:12px}
+.me [data-i]{margin-left:auto;color:var(--muted)}
+/* main */
+.main{padding:22px 32px 40px;display:flex;flex-direction:column;gap:24px;min-width:0}
+.top{display:flex;align-items:center;gap:14px}
+.top h1{font-size:24px;letter-spacing:-.02em}.top p{color:var(--muted);font-size:13px}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 14px;width:320px;color:var(--muted)}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--text);cursor:pointer;position:relative}
+.icon-btn .dot{position:absolute;top:9px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--brand);border:2px solid var(--surface)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:10px 16px;font-weight:600;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--brand-1),var(--brand-2));box-shadow:0 6px 16px rgba(255,74,0,.25)}
+.moon{display:none}[data-theme=dark] .moon{display:inline-flex}[data-theme=dark] .sun{display:none}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.stat{padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.stat .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand)}
+.stat .lbl{color:var(--muted);font-size:13px}
+.stat .val{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.trend{font-size:12px;font-weight:600;color:var(--ok);display:inline-flex;align-items:center;gap:2px}.trend [data-i]{width:14px;height:14px}
+.stat.hero{color:#fff;border:0;background:linear-gradient(135deg,var(--brand-1),var(--brand-2))}
+.stat.hero .ico{background:rgba(255,255,255,.18);color:#fff}.stat.hero .lbl,.stat.hero .trend{color:rgba(255,255,255,.85)}
+/* grid */
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+.card-h{display:flex;align-items:center;gap:10px;padding:18px 20px 12px}
+.card-h h3{font-size:16px}.card-h .sub{color:var(--muted);font-size:13px}
+.chips{margin-left:auto;display:flex;gap:6px}
+.chip{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;color:var(--muted);background:var(--surface-2);border:1px solid transparent}
+.chip.on{color:var(--brand-ink);background:var(--brand-soft);border-color:color-mix(in srgb,var(--brand) 30%,transparent)}
+table{width:100%;border-collapse:collapse}
+th{font-size:12px;font-weight:600;color:var(--muted);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--surface-2)}
+.no{font-weight:600;color:var(--brand-ink)}
+.who{display:flex;align-items:center;gap:10px}.who .avatar{width:32px;height:32px;font-size:12px}
+.who small{display:block;color:var(--muted);font-size:12px}.muted{color:var(--muted);font-size:12px}
+td,th{white-space:nowrap}.who .avatar{font-size:11px;flex:none}
+.num{font-variant-numeric:tabular-nums;font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-wait{color:var(--warn);background:var(--warn-bg)}.p-prep{color:var(--violet);background:var(--violet-bg)}
+.p-road{color:var(--info);background:var(--info-bg)}.p-done{color:var(--ok);background:var(--ok-bg)}.p-cancel{color:var(--bad);background:var(--bad-bg)}
+/* right column */
+.chart{padding:4px 20px 18px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:140px;padding-top:10px}
+.bars div{flex:1;border-radius:8px 8px 4px 4px;background:var(--surface-2);position:relative}
+.bars div.hi{background:linear-gradient(180deg,var(--brand-1),var(--brand-2))}
+.days{display:flex;gap:10px;margin-top:8px}.days span{flex:1;text-align:center;color:var(--muted);font-size:11px}
+.chats{padding:0 8px 10px}.grid>.card:first-child{overflow-x:auto}.chat p{max-width:170px}
+.chat{display:flex;gap:12px;padding:10px 12px;border-radius:12px}
+.chat:hover{background:var(--surface-2)}
+.chat .avatar{width:38px;height:38px;flex:none;font-size:13px}
+.chat b{font-size:14px}.chat p{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.chat .meta{margin-left:auto;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.chat .meta i{font-style:normal;font-size:11px;font-weight:700;background:var(--brand);color:#fff;border-radius:999px;padding:0 7px}
+.a2{background:linear-gradient(135deg,#7A4CE0,#B07CFF)!important}.a3{background:linear-gradient(135deg,#14A06B,#4FD39E)!important}.a4{background:linear-gradient(135deg,#2F6FEB,#6EA1FF)!important}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><img src="logo.png" alt=""><div><b>sowgatly</b><small>Admin panel</small></div></div>
+    <nav class="nav">
+      <a class="on" href="#"><span data-i="home"></span>Dolandyryş paneli</a>
+      <h6>Söwda</h6>
+      <a href="#"><span data-i="orders"></span>Sargytlar<span class="cnt">12</span></a>
+      <a href="#"><span data-i="box"></span>Harytlar</a>
+      <a href="#"><span data-i="shop"></span>Dükanlar</a>
+      <a href="#"><span data-i="inbox"></span>Dükan arzalary<span class="cnt">3</span></a>
+      <a href="#"><span data-i="chat"></span>Çatlar<span class="cnt">5</span></a>
+      <h6>Katalog</h6>
+      <a href="#"><span data-i="grid"></span>Kategoriýalar</a>
+      <a href="#"><span data-i="image"></span>Bannerler</a>
+      <a href="#"><span data-i="map"></span>Sebitler</a>
+      <h6>Ulgam</h6>
+      <a href="#"><span data-i="users"></span>Ulanyjylar</a>
+      <a href="#"><span data-i="gear"></span>Sazlamalar</a>
+    </nav>
+    <div class="me"><div class="avatar">A</div><div><b>Admin</b><small>admin-sowgatly</small></div><span data-i="logout"></span></div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <div><h1>Salam, Admin 👋</h1><p>Şenbe, 4-nji oktýabr · Aşgabat</p></div>
+      <label class="search"><span data-i="search"></span>Sargyt, haryt ýa-da müşderi gözle…</label>
+      <button class="icon-btn" data-theme-toggle title="Tema"><span class="sun" data-i="moon"></span><span class="moon" data-i="sun"></span></button>
+      <button class="icon-btn"><span data-i="bell"></span><span class="dot"></span></button>
+      <button class="btn"><span data-i="plus"></span>Täze haryt</button>
+    </header>
+
+    <section class="stats">
+      <div class="card stat hero"><span class="ico" data-i="orders"></span><span class="lbl">Şu günki sargytlar</span><span class="val">48</span><span class="trend"><span data-i="up"></span>12% düýnküden</span></div>
+      <div class="card stat"><span class="ico" data-i="wallet"></span><span class="lbl">Girdeji (hepde)</span><span class="val">86 420 TMT</span><span class="trend"><span data-i="up"></span>8,4%</span></div>
+      <div class="card stat"><span class="ico" data-i="truck"></span><span class="lbl">Ýolda</span><span class="val">9</span><span class="muted">ortaça 42 min eltip bermek</span></div>
+      <div class="card stat"><span class="ico" data-i="inbox"></span><span class="lbl">Täze dükan arzalary</span><span class="val">3</span><span class="muted">2-si jogap garaşýar</span></div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="card-h"><div><h3>Soňky sargytlar</h3><span class="sub">Ähli dükanlar boýunça</span></div>
+          <div class="chips"><span class="chip on">Ählisi</span><span class="chip">Garaşylýar</span><span class="chip">Ýolda</span><span class="chip">Tamamlandy</span></div></div>
+        <table>
+          <thead><tr><th>№</th><th>Müşderi</th><th>Dükan</th><th>Wagty</th><th>Jemi</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="no">0000148</td><td><div class="who"><span class="avatar">AO</span><div>Aýna Orazowa<small>+993 65 656585</small></div></div></td><td>Gül dünýäsi</td><td>Bu gün 15:25</td><td class="num">1 820 TMT</td><td><span class="pill p-wait">Garaşylýar</span></td></tr>
+            <tr><td class="no">0000147</td><td><div class="who"><span class="avatar a2">MA</span><div>Merdan Annaýew<small>+993 62 123456</small></div></div></td><td>Gül dünýäsi</td><td>Çalt</td><td class="num">1 820 TMT</td><td><span class="pill p-prep">Taýýarlanýar</span></td></tr>
+            <tr><td class="no">0000146</td><td><div class="who"><span class="avatar a3">JH</span><div>Jeren Hojaýewa<small>+993 63 111222</small></div></div></td><td>Roza Flowers</td><td>Çalt</td><td class="num">3 620 TMT</td><td><span class="pill p-road">Ýolda</span></td></tr>
+            <tr><td class="no">0000145</td><td><div class="who"><span class="avatar a4">BG</span><div>Batyr Gurbanow<small>+993 64 555666</small></div></div></td><td>Lale öýi</td><td>Özüň almak</td><td class="num">950 TMT</td><td><span class="pill p-done">Tamamlandy</span></td></tr>
+            <tr><td class="no">0000144</td><td><div class="who"><span class="avatar">GM</span><div>Gülälek Myradowa<small>+993 61 909090</small></div></div></td><td>Roza Flowers</td><td>Ertir 11:00</td><td class="num">625 TMT</td><td><span class="pill p-cancel">Ýatyryldy</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="card-h"><div><h3>Satuw</h3><span class="sub">Soňky 7 gün</span></div></div>
+          <div class="chart">
+            <div class="bars"><div style="height:45%"></div><div style="height:62%"></div><div style="height:38%"></div><div style="height:70%"></div><div style="height:55%"></div><div style="height:82%"></div><div class="hi" style="height:96%"></div></div>
+            <div class="days"><span>Ýek</span><span>Duş</span><span>Siş</span><span>Çar</span><span>Pen</span><span>Ann</span><span>Şen</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>Çatlar</h3><span class="sub">5 okalmadyk</span></div></div>
+          <div class="chats">
+            <div class="chat"><span class="avatar">AO</span><div><b>Aýna Orazowa</b><p>Sargydy 15:00-a çenli getirip bilersiňizmi?</p></div><div class="meta"><span class="muted">14:16</span><i>2</i></div></div>
+            <div class="chat"><span class="avatar a2">MA</span><div><b>Merdan Annaýew</b><p>Lale sebedi Mary-da barmy?</p></div><div class="meta"><span class="muted">13:02</span><i>1</i></div></div>
+            <div class="chat"><span class="avatar a3">JH</span><div><b>Jeren Hojaýewa</b><p>Sag boluň, gaty owadan eken!</p></div><div class="meta"><span class="muted">Düýn</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="icons.js"></script>
+</body>
+</html>

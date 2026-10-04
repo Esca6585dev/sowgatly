@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="tk" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sowgatly Admin · B</title>
+<style>
+:root{
+  --brand-1:#FF6A00; --brand-2:#FF2A00; --brand:#FF4D0A;
+  --rail:#17110E; --rail-ink:#8F7F75;
+  --bg:#F2F0EE; --surface:#FFFFFF; --surface-2:#F7F5F3; --line:#E6E1DD;
+  --text:#16110E; --muted:#7D7069; --tint:rgba(255,77,10,.08);
+  --ok:#0E9F6E; --info:#2563EB; --warn:#D97706; --violet:#7C3AED; --bad:#DC2626;
+}
+[data-theme=dark]{
+  --rail:#0A0807; --rail-ink:#7A6C64;
+  --bg:#0F0D0C; --surface:#181514; --surface-2:#1F1B19; --line:#2B2624;
+  --text:#F5EFEB; --muted:#9C8E86; --tint:rgba(255,106,43,.12);
+  --ok:#34D399; --info:#60A5FA; --warn:#FBBF24; --violet:#A78BFA; --bad:#F87171;
+}
+*{box-sizing:border-box;margin:0}
+body{font:14px/1.45 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+[data-i]{display:inline-flex;width:20px;height:20px}[data-i] svg{width:100%;height:100%}
+.app{display:grid;grid-template-columns:76px 1fr;min-height:100vh}
+/* rail */
+.rail{background:var(--rail);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:6px}
+.rail img{width:44px;height:44px;border-radius:14px;margin-bottom:18px;box-shadow:0 8px 20px rgba(255,60,0,.35)}
+.rail a{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:var(--rail-ink);position:relative}
+.rail a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.rail a.on{color:#fff;background:linear-gradient(135deg,var(--brand-1),var(--brand-2));box-shadow:0 6px 16px rgba(255,60,0,.35)}
+.rail a b{position:absolute;top:6px;right:6px;min-width:16px;height:16px;border-radius:8px;background:var(--brand);color:#fff;font-size:10px;display:grid;place-items:center;padding:0 4px;border:2px solid var(--rail)}
+.rail hr{width:28px;border:0;border-top:1px solid rgba(255,255,255,.08);margin:8px 0}
+.rail .bottom{margin-top:auto;display:flex;flex-direction:column;gap:6px;align-items:center}
+.me{width:40px;height:40px;border-radius:50%;background:#2A211D;color:#FFB08A;display:grid;place-items:center;font-weight:700}
+/* main */
+.main{display:flex;flex-direction:column;min-width:0}
+.bar{display:flex;align-items:center;gap:12px;padding:16px 28px;border-bottom:1px solid var(--line);background:var(--surface)}
+.crumb{color:var(--muted);font-size:13px}.crumb b{color:var(--text)}
+.seg{margin-left:auto;display:flex;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:3px}
+.seg span{padding:6px 12px;border-radius:7px;font-size:12px;font-weight:600;color:var(--muted)}
+.seg span.on{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;width:260px;color:var(--muted);background:var(--surface)}
+.kbd{margin-left:auto;font-size:11px;border:1px solid var(--line);border-radius:5px;padding:0 5px}
+.ib{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--text);cursor:pointer}
+.moon{display:none}[data-theme=dark] .moon{display:inline-flex}[data-theme=dark] .sun{display:none}
+.content{padding:24px 28px 40px;display:flex;flex-direction:column;gap:20px}
+/* hero */
+.hero{position:relative;overflow:hidden;border-radius:16px;padding:24px 28px;color:#fff;background:linear-gradient(120deg,var(--brand-1) 0%,var(--brand-2) 70%,#D81E00 100%)}
+.hero::after{content:"";position:absolute;right:-40px;top:-60px;width:320px;height:320px;background:url(logo.png) center/cover;opacity:.12;border-radius:50%;mix-blend-mode:screen}
+.hero h1{font-size:26px;letter-spacing:-.02em}.hero p{opacity:.85;margin-top:2px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:22px;position:relative;z-index:1}
+.kpi{padding:0 20px;border-left:1px solid rgba(255,255,255,.25)}.kpi:first-child{padding-left:0;border-left:0}
+.kpi span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.8;font-weight:600}
+.kpi div{font-size:30px;font-weight:750;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:4px}
+.kpi small{font-size:12px;opacity:.85}
+/* board */
+.row{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.ph{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.ph h3{font-size:15px}.ph .link{margin-left:auto;color:var(--brand);font-weight:600;font-size:13px}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:14px}
+.col{background:var(--surface-2);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:330px}
+.col h4{display:flex;align-items:center;gap:8px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:4px 4px 6px}
+.col h4 i{width:8px;height:8px;border-radius:50%}
+.col h4 em{margin-left:auto;font-style:normal;font-size:11px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:0 6px;color:var(--text)}
+.o{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.o .t{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.o .t b{color:var(--text);font-variant-numeric:tabular-nums}
+.o .n{font-weight:600}
+.o .f{display:flex;align-items:center;justify-content:space-between;font-size:12px}
+.o .f span{color:var(--muted);display:inline-flex;align-items:center;gap:4px}.o .f span [data-i]{width:14px;height:14px}
+.o .f strong{font-variant-numeric:tabular-nums}
+.tag{font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--tint);color:var(--brand)}
+.o.late{border-color:color-mix(in srgb,var(--bad) 45%,var(--line));box-shadow:inset 3px 0 0 var(--bad)}
+/* right */
+.list{padding:6px 8px 10px}
+.li{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px}
+.li:hover{background:var(--surface-2)}
+.sq{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--brand);background:var(--tint);flex:none}
+.li b{font-size:14px}.li p{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.li .r{margin-left:auto;text-align:right;font-size:12px;color:var(--muted)}
+.li .r i{display:inline-block;margin-top:4px;font-style:normal;background:var(--brand);color:#fff;font-weight:700;font-size:11px;border-radius:6px;padding:0 6px}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 14px 14px}
+.mini div{background:var(--surface-2);border-radius:10px;padding:10px}
+.mini span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.mini b{display:block;font-size:18px;font-variant-numeric:tabular-nums;margin-top:2px}
+.btns{display:flex;gap:8px;padding:0 14px 14px}
+.b1,.b2{flex:1;display:inline-flex;justify-content:center;align-items:center;gap:6px;padding:9px;border-radius:10px;font-weight:600;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+.b1{border:0;color:#fff;background:linear-gradient(135deg,var(--brand-1),var(--brand-2))}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="rail">
+    <img src="logo.png" alt="sowgatly">
+    <a class="on" href="#" title="Dolandyryş paneli"><span data-i="home"></span></a>
+    <a href="#" title="Sargytlar"><span data-i="orders"></span><b>12</b></a>
+    <a href="#" title="Harytlar"><span data-i="box"></span></a>
+    <a href="#" title="Dükanlar"><span data-i="shop"></span></a>
+    <a href="#" title="Dükan arzalary"><span data-i="inbox"></span><b>3</b></a>
+    <a href="#" title="Çatlar"><span data-i="chat"></span><b>5</b></a>
+    <hr>
+    <a href="#" title="Kategoriýalar"><span data-i="grid"></span></a>
+    <a href="#" title="Bannerler"><span data-i="image"></span></a>
+    <a href="#" title="Sebitler"><span data-i="map"></span></a>
+    <a href="#" title="Ulanyjylar"><span data-i="users"></span></a>
+    <div class="bottom"><a href="#" title="Sazlamalar"><span data-i="gear"></span></a><span class="me">A</span></div>
+  </nav>
+
+  <div class="main">
+    <div class="bar">
+      <span class="crumb">Sowgatly / <b>Dolandyryş paneli</b></span>
+      <div class="seg"><span>Şu gün</span><span class="on">Hepde</span><span>Aý</span></div>
+      <label class="search"><span data-i="search"></span>Gözle<span class="kbd">/</span></label>
+      <button class="ib" data-theme-toggle><span class="sun" data-i="moon"></span><span class="moon" data-i="sun"></span></button>
+      <button class="ib"><span data-i="bell"></span></button>
+    </div>
+
+    <div class="content">
+      <section class="hero">
+        <h1>Hepdelik görkezijiler</h1>
+        <p>28 sentýabr – 4 oktýabr · ähli sebitler</p>
+        <div class="kpis">
+          <div class="kpi"><span>Sargytlar</span><div>312</div><small>▲ 12% geçen hepdeden</small></div>
+          <div class="kpi"><span>Girdeji</span><div>86 420 TMT</div><small>▲ 8,4%</small></div>
+          <div class="kpi"><span>Ortaça çek</span><div>277 TMT</div><small>▼ 1,2%</small></div>
+          <div class="kpi"><span>Täze müşderiler</span><div>64</div><small>▲ 21%</small></div>
+        </div>
+      </section>
+
+      <section class="row">
+        <div class="panel">
+          <div class="ph"><h3>Sargyt akymy</h3><span class="tag">Göni efir</span><a class="link">Ähli sargytlar →</a></div>
+          <div class="board">
+            <div class="col"><h4><i style="background:var(--warn)"></i>Garaşylýar<em>4</em></h4>
+              <div class="o late"><div class="t"><b>#0000148</b>8 min öň</div><div class="n">Aýna Orazowa</div><div class="f"><span><span data-i="truck"></span>15:25</span><strong>1 820 TMT</strong></div></div>
+              <div class="o"><div class="t"><b>#0000150</b>2 min öň</div><div class="n">Serdar Ataýew</div><div class="f"><span><span data-i="truck"></span>Çalt</span><strong>740 TMT</strong></div></div>
+            </div>
+            <div class="col"><h4><i style="background:var(--violet)"></i>Taýýarlanýar<em>3</em></h4>
+              <div class="o"><div class="t"><b>#0000147</b>Gül dünýäsi</div><div class="n">Merdan Annaýew</div><div class="f"><span><span data-i="truck"></span>Çalt</span><strong>1 820 TMT</strong></div></div>
+              <div class="o"><div class="t"><b>#0000143</b>Lale öýi</div><div class="n">Maýsa Berdiýewa</div><div class="f"><span class="tag">Özüň al</span><strong>480 TMT</strong></div></div>
+            </div>
+            <div class="col"><h4><i style="background:var(--info)"></i>Ýolda<em>9</em></h4>
+              <div class="o"><div class="t"><b>#0000146</b>Roza Flowers</div><div class="n">Jeren Hojaýewa</div><div class="f"><span><span data-i="truck"></span>~12 min</span><strong>3 620 TMT</strong></div></div>
+              <div class="o"><div class="t"><b>#0000141</b>Gül dünýäsi</div><div class="n">Döwlet Saparow</div><div class="f"><span><span data-i="truck"></span>~25 min</span><strong>1 150 TMT</strong></div></div>
+            </div>
+            <div class="col"><h4><i style="background:var(--ok)"></i>Tamamlandy<em>32</em></h4>
+              <div class="o"><div class="t"><b>#0000145</b>Lale öýi</div><div class="n">Batyr Gurbanow</div><div class="f"><span class="tag">Özüň al</span><strong>950 TMT</strong></div></div>
+              <div class="o"><div class="t"><b>#0000140</b>Roza Flowers</div><div class="n">Ogulgerek Ýazmyradowa</div><div class="f"><span><span data-i="truck"></span>14:02</span><strong>2 300 TMT</strong></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="panel">
+            <div class="ph"><h3>Dükan arzalary</h3><a class="link">3 täze</a></div>
+            <div class="mini"><div><span>Täze</span><b>3</b></div><div><span>Gürleşildi</span><b>2</b></div><div><span>Tassyk</span><b>14</b></div></div>
+            <div class="btns"><a class="b1">Arzalary aç</a><a class="b2"><span data-i="plus"></span>Dükan goş</a></div>
+          </div>
+          <div class="panel">
+            <div class="ph"><h3>Çatlar</h3><a class="link">Hemmesi</a></div>
+            <div class="list">
+              <div class="li"><span class="sq">AO</span><div><b>Aýna Orazowa</b><p>Sargydy 15:00-a çenli getirip bilersiňizmi?</p></div><div class="r">14:16<br><i>2</i></div></div>
+              <div class="li"><span class="sq">MA</span><div><b>Merdan Annaýew</b><p>Lale sebedi Mary-da barmy?</p></div><div class="r">13:02<br><i>1</i></div></div>
+              <div class="li"><span class="sq">JH</span><div><b>Jeren Hojaýewa</b><p>Sag boluň, gaty owadan eken!</p></div><div class="r">Düýn</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<script src="icons.js"></script>
+</body>
+</html>
