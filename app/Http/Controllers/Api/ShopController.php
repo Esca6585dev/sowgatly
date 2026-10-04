@@ -164,7 +164,7 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        $shop = Shop::with('address', 'region')->find($id);
+        $shop = Shop::with('address', 'region')->withRatingSummary()->find($id);
 
         if (!$shop) {
             return response()->json([

@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\HomeFeed;
 use App\Models\Product;
 use App\Models\UserNotification;
 use App\Models\WaitlistItem;
@@ -12,6 +13,16 @@ use App\Models\WaitlistItem;
  */
 class ProductObserver
 {
+    public function saved(Product $product): void
+    {
+        HomeFeed::bump();
+    }
+
+    public function deleted(Product $product): void
+    {
+        HomeFeed::bump();
+    }
+
     public function updated(Product $product): void
     {
         $backInStock = $product->wasChanged('stock')

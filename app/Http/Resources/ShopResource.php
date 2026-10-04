@@ -52,6 +52,8 @@ class ShopResource extends JsonResource
                 'en' => $this->description_en,
             ],
             'status' => $this->status,
+            'rating_avg' => $this->resource->ratingAverage(),
+            'reviews_count' => $this->resource->ratingCount(),
             'region' => $this->when($this->region, function () {
                 return new RegionResource($this->region);
             }),

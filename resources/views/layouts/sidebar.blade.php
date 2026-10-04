@@ -377,6 +377,19 @@
                     <span class="menu-text">{{ __('Chats') }}</span>
                 </a>
             </li>
+            <li class="menu-item {{ Request::is('*/admin/banner*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{ route('banner.index', app()->getlocale() ) }}" class="menu-link">
+                    <span class="svg-icon menu-icon">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"></rect>
+                                <path d="M3,5 L21,5 C21.5522847,5 22,5.44771525 22,6 L22,18 C22,18.5522847 21.5522847,19 21,19 L3,19 C2.44771525,19 2,18.5522847 2,18 L2,6 C2,5.44771525 2.44771525,5 3,5 Z" fill="#000000" opacity="0.3"></path><path d="M5,15 L9,10 L12,13 L15,9 L19,15 L5,15 Z" fill="#000000"></path>
+                            </g>
+                        </svg>
+                    </span>
+                    <span class="menu-text">{{ __('Banners') }}</span>
+                </a>
+            </li>
             <li class="menu-item {{ Request::is('*/admin/shop-application*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                 <a href="{{ route('shop-application.index', app()->getlocale() ) }}" class="menu-link">
                     <span class="svg-icon menu-icon">

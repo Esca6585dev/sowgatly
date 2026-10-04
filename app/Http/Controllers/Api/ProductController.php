@@ -86,6 +86,7 @@ class ProductController extends Controller
 
             // Get products associated with the user's shop
             $products = Product::with(['category', 'shop', 'images', 'brands'])
+                ->withRatingSummary()
                 ->whereHas('shop', function ($query) use ($user) {
                     $query->where('user_id', $user->id);
                 })
@@ -234,7 +235,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::with('images')->findOrFail($id);
+        $product = Product::with('images')->withRatingSummary()->findOrFail($id);
         return new ProductResource($product);
     }
 
@@ -476,6 +477,9 @@ class ProductController extends Controller
     *         required=false,
     *         @OA\Schema(type="integer")
     *     ),
+     *     @OA\Parameter(name="min_rating", in="query", required=false, description="Only products whose average rating is at least this (1-5)", @OA\Schema(type="number", format="float")),
+     *     @OA\Parameter(name="delivery_today", in="query", required=false, description="1 = production time of three hours or less", @OA\Schema(type="integer", enum={0,1})),
+     *     @OA\Parameter(name="sort", in="query", required=false, @OA\Schema(type="string", enum={"price_asc","price_desc","popular","newest"})),
     *     @OA\Response(
     *         response=200,
     *         description="Successful operation",
@@ -527,12 +531,26 @@ class ProductController extends Controller
                 $this->filterByRegion($query, $request->input('region_id'));
             }
 
+            if ($request->boolean('delivery_today')) {
+                $query->deliveryToday();
+            }
+
+            $query->withRatingSummary();
+
+            // min_rating filters on the aggregated average, hence HAVING.
+            if ($request->filled('min_rating')) {
+                $query->having('reviews_avg', '>=', (float) $request->input('min_rating'));
+            }
+
             switch ($request->input('sort')) {
                 case 'price_asc':
                     $query->orderBy('price');
                     break;
                 case 'price_desc':
                     $query->orderByDesc('price');
+                    break;
+                case 'popular':
+                    $query->popular();
                     break;
                 default:
                     $query->latest();
@@ -618,6 +636,7 @@ class ProductController extends Controller
                     'images',
                     'brands',
                 ])
+                ->withRatingSummary()
                 ->where('category_id', $category_id)
                 ->where('status', true)
                 ->orderBy('created_at', 'desc');

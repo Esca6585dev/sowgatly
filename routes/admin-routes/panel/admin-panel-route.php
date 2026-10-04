@@ -30,6 +30,7 @@ Route::group([
             '/role' => App\Http\Controllers\AdminControllers\Role\RoleController::class,
             '/permission' => App\Http\Controllers\AdminControllers\Permission\PermissionController::class,
             '/cart' => App\Http\Controllers\AdminControllers\Cart\CartController::class,
+            '/banner' => App\Http\Controllers\AdminControllers\Banner\BannerController::class,
         ]);
 
         // Orders, chats and shop applications are created by customers; the

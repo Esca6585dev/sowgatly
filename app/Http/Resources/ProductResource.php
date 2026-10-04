@@ -101,6 +101,9 @@ class ProductResource extends JsonResource
             'category' => $this->category,
             'shop' => $this->shop,
             'compositions' => $this->whenLoaded('compositions'),
+            // Rating summary (additive): avg with one decimal or null, and the count.
+            'reviews_avg' => $this->resource->ratingAverage(),
+            'reviews_count' => $this->resource->ratingCount(),
         ];
     }
 

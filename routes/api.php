@@ -40,6 +40,9 @@ Route::controller(App\Http\Controllers\Api\AuthOtpController::class)->middleware
  * stay inside the authenticated group below, exactly as they used to be.
  */
 $catalogReadRoutes = function () {
+    Route::get('home', [App\Http\Controllers\Api\HomeController::class, 'index']);
+    Route::get('banners', [App\Http\Controllers\Api\BannerController::class, 'index']);
+
     Route::get('products/{product}', [App\Http\Controllers\Api\ProductController::class, 'show']);
     Route::get('product/search', [App\Http\Controllers\Api\ProductController::class, 'search']);
     Route::get('product/category/{category_id}', [App\Http\Controllers\Api\ProductController::class, 'getByCategory']);

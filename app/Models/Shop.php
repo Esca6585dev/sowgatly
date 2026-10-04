@@ -56,6 +56,38 @@ class Shop extends Model
         return $query->where('status', 'approved');
     }
 
+    /**
+     * Adds `rating_avg` and `reviews_count` (over all the shop's product
+     * reviews) as subselects, so lists stay at one query.
+     */
+    public function scopeWithRatingSummary($query)
+    {
+        $reviews = ProductReview::query()
+            ->join('products', 'products.id', '=', 'product_reviews.product_id')
+            ->whereColumn('products.shop_id', 'shops.id');
+
+        return $query
+            ->addSelect(['shops.*'])
+            ->addSelect(['rating_avg' => (clone $reviews)->selectRaw('AVG(product_reviews.rating)')])
+            ->addSelect(['reviews_count' => (clone $reviews)->selectRaw('COUNT(*)')]);
+    }
+
+    public function ratingAverage(): ?float
+    {
+        $avg = array_key_exists('rating_avg', $this->attributes)
+            ? $this->attributes['rating_avg']
+            : ProductReview::whereIn('product_id', $this->products()->select('id'))->avg('rating');
+
+        return $avg !== null ? round((float) $avg, 1) : null;
+    }
+
+    public function ratingCount(): int
+    {
+        return (int) (array_key_exists('reviews_count', $this->attributes)
+            ? $this->attributes['reviews_count']
+            : ProductReview::whereIn('product_id', $this->products()->select('id'))->count());
+    }
+
     public function isApproved(): bool
     {
         return $this->status === 'approved';

@@ -698,5 +698,19 @@
     "Minimum order amount": "Минимальная сумма заказа",
     "Pickup available": "Самовывоз доступен",
     "Customers may pick up at the shop": "Клиент может забрать в магазине",
-    "Cannot change status from :from to :to": "Нельзя сменить статус с :from на :to"
+    "Cannot change status from :from to :to": "Нельзя сменить статус с :from на :to",
+    "Banners": "Баннеры",
+    "New banner": "Новый баннер",
+    "No banners yet": "Баннеров пока нет",
+    "Link type": "Тип ссылки",
+    "Link value": "Значение ссылки",
+    "All cities": "Все города",
+    "Position": "Позиция",
+    "Period": "Период",
+    "Starts at": "Начало",
+    "Ends at": "Окончание",
+    "Subtitle": "Подзаголовок",
+    "Active": "Активен",
+    "Inactive": "Неактивен",
+    "Link": "Ссылка"
 }

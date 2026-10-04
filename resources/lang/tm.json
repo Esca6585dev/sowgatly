@@ -686,5 +686,19 @@
     "Minimum order amount": "Iň az sargyt möçberi",
     "Pickup available": "Özüň alyp bolýar",
     "Customers may pick up at the shop": "Müşderi dükandan özi alyp biler",
-    "Cannot change status from :from to :to": ":from statusyndan :to statusyna geçip bolmaýar"
+    "Cannot change status from :from to :to": ":from statusyndan :to statusyna geçip bolmaýar",
+    "Banners": "Bannerler",
+    "New banner": "Täze banner",
+    "No banners yet": "Häzirlikçe banner ýok",
+    "Link type": "Baglanyşyk görnüşi",
+    "Link value": "Baglanyşyk bahasy",
+    "All cities": "Ähli şäherler",
+    "Position": "Tertip",
+    "Period": "Döwür",
+    "Starts at": "Başlanýar",
+    "Ends at": "Gutarýar",
+    "Subtitle": "Goşmaça ýazgy",
+    "Active": "Işjeň",
+    "Inactive": "Işjeň däl",
+    "Link": "Baglanyşyk"
 }

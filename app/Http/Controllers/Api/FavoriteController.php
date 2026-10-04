@@ -28,7 +28,7 @@ class FavoriteController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::with(['category', 'shop', 'images', 'brands'])
+        $products = Product::with(['category', 'shop', 'images', 'brands'])->withRatingSummary()
             ->whereIn('id', Favorite::where('user_id', $request->user()->id)->pluck('product_id'))
             ->get();
 
