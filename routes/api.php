@@ -131,6 +131,15 @@ Route::middleware(['auth:sanctum', 'check.token'])->group(function () use ($cata
     Route::get('favorites', [App\Http\Controllers\Api\FavoriteController::class, 'index']);
     Route::post('favorites/toggle', [App\Http\Controllers\Api\FavoriteController::class, 'toggle']);
 
+    // Named favorite collections ("Подборки")
+    Route::get('me/collections', [App\Http\Controllers\Api\FavoriteCollectionController::class, 'index']);
+    Route::post('me/collections', [App\Http\Controllers\Api\FavoriteCollectionController::class, 'store']);
+    Route::get('me/collections/{id}', [App\Http\Controllers\Api\FavoriteCollectionController::class, 'show']);
+    Route::put('me/collections/{id}', [App\Http\Controllers\Api\FavoriteCollectionController::class, 'update']);
+    Route::delete('me/collections/{id}', [App\Http\Controllers\Api\FavoriteCollectionController::class, 'destroy']);
+    Route::post('me/collections/{id}/products', [App\Http\Controllers\Api\FavoriteCollectionController::class, 'addProduct']);
+    Route::delete('me/collections/{id}/products/{product_id}', [App\Http\Controllers\Api\FavoriteCollectionController::class, 'removeProduct']);
+
     // Order routes
     // Not an apiResource: OrderController exposes createOrder/getUserOrders/getOrder
     // rather than the store/index/show names apiResource expects.
