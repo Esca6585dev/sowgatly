@@ -700,5 +700,11 @@
     "Subtitle": "Goşmaça ýazgy",
     "Active": "Işjeň",
     "Inactive": "Işjeň däl",
-    "Link": "Baglanyşyk"
+    "Link": "Baglanyşyk",
+    "Quantity": "Mukdary",
+    "Sum": "Jemi",
+    "mon_fri_open": "Du–An açylýar",
+    "mon_fri_close": "Du–An ýapylýar",
+    "sat_sun_open": "Şe–Ýe açylýar",
+    "sat_sun_close": "Şe–Ýe ýapylýar"
 }

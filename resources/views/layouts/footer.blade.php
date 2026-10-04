@@ -5,7 +5,7 @@
         <!--begin::Copyright-->
         <div class="text-dark order-2 order-md-1">
             <span class="text-muted font-weight-bold mr-2">&copy {{ Carbon::now()->year }}</span>
-            <a href="{{ route('main-page', app()->getlocale() ) }}" class="text-dark-75 text-hover-primary" target="_blank">«TÜRKMENSTANDARTLARY» BAŞ DÖWLET GULLUGY</a>
+            <a href="{{ route('main-page', app()->getlocale() ) }}" class="text-dark-75 text-hover-primary" target="_blank">Sowgatly</a>
         </div>
         <!--end::Copyright-->
     </div>

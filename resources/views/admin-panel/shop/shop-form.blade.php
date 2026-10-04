@@ -1,7 +1,7 @@
 @extends('layouts.admin-template-app')
 
 @section('title')
-{{ __('Users') }} {{ __( ucfirst(request()->segment(count(request()->segments())))) }}
+{{ __('Shops') }} {{ __( ucfirst(request()->segment(count(request()->segments())))) }}
 @endsection
 
 @section('style')
@@ -142,7 +142,7 @@
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
                                             <a href="{{ route('user.index', [ app()->getlocale() ]) }}"
-                                                class="text-muted">{{ __('Users') }}</a>
+                                                class="text-muted">{{ __('Shops') }}</a>
                                         </li>
 
                                         <li class="breadcrumb-item text-muted">
@@ -168,7 +168,7 @@
                             <div class="card card-custom">
                                 <div class="card-header flex-wrap py-5">
                                     <div class="card-title">
-                                        <h3 class="card-label">{{ __('Users') }}
+                                        <h3 class="card-label">{{ __('Shops') }}
                                             <span class="d-block text-muted pt-2 font-size-sm">
                                                 {{ __( ucfirst(request()->segment(count(request()->segments())))) }}
                                             </span>
@@ -200,7 +200,7 @@
                                                             <input type="text"
                                                                 class="form-control @error('name') is-invalid @enderror"
                                                                 name="name" placeholder="{{ __('Shop name') }}"
-                                                                value="{{ $shop->name ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('first_name') : '' }}" />
+                                                                value="{{ $shop->name ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('name') : '' }}" />
 
                                                             @error('name')
                                                             <div class="fv-plugins-message-container invalid-feedback">
@@ -259,7 +259,7 @@
                                                                 class="form-control @error('mon_fri_open') is-invalid @enderror"
                                                                 name="mon_fri_open">
                                                                 @foreach(config('times') as $time)
-                                                                <option value="{{ $time }}">{{ $time }}</option>
+                                                                <option value="{{ $time }}" {{ old('mon_fri_open', substr($shop->mon_fri_open ?? '', 0, 5)) === $time ? 'selected' : '' }}>{{ $time }}</option>
                                                                 @endforeach
                                                             </select>
 
@@ -282,7 +282,7 @@
                                                                 class="form-control @error('mon_fri_close') is-invalid @enderror"
                                                                 name="mon_fri_close">
                                                                 @foreach(config('times') as $time)
-                                                                <option value="{{ $time }}">{{ $time }}</option>
+                                                                <option value="{{ $time }}" {{ old('mon_fri_close', substr($shop->mon_fri_close ?? '', 0, 5)) === $time ? 'selected' : '' }}>{{ $time }}</option>
                                                                 @endforeach
                                                             </select>
 
@@ -305,7 +305,7 @@
                                                                 class="form-control @error('sat_sun_open') is-invalid @enderror"
                                                                 name="sat_sun_open">
                                                                 @foreach(config('times') as $time)
-                                                                    <option value="{{ $time }}">{{ $time }}</option>
+                                                                    <option value="{{ $time }}" {{ old('sat_sun_open', substr($shop->sat_sun_open ?? '', 0, 5)) === $time ? 'selected' : '' }}>{{ $time }}</option>
                                                                 @endforeach
                                                             </select>
 
@@ -328,7 +328,7 @@
                                                                 class="form-control @error('sat_sun_close') is-invalid @enderror"
                                                                 name="sat_sun_close">
                                                                 @foreach(config('times') as $time)
-                                                                    <option value="{{ $time }}">{{ $time }}</option>
+                                                                    <option value="{{ $time }}" {{ old('sat_sun_close', substr($shop->sat_sun_close ?? '', 0, 5)) === $time ? 'selected' : '' }}>{{ $time }}</option>
                                                                 @endforeach
                                                             </select>
 
