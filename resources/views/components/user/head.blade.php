@@ -5,4 +5,4 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
-<link rel="shortcut icon" href="{{ asset('img/logo/modahouse-logo-favicon.ico') }}" type="image/x-icon" />
+<link rel="shortcut icon" href="{{ asset('img/logo/favicon.ico') }}" type="image/x-icon" />

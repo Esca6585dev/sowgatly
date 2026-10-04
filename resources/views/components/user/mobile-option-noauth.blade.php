@@ -19,8 +19,8 @@
                 id="image__option__button__more" data-text-type="More">More</button>
         </p>
         <div class="main__section__image__option__profile">
-            <img class="main__section__image__option__profile__img" src="{{ asset('img/logo/modahouse-logo-favicon.ico') }}"
-                alt="{{ asset('img/logo/modahouse-logo-favicon.ico') }}" id="optionProfileIcon">
+            <img class="main__section__image__option__profile__img" src="{{ asset('img/logo/favicon.ico') }}"
+                alt="{{ asset('img/logo/favicon.ico') }}" id="optionProfileIcon">
             <div class="main__section__image__option__profile__text">
                 <p class="main__section__image__option__profile__text__account" id="optionProfileName"></p>
                 <p class="main__section__image__option__profile__text__category">DIY Gifts</p>
