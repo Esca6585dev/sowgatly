@@ -47,4 +47,56 @@ class ProductReviewTest extends ApiTestCase
             ->postJson("/api/products/{$product->id}/reviews", ['rating' => 9])
             ->assertStatus(422);
     }
+
+    public function test_three_criteria_derive_the_rating_and_link_the_order(): void
+    {
+        $product = $this->productsOf($this->shopWithProducts(1))->first();
+        $order = Order::factory()->status('completed')->create(['user_id' => $this->user->id, 'shop_id' => $product->shop_id]);
+        OrderItem::factory()->create(['order_id' => $order->id, 'product_id' => $product->id]);
+
+        $this->actingAsCustomer();
+
+        $this->getJson("/api/orders/{$order->id}")->assertOk()->assertJsonPath('items.0.reviewed', false);
+
+        $this->postJson("/api/products/{$product->id}/reviews", [
+            'rating_match' => 5,
+            'rating_value' => 4,
+            'rating_service' => 4,
+            'comment' => 'Gowy',
+            'order_id' => $order->id,
+        ])->assertStatus(201)
+            ->assertJsonPath('data.rating', 4)       // round((5+4+4)/3)
+            ->assertJsonPath('data.rating_match', 5)
+            ->assertJsonPath('data.order_id', $order->id);
+
+        $this->getJson("/api/orders/{$order->id}")->assertOk()->assertJsonPath('items.0.reviewed', true);
+
+        $this->getJson("/api/products/{$product->id}/reviews")
+            ->assertOk()
+            ->assertJsonPath('data.0.rating_service', 4)
+            ->assertJsonPath('data.0.user.name', $this->user->name)
+            ->assertJsonPath('meta.average', 4);
+
+        // Paginated form only when `page` is sent.
+        $this->getJson("/api/products/{$product->id}/reviews?page=1")
+            ->assertOk()
+            ->assertJsonPath('meta.total', 1)
+            ->assertJsonPath('meta.last_page', 1);
+    }
+
+    public function test_criteria_must_come_together_and_the_order_must_be_the_callers(): void
+    {
+        $product = $this->productsOf($this->shopWithProducts(1))->first();
+        $mine = Order::factory()->status('completed')->create(['user_id' => $this->user->id, 'shop_id' => $product->shop_id]);
+        OrderItem::factory()->create(['order_id' => $mine->id, 'product_id' => $product->id]);
+        $foreign = Order::factory()->status('completed')->create(['shop_id' => $product->shop_id]);
+        OrderItem::factory()->create(['order_id' => $foreign->id, 'product_id' => $product->id]);
+
+        $this->actingAsCustomer();
+
+        $this->postJson("/api/products/{$product->id}/reviews", ['rating_match' => 5])->assertStatus(422);
+        $this->postJson("/api/products/{$product->id}/reviews", [])->assertStatus(422);
+        $this->postJson("/api/products/{$product->id}/reviews", ['rating' => 5, 'order_id' => $foreign->id])->assertStatus(403);
+        $this->postJson("/api/products/{$product->id}/reviews", ['rating' => 5, 'order_id' => $mine->id])->assertStatus(201);
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\ProductReview;
 use App\Models\Shop;
 use App\Rules\TurkmenistanPhoneNumber;
 use Illuminate\Http\Request;
@@ -248,6 +249,16 @@ class OrderController extends Controller
         $order = Order::with('items.product.images', 'shop')
             ->where('user_id', $user->id)
             ->findOrFail($id);
+
+        // `reviewed` (additive) tells the app which items still need a review.
+        $reviewed = ProductReview::where('user_id', $user->id)
+            ->whereIn('product_id', $order->items->pluck('product_id'))
+            ->pluck('product_id')
+            ->all();
+
+        $order->items->each(function ($item) use ($reviewed) {
+            $item->setAttribute('reviewed', in_array($item->product_id, $reviewed, true));
+        });
 
         return response()->json($order);
     }

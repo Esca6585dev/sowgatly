@@ -9,10 +9,18 @@ class ProductReview extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'product_id', 'rating', 'comment'];
+    protected $fillable = [
+        'user_id', 'product_id', 'order_id', 'rating', 'comment',
+        'rating_match', 'rating_value', 'rating_service',
+    ];
+
+    public const CRITERIA = ['rating_match', 'rating_value', 'rating_service'];
 
     protected $casts = [
         'rating' => 'integer',
+        'rating_match' => 'integer',
+        'rating_value' => 'integer',
+        'rating_service' => 'integer',
     ];
 
     public function user()
@@ -23,5 +31,10 @@ class ProductReview extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }
