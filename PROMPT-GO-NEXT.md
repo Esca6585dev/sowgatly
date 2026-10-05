@@ -6,6 +6,9 @@
 > `PROMPT-GO-NEXT.md faýlyny oka we Phase 0-dan başlap tertip bilen ýerine ýetir.
 > Her Phase-den soň testleri işlet, commit et we main-a push et.`
 >
+> **Her sessiýa üçin taýýar promptlar we ýagdaý tablisasy:**
+> [`docs/migration/SESSIONS.md`](docs/migration/SESSIONS.md). Iş žurnaly: `docs/migration/LOG.md`.
+>
 > Bir sessiýada hemmesi gutarmaz: bu uly iş. Her täze sessiýada
 > `PROMPT-GO-NEXT.md-de galan Phase-leri dowam et` diýiň. Laravel iň soňky Phase-e çenli
 > işläp durýar, şonuň üçin saýt we mobil app göçüriş wagtynda bozulmaýar.
