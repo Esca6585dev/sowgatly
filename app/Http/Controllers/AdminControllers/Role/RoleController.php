@@ -3,134 +3,126 @@
 namespace App\Http\Controllers\AdminControllers\Role;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Http\Requests\RoleRequest;
-use Str;
+use App\Models\Admin;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
+/** Roles of admin panel users (spatie/laravel-permission, guard "admin"). */
 class RoleController extends Controller
 {
+    public const GUARD = 'admin';
+
     public function __construct()
     {
         $this->middleware(['auth:admin']);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request, $lang, $pagination = 10)
+
+    public function index(Request $request, $lang)
     {
-        if($request->pagination) {
-            $pagination = (int)$request->pagination;
+        $pagination = (int) $request->input('pagination', 10) ?: 10;
+        $search = trim((string) $request->input('search'));
+
+        $roles = Role::withCount('permissions')
+            ->when($search !== '', fn ($q) => $q->where('name', 'like', "%{$search}%"))
+            ->orderBy('name')
+            ->paginate($pagination)
+            ->withQueryString();
+
+        $adminCounts = self::adminCounts($roles->pluck('id')->all());
+
+        if ($request->ajax()) {
+            return view('admin-panel.role.role-table', compact('roles', 'pagination', 'adminCounts'));
         }
 
-        $roles = Role::orderByDesc('id')->paginate($pagination);
-        
-        if(request()->ajax()){
-            if($request->search) {
-                $searchQuery = trim($request->query('search'));
-                
-                $requestData = ['name', 'guard_name'];
-    
-                $roles = Role::where(function($q) use($requestData, $searchQuery) {
-                                        foreach ($requestData as $field)
-                                        $q->orWhere($field, 'like', "%{$searchQuery}%");
-                                })->paginate($pagination);
-            }
-            
-            return view('admin-panel.role.role-table', compact('roles', 'pagination'))->render();
-        }
-
-        return view('admin-panel.role.role', compact('roles', 'pagination'));
+        return view('admin-panel.role.role', compact('roles', 'pagination', 'adminCounts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($lang, Role $role)
+    public function create($lang)
     {
-        $permissions = Permission::all();
-
-        return view('admin-panel.role.role-form', compact('role', 'permissions'));
+        return $this->form(new Role(['guard_name' => self::GUARD]));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(RoleRequest $request)
+    public function store($lang, RoleRequest $request)
     {
-        $role = new Role;
-            
-        $role->name = $request->name;
-        $role->guard_name = $request->guard_name;
-        
-        $role->save();
+        $role = Role::create(['name' => $request->validated()['name'], 'guard_name' => self::GUARD]);
+        $role->syncPermissions($request->validated()['permissions'] ?? []);
 
-        $role->givePermissionTo($request->permissions);
-
-        return redirect()->route('role.index', [ app()->getlocale() ])->with('success-create', 'The resource was created!');
+        return redirect()->route('role.show', [app()->getLocale(), $role->id])->with('success-create', 'The resource was created!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
     public function show($lang, Role $role)
     {
-        return view('admin-panel.role.role-show', compact('role'));
+        $groups = self::groupPermissions($role->permissions);
+        $admins = Admin::role($role)->orderBy('first_name')->get(['id', 'first_name', 'last_name', 'username', 'email']);
+
+        return view('admin-panel.role.role-show', compact('role', 'groups', 'admins'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
     public function edit($lang, Role $role)
     {
-        $permissions = Permission::all();
-
-        return view('admin-panel.role.role-form', compact('role', 'permissions'));
+        return $this->form($role);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
     public function update($lang, RoleRequest $request, Role $role)
     {
-        $role->name = $request->name;
-        $role->guard_name = $request->guard_name;
-        
-        $role->update();
+        $role->update(['name' => $request->validated()['name']]);
+        $role->syncPermissions($request->validated()['permissions'] ?? []);
 
-        $role->syncPermissions($request->permissions);
-            
-        return redirect()->route('role.index', [ app()->getlocale() ])->with('success-update', 'The resource was updated!');
+        return redirect()->route('role.show', [app()->getLocale(), $role->id])->with('success-update', 'The resource was updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($lang, Role $role)
     {
         $role->delete();
-    
-        return redirect()->route('role.index', [ app()->getlocale() ])->with('success-delete', 'The resource was deleted!');
+
+        return redirect()->route('role.index', app()->getLocale())->with('success-delete', 'The resource was deleted!');
+    }
+
+    private function form(Role $role)
+    {
+        $groups = self::groupPermissions(Permission::where('guard_name', $role->guard_name ?: self::GUARD)->get());
+        $selected = $role->exists ? $role->permissions->pluck('name')->all() : [];
+
+        return view('admin-panel.role.role-form', compact('role', 'groups', 'selected'));
+    }
+
+    /**
+     * Group permissions by the part before the last separator:
+     * "banner-list", "banner-create" -> "banner"; "shop-application-edit" -> "shop-application".
+     */
+    public static function groupPermissions(Collection $permissions): Collection
+    {
+        return $permissions
+            ->sortBy('name')
+            ->groupBy(fn ($p) => self::groupOf($p->name))
+            ->sortKeys();
+    }
+
+    public static function groupOf(string $name): string
+    {
+        foreach (['-', '.', ' ', '_'] as $sep) {
+            if (Str::contains($name, $sep)) {
+                return Str::beforeLast($name, $sep);
+            }
+        }
+
+        return $name;
+    }
+
+    /** [role_id => number of admins with that role] */
+    public static function adminCounts(array $roleIds): array
+    {
+        return DB::table(config('permission.table_names.model_has_roles'))
+            ->whereIn('role_id', $roleIds ?: [0])
+            ->where('model_type', Admin::class)
+            ->selectRaw('role_id, count(*) as aggregate')
+            ->groupBy('role_id')
+            ->pluck('aggregate', 'role_id')
+            ->all();
     }
 }

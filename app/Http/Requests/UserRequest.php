@@ -2,34 +2,44 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\TurkmenistanPhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
+/** Admin panel: create / edit a customer. (The API uses UserStoreRequest / UserUpdateRequest.) */
 class UserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    protected function prepareForValidation()
+    {
+        // Accept "+993 65 12-34-56" as well as "65123456".
+        $phone = preg_replace('/\D+/', '', (string) $this->input('phone_number'));
+        if (strlen($phone) === 11 && str_starts_with($phone, '993')) {
+            $phone = substr($phone, 3);
+        }
+
+        $this->merge([
+            'phone_number' => $phone,
+            'email' => $this->filled('email') ? trim($this->input('email')) : null,
+        ]);
+    }
+
     public function rules()
     {
-        return [
-            'name' => 'required',
-            'phone_number' => 'required|numeric|min:6',
-            'password' => 'sometimes|nullable|confirmed|min:6',
-            'image' => 'nullable',
-            'status' => 'required',
-        ];
+        $user = $this->route('user');
+        $ignore = is_object($user) ? $user->id : $user;
 
+        return [
+            'name' => 'required|string|max:255',
+            'phone_number' => ['required', new TurkmenistanPhoneNumber, Rule::unique('users', 'phone_number')->ignore($ignore)],
+            'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($ignore)],
+            'birth_date' => 'nullable|date|before:today',
+            'status' => 'nullable|boolean',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:4096',
+        ];
     }
 }

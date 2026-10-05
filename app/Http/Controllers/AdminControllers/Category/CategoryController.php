@@ -3,194 +3,169 @@
 namespace App\Http\Controllers\AdminControllers\Category;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Image;
-use Str;
+use App\Models\Product;
+use App\Support\ImageUploader;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
+/**
+ * Admin CRUD for categories. URLs carry a {categoryType} segment
+ * (all | parent | sub) that filters the list and shapes the form.
+ */
 class CategoryController extends Controller
 {
+    public const TYPES = ['all', 'parent', 'sub'];
+
     public function __construct()
     {
         $this->middleware(['auth:admin']);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request, $lang, $categoryType, $pagination = 10)
-    {
-        if($request->pagination) {
-            $pagination = (int)$request->pagination;
-        }
 
-        if($categoryType == 'all'){
-            $categories = Category::orderByDesc('id')->paginate($pagination);
-        } else if($categoryType == 'parent'){
-            $categories = Category::whereNull('category_id')->orderByDesc('id')->paginate($pagination);
-        } else if($categoryType == 'sub'){
-            $categories = Category::whereNotNull('category_id')->orderByDesc('id')->paginate($pagination);
-        } 
-        
-        if(request()->ajax()){
-            if($request->search) {
-                $searchQuery = trim($request->query('search'));
-                
-                $requestData = Category::fillableData();
-    
-                $categories = Category::where(function($q) use($requestData, $searchQuery) {
-                                        foreach ($requestData as $field)
-                                        $q->orWhere($field, 'like', "%{$searchQuery}%");
-                                })->paginate($pagination);
-            }
-            
-            return view('admin-panel.category.category-table', compact('categories', 'categoryType', 'pagination'))->render();
+    public function index(Request $request, $lang, $categoryType)
+    {
+        $this->checkType($categoryType);
+
+        $pagination = (int) $request->input('pagination', 10) ?: 10;
+        $search = trim((string) $request->input('search'));
+
+        $categories = Category::with('parent:id,name_tm,name_en,name_ru')
+            ->withCount('categories')
+            ->addSelect(['products_count' => Product::selectRaw('count(*)')->whereColumn('products.category_id', 'categories.id')])
+            ->when($categoryType === 'parent', fn ($q) => $q->whereNull('category_id'))
+            ->when($categoryType === 'sub', fn ($q) => $q->whereNotNull('category_id'))
+            ->when($search !== '', fn ($q) => $q->where(fn ($w) => $w
+                ->where('name_tm', 'like', "%{$search}%")
+                ->orWhere('name_en', 'like', "%{$search}%")
+                ->orWhere('name_ru', 'like', "%{$search}%")))
+            ->orderByDesc('id')
+            ->paginate($pagination)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin-panel.category.category-table', compact('categories', 'categoryType', 'pagination'));
         }
 
         return view('admin-panel.category.category', compact('categories', 'categoryType', 'pagination'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($lang, $categoryType, Category $category)
+    public function create(Request $request, $lang, $categoryType)
     {
-        $parentCategories = Category::all();
+        $this->checkType($categoryType);
 
-        return view('admin-panel.category.category-form', compact('category', 'categoryType', 'parentCategories'));
+        return $this->form(new Category(['category_id' => $request->query('parent')]), $categoryType);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store($lang, $categoryType, CategoryRequest $request)
     {
-        if($request->file('image')){
-            $image = $request->file('image');
-            
-            $date = date("d-m-Y H-i-s");
-            
-            $fileRandName = Str::random(10);
-            $fileExt = $image->getClientOriginalExtension();
+        $this->checkType($categoryType);
 
-            $fileName = $fileRandName . '.' . $fileExt;
-            
-            $path = 'category/' . Str::slug($request->name_tm . '-' . $date ) . '/';
-
-            $image->move($path, $fileName);
-            
-            $originalImage = $path . $fileName;
+        $category = new Category($request->safe()->only(['name_tm', 'name_en', 'name_ru']));
+        $category->category_id = $request->validated('category_id');
+        if ($request->hasFile('image')) {
+            $category->image = ImageUploader::store($request->file('image'), 'categories');
         }
-        
-        $category = new Category;
-        
-        $category->name_tm = $request->name_tm;
-        $category->name_en = $request->name_en;
-        $category->name_ru = $request->name_ru;
-        $category->category_id = $request->category_id;
-
-        $category->image = $originalImage ?? null;
-
         $category->save();
-        
-        return redirect()->route('category.index', [ app()->getlocale(), $categoryType ])->with('success-create', 'The resource was created!');
+
+        return redirect()->route('category.show', [app()->getLocale(), $categoryType, $category->id])->with('success-create', 'The resource was created!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function show($lang, $categoryType, Category $category)
     {
-        return view('admin-panel.category.category-show', compact('category', 'categoryType'));
+        $this->checkType($categoryType);
+
+        $category->load('parent')->loadCount('categories');
+        $subcategories = $category->categories()
+            ->addSelect(['products_count' => Product::selectRaw('count(*)')->whereColumn('products.category_id', 'categories.id')])
+            ->orderBy('name_' . $this->locale())
+            ->get();
+        // A parent category shows the products of its subcategories too (as the product list filter does).
+        $ids = $subcategories->pluck('id')->push($category->id);
+        $productsCount = Product::whereIn('category_id', $ids)->count();
+        $products = Product::with('images')->whereIn('category_id', $ids)->latest('id')->take(6)->get();
+
+        return view('admin-panel.category.category-show', compact('category', 'categoryType', 'subcategories', 'products', 'productsCount'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function edit($lang, $categoryType, Category $category)
     {
-        $parentCategories = Category::all();
+        $this->checkType($categoryType);
 
-        return view('admin-panel.category.category-form', compact('category', 'categoryType', 'parentCategories'));
+        return $this->form($category, $categoryType);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function update($lang, $categoryType, CategoryRequest $request, Category $category)
     {
-        if($request->file('image')){
-            $this->deleteFolder($category);
+        $this->checkType($categoryType);
 
-            $image = $request->file('image');
-            
-            $date = date("d-m-Y H-i-s");
-            
-            $fileRandName = Str::random(10);
-            $fileExt = $image->getClientOriginalExtension();
+        $category->fill($request->safe()->only(['name_tm', 'name_en', 'name_ru']));
+        // The "parent" form has no parent select: a parent category stays a parent.
+        if ($request->has('category_id') || $categoryType !== 'parent') {
+            $category->category_id = $request->validated('category_id');
+        }
+        if ($request->hasFile('image')) {
+            $this->deleteImage($category->image);
+            $category->image = ImageUploader::store($request->file('image'), 'categories');
+        }
+        $category->save();
 
-            $fileName = $fileRandName . '.' . $fileExt;
-            
-            $path = 'category/' . Str::slug($request->name_tm . '-' . $date ) . '/';
+        return redirect()->route('category.show', [app()->getLocale(), $categoryType, $category->id])->with('success-update', 'The resource was updated!');
+    }
 
-            $image->move($path, $fileName);
-            
-            $originalImage = $path . $fileName;
+    public function destroy($lang, $categoryType, Category $category)
+    {
+        $this->checkType($categoryType);
 
-            $category->image = $originalImage;
+        $ids = $category->categories()->pluck('id')->push($category->id);
+        if (Product::whereIn('category_id', $ids)->exists()) {
+            return back()->with('error', 'This category still has products. Move or delete them first.');
         }
 
-        $category->name_tm = $request->name_tm;
-        $category->name_en = $request->name_en;
-        $category->name_ru = $request->name_ru;
-        $category->category_id = $request->category_id;
-        
-        $category->update();
-        
-        return redirect()->route('category.index', [ app()->getlocale(), $categoryType ])->with('success-update', 'The resource was updated!');
+        foreach ($category->categories as $child) {
+            $this->deleteImage($child->image);
+        }
+        $this->deleteImage($category->image);
+        // Subcategories and attributes are removed by the foreign keys (on delete cascade).
+        $category->delete();
+
+        return redirect()->route('category.index', [app()->getLocale(), $categoryType])->with('success-delete', 'The resource was deleted!');
+    }
+
+    private function form(Category $category, string $categoryType)
+    {
+        $parents = Category::whereNull('category_id')
+            ->where('id', '!=', $category->id ?? 0)
+            ->orderBy('name_' . $this->locale())
+            ->get(['id', 'name_tm', 'name_en', 'name_ru']);
+
+        return view('admin-panel.category.category-form', compact('category', 'categoryType', 'parents'));
+    }
+
+    private function checkType($categoryType): void
+    {
+        abort_unless(in_array($categoryType, self::TYPES, true), 404);
+    }
+
+    private function locale(): string
+    {
+        return in_array(app()->getLocale(), ['tm', 'en', 'ru'], true) ? app()->getLocale() : 'tm';
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * New images live on the public disk (storage/categories/...). Older uploads were
+     * moved into public/category/<folder>/; seeded ones (category/category-seeder) stay.
      */
-    public function destroy($lang, $categoryType, Category $category)
+    private function deleteImage(?string $path): void
     {
-        $this->deleteFolder($category);
-
-        $category->delete();
-
-        return redirect()->route('category.index', [ app()->getlocale(), $categoryType ])->with('success-delete', 'The resource was deleted!');
-    }
-
-    public function deleteFolder($category)
-    {
-        if($category->image){
-            $folder = explode('/', $category->image);
-
-            if($folder[1] != 'category-seeder'){
-                \File::deleteDirectory($folder[0] . '/' . $folder[1]);
-            }
+        if (! $path) {
+            return;
+        }
+        if (Str::startsWith($path, 'storage/')) {
+            ImageUploader::delete($path);
+        } elseif (Str::startsWith($path, 'category/') && ! Str::startsWith($path, 'category/category-seeder/') && substr_count($path, '/') === 2) {
+            File::deleteDirectory(public_path(dirname($path)));
         }
     }
 }

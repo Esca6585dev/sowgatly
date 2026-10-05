@@ -1,646 +1,88 @@
-@extends('layouts.admin-template-app')
+@extends('layouts.admin-page')
 
-@section('title')
-{{ __('Product') }} {{ __( ucfirst(request()->segment(count(request()->segments())))) }}
-@endsection
+@php
+    $editing = $product->exists;
+    $l = app()->getLocale();
+    $title = $editing ? ($product->{'name_' . $l} ?: $product->name_tm) : __('New product');
+    $langs = ['tm' => __('Turkmen'), 'ru' => __('Russian'), 'en' => __('English')];
+    $categoryOptions = [];
+    foreach ($parentCategories as $parent) {
+        $categoryOptions[$parent->id] = $parent->{'name_' . $l};
+        foreach ($parent->categories as $child) {
+            $categoryOptions[$child->id] = '— ' . $child->{'name_' . $l};
+        }
+    }
+@endphp
+@section('page-title'){{ $title }}@endsection
+@section('breadcrumb')<a href="{{ route('product.index', $l) }}">{{ __('Products') }}</a><span class="sep">/</span><span>{{ $editing ? __('Edit') : __('New') }}</span>@endsection
 
-@section('style')
-<!--begin::Fonts-->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-<!--end::Fonts-->
-<!--begin::Page Vendors Styles(used by this page)-->
-<link href="{{ asset('metronic-template/v7/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}"
-    rel="stylesheet" type="text/css" />
-<!--end::Page Vendors Styles-->
-<!--begin::Global Theme Styles(used by all pages)-->
-<link href="{{ asset('metronic-template/v7/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-<!--end::Global Theme Styles-->
-<!--begin::Layout Themes(used by all pages)-->
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/header/base/light.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/header/menu/light.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/brand/dark.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/aside/dark.css') }}" rel="stylesheet"
-    type="text/css" />
+@section('content')
+<x-admin.page-header :title="$editing ? __('Edit product') : __('New product')" :subtitle="$editing ? $title . ' · #' . $product->id : null">
+    <x-slot:actions>
+        <a class="btn btn-ghost" href="{{ $editing ? route('product.show', [$l, $product->id]) : route('product.index', $l) }}">{{ __('Cancel') }}</a>
+        <button class="btn btn-primary" type="submit" form="product-form"><x-admin.icon name="check" class="i-sm" />{{ $editing ? __('Save') : __('Create') }}</button>
+    </x-slot:actions>
+</x-admin.page-header>
 
-@endsection
-
-@section('body')
-<!--begin::Body-->
-
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-    <!--begin::Main-->
-    <!--begin::Header Mobile-->
-    <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
-        <!--begin::Logo-->
-        @include('layouts.logo')
-        <!--end::Logo-->
-        <!--begin::Toolbar-->
-        <div class="d-flex align-items-center">
-            <!--begin::Aside Mobile Toggle-->
-            <button class="btn p-0 burger-icon" id="kt_aside_mobile_toggle">
-                <span></span>
-            </button>
-            <!--end::Aside Mobile Toggle-->
-            <!--begin::Header Menu Mobile Toggle-->
-            <!-- <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
-                <span></span>
-            </button> -->
-            <!--end::Header Menu Mobile Toggle-->
-            <!--begin::Topbar Mobile Toggle-->
-            <button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
-                <span class="svg-icon svg-icon-xl">
-                    <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                        height="24px" viewBox="0 0 24 24" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <polygon points="0 0 24 0 24 24 0 24" />
-                            <path
-                                d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
-                                fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                            <path
-                                d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
-                                fill="#000000" fill-rule="nonzero" />
-                        </g>
-                    </svg>
-                    <!--end::Svg Icon-->
-                </span>
-            </button>
-            <!--end::Topbar Mobile Toggle-->
-        </div>
-        <!--end::Toolbar-->
-    </div>
-    <!--end::Header Mobile-->
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Page-->
-        <div class="d-flex flex-row flex-column-fluid page">
-            <!--begin::Aside-->
-            <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
-                <!--begin::Brand-->
-                <div class="brand flex-column-auto" id="kt_brand">
-                    <!--begin::Logo-->
-                    @include('layouts.logo')
-                    <!--end::Logo-->
-                    <!--begin::Toggle-->
-                    <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
-                        <span class="svg-icon svg-icon svg-icon-xl">
-                            <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-left.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <polygon points="0 0 24 0 24 24 0 24" />
-                                    <path
-                                        d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z"
-                                        fill="#000000" fill-rule="nonzero"
-                                        transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999)" />
-                                    <path
-                                        d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z"
-                                        fill="#000000" fill-rule="nonzero" opacity="0.3"
-                                        transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999)" />
-                                </g>
-                            </svg>
-                            <!--end::Svg Icon-->
-                        </span>
-                    </button>
-                    <!--end::Toolbar-->
-                </div>
-                <!--end::Brand-->
-                <!--begin::Aside Menu-->
-                @include('layouts.sidebar')
-                <!--end::Aside Menu-->
+<x-admin.form id="product-form" :action="$editing ? route('product.update', [$l, $product->id]) : route('product.store', $l)" :method="$editing ? 'put' : 'post'" files>
+<div class="split">
+    <div class="stack">
+        <x-admin.card :title="__('Main')" :subtitle="__('Name and description in every language')">
+            <div class="form-grid">
+                @foreach($langs as $code => $language)
+                <x-admin.field :name="'name_' . $code" :label="__('Name') . ' (' . $language . ')'" :value="$product->{'name_' . $code}" required maxlength="255" col="col-4" />
+                @endforeach
+                @foreach($langs as $code => $language)
+                <x-admin.textarea :name="'description_' . $code" :label="__('Description') . ' (' . $language . ')'" :value="$product->{'description_' . $code}" rows="4" required />
+                @endforeach
             </div>
-            <!--end::Aside-->
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-                <!--begin::Header-->
-                @include('layouts.header')
-                <!--end::Header-->
-                <!--begin::Content-->
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                    <!--begin::Subheader-->
-                    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-                        <div
-                            class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-                            <!--begin::Info-->
-                            <div class="d-flex align-items-center flex-wrap mr-1">
-                                <!--begin::Page Heading-->
-                                <div class="d-flex align-items-baseline flex-wrap mr-5">
-                                    <!--begin::Page Title-->
-                                    <h5 class="text-dark font-weight-bold my-1 mr-5">
+        </x-admin.card>
 
-                                    </h5>
-                                    <!--end::Page Title-->
-                                    <!--begin::Breadcrumb-->
-                                    <ul
-                                        class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-                                        <li class="breadcrumb-item text-muted">
-                                            <a href="{{ route('product.index', app()->getlocale() ) }}"
-                                                class="text-muted">{{ __('Products') }}</a>
-                                        </li>
-
-                                        <li class="breadcrumb-item text-muted">
-                                            <a href="{{ route('product.index', app()->getlocale() ) }}"
-                                                class="text-muted">
-                                                {{ __( ucfirst(Request::segment(3)) . ' Products') }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <!--end::Breadcrumb-->
-                                </div>
-                                <!--end::Page Heading-->
-                            </div>
-                            <!--end::Info-->
-                        </div>
-                    </div>
-                    <!--end::Subheader-->
-                    <!--begin::Entry-->
-                    <div class="d-flex flex-column-fluid">
-                        <!--begin::Container-->
-                        <div class="container">
-                            <!--begin::Card-->
-                            <div class="card card-custom">
-                                <div class="card-header flex-wrap py-5">
-                                    <div class="card-title">
-                                        <h3 class="card-label">{{ __('Products') }}
-                                            <span class="d-block text-muted pt-2 font-size-sm">
-                                                {{ __( ucfirst(request()->segment(count(request()->segments())))) }}
-                                            </span>
-                                        </h3>
-                                    </div>
-
-                                </div>
-                                <!--begin::Form-->
-                                @if($product->id)
-                                <form
-                                    action="{{ route(Request::segment(3) . '.update', [ app()->getlocale(), $product->id ] ) }}"
-                                    method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    @else
-                                    <form action="{{ route(Request::segment(3) . '.store', [ app()->getlocale() ] ) }}"
-                                        method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        @endif
-
-                                        <div class="card-body">
-                                            <div class="container">
-                                                <div class="row">
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Name (TM)') }}</label>
-                                                        <input type="text" 
-                                                            class="form-control @error('name_tm') is-invalid @enderror"
-                                                            name="name_tm" placeholder="{{ __('Name (TM)') }}"
-                                                            value="{{ old('name_tm', $product->name_tm) }}" />
-                                                        @error('name_tm')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="name_tm" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Name (EN)') }}</label>
-                                                        <input type="text" 
-                                                            class="form-control @error('name_en') is-invalid @enderror"
-                                                            name="name_en" placeholder="{{ __('Name (EN)') }}"
-                                                            value="{{ old('name_en', $product->name_en) }}" />
-                                                        @error('name_en')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="name_en" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Name (RU)') }}</label>
-                                                        <input type="text" 
-                                                            class="form-control @error('name_ru') is-invalid @enderror"
-                                                            name="name_ru" placeholder="{{ __('Name (RU)') }}"
-                                                            value="{{ old('name_ru', $product->name_ru) }}" />
-                                                        @error('name_ru')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="name_ru" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Description (TM)') }}</label>
-                                                        <textarea rows="4"
-                                                            class="form-control @error('description_tm') is-invalid @enderror"
-                                                            name="description_tm">{{ old('description_tm', $product->description_tm) }}</textarea>
-                                                        @error('description_tm')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="description_tm" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Description (EN)') }}</label>
-                                                        <textarea rows="4"
-                                                            class="form-control @error('description_en') is-invalid @enderror"
-                                                            name="description_en">{{ old('description_en', $product->description_en) }}</textarea>
-                                                        @error('description_en')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="description_en" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Description (RU)') }}</label>
-                                                        <textarea rows="4"
-                                                            class="form-control @error('description_ru') is-invalid @enderror"
-                                                            name="description_ru">{{ old('description_ru', $product->description_ru) }}</textarea>
-                                                        @error('description_ru')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="description_ru" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Categories') }}</label>
-                                                        <select class="form-control @error('category_id') is-invalid @enderror" name="category_id">
-                                                            <option value="">---{{ __('unselected') }}---</option>
-                                                            @foreach($parentCategories as $parentCategory)
-                                                            <option value="{{ $parentCategory->id }}" {{ old('category_id', $product->category_id) == $parentCategory->id ? 'selected' : '' }}>
-                                                                {{ $parentCategory->id }}) {{ $parentCategory->{ 'name_' . app()->getlocale() } }}
-                                                            </option>
-                                                            @foreach($parentCategory->categories as $category)
-                                                            <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                                                                -- {{ $category->id }}) {{ $category->{ 'name_' . app()->getlocale() } }}
-                                                            </option>
-                                                            @endforeach
-                                                            @endforeach
-                                                        </select>
-                                                        @error('category_id')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="category_id" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Shops') }}</label>
-                                                        <select class="form-control @error('shop_id') is-invalid @enderror" name="shop_id">
-                                                            <option value="">---{{ __('unselected') }}---</option>
-                                                            @foreach($shops as $shop)
-                                                            <option value="{{ $shop->id }}" {{ old('shop_id', $product->shop_id) == $shop->id ? 'selected' : '' }}>{{ $shop->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('shop_id')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="shop_id" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Images') }}</label>
-                                                        <input type="file"
-                                                            class="form-control @error('images') is-invalid @enderror"
-                                                            accept="image/gif, image/jpeg, image/png, image/webp"
-                                                            onchange="loadImages(event)"
-                                                            name="images[]" multiple />
-                                                        @error('images')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="images" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                        @error('images.*')
-                                                        <div class="fv-plugins-message-container invalid-feedback d-block">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Price') }}</label>
-                                                        <input type="number" step="0.01" min="0"
-                                                            class="form-control @error('price') is-invalid @enderror"
-                                                            name="price" placeholder="{{ __('Price') }}"
-                                                            value="{{ old('price', $product->price) }}" />
-                                                        @error('price')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="price" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Discount %') }}</label>
-                                                        <input type="number" min="0" max="100"
-                                                            class="form-control @error('discount') is-invalid @enderror"
-                                                            name="discount" placeholder="{{ __('Discount %') }}"
-                                                            value="{{ old('discount', $product->discount) }}" />
-                                                        @error('discount')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="discount" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Stock') }}</label>
-                                                        <input type="number" min="0"
-                                                            class="form-control @error('stock') is-invalid @enderror"
-                                                            name="stock" placeholder="{{ __('Stock') }}"
-                                                            value="{{ old('stock', $product->stock) }}" />
-                                                        @error('stock')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="stock" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Production time (min)') }}</label>
-                                                        <input type="number" min="0"
-                                                            class="form-control @error('production_time') is-invalid @enderror"
-                                                            name="production_time" placeholder="{{ __('Production time (min)') }}"
-                                                            value="{{ old('production_time', $product->production_time) }}" />
-                                                        @error('production_time')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="production_time" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Min order') }}</label>
-                                                        <input type="number" min="1"
-                                                            class="form-control @error('min_order') is-invalid @enderror"
-                                                            name="min_order" placeholder="{{ __('Min order') }}"
-                                                            value="{{ old('min_order', $product->min_order) }}" />
-                                                        @error('min_order')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="min_order" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Status') }}</label>
-                                                        <select class="form-control @error('status') is-invalid @enderror" name="status">
-                                                            <option value="1" {{ (string) old('status', $product->id ? (int) $product->status : 1) === '1' ? 'selected' : '' }}>{{ __('Active') }}</option>
-                                                            <option value="0" {{ (string) old('status', $product->id ? (int) $product->status : 1) === '0' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
-                                                        </select>
-                                                        @error('status')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="status" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-group">
-                                                        <label>{{ __('Seller status') }}</label>
-                                                        <select class="form-control @error('seller_status') is-invalid @enderror" name="seller_status">
-                                                            <option value="1" {{ (string) old('seller_status', $product->id ? (int) $product->seller_status : 1) === '1' ? 'selected' : '' }}>{{ __('Active') }}</option>
-                                                            <option value="0" {{ (string) old('seller_status', $product->id ? (int) $product->seller_status : 1) === '0' ? 'selected' : '' }}>{{ __('Inactive') }}</option>
-                                                        </select>
-                                                        @error('seller_status')
-                                                        <div class="fv-plugins-message-container invalid-feedback">
-                                                            <div data-field="seller_status" data-validator="notEmpty">{{ $message }}</div>
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-12" id="outputDiv"></div>
-                                                        <div class="row mb-6">
-                                                            <!--begin::Image-->
-                                                            @if($product->images)
-                                                            @foreach($product->images as $image)
-                                                            <div class="col m-5">
-                                                                <div class="image-input image-input-outline"
-                                                                    id="kt_image_1" data-image-count=""
-                                                                    style="background-image: url();">
-                                                                    <div class="image-input-wrapper"
-                                                                        style="background-image: url({{ asset($image->url) }})">
-                                                                    </div>
-
-                                                                    <label
-                                                                        class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                        data-action="change" data-toggle="tooltip"
-                                                                        title="" data-original-title="Change avatar">
-                                                                        <i class="fa fa-pen icon-sm text-muted"></i>
-                                                                        <input type="file" name="profile_avatar"
-                                                                            accept=".png, .jpg, .jpeg" />
-
-                                                                        <input type="hidden"
-                                                                            name="profile_avatar_remove" />
-                                                                    </label>
-
-                                                                    <span
-                                                                        class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                        data-action="cancel" data-toggle="tooltip"
-                                                                        title="Cancel avatar">
-                                                                        <i
-                                                                            class="ki ki-bold-close icon-xs text-muted"></i>
-                                                                    </span>
-
-                                                                    <span
-                                                                        class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                        data-action="remove" data-toggle="tooltip"
-                                                                        title="Remove avatar">
-                                                                        <i
-                                                                            class="ki ki-bold-close icon-xs text-muted"></i>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            @endforeach
-                                                            @endif
-                                                            <!--end::Image-->
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card-footer d-flex justify-content-between">
-                                                <a href="{{ url()->previous() }}"
-                                                    class="btn btn-sm btn-clean btn-icon mr-2">
-                                                    <span class="svg-icon svg-icon-xl">
-                                                        <svg width="24px" height="24px" viewBox="0 0 24 24"
-                                                            version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M8.42034438,20 L21,20 C22.1045695,20 23,19.1045695 23,18 L23,6 C23,4.8954305 22.1045695,4 21,4 L8.42034438,4 C8.15668432,4 7.90369297,4.10412727 7.71642146,4.28972363 L0.653241109,11.2897236 C0.260966303,11.6784895 0.25812177,12.3116481 0.646887666,12.7039229 C0.648995955,12.7060502 0.651113791,12.7081681 0.653241109,12.7102764 L7.71642146,19.7102764 C7.90369297,19.8958727 8.15668432,20 8.42034438,20 Z"
-                                                                id="Combined-Shape" fill="#000000" opacity="0.3"></path>
-                                                            <path
-                                                                d="M12.5857864,12 L11.1715729,10.5857864 C10.7810486,10.1952621 10.7810486,9.56209717 11.1715729,9.17157288 C11.5620972,8.78104858 12.1952621,8.78104858 12.5857864,9.17157288 L14,10.5857864 L15.4142136,9.17157288 C15.8047379,8.78104858 16.4379028,8.78104858 16.8284271,9.17157288 C17.2189514,9.56209717 17.2189514,10.1952621 16.8284271,10.5857864 L15.4142136,12 L16.8284271,13.4142136 C17.2189514,13.8047379 17.2189514,14.4379028 16.8284271,14.8284271 C16.4379028,15.2189514 15.8047379,15.2189514 15.4142136,14.8284271 L14,13.4142136 L12.5857864,14.8284271 C12.1952621,15.2189514 11.5620972,15.2189514 11.1715729,14.8284271 C10.7810486,14.4379028 10.7810486,13.8047379 11.1715729,13.4142136 L12.5857864,12 Z"
-                                                                id="Combined-Shape" fill="#000000"></path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-
-                                                <button type="submit"
-                                                    title="{{ $product->id ? __('Edit') : __('Create') }}"
-                                                    class="btn {{ $product->id ? 'btn-warning' : 'btn-primary' }} font-weight-bolder">
-                                                    <span class="svg-icon svg-icon-md">
-                                                        @if($product->id)
-                                                        <span
-                                                            class="svg-icon svg-icon-md {{ $product->id ? 'svg-icon-dark' : '' }}">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                                height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                <g stroke="none" stroke-width="1" fill="none"
-                                                                    fill-rule="evenodd">
-                                                                    <rect x="0" y="0" width="24" height="24"></rect>
-                                                                    <path
-                                                                        d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921
-                                                            13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182
-                                                            L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
-                                                                        fill="#000000" fill-rule="nonzero"
-                                                                        transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) ">
-                                                                    </path>
-                                                                    <rect fill="#000000" opacity="0.3" x="5" y="20"
-                                                                        width="15" height="2" rx="1"></rect>
-                                                                </g>
-                                                            </svg>
-                                                        </span>
-                                                        @else
-                                                        <svg width="24px" height="24px" viewBox="0 0 24 24"
-                                                            version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                            <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-                                                            <title>Stockholm-icons / Code / Plus</title>
-                                                            <desc>Created with Sketch.</desc>
-                                                            <defs></defs>
-                                                            <g id="Stockholm-icons-/-Code-/-Plus" stroke="none"
-                                                                stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                <rect id="bound" x="0" y="0" width="24" height="24">
-                                                                </rect>
-                                                                <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12"
-                                                                    cy="12" r="10"></circle>
-                                                                <path
-                                                                    d="M11,11 L11,7 C11,6.44771525 11.4477153,6 12,6 C12.5522847,6 13,6.44771525 13,7 L13,11 L17,11 C17.5522847,11 18,11.4477153 18,12 C18,12.5522847 17.5522847,13 17,13 L13,13 L13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 L11,13 L7,13 C6.44771525,13 6,12.5522847 6,12 C6,11.4477153 6.44771525,11 7,11 L11,11 Z"
-                                                                    id="Combined-Shape" fill="#000000"></path>
-                                                            </g>
-                                                        </svg>
-                                                        @endif
-                                                    </span>
-                                                    <span class="{{ $product->id ? 'text-dark' : '' }}">
-                                                        {{ $product->id ? __('Edit') : __('Create') }}
-                                                    </span>
-                                                </button>
-                                            </div>
-                                    </form>
-                                    <!--end::Form-->
-                            </div>
-                            <!--end::Card-->
-                        </div>
-                        <!--end::Container-->
-                    </div>
-                    <!--end::Entry-->
-                </div>
-                <!--end::Content-->
-                <!--begin::Footer-->
-                @include('layouts.footer')
-                <!--end::Footer-->
+        <x-admin.card :title="__('Price & stock')">
+            <div class="form-grid">
+                <x-admin.field name="price" type="number" step="0.01" min="0" :label="__('Price')" :value="$product->price" addon="TMT" required col="col-4" />
+                <x-admin.field name="discount" type="number" min="0" max="100" :label="__('Discount')" :value="$product->discount" addon="%" col="col-4" />
+                <x-admin.field name="stock" type="number" min="0" :label="__('Stock')" :value="$product->stock" :hint="__('Leave empty if not tracked')" col="col-4" />
+                <x-admin.field name="production_time" type="number" min="0" :label="__('Production time')" :value="$product->production_time" :addon="__('min')" :hint="__('Up to 180 minutes counts as same-day delivery')" col="col-6" />
+                <x-admin.field name="min_order" type="number" min="1" :label="__('Minimum order')" :value="$product->min_order" :addon="__('pcs')" col="col-6" />
             </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Page-->
+        </x-admin.card>
+
+        <x-admin.card :title="__('Images')" :subtitle="$editing ? trans_choice(':count image|:count images', $product->images->count()) : null">
+            <div class="form-grid">
+                <x-admin.file name="images[]" multiple :current="$editing ? $product->images->map(fn ($i) => asset($i->url))->all() : []"
+                    :hint="$editing && $product->images->isNotEmpty() ? __('JPG, PNG, WEBP up to 10 MB. New images replace the current ones.') : __('JPG, PNG, WEBP up to 10 MB. The first image is the cover.')" />
+            </div>
+        </x-admin.card>
     </div>
-    <!--end::Main-->
-    <!-- begin::User Panel-->
-    @include('layouts.admin-profile')
-    <!-- end::User Panel-->
 
-    <!--begin::Global Config(global config for global JS scripts)-->
-    <script>
-        var KTAppSettings = {
-            "breakpoints": {
-                "sm": 576,
-                "md": 768,
-                "lg": 992,
-                "xl": 1200,
-                "xxl": 1400
-            },
-            "colors": {
-                "theme": {
-                    "base": {
-                        "white": "#ffffff",
-                        "primary": "#3699FF",
-                        "secondary": "#E5EAEE",
-                        "success": "#1BC5BD",
-                        "info": "#8950FC",
-                        "warning": "#FFA800",
-                        "danger": "#F64E60",
-                        "light": "#E4E6EF",
-                        "dark": "#181C32"
-                    },
-                    "light": {
-                        "white": "#ffffff",
-                        "primary": "#E1F0FF",
-                        "secondary": "#EBEDF3",
-                        "success": "#C9F7F5",
-                        "info": "#EEE5FF",
-                        "warning": "#FFF4DE",
-                        "danger": "#FFE2E5",
-                        "light": "#F3F6F9",
-                        "dark": "#D6D6E0"
-                    },
-                    "inverse": {
-                        "white": "#ffffff",
-                        "primary": "#ffffff",
-                        "secondary": "#3F4254",
-                        "success": "#ffffff",
-                        "info": "#ffffff",
-                        "warning": "#ffffff",
-                        "danger": "#ffffff",
-                        "light": "#464E5F",
-                        "dark": "#ffffff"
-                    }
-                },
-                "gray": {
-                    "gray-100": "#F3F6F9",
-                    "gray-200": "#EBEDF3",
-                    "gray-300": "#E4E6EF",
-                    "gray-400": "#D1D3E0",
-                    "gray-500": "#B5B5C3",
-                    "gray-600": "#7E8299",
-                    "gray-700": "#5E6278",
-                    "gray-800": "#3F4254",
-                    "gray-900": "#181C32"
-                }
-            },
-            "font-family": "Poppins"
-        };
+    <div class="stack">
+        <x-admin.card :title="__('Shop & category')">
+            <div class="form-grid">
+                <x-admin.select name="shop_id" :label="__('Shop')" :options="$shops" :value="$product->shop_id" :placeholder="__('— Select —')" required col="col-12" />
+                <x-admin.select name="category_id" :label="__('Category')" :options="$categoryOptions" :value="$product->category_id" :placeholder="__('— Select —')" required col="col-12" />
+            </div>
+        </x-admin.card>
 
-    </script>
-
-    <script src="{{ asset('metronic-template/v7/assets/js/ajax/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/js/ajax/getdata.js') }}"></script>
-
-    <script src="{{ asset('metronic-template/v7/assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/js/scripts.bundle.js') }}"></script>
-
-    <script src="{{ asset('metronic-template/v7/assets/js/pages/crud/forms/editors/summernote.min.js') }}"></script>
-
-</body>
-<!--end::Body-->
+        <x-admin.card :title="__('Visibility')" :subtitle="__('Customers see a product only when both are on')">
+            <div class="stack" style="gap:14px">
+                <div class="field">
+                    <x-admin.checkbox name="status" :label="__('Approved by admin')" :checked="(bool) $product->status" switch />
+                    <span class="hint" style="padding-left:48px">{{ __('Moderation status set by Sowgatly') }}</span>
+                    @error('status')<span class="err">{{ $message }}</span>@enderror
+                </div>
+                <div class="field">
+                    <x-admin.checkbox name="seller_status" :label="__('Switched on by the shop')" :checked="(bool) $product->seller_status" switch />
+                    <span class="hint" style="padding-left:48px">{{ __('The seller can hide a product, e.g. when out of season') }}</span>
+                    @error('seller_status')<span class="err">{{ $message }}</span>@enderror
+                </div>
+            </div>
+            <x-slot:footer>
+                <a class="btn btn-ghost" href="{{ $editing ? route('product.show', [$l, $product->id]) : route('product.index', $l) }}">{{ __('Cancel') }}</a>
+                <button class="btn btn-primary" type="submit"><x-admin.icon name="check" class="i-sm" />{{ $editing ? __('Save') : __('Create') }}</button>
+            </x-slot:footer>
+        </x-admin.card>
+    </div>
+</div>
+</x-admin.form>
 @endsection

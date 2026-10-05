@@ -1,36 +1,77 @@
 @extends('layouts.admin-page')
 
+@php
+    $l = app()->getLocale();
+    $faker = config('app.faker_locales.' . $l, 'en_US');
+    $initials = fn ($name) => mb_strtoupper(collect(preg_split('/\s+/u', trim((string) $name)))->filter()->take(2)->map(fn ($p) => mb_substr($p, 0, 1))->implode('')) ?: '?';
+    $customer = optional($thread->user)->name ?? __('Customer');
+    $shopName = optional($thread->shop)->name ?? __('Shop');
+@endphp
 @section('page-title'){{ __('Chat') }} #{{ $thread->id }}@endsection
-
-@section('breadcrumb')
-<a href="{{ route('chat.index', [ app()->getlocale() ]) }}" class="text-muted">{{ __('Chats') }}</a>
-<li class="breadcrumb-item text-muted">#{{ $thread->id }}</li>
-@endsection
+@section('breadcrumb')<a href="{{ route('chat.index', $l) }}">{{ __('Chats') }}</a><span class="sep">/</span><span>#{{ $thread->id }}</span>@endsection
 
 @section('content')
-<div class="card card-custom">
-    <div class="card-header">
-        <h3 class="card-title">
-            {{ optional($thread->user)->name }} (+993 {{ optional($thread->user)->phone_number }})
-            &nbsp;↔&nbsp; {{ optional($thread->shop)->name }}
-            @if($thread->order_id) &nbsp;·&nbsp; <a href="{{ route('order.show', [ app()->getlocale(), $thread->order_id ]) }}">{{ __('Order') }} #{{ $thread->order_id }}</a>@endif
-        </h3>
-    </div>
-    <div class="card-body" style="max-height:70vh;overflow-y:auto">
-        @forelse($messages as $message)
-        <div class="d-flex {{ $message->sender_type === 'shop' ? 'justify-content-end' : 'justify-content-start' }} mb-3">
-            <div class="p-3 rounded {{ $message->sender_type === 'shop' ? 'bg-light-primary' : 'bg-light' }}" style="max-width:70%">
-                <div class="font-size-sm text-muted mb-1">
-                    {{ $message->sender_type === 'shop' ? optional($thread->shop)->name : optional($thread->user)->name }}
-                    · {{ $message->created_at->format('d.m.Y H:i') }}
-                    @if($message->read_at) · {{ __('read') }} @endif
+<x-admin.page-header :title="$customer . ' ↔ ' . $shopName" :subtitle="__('Read only: admins can see the conversation but cannot write in it.')">
+    <x-slot:actions>
+        @if($thread->order_id)
+        <a class="btn" href="{{ route('order.show', [$l, $thread->order_id]) }}"><x-admin.icon name="orders" class="i-sm" />{{ __('Order') }} № {{ str_pad((string) $thread->order_id, 7, '0', STR_PAD_LEFT) }}</a>
+        @endif
+        <a class="btn btn-ghost" href="{{ route('chat.index', $l) }}"><x-admin.icon name="left" class="i-sm" />{{ __('All chats') }}</a>
+    </x-slot:actions>
+</x-admin.page-header>
+
+<section class="split">
+    <x-admin.card style="min-width:0" :title="__('Conversation')" :subtitle="__('Total') . ': ' . $thread->messages_count" flush>
+        @if($messages->isEmpty())
+            <x-admin.empty icon="chat" :text="__('No messages yet')" />
+        @else
+        <div class="bubbles">
+            @foreach($messages as $message)
+            @php $mine = $message->sender_type === 'shop'; @endphp
+            <div class="bubble {{ $mine ? 'mine' : '' }}">
+                <div class="meta">
+                    {{ $mine ? $shopName : $customer }} · {{ $message->created_at->locale($faker)->isoFormat('D MMM, HH:mm') }}
+                    @if($message->read_at) · {{ __('read') }}@endif
                 </div>
-                <div>{!! nl2br(e($message->body)) !!}</div>
+                <div style="word-break:break-word">{!! nl2br(e($message->body)) !!}</div>
             </div>
+            @endforeach
         </div>
-        @empty
-        <p class="text-muted text-center mb-0">{{ __('No messages yet') }}</p>
-        @endforelse
+        @endif
+    </x-admin.card>
+
+    <div class="stack">
+        <x-admin.card :title="__('Customer')">
+            <div class="who">
+                <span class="avatar lg">{{ $initials(optional($thread->user)->name) }}</span>
+                <div>
+                    @if($thread->user)
+                        <a href="{{ route('user.show', [$l, $thread->user_id]) }}" style="font-weight:600">{{ $customer }}</a>
+                        @if($thread->user->phone_number)<small><a href="tel:+993{{ $thread->user->phone_number }}">+993 {{ $thread->user->phone_number }}</a></small>@endif
+                    @else
+                        <span class="muted">{{ __('Deleted user') }}</span>
+                    @endif
+                </div>
+            </div>
+        </x-admin.card>
+
+        <x-admin.card :title="__('Details')">
+            <dl class="dl" style="grid-template-columns:130px minmax(0,1fr)">
+                <dt>{{ __('Shop') }}</dt>
+                <dd>@if($thread->shop)<a class="text-brand" href="{{ route('shop.show', [$l, $thread->shop_id]) }}">{{ $shopName }}</a>@else — @endif</dd>
+                <dt>{{ __('Order') }}</dt>
+                <dd>
+                    @if($thread->order)
+                        <a class="text-brand" href="{{ route('order.show', [$l, $thread->order_id]) }}">№ {{ $thread->order->number }}</a>
+                        <x-admin.status :value="$thread->order->status" />
+                    @else — @endif
+                </dd>
+                <dt>{{ __('Unread by the shop') }}</dt><dd class="num">{{ $thread->shop_unread }}</dd>
+                <dt>{{ __('Unread by the customer') }}</dt><dd class="num">{{ $thread->user_unread }}</dd>
+                <dt>{{ __('Last message') }}</dt>
+                <dd>{{ optional($thread->last_message_at)->locale($faker)->isoFormat('D MMM YYYY, HH:mm') ?? '—' }}</dd>
+            </dl>
+        </x-admin.card>
     </div>
-</div>
+</section>
 @endsection

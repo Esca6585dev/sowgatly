@@ -57,37 +57,17 @@ Delete, do not comment out. Make sure nothing else references what you remove
 Backend (`sowgatly`):
 
 1. ~~**Chess API**~~ — done, the block is gone from `routes/api.php`.
-2. **Resume / letterhead generator**: remove the `HomeController` routes
-   (`/{locale}/home`, `/{locale}/email`, `/{locale}/profile/*`), `HomeController.php`,
-   the models `Application`, `Letterhead`, `Section`, `Standart` (no migrations exist
-   for them), the `/Esca6585` resume route and `resume()` action, `resources/views/resume.blade.php`,
-   `resources/views/excel.blade.php`, `resources/views/home.blade.php`,
-   `resources/views/welcome.blade.php`, `public/resume/` and `public/docs/` if they
-   belong to the resume feature, and the `/otp` test route plus `send()` in
-   `UserControllers/UserController.php`.
-3. **Web password auth for customers**: customers sign in with OTP, so remove both
-   `Auth::routes(...)` calls in `routes/web.php` and the unused `routes/auth.php`
-   scaffolding (Fortify/Breeze controllers under `App\Http\Controllers\Auth` that are
-   not used by the admin login). Keep `AdminLoginController` and `AdminLogoutController`.
-   Keep the `admins` guard and everything under `routes/admin-routes/`.
+2. ~~**Resume / letterhead generator**~~ — done: routes, `HomeController`, the resume page and the `Application/Letterhead/Section/Standart` models are gone.
+3. **Web password auth for customers** — partly done: `Auth::routes()`, the e-mail verification routes, the laravel/ui controllers and their views are removed; `/login` now redirects to the admin login. Still to remove: `routes/auth.php`, the Breeze/Fortify controllers under `App\Http\Controllers\Auth` (keep `AdminLoginController`/`AdminLogoutController`), the remaining `resources/views/auth/*` except `admin-login`, and `FortifyServiceProvider` if nothing uses it.
 4. Remove the `laravel/telescope` dependency and its migration unless `.env.example`
    documents it; it is not used.
 5. `DatabaseSeeder` lists `ProductSeeder` twice; keep one.
 6. Remove `public/base64.txt` and `public/docs/api-docs.json` (a stale copy of the
    Swagger spec; the live one is served from `storage/api-docs`).
 7. ~~**Missing `messages` table**~~ — done (`2026_10_04_000007_create_messages_table`).
-8. **Orphan `Text` model**: `App\Models\Text` and `resources/views/admin-panel/text/`
-   have no route or controller. Remove them.
-9. `public/metronic-template/` (206 MB, 5 841 files) is the admin theme. Keep only the
-   CSS/JS/font/image files the admin Blade views actually reference (grep the 44 views
-   that mention it) and delete the rest of the template (demo pages, docs, unused
-   plugins).
-10. `app/Exceptions/Handler.php` turns every `AuthenticationException` into a JSON
-    `{"message":"Unauthenticated."}` with **HTTP 200**, for the admin panel and the API
-    alike. Guests on `/{locale}/admin/*` therefore see raw JSON instead of the login
-    page, and API clients cannot rely on 401 (only `check.token` sends a real 401).
-    Make web requests redirect to `route('login')` and API requests return 401. Check
-    the mobile app's sign-out-on-401 logic still works afterwards.
+8. ~~**Orphan `Text` model**~~ — done.
+9. ~~Metronic~~ — done: the admin panel was rebuilt on its own design system (`public/admin/`, `docs/admin-design/`) and `public/metronic-template/` was deleted.
+10. ~~Auth exception handling~~ — done: API requests get a JSON 401, browser requests to the admin panel are redirected to the admin login.
 11. Update `README.md` so it no longer mentions anything you removed.
 
 Mobile (`sowgatly-app-react-native`):

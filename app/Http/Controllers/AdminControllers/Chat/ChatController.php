@@ -24,16 +24,19 @@ class ChatController extends Controller
         $threads = ChatThread::with('user:id,name,phone_number', 'shop:id,name', 'lastMessage')
             ->when($search !== '', function ($q) use ($search) {
                 $like = '%' . $search . '%';
-                $q->whereHas('user', fn ($u) => $u->where('name', 'like', $like)->orWhere('phone_number', 'like', $like))
-                  ->orWhereHas('shop', fn ($s) => $s->where('name', 'like', $like));
+                $q->where(function ($q) use ($like) {
+                    $q->whereHas('user', fn ($u) => $u->where('name', 'like', $like)->orWhere('phone_number', 'like', $like))
+                      ->orWhereHas('shop', fn ($s) => $s->where('name', 'like', $like));
+                });
             })
+            ->when($request->input('unread') === '1', fn ($q) => $q->where('shop_unread', '>', 0))
             ->orderByDesc('last_message_at')
             ->orderByDesc('id')
             ->paginate($pagination)
             ->withQueryString();
 
         if ($request->ajax()) {
-            return view('admin-panel.chat.chat-table', compact('threads', 'pagination'))->render();
+            return view('admin-panel.chat.chat-table', compact('threads', 'pagination'));
         }
 
         return view('admin-panel.chat.chat', compact('threads', 'pagination'));
@@ -41,7 +44,7 @@ class ChatController extends Controller
 
     public function show($lang, ChatThread $chat)
     {
-        $chat->load('user', 'shop', 'order');
+        $chat->load('user', 'shop', 'order')->loadCount('messages');
         $messages = $chat->messages()->orderBy('id')->limit(500)->get();
 
         return view('admin-panel.chat.chat-show', ['thread' => $chat, 'messages' => $messages]);

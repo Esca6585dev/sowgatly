@@ -1,51 +1,20 @@
 @if ($paginator->hasPages())
-<div class="example-preview">
-    <!--begin::Pagination-->
-    <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <div class="d-flex flex-wrap py-2 mr-3">
-            {{-- Previous Page Link --}}
-            @if ($paginator->onFirstPage())
-            <a href="{{ $paginator->previousPageUrl() }}" class="btn btn-icon btn-sm btn-light mr-2 my-1 admin-page-link disabled">
-                <i class="ki ki-bold-arrow-back icon-xs"></i>
-            </a>
-            @else
-            <a href="{{ $paginator->previousPageUrl() }}"
-                class="btn btn-icon btn-sm btn-light mr-2 my-1 admin-page-link">
-                <i class="ki ki-bold-arrow-back icon-xs"></i>
-            </a>
-            @endif
-
-            {{-- Pagination Elements --}}
-            @foreach ($elements as $element)
-            @if (is_string($element))
-            <a class="btn btn-icon btn-sm border-0 btn-light btn-hover-primary active mr-2 my-1 admin-page-link">{{ $element }}</a>
-            @endif
-
-            {{-- Array Of Links --}}
+<nav class="pager" aria-label="{{ __('Pagination') }}">
+    <span class="muted small">{{ __('Showing :from–:to of :total', ['from' => $paginator->firstItem(), 'to' => $paginator->lastItem(), 'total' => $paginator->total()]) }}</span>
+    <div class="pages">
+        <a href="{{ $paginator->previousPageUrl() }}" class="{{ $paginator->onFirstPage() ? 'off' : '' }}" aria-label="{{ __('Previous') }}"><x-admin.icon name="left" class="i-sm" /></a>
+        @foreach ($elements as $element)
+            @if (is_string($element))<span class="pg">…</span>@endif
             @if (is_array($element))
-            @foreach ($element as $page => $url)
-            @if ($page == $paginator->currentPage())
-            <a class="btn btn-icon btn-sm border-0 btn-light active mr-2 my-1 admin-page-link">{{ $page }}</a>
-            @else
-            <a href="{{ $url }}" class="btn btn-icon btn-sm border-0 btn-light mr-2 my-1 admin-page-link">{{ $page }}</a>
-
+                @foreach ($element as $page => $url)
+                    @if ($page == $paginator->currentPage())<span class="pg on">{{ $page }}</span>
+                    @else<a href="{{ $url }}">{{ $page }}</a>@endif
+                @endforeach
             @endif
-            @endforeach
-            @endif
-            @endforeach
-
-            {{-- Next Page Link --}}
-            @if ($paginator->hasMorePages())
-            <a href="{{ $paginator->nextPageUrl() }}" class="btn btn-icon btn-sm btn-light mr-2 my-1 admin-page-link">
-                <i class="ki ki-bold-arrow-next icon-xs"></i>
-            </a>
-            @else
-            <a href="{{ $paginator->nextPageUrl() }}" class="btn btn-icon btn-sm btn-light mr-2 my-1 admin-page-link disabled">
-                <i class="ki ki-bold-arrow-next icon-xs"></i>
-            </a>
-            @endif
-        </div>
+        @endforeach
+        <a href="{{ $paginator->nextPageUrl() }}" class="{{ $paginator->hasMorePages() ? '' : 'off' }}" aria-label="{{ __('Next') }}"><x-admin.icon name="chevron" class="i-sm" /></a>
     </div>
-    <!--end:: Pagination-->
-</div>
+</nav>
+@elseif($paginator->total() > 0)
+<nav class="pager"><span class="muted small">{{ __('Showing :from–:to of :total', ['from' => $paginator->firstItem(), 'to' => $paginator->lastItem(), 'total' => $paginator->total()]) }}</span></nav>
 @endif

@@ -10,18 +10,17 @@ class AdminGuestTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * The project's exception handler answers every AuthenticationException with
-     * a JSON "Unauthenticated." body (status 200) instead of redirecting, so the
-     * check here is that no page content leaks, not the status code.
+     * Guests opening admin pages are sent to the admin login; the API answers
+     * with a JSON 401.
      *
      * @test
      */
-    public function guests_do_not_see_the_new_admin_pages()
+    public function guests_are_redirected_to_the_admin_login()
     {
-        foreach (['/tm/admin/order', '/tm/admin/chat', '/tm/admin/shop-application'] as $url) {
-            $this->get($url)
-                ->assertDontSee('<table', false)
-                ->assertSee('Unauthenticated');
+        foreach (['/tm/admin/dashboard', '/tm/admin/order', '/tm/admin/chat', '/tm/admin/shop-application', '/ru/admin/product'] as $url) {
+            $this->get($url)->assertRedirect('/' . substr($url, 1, 2) . '/admin/login');
         }
+
+        $this->getJson('/api/orders')->assertStatus(401)->assertJson(['message' => 'Unauthenticated.']);
     }
 }

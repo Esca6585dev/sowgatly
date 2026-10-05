@@ -1,51 +1,22 @@
-<div id="datatable">
-    <table class="table table-separate table-head-custom table-checkable">
-        <thead>
-            <tr>
-                <th>{{ __('ID') }}</th>
-                <th>{{ __('Username') }}</th>
-                <th>{{ __('Region Name') }}</th>
-                <th>{{ __('Parent Region') }}</th>
-                <th>{{ __('Address') }}</th>
-                <th>{{ __('Created time') }}</th>
-                <th>{{ __('Actions') }}</th>
-            </tr>
-        </thead>
+@if($regions->isEmpty())
+    <x-admin.empty icon="map" :text="__('No regions found')" />
+@else
+<div class="table-wrap">
+    <table class="tbl">
+        <thead><tr><th>{{ __('Name') }}</th><th>{{ __('Type') }}</th><th>{{ __('Parent region') }}</th><th class="right">{{ __('Subregions') }}</th><th class="right">{{ __('Shops') }}</th><th></th></tr></thead>
         <tbody>
-            @forelse ($regions as $region)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $region->name }}</td>
-                    <td>{{ $region->parent->name ?? __('N/A') }}</td>
-                    <td>
-                        @if($region->address)
-                            {{ $region->address->street }},
-                            {{ $region->address->city }},
-                            {{ $region->address->state }},
-                            {{ $region->address->country }},
-                            {{ $region->address->postal_code }}
-                        @else
-                            {{ __('No address available') }}
-                        @endif
-                    </td>
-                    <td>
-                        <span class="badge badge-secondary">
-                            {{ $region->created_at->locale(config('app.faker_locales.' . app()->getLocale()))->isoFormat('LLLL') }}
-                        </span>
-                    </td>
-                    <td>
-                        @include('admin-panel.region.region-action', ['region' => $region])
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="7" class="text-center">{{ __('No regions found') }}</td>
-                </tr>
-            @endforelse
+        @foreach($regions as $region)
+            <tr>
+                <td><a href="{{ route('region.show', [app()->getLocale(), $region->id]) }}" style="font-weight:600">{{ $region->name }}</a></td>
+                <td><x-admin.pill :tone="['country' => 'brand', 'province' => 'violet', 'city' => 'info', 'village' => null][$region->type] ?? null">{{ __(ucfirst($region->type)) }}</x-admin.pill></td>
+                <td class="muted">{{ $region->parent->name ?? '—' }}</td>
+                <td class="right num">{{ $region->children_count }}</td>
+                <td class="right num">{{ $region->shops_count }}</td>
+                <td class="right"><x-admin.row-actions route="region" :model="$region->id" /></td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
-    
-    <div class="d-flex justify-content-end">
-        {{ $regions->links('layouts.pagination') }}
-    </div>
 </div>
+{{ $regions->links('layouts.pagination') }}
+@endif

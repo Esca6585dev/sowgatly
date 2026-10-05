@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\AdminControllers\Admin;
 
+use App\Http\Controllers\AdminControllers\Role\RoleController;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Admin;
 use App\Http\Requests\AdminCreateRequest;
 use App\Http\Requests\AdminEditRequest;
+use App\Models\Admin;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\DB;
-use Auth;
 
 class AdminController extends Controller
 {
@@ -19,146 +17,104 @@ class AdminController extends Controller
     {
         $this->middleware(['auth:admin']);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request, $lang, $pagination = 10)
+
+    public function index(Request $request, $lang)
     {
-        if($request->pagination) {
-            $pagination = (int)$request->pagination;
+        $pagination = (int) $request->input('pagination', 10) ?: 10;
+        $search = trim((string) $request->input('search'));
+        $role = (string) $request->input('role');
+
+        $admins = Admin::with('roles:id,name')
+            ->when($search !== '', fn ($q) => $q->where(function ($q) use ($search) {
+                foreach (['first_name', 'last_name', 'username', 'email'] as $field) {
+                    $q->orWhere($field, 'like', "%{$search}%");
+                }
+            }))
+            ->when($role !== '', fn ($q) => $q->whereHas('roles', fn ($r) => $r->where('name', $role)))
+            ->orderByDesc('id')
+            ->paginate($pagination)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin-panel.admin.admin-table', compact('admins', 'pagination'));
         }
 
-        $admins = Admin::orderByDesc('id')->with('roles')->withTrashed()->paginate($pagination);
+        $roles = $this->roles();
 
-        if(request()->ajax()){
-            if($request->search) {
-                $searchQuery = trim($request->query('search'));
-
-                $requestData = Admin::fillableData();
-
-                $admins = Admin::where(function($q) use($requestData, $searchQuery) {
-                                        foreach ($requestData as $field)
-                                        $q->orWhere($field, 'like', "%{$searchQuery}%");
-                                })->paginate($pagination);
-            }
-
-            return view('admin-panel.admin.admin-table', compact('admins', 'pagination'))->render();
-        }
-
-        return view('admin-panel.admin.admin', compact('admins', 'pagination'));
+        return view('admin-panel.admin.admin', compact('admins', 'pagination', 'roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($lang, Admin $admin)
+    public function create($lang)
     {
-        $roles = Role::where('guard_name','admin')->pluck('name','name')->all();
-
-        return view('admin-panel.admin.admin-form', compact('admin', 'roles'));
+        return view('admin-panel.admin.admin-form', ['admin' => new Admin, 'roles' => $this->roles(), 'selected' => []]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store($lang, AdminCreateRequest $request)
     {
-        if(Admin::where('email', $request->email)->exists()) {
-            return redirect()->route('admin.index', [ app()->getlocale() ])->with('warning', 'This Email Address already is exist!');
-        } else {
+        $data = $request->validated();
 
-            $admin = new Admin;
+        $admin = Admin::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+        $admin->syncRoles($data['roles'] ?? []);
 
-            $admin->first_name = $request->first_name;
-            $admin->last_name = $request->last_name;
-            $admin->username = $request->username;
-            $admin->email = $request->email;
-            $admin->password = Hash::make($request->password);
-
-            $admin->save();
-
-            $admin->assignRole($request->roles);
-
-            return redirect()->route('admin.index', [ app()->getlocale() ])->with('success-create', 'The resource was created!');
-        }
+        return redirect()->route('admin.show', [app()->getLocale(), $admin->id])->with('success-create', 'The resource was created!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function show($lang, $id)
+    public function show($lang, Admin $admin)
     {
-        $admin = Admin::withTrashed()->find($id);
-        $roles = Role::where('guard_name','admin')->pluck('name','name')->all();
+        $admin->load('roles.permissions');
+        $groups = RoleController::groupPermissions($admin->getAllPermissions());
 
-        return view('admin-panel.admin.admin-show', compact('admin', 'roles'));
+        return view('admin-panel.admin.admin-show', compact('admin', 'groups'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($lang, Admin $admin)
     {
-        $roles = Role::where('guard_name','admin')->pluck('name','name')->all();
-
-        $adminRole = $admin->roles->pluck('name','name')->all();
-
-        return view('admin-panel.admin.admin-form', compact('admin', 'roles', 'adminRole'));
+        return view('admin-panel.admin.admin-form', [
+            'admin' => $admin,
+            'roles' => $this->roles(),
+            'selected' => $admin->roles->pluck('name')->all(),
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update($lang, AdminEditRequest $request, Admin $admin)
     {
-        if($admin->email != $request->email && Admin::where('email', '=', $request->email)->count() == 0){
-            $admin->email = $request->email;
+        $data = $request->validated();
+
+        $admin->fill([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+        ]);
+        if (! empty($data['password'])) {
+            $admin->password = Hash::make($data['password']);
         }
+        $admin->save();
+        $admin->syncRoles($data['roles'] ?? []);
 
-        $admin->first_name = $request->first_name;
-        $admin->last_name = $request->last_name;
-        $admin->username = $request->username;
-
-        if($request->password){
-            $admin->password = Hash::make($request->password);
-        }
-
-        $admin->update();
-
-        DB::table('model_has_roles')->where('model_id',$admin->id)->delete();
-
-        $admin->assignRole($request->roles);
-
-        return redirect()->route('admin.index', [ app()->getlocale() ])->with('success-update', 'The resource was updated!');
+        return redirect()->route('admin.show', [app()->getLocale(), $admin->id])->with('success-update', 'The resource was updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($lang, Admin $admin)
     {
+        if ($admin->is(auth('admin')->user())) {
+            return redirect()->route('admin.show', [app()->getLocale(), $admin->id])->with('warning', 'You cannot delete your own account.');
+        }
+
+        $admin->syncRoles([]);
         $admin->forceDelete();
 
-        return redirect()->route('admin.index', [ app()->getlocale() ])->with('success-delete', 'The resource was deleted!');
+        return redirect()->route('admin.index', app()->getLocale())->with('success-delete', 'The resource was deleted!');
+    }
+
+    private function roles()
+    {
+        return Role::where('guard_name', 'admin')->withCount('permissions')->orderBy('name')->get(['id', 'name']);
     }
 }

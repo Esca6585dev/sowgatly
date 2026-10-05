@@ -15,7 +15,7 @@ Route::group([
     Route::prefix('admin')->group(function(){
         Route::get('/dashboard', [App\Http\Controllers\AdminControllers\Dashboard\DashboardController::class, 'dashboard'])->name('admin.dashboard');
 
-        Route::get('/export',[App\Http\Controllers\UserControllers\UserController::class, 'export'])->name('export')->middleware(['auth:admin']);
+        Route::get('/export',[App\Http\Controllers\AdminControllers\User\UserController::class, 'export'])->name('export')->middleware(['auth:admin']);
         
         Route::resources([
             '/{categoryType}/category' => App\Http\Controllers\AdminControllers\Category\CategoryController::class,

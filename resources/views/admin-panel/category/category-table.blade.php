@@ -1,37 +1,39 @@
-<div id="datatable">
-    <table class="table table-separate table-head-custom table-checkable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                @foreach (Config::get('languages') as $lang => $language)
-                <th>{{ __('Name') }} ({{ $language['name'] }})</th>
-                @endforeach
-                <th>{{ __('Image') }}</th>
-                <th>{{ __('Category') }} ID</th>
-                <th>{{ __('Actions') }}</th>
-            </tr>
-        </thead>
+@php
+    $l = app()->getLocale();
+    $nameKey = 'name_' . (in_array($l, ['tm', 'en', 'ru'], true) ? $l : 'tm');
+@endphp
+@if($categories->isEmpty())
+    <x-admin.empty icon="grid" :text="__('No categories found')" />
+@else
+<div class="table-wrap">
+    <table class="tbl">
+        <thead><tr><th></th><th>{{ __('Name') }}</th><th>{{ __('Parent category') }}</th><th class="right">{{ __('Subcategories') }}</th><th class="right">{{ __('Products') }}</th><th></th></tr></thead>
         <tbody>
-            @foreach ($categories as $category)
-            <tr id="datatable">
-                <td>{{ $loop->iteration }}</td>
-                @foreach (Config::get('languages') as $lang => $language)
-                <td>{{ $category->{ 'name_' . $lang } }}</td>
-                @endforeach
-                <td><img src="{{ asset($category->image) }}" alt="{{ asset($category->image) }}" width="100px"></td>
-                <td>
-                    <a href="{{ route(Request::segment(4) . '.show', [ app()->getlocale(), $categoryType, $category->parent ? $category->parent->id : $category->id ] ) }}" class="{{ $category->parent ? 'text-warning' : 'text-primary' }}">
-                        {{ $category->parent ? $category->parent->{ 'name_' . app()->getlocale() } : __('Parent Category') }}
-                    </a>
+        @foreach($categories as $category)
+            @php $others = collect(['tm', 'en', 'ru'])->map(fn ($c) => 'name_' . $c)->reject(fn ($k) => $k === $nameKey)->map(fn ($k) => $category->$k)->filter()->implode(' · '); @endphp
+            <tr>
+                <td style="width:64px">
+                    @if($category->image)<img class="thumb" src="{{ asset($category->image) }}" alt="" loading="lazy" style="max-width:none">
+                    @else<span class="thumb"><x-admin.icon name="image" class="i-sm" /></span>@endif
                 </td>
-                <td>@include('admin-panel.category.category-action', [ $categoryType, $category ])</td>
+                <td>
+                    <a href="{{ route('category.show', [$l, $categoryType, $category->id]) }}" style="font-weight:600">{{ $category->$nameKey }}</a>
+                    @if($others !== '')<div class="muted small">{{ $others }}</div>@endif
+                </td>
+                <td>
+                    @if($category->parent)
+                        <a class="text-brand" href="{{ route('category.show', [$l, 'parent', $category->parent->id]) }}">{{ $category->parent->$nameKey }}</a>
+                    @else
+                        <x-admin.pill tone="brand">{{ __('Parent category') }}</x-admin.pill>
+                    @endif
+                </td>
+                <td class="right num">{{ $category->categories_count }}</td>
+                <td class="right num">{{ $category->products_count }}</td>
+                <td class="right"><x-admin.row-actions route="category" :model="$category->id" :params="[$categoryType]" /></td>
             </tr>
-            @endforeach
+        @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-end">
-        <div>
-            {{ $categories->links('layouts.pagination') }}
-        </div>
-    </div>                                
 </div>
+{{ $categories->links('layouts.pagination') }}
+@endif

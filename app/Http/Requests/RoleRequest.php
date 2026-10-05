@@ -3,29 +3,24 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
+/** Admin panel role (guard "admin") with its permissions. */
 class RoleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
+        $role = $this->route('role');
+
         return [
-            'name' => 'required',
-            'guard_name' => 'required',
+            'name' => ['required', 'string', 'max:125', Rule::unique('roles', 'name')->where('guard_name', 'admin')->ignore(is_object($role) ? $role->id : $role)],
+            'permissions' => 'nullable|array',
+            'permissions.*' => ['string', Rule::exists('permissions', 'name')->where('guard_name', 'admin')],
         ];
     }
 }

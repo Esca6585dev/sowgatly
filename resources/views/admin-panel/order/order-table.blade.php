@@ -1,56 +1,53 @@
-<div id="datatable">
-    <table class="table table-separate table-head-custom">
-        <thead>
-            <tr>
-                <th>№</th>
-                <th>{{ __('Customer') }}</th>
-                <th>{{ __('Shop') }}</th>
-                <th>{{ __('Items') }}</th>
-                <th>{{ __('Total') }}</th>
-                <th>{{ __('Delivery') }}</th>
-                <th>{{ __('Payment') }}</th>
-                <th>{{ __('Status') }}</th>
-                <th>{{ __('Created time') }}</th>
-                <th>{{ __('Actions') }}</th>
-            </tr>
-        </thead>
+@php
+    $l = app()->getLocale();
+    $faker = config('app.faker_locales.' . $l, 'en_US');
+    $banks = collect(config('payments.methods'))->keyBy('code');
+    $money = fn ($v) => number_format((float) $v, 2, '.', ' ') . ' TMT';
+    $initials = fn ($name) => mb_strtoupper(collect(preg_split('/\s+/u', trim((string) $name)))->filter()->take(2)->map(fn ($p) => mb_substr($p, 0, 1))->implode('')) ?: '?';
+@endphp
+@if($orders->isEmpty())
+    <x-admin.empty icon="orders" :text="__('No orders found')" />
+@else
+<div class="table-wrap">
+    <table class="tbl">
+        <thead><tr>
+            <th>№</th><th>{{ __('Customer') }}</th><th>{{ __('Shop') }}</th>
+            <th class="right">{{ __('Total') }}</th><th>{{ __('Delivery') }}</th><th>{{ __('Payment') }}</th><th>{{ __('Status') }}</th><th></th>
+        </tr></thead>
         <tbody>
-            @forelse ($orders as $order)
+        @foreach($orders as $i => $order)
             <tr>
-                <td><a href="{{ route('order.show', [ app()->getlocale(), $order->id ]) }}">{{ $order->number }}</a></td>
-                <td>
-                    {{ optional($order->user)->name }}<br>
-                    <small class="text-muted">+993 {{ optional($order->user)->phone_number }}</small>
+                <td class="nowrap">
+                    <a class="text-brand" style="font-weight:600" href="{{ route('order.show', [$l, $order->id]) }}">{{ $order->number }}</a>
+                    <small class="muted" style="display:block;margin-top:2px">{{ $order->created_at->locale($faker)->isoFormat('D MMM, HH:mm') }}</small>
                 </td>
-                <td>{{ optional($order->shop)->name }}</td>
-                <td>{{ $order->items->sum('quantity') }}</td>
-                <td>{{ number_format($order->total_amount, 2) }} TMT</td>
                 <td>
-                    <span class="badge badge-light">{{ __(ucfirst($order->fulfillment)) }}</span>
+                    <div class="who">
+                        <span class="avatar {{ ['', 'av-2', 'av-3', 'av-4'][$i % 4] }}">{{ $initials(optional($order->user)->name) }}</span>
+                        <div>{{ optional($order->user)->name ?? '—' }}@if(optional($order->user)->phone_number)<small class="nowrap">+993 {{ $order->user->phone_number }}</small>@endif</div>
+                    </div>
+                </td>
+                <td>{{ optional($order->shop)->name ?? '—' }}</td>
+                <td class="right num nowrap">
+                    <b>{{ $money($order->total_amount) }}</b>
+                    <small class="muted" style="display:block;margin-top:2px">{{ __('Items') }}: {{ (int) $order->items_quantity }}</small>
+                </td>
+                <td class="nowrap">
+                    <x-admin.pill :tone="$order->fulfillment === 'pickup' ? 'violet' : 'info'">{{ __(ucfirst($order->fulfillment ?? 'delivery')) }}</x-admin.pill>
                     @if($order->delivery_type === 'scheduled' && $order->scheduled_at)
-                    <br><small>{{ $order->scheduled_at->format('d.m.Y H:i') }}</small>
+                    <small class="muted" style="display:block;margin-top:4px">{{ $order->scheduled_at->locale($faker)->isoFormat('D MMM, HH:mm') }}</small>
                     @endif
                 </td>
-                <td>
-                    {{ __(ucfirst($order->payment_method)) }}@if($order->payment_bank) ({{ $order->payment_bank }})@endif<br>
-                    <span class="badge badge-{{ $order->payment_status === 'paid' ? 'success' : ($order->payment_status === 'refunded' ? 'warning' : 'secondary') }}">{{ __(ucfirst($order->payment_status)) }}</span>
+                <td class="nowrap">
+                    <x-admin.status :value="$order->payment_status ?? 'unpaid'" />
+                    <small class="muted" style="display:block;margin-top:4px">{{ __(ucfirst($order->payment_method ?? 'cash')) }}@if($order->payment_bank) · {{ $banks[$order->payment_bank]['name'][$l] ?? $order->payment_bank }}@endif</small>
                 </td>
-                <td>
-                    @php $colors = ['pending' => 'warning', 'processing' => 'info', 'delivering' => 'primary', 'completed' => 'success', 'cancelled' => 'danger']; @endphp
-                    <span class="badge badge-{{ $colors[$order->status] ?? 'secondary' }}">{{ __(ucfirst($order->status)) }}</span>
-                </td>
-                <td><span class="badge badge-secondary">{{ $order->created_at->format('d.m.Y H:i') }}</span></td>
-                <td>
-                    <a href="{{ route('order.show', [ app()->getlocale(), $order->id ]) }}" class="btn btn-sm btn-light-primary">{{ __('View') }}</a>
-                </td>
+                <td><x-admin.status :value="$order->status" /></td>
+                <td class="right"><x-admin.row-actions route="order" :model="$order->id" :edit="false" :delete="false" /></td>
             </tr>
-            @empty
-            <tr><td colspan="10" class="text-center text-muted">{{ __('No orders yet') }}</td></tr>
-            @endforelse
+        @endforeach
         </tbody>
     </table>
-
-    <div class="d-flex justify-content-end">
-        <div>{{ $orders->links('layouts.pagination') }}</div>
-    </div>
 </div>
+{{ $orders->links('layouts.pagination') }}
+@endif

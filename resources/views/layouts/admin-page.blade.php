@@ -1,248 +1,85 @@
-@extends('layouts.admin-template-app')
+@php
+    $locale = app()->getLocale();
+    $admin = auth('admin')->user();
+    $adminName = $admin ? trim(($admin->first_name ?? '') . ' ' . ($admin->last_name ?? '')) ?: $admin->username : 'Admin';
+    $v = fn ($file) => asset($file) . '?v=' . @filemtime(public_path($file));
+    $segments = request()->segments();
+    $langUrl = function ($lang) use ($segments) {
+        $s = $segments; if ($s) { $s[0] = $lang; }
+        $q = request()->getQueryString();
+        return url(implode('/', $s)) . ($q ? '?' . $q : '');
+    };
+    $languages = ['tm' => 'Türkmençe', 'ru' => 'Русский', 'en' => 'English'];
+@endphp
+<!doctype html>
+<html lang="{{ $locale }}" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="robots" content="noindex">
+    <title>@hasSection('page-title')@yield('page-title') · @endif{{ __('Admin panel') }} · Sowgatly</title>
+    <script>(function(){var R=document.documentElement;try{var t=localStorage.getItem('sg-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';R.dataset.theme=t;if(localStorage.getItem('sg-collapsed')==='1')R.dataset.collapsed='';}catch(e){}})();</script>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/logo/favicon-32x32.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('img/logo/logo-rounded.svg') }}">
+    <link rel="stylesheet" href="{{ $v('admin/admin.css') }}">
+    @stack('styles')
+</head>
+<body>
+<div class="app">
+    <div class="scrim" data-drawer></div>
+    @include('layouts.sidebar', ['adminName' => $adminName, 'admin' => $admin])
 
-@section('title')
-    @yield('page-title')
-@endsection
-
-@section('style')
-<!--begin::Fonts-->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-<!--end::Fonts-->
-<!--begin::Page Vendors Styles(used by this page)-->
-<link href="{{ asset('metronic-template/v7/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}"
-    rel="stylesheet" type="text/css" />
-<!--end::Page Vendors Styles-->
-<!--begin::Global Theme Styles(used by all pages)-->
-<link href="{{ asset('metronic-template/v7/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-<!--end::Global Theme Styles-->
-<!--begin::Layout Themes(used by all pages)-->
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/header/base/light.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/header/menu/light.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/brand/dark.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/aside/dark.css') }}" rel="stylesheet"
-    type="text/css" />
-
-@endsection
-
-@section('body')
-
-<!--begin::Body-->
-
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-    <!--begin::Main-->
-    <!--begin::Header Mobile-->
-    <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
-        <!--begin::Logo-->
-        @include('layouts.logo')
-        <!--end::Logo-->
-        <!--begin::Toolbar-->
-        <div class="d-flex align-items-center">
-            <!--begin::Aside Mobile Toggle-->
-            <button class="btn p-0 burger-icon" id="kt_aside_mobile_toggle">
-                <span></span>
-            </button>
-            <!--end::Aside Mobile Toggle-->
-            <!--begin::Header Menu Mobile Toggle-->
-            <!-- <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
-                <span></span>
-            </button> -->
-            <!--end::Header Menu Mobile Toggle-->
-            <!--begin::Topbar Mobile Toggle-->
-            <button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
-                <span class="svg-icon svg-icon-xl">
-                    <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                        height="24px" viewBox="0 0 24 24" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <polygon points="0 0 24 0 24 24 0 24" />
-                            <path
-                                d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
-                                fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                            <path
-                                d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
-                                fill="#000000" fill-rule="nonzero" />
-                        </g>
-                    </svg>
-                    <!--end::Svg Icon-->
-                </span>
-            </button>
-            <!--end::Topbar Mobile Toggle-->
-        </div>
-        <!--end::Toolbar-->
-    </div>
-    <!--end::Header Mobile-->
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Page-->
-        <div class="d-flex flex-row flex-column-fluid page">
-            <!--begin::Aside-->
-            <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
-                <!--begin::Brand-->
-                <div class="brand flex-column-auto" id="kt_brand">
-                    <!--begin::Logo-->
-                    @include('layouts.logo')
-                    <!--end::Logo-->
-                    <!--begin::Toggle-->
-                    <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
-                        <span class="svg-icon svg-icon svg-icon-xl">
-                            <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-left.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <polygon points="0 0 24 0 24 24 0 24" />
-                                    <path
-                                        d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z"
-                                        fill="#000000" fill-rule="nonzero"
-                                        transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999)" />
-                                    <path
-                                        d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z"
-                                        fill="#000000" fill-rule="nonzero" opacity="0.3"
-                                        transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999)" />
-                                </g>
-                            </svg>
-                            <!--end::Svg Icon-->
-                        </span>
-                    </button>
-                    <!--end::Toolbar-->
-                </div>
-                <!--end::Brand-->
-                <!--begin::Aside Menu-->
-                @include('layouts.sidebar')
-                <!--end::Aside Menu-->
-            </div>
-            <!--end::Aside-->
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-                <!--begin::Header-->
-                @include('layouts.header')
-                <!--end::Header-->
-                <!--begin::Content-->
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                    <!--begin::Subheader-->
-                    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-                        <div
-                            class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-                            <!--begin::Info-->
-                            <div class="d-flex align-items-center flex-wrap mr-1">
-                                <!--begin::Page Heading-->
-                                <div class="d-flex align-items-baseline flex-wrap mr-5">
-                                    <!--begin::Page Title-->
-                                    <h5 class="text-dark font-weight-bold my-1 mr-5"></h5>
-                                    <!--end::Page Title-->
-                                    <!--begin::Breadcrumb-->
-                                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-                                        <li class="breadcrumb-item text-muted">
-                                            @yield('breadcrumb')
-                                        </li>
-                                    </ul>
-                                    <!--end::Breadcrumb-->
-                                </div>
-                                <!--end::Page Heading-->
-                            </div>
-                            <!--end::Info-->
-                        </div>
+    <main class="main">
+        <header class="top">
+            <button class="icon-btn burger" type="button" data-drawer aria-label="{{ __('Menu') }}"><x-admin.icon name="menu" /></button>
+            <nav class="crumbs" aria-label="breadcrumb">
+                <a href="{{ route('admin.dashboard', $locale) }}" title="{{ __('Dashboard') }}"><x-admin.icon name="home" class="i-sm" /></a>
+                @hasSection('breadcrumb')<span class="sep">/</span>@yield('breadcrumb')@endif
+            </nav>
+            <div class="top-actions">
+                <form class="top-search" method="get" action="{{ route('order.index', $locale) }}" role="search">
+                    <x-admin.icon name="search" class="i-sm" />
+                    <input type="search" name="search" placeholder="{{ __('Find an order by number or product') }}…" aria-label="{{ __('Search') }}">
+                </form>
+                <details class="menu">
+                    <summary class="icon-btn" title="{{ __('Language') }}" style="list-style:none"><x-admin.icon name="globe" /></summary>
+                    <div class="menu-pop">
+                        @foreach($languages as $code => $name)
+                        <a href="{{ $langUrl($code) }}" class="{{ $code === $locale ? 'on' : '' }}">{{ strtoupper($code) }} · {{ $name }}</a>
+                        @endforeach
                     </div>
-                    <!--end::Subheader-->
-                    <!--begin::Entry-->
-                    <div class="d-flex flex-column-fluid">
-                        <!--begin::Container-->
-                        <div class="container">
-                            @yield('content')
-                        </div>
-                        <!--end::Container-->
-                    </div>
-                    <!--end::Entry-->
-                </div>
-                <!--end::Content-->
-                <!--begin::Footer-->
-                @include('layouts.footer')
-                <!--end::Footer-->
+                </details>
+                <button class="icon-btn" type="button" data-theme-toggle title="{{ __('Light / dark theme') }}">
+                    <x-admin.icon name="moon" class="theme-light" /><x-admin.icon name="sun" class="theme-dark" />
+                </button>
+                <a class="icon-btn" href="{{ route('order.index', [$locale, 'status' => 'pending']) }}" title="{{ __('New orders') }}">
+                    <x-admin.icon name="bell" />@if(($sidebarCounts['orders'] ?? 0) > 0)<span class="dot"></span>@endif
+                </a>
             </div>
-            <!--end::Wrapper-->
+        </header>
+
+        @yield('content')
+    </main>
+</div>
+
+@include('layouts.alert')
+
+<dialog class="modal" id="confirm-dialog">
+    <form method="dialog">
+        <div class="modal-b">
+            <div class="modal-icon"><x-admin.icon name="trash" /></div>
+            <h3>{{ __('Warning') }}</h3>
+            <p class="muted" data-confirm-text>{{ __('Are you sure you want to delete this resource?') }}</p>
         </div>
-        <!--end::Page-->
-    </div>
-    <!--end::Main-->
-    <!-- begin::User Panel-->
-    @include('layouts.admin-profile')
-    <!-- end::User Panel-->
+        <div class="modal-f">
+            <button class="btn" value="cancel">{{ __('Cancel') }}</button>
+            <button class="btn btn-danger" value="ok">{{ __('Delete') }}</button>
+        </div>
+    </form>
+</dialog>
 
-    <!--begin::Global Config(global config for global JS scripts)-->
-    <script>
-        var KTAppSettings = {
-            "breakpoints": {
-                "sm": 576,
-                "md": 768,
-                "lg": 992,
-                "xl": 1200,
-                "xxl": 1400
-            },
-            "colors": {
-                "theme": {
-                    "base": {
-                        "white": "#ffffff",
-                        "primary": "#3699FF",
-                        "secondary": "#E5EAEE",
-                        "success": "#1BC5BD",
-                        "info": "#8950FC",
-                        "warning": "#FFA800",
-                        "danger": "#F64E60",
-                        "light": "#E4E6EF",
-                        "dark": "#181C32"
-                    },
-                    "light": {
-                        "white": "#ffffff",
-                        "primary": "#E1F0FF",
-                        "secondary": "#EBEDF3",
-                        "success": "#C9F7F5",
-                        "info": "#EEE5FF",
-                        "warning": "#FFF4DE",
-                        "danger": "#FFE2E5",
-                        "light": "#F3F6F9",
-                        "dark": "#D6D6E0"
-                    },
-                    "inverse": {
-                        "white": "#ffffff",
-                        "primary": "#ffffff",
-                        "secondary": "#3F4254",
-                        "success": "#ffffff",
-                        "info": "#ffffff",
-                        "warning": "#ffffff",
-                        "danger": "#ffffff",
-                        "light": "#464E5F",
-                        "dark": "#ffffff"
-                    }
-                },
-                "gray": {
-                    "gray-100": "#F3F6F9",
-                    "gray-200": "#EBEDF3",
-                    "gray-300": "#E4E6EF",
-                    "gray-400": "#D1D3E0",
-                    "gray-500": "#B5B5C3",
-                    "gray-600": "#7E8299",
-                    "gray-700": "#5E6278",
-                    "gray-800": "#3F4254",
-                    "gray-900": "#181C32"
-                }
-            },
-            "font-family": "Poppins"
-        };
-
-    </script>
-    
-    <script src="{{ asset('metronic-template/v7/assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/js/scripts.bundle.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/js/ajax/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/js/ajax/getdata.js') }}"></script>
-
+<script src="{{ $v('admin/admin.js') }}"></script>
+@stack('scripts')
 </body>
-<!--end::Body-->
-@endsection
+</html>

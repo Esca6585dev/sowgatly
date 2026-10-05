@@ -3,29 +3,27 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
+/** Admin panel permission (guard "admin"), named "<section>-<action>", e.g. "banner-create". */
 class PermissionRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    protected function prepareForValidation()
+    {
+        $this->merge(['name' => trim((string) $this->input('name'))]);
+    }
+
     public function rules()
     {
+        $permission = $this->route('permission');
+
         return [
-            'name' => 'required',
-            'guard_name' => 'required',
+            'name' => ['required', 'string', 'max:125', 'regex:/^[\pL\pN_.\- ]+$/u', Rule::unique('permissions', 'name')->where('guard_name', 'admin')->ignore(is_object($permission) ? $permission->id : $permission)],
         ];
     }
 }

@@ -22,18 +22,21 @@ class ShopApplicationController extends Controller
         $applications = ShopApplication::with('user:id,name,phone_number', 'region:id,name')
             ->when($search !== '', function ($q) use ($search) {
                 $like = '%' . $search . '%';
-                $q->where('name', 'like', $like)->orWhere('phone', 'like', $like);
+                // Grouped so the OR does not escape the status filter below.
+                $q->where(fn ($q) => $q->where('name', 'like', $like)->orWhere('phone', 'like', $like));
             })
-            ->when($request->filled('status'), fn ($q) => $q->where('status', $request->input('status')))
+            ->when(in_array($request->input('status'), ShopApplication::STATUSES, true), fn ($q) => $q->where('status', $request->input('status')))
             ->orderByDesc('id')
             ->paginate($pagination)
             ->withQueryString();
 
         if ($request->ajax()) {
-            return view('admin-panel.shop-application.shop-application-table', compact('applications', 'pagination'))->render();
+            return view('admin-panel.shop-application.shop-application-table', compact('applications', 'pagination'));
         }
 
-        return view('admin-panel.shop-application.shop-application', compact('applications', 'pagination'));
+        $statusCounts = ShopApplication::selectRaw('status, count(*) as n')->groupBy('status')->pluck('n', 'status');
+
+        return view('admin-panel.shop-application.shop-application', compact('applications', 'pagination', 'statusCounts'));
     }
 
     public function show($lang, ShopApplication $shop_application)

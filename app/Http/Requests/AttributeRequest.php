@@ -6,27 +6,18 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AttributeRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    /** Matches the attributes table: type, value, category_id. */
     public function rules()
     {
         return [
-            'type' => 'required',
-            'value' => 'required',
+            'type' => 'required|string|max:255',
+            'value' => 'required|string|max:255',
+            'category_id' => 'nullable|integer|exists:categories,id',
         ];
-
     }
 }

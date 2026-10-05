@@ -1,53 +1,35 @@
-<div id="datatable">
-    <table class="table table-separate table-head-custom table-checkable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>{{ __('Name') }}</th>
-                <th>{{ __('Email') }}</th>
-                <th>{{ __('Phone number') }}</th>
-                <th>{{ __('Image') }}</th>
-                <th>{{ __('Status') }}</th>
-                <th>{{ __('Created time') }}</th>
-                <th>{{ __('Actions') }}</th>
-            </tr>
-        </thead>
+@php $l = app()->getLocale(); @endphp
+@if($users->isEmpty())
+    <x-admin.empty icon="users" :text="__('No users found')" />
+@else
+<div class="table-wrap">
+    <table class="tbl">
+        <thead><tr><th>{{ __('Name') }}</th><th>{{ __('Phone') }}</th><th>{{ __('Shop') }}</th><th class="right">{{ __('Orders') }}</th><th>{{ __('Status') }}</th><th>{{ __('Joined') }}</th><th></th></tr></thead>
         <tbody>
-            @foreach ($users as $user)
-            <tr id="datatable">
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
+        @foreach($users as $user)
+            <tr>
                 <td>
-                    <a href="tel:+993{{ $user->phone_number }}">
-                        <span>+993</span> {{ $user->phone_number }}
+                    <a class="who" href="{{ route('user.show', [$l, $user->id]) }}">
+                        @include('admin-panel.user.user-avatar', ['u' => $user])
+                        <div class="nowrap"><b>{{ $user->name }}</b>@if($user->email)<small>{{ $user->email }}</small>@endif</div>
                     </a>
                 </td>
+                <td class="nowrap num">+993 {{ $user->phone_number }}</td>
                 <td>
-                    @if($user->image)
-                    <img src="{{ asset($user->image) }}" alt="{{ asset($user->image) }}" class="logo-circle">
+                    @if($user->shop)
+                        <a href="{{ route('shop.show', [$l, $user->shop->id]) }}"><x-admin.pill tone="brand" :title="$user->shop->name">{{ \Illuminate\Support\Str::limit($user->shop->name, 20) }}</x-admin.pill></a>
                     @else
-                    <img src="{{ asset('img/logo/no-avatar-profile.avif') }}" alt="{{ asset('img/logo/no-avatar-profile.avif') }}" class="logo-circle">
+                        <span class="muted">—</span>
                     @endif
                 </td>
-                <td>
-                    @if($user->status)
-                    <span class="badge badge-success">{{ __('Active') }}</span>
-                    @else
-                    <span class="badge badge-danger">{{ __('Inactive') }}</span>
-                    @endif
-                </td>
-                <td>
-                    <span class="badge badge-secondary">{{ \Carbon::parse($user->created_at)->locale(config('app.faker_locales.' . app()->getlocale() ))->isoFormat('LLLL') }}</span>
-                </td>
-                <td>@include('admin-panel.user.user-action', [ $user ])</td>
+                <td class="right num">{{ $user->orders_count }}</td>
+                <td><x-admin.status :value="(bool) $user->status" /></td>
+                <td class="muted nowrap">{{ optional($user->created_at)->format('d.m.Y') }}</td>
+                <td class="right"><x-admin.row-actions route="user" :model="$user->id" /></td>
             </tr>
-            @endforeach
+        @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-end">
-        <div>
-            {{ $users->links('layouts.pagination') }}
-        </div>
-    </div>                                
 </div>
+{{ $users->links('layouts.pagination') }}
+@endif

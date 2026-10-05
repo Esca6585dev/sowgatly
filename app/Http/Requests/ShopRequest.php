@@ -40,7 +40,7 @@ class ShopRequest extends FormRequest
             'mon_fri_close' => $prefix.'required|date_format:H:i|after:mon_fri_open',
             'sat_sun_open' => $prefix.'required|date_format:H:i',
             'sat_sun_close' => $prefix.'required|date_format:H:i|after:sat_sun_open',
-            'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'region_id' => 'sometimes|nullable|exists:regions,id',
             'phone' => 'sometimes|nullable|string|max:20',
             'delivery_fee' => 'sometimes|nullable|numeric|min:0|max:99999',

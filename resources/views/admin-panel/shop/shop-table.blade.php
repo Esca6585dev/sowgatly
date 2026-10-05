@@ -1,59 +1,34 @@
-<div id="datatable">
-    <table class="table table-separate table-head-custom table-checkable">
-        <thead>
-            <tr>
-                <th>{{ __('ID') }}</th>
-                <th>{{ __('Username') }}</th>
-                <th>{{ __('Shop name') }}</th>
-                <th>{{ __('Contact') }}</th>
-                <th>{{ __('Address') }}</th>
-                <th>{{ __('Image') }}</th>
-                <th>{{ __('Status') }}</th>
-                <th>{{ __('Created time') }}</th>
-                <th>{{ __('Actions') }}</th>
-            </tr>
-        </thead>
+@php $l = app()->getLocale(); @endphp
+@if($shops->isEmpty())
+    <x-admin.empty icon="shop" :text="__('No shops found')" />
+@else
+<div class="table-wrap">
+    <table class="tbl">
+        <thead><tr><th>{{ __('Shop') }}</th><th>{{ __('Owner') }}</th><th>{{ __('Region') }}</th><th class="right">{{ __('Products') }}</th><th class="right">{{ __('Orders') }}</th><th>{{ __('Status') }}</th><th></th></tr></thead>
         <tbody>
-            @forelse ($shops as $shop)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $shop->user->name }}</td>
-                    <td>{{ $shop->name }}</td>
-                    <td>
-                        <a href="mailto:{{ $shop->email }}">{{ $shop->email }}</a><br>
-                        <a href="tel:+993{{ $shop->user->phone_number }}">
-                            +993 {{ $shop->user->phone_number }}
-                        </a>
-                    </td>
-                    <td>{{ $shop->address->address_name }} - {{ $shop->address->postal_code }}</td>
-                    <td>
-                        <img src="{{ asset($shop->image) }}" alt="{{ $shop->name }}" class="logo-circle" loading="lazy">
-                    </td>
-                    <td>
-                        @if($shop->user->status)
-                            <span class="badge badge-success">{{ __('Active') }}</span>
-                        @else
-                            <span class="badge badge-danger">{{ __('Inactive') }}</span>
-                        @endif
-                    </td>
-                    <td>
-                        <span class="badge badge-secondary">
-                            {{ $shop->created_at->locale(config('app.faker_locales.' . app()->getLocale()))->isoFormat('LLLL') }}
-                        </span>
-                    </td>
-                    <td>
-                        @include('admin-panel.shop.shop-action', ['shop' => $shop])
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="9" class="text-center">{{ __('No shops found') }}</td>
-                </tr>
-            @endforelse
+        @foreach($shops as $shop)
+            @php $logo = \App\Http\Controllers\AdminControllers\Shop\ShopController::imageUrl($shop->image); @endphp
+            <tr>
+                <td>
+                    <a class="who" href="{{ route('shop.show', [$l, $shop->id]) }}">
+                        @if($logo)<img class="thumb" src="{{ $logo }}" alt="" loading="lazy">@else<span class="thumb"><x-admin.icon name="shop" /></span>@endif
+                        <div><b>{{ $shop->name }}</b>@if($shop->phone)<small class="nowrap">+993 {{ $shop->phone }}</small>@elseif($shop->email)<small>{{ $shop->email }}</small>@endif</div>
+                    </a>
+                </td>
+                <td>
+                    @if($shop->user)
+                    <div>{{ $shop->user->name }}<small class="muted nowrap" style="display:block;font-size:12px">+993 {{ $shop->user->phone_number }}</small></div>
+                    @else<span class="muted">—</span>@endif
+                </td>
+                <td class="muted">{{ $shop->region->name ?? '—' }}</td>
+                <td class="right num">{{ $shop->products_count }}</td>
+                <td class="right num">{{ $shop->orders_count }}</td>
+                <td><x-admin.status :value="$shop->status ?? 'approved'" /></td>
+                <td class="right"><x-admin.row-actions route="shop" :model="$shop->id" /></td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
-    
-    <div class="d-flex justify-content-end">
-        {{ $shops->links('layouts.pagination') }}
-    </div>
 </div>
+{{ $shops->links('layouts.pagination') }}
+@endif

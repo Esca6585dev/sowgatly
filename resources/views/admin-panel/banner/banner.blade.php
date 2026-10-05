@@ -1,31 +1,18 @@
 @extends('layouts.admin-page')
 
 @section('page-title'){{ __('Banners') }}@endsection
-
-@section('breadcrumb')
-<a href="{{ route('banner.index', [ app()->getlocale() ]) }}" class="text-muted">{{ __('Banners') }}</a>
-@endsection
+@section('breadcrumb')<span>{{ __('Banners') }}</span>@endsection
 
 @section('content')
-<div class="card card-custom">
-    <div class="card-header flex-wrap py-5">
-        <div class="card-title"><h3 class="card-label">{{ __('Banners') }}</h3></div>
-        <div class="card-toolbar">
-            <a href="{{ route('banner.create', [ app()->getlocale() ]) }}" class="btn btn-primary font-weight-bolder">{{ __('Create') }}</a>
-        </div>
-    </div>
-    <div class="card-body">
-        <form method="get" class="form-inline mb-5">
-            <input type="search" name="search" value="{{ request('search') }}" class="form-control mr-2 mb-2" placeholder="{{ __('Title') }}">
-            <select name="pagination" class="form-control mr-2 mb-2">
-                @foreach([10, 25, 50, 100] as $number)
-                <option value="{{ $number }}" {{ $pagination == $number ? 'selected' : '' }}>{{ $number }}</option>
-                @endforeach
-            </select>
-            <button type="submit" class="btn btn-primary mb-2">{{ __('Search') }}</button>
-        </form>
-        @include('layouts.alert')
-        @include('admin-panel.banner.banner-table')
-    </div>
-</div>
+<x-admin.page-header :title="__('Banners')" :subtitle="__('Promo slides on the home screen of the app')">
+    <x-slot:actions>
+        <a class="btn btn-primary" href="{{ route('banner.create', app()->getLocale()) }}"><x-admin.icon name="plus" class="i-sm" />{{ __('New banner') }}</a>
+    </x-slot:actions>
+</x-admin.page-header>
+
+<x-admin.card flush>
+    <div style="height:16px"></div>
+    <x-admin.toolbar :placeholder="__('Title')" :per-page="$pagination" />
+    <div id="datatable">@include('admin-panel.banner.banner-table')</div>
+</x-admin.card>
 @endsection

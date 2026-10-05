@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\AdminControllers\Address;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Address;
-use App\Models\Seller;
 use App\Http\Requests\AddressRequest;
-use Str;
+use App\Models\Address;
+use App\Models\Shop;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
+/**
+ * Shop addresses: one row per shop (addresses.shop_id is unique).
+ */
 class AddressController extends Controller
 {
     public function __construct()
@@ -16,87 +19,86 @@ class AddressController extends Controller
         $this->middleware(['auth:admin']);
     }
 
-    public function index(Request $request, $lang, $pagination = 10)
+    public function index(Request $request, $lang)
     {
-        if($request->pagination) {
-            $pagination = (int)$request->pagination;
-        }
+        $pagination = (int) $request->input('pagination', 10) ?: 10;
+        $search = trim((string) $request->input('search'));
 
-        $addresses = Address::orderByDesc('id')->paginate($pagination);
+        $addresses = Address::with('shop:id,name,image,status')
+            ->when($search !== '', fn ($q) => $q->where(fn ($w) => $w
+                ->where('address_name', 'like', "%{$search}%")
+                ->orWhere('postal_code', 'like', "%{$search}%")
+                ->orWhereHas('shop', fn ($s) => $s->where('name', 'like', "%{$search}%"))))
+            ->orderByDesc('id')
+            ->paginate($pagination)
+            ->withQueryString();
 
-        if(request()->ajax()){
-            if($request->search) {
-                $searchQuery = trim($request->query('search'));
-                
-                $requestData = ['street', 'city', 'state', 'country', 'postal_code'];
-    
-                $addresses = Address::where(function($q) use($requestData, $searchQuery) {
-                    foreach ($requestData as $field)
-                        $q->orWhere($field, 'like', "%{$searchQuery}%");
-                })->paginate($pagination);
-            }
-            
-            return view('admin-panel.address.address-table', compact('addresses', 'pagination'))->render();
+        if ($request->ajax()) {
+            return view('admin-panel.address.address-table', compact('addresses', 'pagination'));
         }
 
         return view('admin-panel.address.address', compact('addresses', 'pagination'));
     }
 
-    public function create($lang, Address $address)
+    public function create(Request $request, $lang)
     {
-        $sellers = Seller::all();
-
-        return view('admin-panel.address.address-form', compact('address', 'sellers'));
+        return $this->form(new Address(['shop_id' => $request->integer('shop_id') ?: null]));
     }
 
     public function store($lang, AddressRequest $request)
-    {   
-        $address = new Address;
-        
-        $address->street = $request->street;
-        $address->city = $request->city;
-        $address->state = $request->state;
-        $address->country = $request->country;
-        $address->postal_code = $request->postal_code;
-        $address->seller_id = $request->seller_id;
+    {
+        $this->validateOnePerShop($request);
 
-        $address->save();
+        $address = Address::create($request->validated());
 
-        return redirect()->route('address.index', app()->getlocale())->with('success-create', 'The address was created!');
+        return redirect()->route('address.show', [app()->getLocale(), $address->id])->with('success-create', 'The resource was created!');
     }
 
     public function show($lang, Address $address)
     {
-        $sellers = Seller::all();
+        $address->load(['shop.user:id,name,phone_number', 'shop.region:id,name']);
 
-        return view('admin-panel.address.address-form', compact('address', 'sellers'));
+        return view('admin-panel.address.address-show', compact('address'));
     }
 
     public function edit($lang, Address $address)
     {
-        $sellers = Seller::all();
-
-        return view('admin-panel.address.address-form', compact('address', 'sellers'));
+        return $this->form($address);
     }
 
     public function update($lang, AddressRequest $request, Address $address)
     {
-        $address->street = $request->street;
-        $address->city = $request->city;
-        $address->state = $request->state;
-        $address->country = $request->country;
-        $address->postal_code = $request->postal_code;
-        $address->seller_id = $request->seller_id;
+        $this->validateOnePerShop($request, $address);
 
-        $address->update();
+        $address->update($request->validated());
 
-        return redirect()->route('address.index', app()->getlocale())->with('success-update', 'The address was updated!');
+        return redirect()->route('address.show', [app()->getLocale(), $address->id])->with('success-update', 'The resource was updated!');
     }
 
     public function destroy($lang, Address $address)
     {
         $address->delete();
 
-        return redirect()->route('address.index', [app()->getlocale()])->with('success-delete', 'The address was deleted!');
+        return redirect()->route('address.index', app()->getLocale())->with('success-delete', 'The resource was deleted!');
+    }
+
+    private function form(Address $address)
+    {
+        // Shops without an address, plus the one this address belongs to.
+        $shops = Shop::orderBy('name')
+            ->where(fn ($q) => $q->whereDoesntHave('address')->orWhere('id', $address->shop_id ?? 0))
+            ->get(['id', 'name']);
+
+        return view('admin-panel.address.address-form', compact('address', 'shops'));
+    }
+
+    /** Admin-only check (the API request is shared and left as it is): the column is unique. */
+    private function validateOnePerShop(Request $request, ?Address $address = null): void
+    {
+        $request->validate([
+            'shop_id' => [Rule::unique('addresses', 'shop_id')->ignore(optional($address)->id)],
+        ], [
+            'shop_id.unique' => __('This shop already has an address.'),
+        ]);
     }
 }

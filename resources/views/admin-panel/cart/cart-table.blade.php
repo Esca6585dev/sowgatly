@@ -1,47 +1,41 @@
-<div id="datatable">
-    <table class="table table-separate table-head-custom table-checkable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>{{ __('First Name') }}</th>
-                <th>{{ __('Last Name') }}</th>
-                <th>{{ __('Email') }}</th>
-                <th>{{ __('Phone number') }}</th>
-                <th>{{ __('IP Address') }}</th>
-                <th>TDS №</th>
-                <th>{{ __('Accepted') }}</th>
-                <th>{{ __('Created time') }}</th>
-                <th>{{ __('Actions') }}</th>
-            </tr>
-        </thead>
+@php
+    $l = app()->getLocale();
+    $faker = config('app.faker_locales.' . $l, 'en_US');
+    $money = fn ($v) => number_format((float) $v, floor((float) $v) == (float) $v ? 0 : 2, '.', ' ') . ' TMT';
+    $initials = fn ($name) => mb_strtoupper(collect(preg_split('/\s+/u', trim((string) $name)))->filter()->take(2)->map(fn ($p) => mb_substr($p, 0, 1))->implode('')) ?: '?';
+@endphp
+@if($carts->isEmpty())
+    <x-admin.empty icon="cart" :text="__('No carts found')" />
+@else
+<div class="table-wrap">
+    <table class="tbl">
+        <thead><tr><th>№</th><th>{{ __('Customer') }}</th><th class="right">{{ __('Items') }}</th><th class="right">{{ __('Total') }}</th><th>{{ __('Updated') }}</th><th></th></tr></thead>
         <tbody>
-            @foreach ($carts as $cart)
-            <tr id="datatable">
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $cart->user->first_name }}</td>
-                <td>{{ $cart->user->last_name }}</td>
-                <td>{{ $cart->user->email }}</td>
-                <td>+993 {{ $cart->user->phone_number }}</td>
-                <td>{{ $cart->ip_address }}</td>
-                <td>{{ $cart->standart->number }}</td>
+        @foreach($carts as $i => $cart)
+            @php $touched = collect([$cart->updated_at, $cart->items_updated_at ? \Carbon\Carbon::parse($cart->items_updated_at) : null])->filter()->max(); @endphp
+            <tr>
+                <td><a class="text-brand" style="font-weight:600" href="{{ route('cart.show', [$l, $cart->id]) }}">#{{ $cart->id }}</a></td>
                 <td>
-                    @if($cart->deleted_at)
-                    <span class="badge badge-primary">Arza ugratdy</span>
+                    @if($cart->user)
+                    <a class="who" href="{{ route('user.show', [$l, $cart->user->id]) }}"><span class="avatar {{ ['', 'av-2', 'av-3', 'av-4'][$i % 4] }}">{{ $initials($cart->user->name) }}</span><div>{{ $cart->user->name ?: __('No name') }}<small class="nowrap">@if($cart->user->phone_number)+993 {{ $cart->user->phone_number }}@else{{ $cart->user->email }}@endif</small></div></a>
                     @else
-                    <span class="badge badge-success">Sebede goşuldy</span>
+                    <span class="muted">{{ __('Deleted user') }}</span>
                     @endif
                 </td>
-                <td>
-                    <span class="badge badge-secondary">{{ \Carbon::parse($cart->created_at)->locale(config('app.faker_locales.' . app()->getlocale() ))->isoFormat('LLLL') }}</span>
+                <td class="right num">
+                    @if($cart->items_count)
+                        {{ $cart->items_count }}@if($cart->items_quantity > $cart->items_count) <small class="muted">· {{ trans_choice(':count pc|:count pcs', $cart->items_quantity) }}</small>@endif
+                    @else
+                        <x-admin.pill>{{ __('Empty') }}</x-admin.pill>
+                    @endif
                 </td>
-                <td>@include('admin-panel.cart.cart-action', [ $cart ])</td>
+                <td class="right num nowrap" style="font-weight:600">{{ $cart->items_count ? $money($cart->items_total) : '—' }}</td>
+                <td class="nowrap muted" title="{{ optional($touched)->format('d.m.Y H:i') }}">{{ optional($touched)->locale($faker)->diffForHumans() }}</td>
+                <td class="right"><x-admin.row-actions route="cart" :model="$cart->id" :edit="false" /></td>
             </tr>
-            @endforeach
+        @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-end">
-        <div>
-            {{ $carts->links('layouts.pagination') }}
-        </div>
-    </div>                                
 </div>
+{{ $carts->links('layouts.pagination') }}
+@endif

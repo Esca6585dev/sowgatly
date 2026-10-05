@@ -4,30 +4,24 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * A contact message (table `messages`). Rules match the real columns.
+ */
 class MessageRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    // public function authorize()
-    // {
-    //     return true;
-    // }
+    public function authorize()
+    {
+        return true;
+    }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            'name' => 'required',
-            'phone_number' => 'required|numeric',
-            'email' => 'required|email',
-            'messages' => 'required'
+            'username' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'message' => 'required|string|max:5000',
+            'user_id' => 'nullable|integer|exists:users,id',
         ];
     }
 }

@@ -3,133 +3,111 @@
 namespace App\Http\Controllers\AdminControllers\Attribute;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\AttributeRequest;
 use App\Models\Attribute;
 use App\Models\Category;
-use App\Http\Requests\AttributeRequest;
+use Illuminate\Http\Request;
 
+/**
+ * Admin CRUD for category attributes: a type ("Colour", "Size") with a value,
+ * optionally tied to a category. Columns: type, value, category_id.
+ */
 class AttributeController extends Controller
 {
     public function __construct()
     {
         $this->middleware(['auth:admin']);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request, $lang, $pagination = 10)
+
+    public function index(Request $request, $lang)
     {
-        if($request->pagination) {
-            $pagination = (int)$request->pagination;
+        $pagination = (int) $request->input('pagination', 10) ?: 10;
+        $search = trim((string) $request->input('search'));
+
+        // Named $attrs: $attributes is reserved inside Blade components.
+        $attrs = Attribute::with('category.parent')
+            ->when($search !== '', fn ($q) => $q->where(fn ($w) => $w
+                ->where('type', 'like', "%{$search}%")
+                ->orWhere('value', 'like', "%{$search}%")))
+            ->when($request->filled('category_id'), fn ($q) => $q->where('category_id', (int) $request->input('category_id')))
+            ->orderBy('type')->orderBy('value')
+            ->paginate($pagination)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin-panel.attribute.attribute-table', compact('attrs', 'pagination'));
         }
 
-        $attributes = Attribute::orderByDesc('id')->paginate($pagination);
+        $categories = $this->categoryOptions();
 
-        if(request()->ajax()){
-            if($request->search) {
-                $searchQuery = trim($request->query('search'));
-                
-                $requestData = Attribute::fillableData();
-    
-                $attributes = Attribute::where(function($q) use($requestData, $searchQuery) {
-                                        foreach ($requestData as $field)
-                                        $q->orWhere($field, 'like', "%{$searchQuery}%");
-                                })->paginate($pagination);
-            }
-            
-            return view('admin-panel.attribute.attribute-table', compact('attributes', 'pagination'))->render();
-        }
-
-        return view('admin-panel.attribute.attribute', compact('attributes', 'pagination'));
+        return view('admin-panel.attribute.attribute', compact('attrs', 'pagination', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($lang, Attribute $attribute)
+    public function create($lang)
     {
-        $parentCategories = Category::parentCategory();
-
-        return view('admin-panel.attribute.attribute-form', compact('attribute', 'parentCategories'));
+        return $this->form(new Attribute());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store($lang, AttributeRequest $request)
-    {   
-        $attribute = new Attribute;
+    {
+        $attribute = Attribute::create($request->validated());
 
-        $attribute->type = $request->type;
-        $attribute->value = $request->value;
-        $attribute->category_id = $request->category_id;
-
-        $attribute->save();
-
-        return redirect()->route('attribute.index', app()->getlocale() )->with('success-create', 'The resource was created!');
+        return redirect()->route('attribute.show', [app()->getLocale(), $attribute->id])->with('success-create', 'The resource was created!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Attribute $attribute
-     * @return \Illuminate\Http\Response
-     */
     public function show($lang, Attribute $attribute)
     {
-        $parentCategories = Category::parentCategory();
+        $attribute->load('category.parent');
+        $siblings = Attribute::where('type', $attribute->type)
+            ->where('id', '!=', $attribute->id)
+            ->with('category')
+            ->orderBy('value')
+            ->take(20)
+            ->get();
 
-        return view('admin-panel.attribute.attribute-show', compact('attribute', 'parentCategories'));
+        return view('admin-panel.attribute.attribute-show', compact('attribute', 'siblings'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Attribute $attribute
-     * @return \Illuminate\Http\Response
-     */
     public function edit($lang, Attribute $attribute)
     {
-        $parentCategories = Category::parentCategory();
-
-        return view('admin-panel.attribute.attribute-form', compact('attribute', 'parentCategories'));
+        return $this->form($attribute);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Attribute $attribute
-     * @return \Illuminate\Http\Response
-     */
     public function update($lang, AttributeRequest $request, Attribute $attribute)
     {
-        $attribute->type = $request->type;
-        $attribute->value = $request->value;
-        $attribute->category_id = $request->category_id;
+        $attribute->update($request->validated());
 
-        $attribute->update();
-
-        return redirect()->route('attribute.index', app()->getlocale() )->with('success-update', 'The resource was updated!');
+        return redirect()->route('attribute.show', [app()->getLocale(), $attribute->id])->with('success-update', 'The resource was updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Attribute $attribute
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($lang, Attribute $attribute)
     {
         $attribute->delete();
 
-        return redirect()->route('attribute.index', [ app()->getlocale() ])->with('success-delete', 'The resource was deleted!');
+        return redirect()->route('attribute.index', app()->getLocale())->with('success-delete', 'The resource was deleted!');
+    }
+
+    private function form(Attribute $attribute)
+    {
+        $categories = $this->categoryOptions();
+        $types = Attribute::query()->distinct()->orderBy('type')->pluck('type');
+
+        return view('admin-panel.attribute.attribute-form', compact('attribute', 'categories', 'types'));
+    }
+
+    /** [id => "Parent › Child"] for every category, parents first. */
+    private function categoryOptions()
+    {
+        $key = 'name_' . (in_array(app()->getLocale(), ['tm', 'en', 'ru'], true) ? app()->getLocale() : 'tm');
+
+        $options = [];
+        foreach (Category::whereNull('category_id')->with('categories')->orderBy($key)->get() as $parent) {
+            $options[$parent->id] = $parent->$key;
+            foreach ($parent->categories->sortBy($key) as $child) {
+                $options[$child->id] = $parent->$key . ' › ' . $child->$key;
+            }
+        }
+
+        return $options;
     }
 }

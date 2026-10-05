@@ -1,326 +1,136 @@
-@extends('layouts.admin-template-app')
+@extends('layouts.admin-page')
 
-@section('title')
-{{ __('Users') }} {{ __('View') }}
-@endsection
+@php
+    $l = app()->getLocale();
+    $faker = config('app.faker_locales.' . $l, 'en_US');
+    $img = fn ($p) => \App\Http\Controllers\AdminControllers\Shop\ShopController::imageUrl($p);
+    $logo = $img($shop->image);
+    $money = fn ($v) => number_format((float) $v, 2, '.', ' ') . ' TMT';
+    $hm = fn ($v) => $v ? substr($v, 0, 5) : '—';
+    $status = $shop->status ?? 'approved';
+    $description = $shop->{'description_' . $l} ?: ($shop->description_tm ?: ($shop->description_en ?: $shop->description_ru));
+@endphp
+@section('page-title'){{ $shop->name }}@endsection
+@section('breadcrumb')<a href="{{ route('shop.index', $l) }}">{{ __('Shops') }}</a><span class="sep">/</span><span>{{ $shop->name }}</span>@endsection
 
-@section('style')
-<!--begin::Fonts-->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-<!--end::Fonts-->
-<!--begin::Page Vendors Styles(used by this page)-->
-<link href="{{ asset('metronic-template/v7/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}"
-    rel="stylesheet" type="text/css" />
-<!--end::Page Vendors Styles-->
-<!--begin::Global Theme Styles(used by all pages)-->
-<link href="{{ asset('metronic-template/v7/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-<!--end::Global Theme Styles-->
-<!--begin::Layout Themes(used by all pages)-->
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/header/base/light.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/header/menu/light.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/brand/dark.css') }}" rel="stylesheet"
-    type="text/css" />
-<link href="{{ asset('metronic-template/v7/assets/css/themes/layout/aside/dark.css') }}" rel="stylesheet"
-    type="text/css" />
-@endsection
-
-@section('body')
-<!--begin::Body-->
-
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-    <!--begin::Main-->
-    <!--begin::Header Mobile-->
-    <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
-        <!--begin::Logo-->
-        @include('layouts.logo')
-        <!--end::Logo-->
-        <!--begin::Toolbar-->
-        <div class="d-flex align-items-center">
-            <!--begin::Aside Mobile Toggle-->
-            <button class="btn p-0 burger-icon" id="kt_aside_mobile_toggle">
-                <span></span>
-            </button>
-            <!--end::Aside Mobile Toggle-->
-            <!--begin::Header Menu Mobile Toggle-->
-            <!-- <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
-                <span></span>
-            </button> -->
-            <!--end::Header Menu Mobile Toggle-->
-            <!--begin::Topbar Mobile Toggle-->
-            <button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
-                <span class="svg-icon svg-icon-xl">
-                    <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                        height="24px" viewBox="0 0 24 24" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <polygon points="0 0 24 0 24 24 0 24" />
-                            <path
-                                d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
-                                fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                            <path
-                                d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
-                                fill="#000000" fill-rule="nonzero" />
-                        </g>
-                    </svg>
-                    <!--end::Svg Icon-->
-                </span>
-            </button>
-            <!--end::Topbar Mobile Toggle-->
+@section('content')
+<div class="page-head">
+    <div class="who" style="gap:14px">
+        @if($logo)<img class="thumb lg" src="{{ $logo }}" alt="">@else<span class="thumb lg"><x-admin.icon name="shop" /></span>@endif
+        <div style="min-width:0">
+            <h1>{{ $shop->name }}</h1>
+            <p style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <x-admin.status :value="$status" />
+                <span>{{ collect([optional($shop->region)->name, $shop->created_at ? __('since :date', ['date' => $shop->created_at->locale($faker)->isoFormat('D MMM YYYY')]) : null])->filter()->implode(' · ') }}</span>
+            </p>
         </div>
-        <!--end::Toolbar-->
     </div>
-    <!--end::Header Mobile-->
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Page-->
-        <div class="d-flex flex-row flex-column-fluid page">
-            <!--begin::Aside-->
-            <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
-                <!--begin::Brand-->
-                <div class="brand flex-column-auto" id="kt_brand">
-                    <!--begin::Logo-->
-                    @include('layouts.logo')
-                    <!--end::Logo-->
-                    <!--begin::Toggle-->
-                    <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
-                        <span class="svg-icon svg-icon svg-icon-xl">
-                            <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-left.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <polygon points="0 0 24 0 24 24 0 24" />
-                                    <path
-                                        d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z"
-                                        fill="#000000" fill-rule="nonzero"
-                                        transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999)" />
-                                    <path
-                                        d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z"
-                                        fill="#000000" fill-rule="nonzero" opacity="0.3"
-                                        transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999)" />
-                                </g>
-                            </svg>
-                            <!--end::Svg Icon-->
-                        </span>
-                    </button>
-                    <!--end::Toolbar-->
-                </div>
-                <!--end::Brand-->
-                <!--begin::Aside Menu-->
-                @include('layouts.sidebar')
-                <!--end::Aside Menu-->
-            </div>
-            <!--end::Aside-->
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-                <!--begin::Header-->
-                @include('layouts.header')
-                <!--end::Header-->
-                <!--begin::Content-->
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                    <!--begin::Subheader-->
-                    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
-                        <div
-                            class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-                            <!--begin::Info-->
-                            <div class="d-flex align-items-center flex-wrap mr-1">
-                                <!--begin::Page Heading-->
-                                <div class="d-flex align-items-baseline flex-wrap mr-5">
-                                    <!--begin::Page Title-->
-                                    <h5 class="text-dark font-weight-bold my-1 mr-5">
+    <div class="actions">
+        @if($status !== 'approved')
+        <form method="post" action="{{ route('shop.update', [$l, $shop->id]) }}">
+            @csrf @method('put')
+            <input type="hidden" name="status" value="approved">
+            <button class="btn btn-soft" type="submit"><x-admin.icon name="check" class="i-sm" />{{ __('Approve') }}</button>
+        </form>
+        @endif
+        @if($status !== 'rejected')
+        <form method="post" action="{{ route('shop.update', [$l, $shop->id]) }}" data-confirm="{{ __('Reject this shop? It will be hidden in the app.') }}">
+            @csrf @method('put')
+            <input type="hidden" name="status" value="rejected">
+            <button class="btn" type="submit"><x-admin.icon name="x" class="i-sm" />{{ __('Reject') }}</button>
+        </form>
+        @endif
+        <form method="post" action="{{ route('shop.destroy', [$l, $shop->id]) }}" data-confirm="{{ __('Are you sure you want to delete this resource?') }}">
+            @csrf @method('delete')
+            <button class="btn btn-danger" type="submit"><x-admin.icon name="trash" class="i-sm" />{{ __('Delete') }}</button>
+        </form>
+        <a class="btn btn-primary" href="{{ route('shop.edit', [$l, $shop->id]) }}"><x-admin.icon name="edit" class="i-sm" />{{ __('Edit') }}</a>
+    </div>
+</div>
 
-                                    </h5>
-                                    <!--end::Page Title-->
-                                    <!--begin::Breadcrumb-->
-                                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-                                        <li class="breadcrumb-item text-muted">
-                                            <a href="" class="text-muted">{{ __('Categories') }}</a>
-                                        </li>
+<section class="grid grid-3">
+    <x-admin.stat icon="box" :label="__('Products')" :value="$shop->products_count" :href="route('product.index', [$l, 'shop_id' => $shop->id])" />
+    <x-admin.stat icon="orders" :label="__('Orders')" :value="$shop->orders_count" :href="route('order.index', [$l, 'shop_id' => $shop->id])" />
+    <x-admin.stat icon="wallet" :label="__('Revenue')" :value="number_format((float) $revenue, 0, '.', ' ') . ' TMT'" :foot="__('Cancelled orders excluded')" />
+</section>
 
-                                        <li class="breadcrumb-item text-muted">
-                                            <a href="" class="text-muted">
-                                                {{ __( ucfirst(Request::segment(3)) . ' Categories') }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <!--end::Breadcrumb-->
-                                </div>
-                                <!--end::Page Heading-->
-                            </div>
-                            <!--end::Info-->
-                        </div>
-                    </div>
-                    <!--end::Subheader-->
-                    <!--begin::Entry-->
-                    <div class="d-flex flex-column-fluid">
-                        <!--begin::Container-->
-                        <div class="container">
-                            <!--begin::Card-->
-                            <div class="card card-custom card-stretch gutter-b">
-                                <div class="card-body p-15 pb-20">
-                                    <div class="row mb-17">
-                                        <div class="col-xxl-5 mb-11 mb-xxl-0">
-                                            <!--begin::Image-->
-                                            <div class="card card-custom card-stretch">
-                                                <div class="card-body p-0 rounded px-10 py-15 d-flex align-items-center justify-content-center">
-                                                    <h1>
-                                                        {{ $user->first_name }}
-                                                        {{ $user->last_name }}
-                                                    </h1>
-                                                </div>
-                                            </div>
-                                            <!--end::Image-->
-                                        </div>
-                                        <div class="col-xxl-7 pl-xxl-11">
-                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $user->first_name }}</h4>
-                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $user->last_name }}</h4>
-                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $user->email }}</h4>
-                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $user->phone_number }}</h4>
-                                            <h4 class="font-weight-bolder text-dark mb-7">
-                                                @if($user->roles->pluck("name")->first() == 'raýat')
-                                                    <span class="badge badge-warning">{{ $user->roles->pluck("name")->first() }}</span>
-                                                @elseif($user->roles->pluck("name")->first() == 'telekeçi')
-                                                    <span class="badge badge-primary">{{ $user->roles->pluck("name")->first() }}</span>
-                                                @elseif($user->roles->pluck("name")->first() == 'döwlet-edara')
-                                                    <span class="badge badge-success">{{ $user->roles->pluck("name")->first() }}</span>
-                                                @endif
-                                            </h4>
-                                        </div>
-                                
-                                        <div class="section__container__body mx-4 mt-10">
-                                            <div class="section__container__word">
+<section class="split">
+    <x-admin.card :title="__('Details')">
+        <dl class="dl">
+            <dt>{{ __('Owner') }}</dt>
+            <dd>
+                @if($shop->user)
+                    <a class="text-brand" href="{{ route('user.show', [$l, $shop->user->id]) }}">{{ $shop->user->name }}</a>
+                    <span class="muted nowrap"> · +993 {{ $shop->user->phone_number }}</span>
+                @else<span class="muted">—</span>@endif
+            </dd>
+            <dt>{{ __('Phone number') }}</dt>
+            <dd>@if($shop->phone)<a href="tel:+993{{ $shop->phone }}">+993 {{ $shop->phone }}</a>@else<span class="muted">—</span>@endif</dd>
+            <dt>{{ __('Email') }}</dt>
+            <dd>@if($shop->email)<a href="mailto:{{ $shop->email }}">{{ $shop->email }}</a>@else<span class="muted">—</span>@endif</dd>
+            <dt>{{ __('Region') }}</dt>
+            <dd>@if($shop->region)<a href="{{ route('region.show', [$l, $shop->region->id]) }}">{{ $shop->region->name }}</a>@if($shop->region->parent)<span class="muted"> · {{ $shop->region->parent->name }}</span>@endif @else<span class="muted">—</span>@endif</dd>
+            <dt>{{ __('Address') }}</dt>
+            <dd>
+                @if($shop->address)
+                    {{ $shop->address->address_name ?: '—' }}@if($shop->address->postal_code)<span class="muted"> · {{ $shop->address->postal_code }}</span>@endif
+                    <a class="text-brand small nowrap" style="margin-left:8px" href="{{ route('address.edit', [$l, $shop->address->id]) }}">{{ __('Edit') }}</a>
+                @else
+                    <a class="btn btn-sm btn-soft" href="{{ route('address.create', [$l, 'shop_id' => $shop->id]) }}"><x-admin.icon name="plus" class="i-sm" />{{ __('Add address') }}</a>
+                @endif
+            </dd>
+            <dt>{{ __('Description') }}</dt>
+            <dd>@if($description){!! nl2br(e($description)) !!}@else<span class="muted">—</span>@endif</dd>
+        </dl>
+    </x-admin.card>
 
-                                                <div class="section__sample">
-                                                    <x-user.blank.company :id="$user->id" />
-                                                </div>
-                                            </div>
-                                        </div>
+    <div class="stack">
+        <x-admin.card :title="__('Opening hours')">
+            <div class="kv"><span class="muted">{{ __('Monday – Friday') }}</span><b class="num">{{ $hm($shop->mon_fri_open) }} – {{ $hm($shop->mon_fri_close) }}</b></div>
+            <div class="kv"><span class="muted">{{ __('Saturday – Sunday') }}</span><b class="num">{{ $hm($shop->sat_sun_open) }} – {{ $hm($shop->sat_sun_close) }}</b></div>
+        </x-admin.card>
+        <x-admin.card :title="__('Delivery')">
+            <div class="kv"><span class="muted">{{ __('Delivery fee') }}</span><b class="num">{{ $money($shop->delivery_fee ?? 0) }}</b></div>
+            <div class="kv"><span class="muted">{{ __('Minimum order') }}</span><b class="num">{{ $shop->min_order_amount !== null ? $money($shop->min_order_amount) : __('No minimum') }}</b></div>
+            <div class="kv"><span class="muted">{{ __('Pickup') }}</span>@if($shop->pickup_available)<x-admin.pill tone="ok" dot>{{ __('Available') }}</x-admin.pill>@else<x-admin.pill dot>{{ __('Not available') }}</x-admin.pill>@endif</div>
+        </x-admin.card>
+    </div>
+</section>
 
-                                    </div>
-                                </div>
-                                <!--begin::Buttons-->
-                                <div class="card-footer d-flex justify-content-between">
-                                    <a href="{{ url()->previous() }}" class="btn btn-sm btn-clean btn-icon mr-2">
-                                        <span class="svg-icon svg-icon-xl">
-                                            <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M8.42034438,20 L21,20 C22.1045695,20 23,19.1045695 23,18 L23,6 C23,4.8954305 22.1045695,4 21,4 L8.42034438,4 C8.15668432,4 7.90369297,4.10412727 7.71642146,4.28972363 L0.653241109,11.2897236 C0.260966303,11.6784895 0.25812177,12.3116481 0.646887666,12.7039229 C0.648995955,12.7060502 0.651113791,12.7081681 0.653241109,12.7102764 L7.71642146,19.7102764 C7.90369297,19.8958727 8.15668432,20 8.42034438,20 Z"
-                                                    id="Combined-Shape" fill="#000000" opacity="0.3"></path>
-                                                <path
-                                                    d="M12.5857864,12 L11.1715729,10.5857864 C10.7810486,10.1952621 10.7810486,9.56209717 11.1715729,9.17157288 C11.5620972,8.78104858 12.1952621,8.78104858 12.5857864,9.17157288 L14,10.5857864 L15.4142136,9.17157288 C15.8047379,8.78104858 16.4379028,8.78104858 16.8284271,9.17157288 C17.2189514,9.56209717 17.2189514,10.1952621 16.8284271,10.5857864 L15.4142136,12 L16.8284271,13.4142136 C17.2189514,13.8047379 17.2189514,14.4379028 16.8284271,14.8284271 C16.4379028,15.2189514 15.8047379,15.2189514 15.4142136,14.8284271 L14,13.4142136 L12.5857864,14.8284271 C12.1952621,15.2189514 11.5620972,15.2189514 11.1715729,14.8284271 C10.7810486,14.4379028 10.7810486,13.8047379 11.1715729,13.4142136 L12.5857864,12 Z"
-                                                    id="Combined-Shape" fill="#000000"></path>
-                                            </svg>
-                                        </span>
-                                    </a>
-
-                                    <a href="{{ route(Request::segment(3) . '.edit', [ app()->getlocale(), $user->id ] ) }}"
-                                        title="{{ __('Edit') }}"
-                                        class="btn btn-warning font-weight-bolder">
-                                        
-                                        <span class="{{ $user->id ? 'text-dark' : '' }}">
-                                            {{ __('Edit') }}
-                                        </span>
-                                    </a>
-                                    
-                                </div>
-                                <!--end::Buttons-->
-                            </div>
-                            <!--end::Card-->
-                        </div>
-                        <!--end::Container-->
-                    </div>
-                    <!--end::Entry-->
-                </div>
-                <!--end::Content-->
-                <!--begin::Footer-->
-                @include('layouts.footer')
-                <!--end::Footer-->
-            </div>
-            <!--end::Wrapper-->
+<section class="grid grid-2">
+    <x-admin.card :title="__('Latest products')" :subtitle="trans_choice(':count product|:count products', $shop->products_count)" flush>
+        <x-slot:right><a class="btn btn-sm btn-ghost" href="{{ route('product.index', [$l, 'shop_id' => $shop->id]) }}">{{ __('All') }}</a></x-slot:right>
+        @if($products->isEmpty())
+            <x-admin.empty icon="box" :text="__('No products yet')" />
+        @else
+        <div class="list">
+            @foreach($products as $product)
+            @php $thumb = $img(optional($product->images->first())->url); @endphp
+            <a class="list-item" href="{{ route('product.show', [$l, $product->id]) }}">
+                @if($thumb)<img class="thumb" src="{{ $thumb }}" alt="" loading="lazy">@else<span class="thumb"><x-admin.icon name="box" /></span>@endif
+                <div class="body"><b>{{ $product->{'name_' . $l} ?: $product->name_tm }}</b><p class="num">{{ $money($product->price) }}@if($product->discount) · −{{ $product->discount }}%@endif</p></div>
+                <x-admin.status :value="(bool) $product->status" />
+            </a>
+            @endforeach
         </div>
-        <!--end::Page-->
-    </div>
-    <!--end::Main-->
-    <!-- begin::User Panel-->
-    @include('layouts.admin-profile')
-    <!-- end::User Panel-->
+        @endif
+    </x-admin.card>
 
-    <!--begin::Global Config(global config for global JS scripts)-->
-    <script>
-        var KTAppSettings = {
-            "breakpoints": {
-                "sm": 576,
-                "md": 768,
-                "lg": 992,
-                "xl": 1200,
-                "xxl": 1400
-            },
-            "colors": {
-                "theme": {
-                    "base": {
-                        "white": "#ffffff",
-                        "primary": "#3699FF",
-                        "secondary": "#E5EAEE",
-                        "success": "#1BC5BD",
-                        "info": "#8950FC",
-                        "warning": "#FFA800",
-                        "danger": "#F64E60",
-                        "light": "#E4E6EF",
-                        "dark": "#181C32"
-                    },
-                    "light": {
-                        "white": "#ffffff",
-                        "primary": "#E1F0FF",
-                        "secondary": "#EBEDF3",
-                        "success": "#C9F7F5",
-                        "info": "#EEE5FF",
-                        "warning": "#FFF4DE",
-                        "danger": "#FFE2E5",
-                        "light": "#F3F6F9",
-                        "dark": "#D6D6E0"
-                    },
-                    "inverse": {
-                        "white": "#ffffff",
-                        "primary": "#ffffff",
-                        "secondary": "#3F4254",
-                        "success": "#ffffff",
-                        "info": "#ffffff",
-                        "warning": "#ffffff",
-                        "danger": "#ffffff",
-                        "light": "#464E5F",
-                        "dark": "#ffffff"
-                    }
-                },
-                "gray": {
-                    "gray-100": "#F3F6F9",
-                    "gray-200": "#EBEDF3",
-                    "gray-300": "#E4E6EF",
-                    "gray-400": "#D1D3E0",
-                    "gray-500": "#B5B5C3",
-                    "gray-600": "#7E8299",
-                    "gray-700": "#5E6278",
-                    "gray-800": "#3F4254",
-                    "gray-900": "#181C32"
-                }
-            },
-            "font-family": "Poppins"
-        };
-
-    </script>
-
-    <script src="{{ asset('metronic-template/v7/assets/js/ajax/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/js/ajax/getdata.js') }}"></script>
-
-    <script src="{{ asset('metronic-template/v7/assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
-    <script src="{{ asset('metronic-template/v7/assets/js/scripts.bundle.js') }}"></script>
-
-</body>
-<!--end::Body-->
+    <x-admin.card :title="__('Latest orders')" :subtitle="trans_choice(':count order|:count orders', $shop->orders_count)" flush>
+        <x-slot:right><a class="btn btn-sm btn-ghost" href="{{ route('order.index', [$l, 'shop_id' => $shop->id]) }}">{{ __('All') }}</a></x-slot:right>
+        @if($orders->isEmpty())
+            <x-admin.empty icon="orders" :text="__('No orders yet')" />
+        @else
+        <div class="list">
+            @foreach($orders as $order)
+            <a class="list-item" href="{{ route('order.show', [$l, $order->id]) }}">
+                <span class="thumb"><x-admin.icon name="orders" /></span>
+                <div class="body"><b>{{ $order->number }} · {{ optional($order->user)->name ?? __('Guest') }}</b><p>{{ optional($order->created_at)->locale($faker)->isoFormat('D MMM, HH:mm') }}</p></div>
+                <div class="meta"><b class="num" style="color:var(--text)">{{ $money($order->total_amount) }}</b><x-admin.status :value="$order->status" /></div>
+            </a>
+            @endforeach
+        </div>
+        @endif
+    </x-admin.card>
+</section>
 @endsection

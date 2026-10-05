@@ -1,42 +1,34 @@
-<div id="datatable">
-    <table class="table table-separate table-head-custom">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>{{ __('Image') }}</th>
-                <th>{{ __('Title') }}</th>
-                <th>{{ __('Link') }}</th>
-                <th>{{ __('Region') }}</th>
-                <th>{{ __('Position') }}</th>
-                <th>{{ __('Status') }}</th>
-                <th>{{ __('Period') }}</th>
-                <th>{{ __('Actions') }}</th>
-            </tr>
-        </thead>
+@php $l = app()->getLocale(); @endphp
+@if($banners->isEmpty())
+    <x-admin.empty icon="image" :text="__('No banners yet')" />
+@else
+<div class="table-wrap">
+    <table class="tbl">
+        <thead><tr><th>{{ __('Image') }}</th><th>{{ __('Title') }}</th><th>{{ __('Link') }}</th><th>{{ __('Region') }}</th><th class="right">{{ __('Position') }}</th><th>{{ __('Status') }}</th><th>{{ __('Period') }}</th><th></th></tr></thead>
         <tbody>
-            @forelse ($banners as $banner)
+        @foreach($banners as $banner)
             <tr>
-                <td>{{ $banner->id }}</td>
-                <td>@if($banner->image)<img src="{{ asset($banner->image) }}" alt="" style="height:40px;border-radius:4px">@else — @endif</td>
-                <td>{{ $banner->title_tm }}<br><small class="text-muted">{{ $banner->subtitle_tm }}</small></td>
-                <td>{{ $banner->link_type === 'none' ? '—' : $banner->link_type . ': ' . $banner->link_value }}</td>
-                <td>{{ optional($banner->region)->name ?? __('All cities') }}</td>
-                <td>{{ $banner->position }}</td>
-                <td><span class="badge badge-{{ $banner->is_active ? 'success' : 'secondary' }}">{{ $banner->is_active ? __('Active') : __('Inactive') }}</span></td>
-                <td><small>{{ optional($banner->starts_at)->format('d.m.Y') ?? '…' }} – {{ optional($banner->ends_at)->format('d.m.Y') ?? '…' }}</small></td>
-                <td class="d-flex">
-                    <a href="{{ route('banner.edit', [ app()->getlocale(), $banner->id ]) }}" class="btn btn-sm btn-light-primary mr-2">{{ __('Edit') }}</a>
-                    <form method="post" action="{{ route('banner.destroy', [ app()->getlocale(), $banner->id ]) }}" onsubmit="return confirm('{{ __('Are you sure you want to delete this resource?') }}')">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-sm btn-light-danger">{{ __('Delete') }}</button>
-                    </form>
+                <td style="width:120px">
+                    @if($banner->image)<img class="thumb" src="{{ asset($banner->image) }}" alt="" loading="lazy" style="width:104px;height:41px;max-width:none">
+                    @else<span class="thumb" style="width:104px;height:41px"><x-admin.icon name="image" class="i-sm" /></span>@endif
                 </td>
+                <td style="min-width:200px">
+                    <a href="{{ route('banner.show', [$l, $banner->id]) }}" style="font-weight:600">{{ $banner->title_tm }}</a>
+                    @if($banner->subtitle_tm)<div class="muted small">{{ $banner->subtitle_tm }}</div>@endif
+                </td>
+                <td>
+                    @if($banner->link_type === 'none')<span class="muted">—</span>
+                    @else<x-admin.pill tone="violet">{{ __(ucfirst($banner->link_type)) }}</x-admin.pill> <span class="small muted">{{ \Illuminate\Support\Str::limit($banner->link_value, 32) }}</span>@endif
+                </td>
+                <td class="nowrap {{ $banner->region ? '' : 'muted' }}">{{ optional($banner->region)->name ?? __('All cities') }}</td>
+                <td class="right num">{{ $banner->position }}</td>
+                <td><x-admin.status :value="$banner->is_active ? '1' : '0'" /></td>
+                <td class="small muted nowrap num">{{ optional($banner->starts_at)->format('d.m.Y') ?? '…' }} – {{ optional($banner->ends_at)->format('d.m.Y') ?? '…' }}</td>
+                <td class="right"><x-admin.row-actions route="banner" :model="$banner->id" /></td>
             </tr>
-            @empty
-            <tr><td colspan="9" class="text-center text-muted">{{ __('No banners yet') }}</td></tr>
-            @endforelse
+        @endforeach
         </tbody>
     </table>
-    <div class="d-flex justify-content-end"><div>{{ $banners->links('layouts.pagination') }}</div></div>
 </div>
+{{ $banners->links('layouts.pagination') }}
+@endif

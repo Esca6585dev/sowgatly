@@ -39,7 +39,7 @@ class BannerController extends Controller
             ->withQueryString();
 
         if ($request->ajax()) {
-            return view('admin-panel.banner.banner-table', compact('banners', 'pagination'))->render();
+            return view('admin-panel.banner.banner-table', compact('banners', 'pagination'));
         }
 
         return view('admin-panel.banner.banner', compact('banners', 'pagination'));
@@ -61,7 +61,9 @@ class BannerController extends Controller
 
     public function show($lang, Banner $banner)
     {
-        return $this->form($banner);
+        $banner->load('region:id,name');
+
+        return view('admin-panel.banner.banner-show', compact('banner'));
     }
 
     public function edit($lang, Banner $banner)

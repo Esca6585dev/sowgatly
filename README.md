@@ -38,7 +38,13 @@ php artisan storage:link
 php artisan serve          # http://localhost:8000
 ```
 
-Blade assets (admin panel and website) are built with Vite:
+The admin panel needs no build step: its styles and scripts are plain files in
+`public/admin/` (`admin.css`, `admin.js`), with Blade components in
+`resources/views/components/admin/`. See `docs/admin-design/CONVENTIONS.md` before adding a
+page. Uploaded images live on the public disk, so `php artisan storage:link` is required on
+every server.
+
+The public website's Blade assets are built with Vite:
 
 ```bash
 npm install

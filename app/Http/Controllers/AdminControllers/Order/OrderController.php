@@ -4,11 +4,14 @@ namespace App\Http\Controllers\AdminControllers\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public const PAYMENT_STATUSES = ['unpaid', 'paid', 'refunded'];
+
     public function __construct()
     {
         $this->middleware(['auth:admin']);
@@ -17,22 +20,38 @@ class OrderController extends Controller
     public function index(Request $request, $lang)
     {
         $pagination = (int) $request->input('pagination', 10) ?: 10;
+        $filters = [
+            'status' => Order::STATUSES,
+            'payment_status' => self::PAYMENT_STATUSES,
+            'payment_method' => ['cash', 'online'],
+            'fulfillment' => ['delivery', 'pickup'],
+        ];
 
-        $orders = Order::with('user:id,name,phone_number', 'shop:id,name', 'items')
+        $orders = Order::with('user:id,name,phone_number', 'shop:id,name')
+            ->withSum('items as items_quantity', 'quantity')
             ->search($request->input('search'))
-            ->when($request->filled('status'), fn ($q) => $q->where('status', $request->input('status')))
-            ->when($request->filled('payment_status'), fn ($q) => $q->where('payment_status', $request->input('payment_status')))
-            ->when($request->filled('payment_method'), fn ($q) => $q->where('payment_method', $request->input('payment_method')))
-            ->when($request->filled('fulfillment'), fn ($q) => $q->where('fulfillment', $request->input('fulfillment')))
+            ->when($request->filled('shop_id'), fn ($q) => $q->where('shop_id', (int) $request->input('shop_id')))
+            ->tap(function ($q) use ($request, $filters) {
+                foreach ($filters as $field => $allowed) {
+                    if (in_array($request->input($field), $allowed, true)) {
+                        $q->where($field, $request->input($field));
+                    }
+                }
+            })
             ->orderByDesc('id')
             ->paginate($pagination)
             ->withQueryString();
 
         if ($request->ajax()) {
-            return view('admin-panel.order.order-table', compact('orders', 'pagination'))->render();
+            return view('admin-panel.order.order-table', compact('orders', 'pagination'));
         }
 
-        return view('admin-panel.order.order', compact('orders', 'pagination'));
+        // Counts follow the shop filter (the Shops page links here with ?shop_id=).
+        $shop = $request->filled('shop_id') ? Shop::find((int) $request->input('shop_id'), ['id', 'name']) : null;
+        $statusCounts = Order::when($request->filled('shop_id'), fn ($q) => $q->where('shop_id', (int) $request->input('shop_id')))
+            ->selectRaw('status, count(*) as n')->groupBy('status')->pluck('n', 'status');
+
+        return view('admin-panel.order.order', compact('orders', 'pagination', 'statusCounts', 'shop'));
     }
 
     public function show($lang, Order $order)
@@ -51,7 +70,7 @@ class OrderController extends Controller
     {
         $data = $request->validate([
             'status' => 'nullable|in:' . implode(',', Order::STATUSES),
-            'payment_status' => 'nullable|in:unpaid,paid,refunded',
+            'payment_status' => 'nullable|in:' . implode(',', self::PAYMENT_STATUSES),
         ]);
 
         if (!empty($data['status']) && $data['status'] !== $order->status) {

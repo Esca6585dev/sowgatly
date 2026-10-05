@@ -19,13 +19,19 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
             // API clients get a real 401 so token refresh / login redirects
-            // work; the legacy 200 body is kept for non-JSON web requests.
-            $status = ($request->is('api/*') || $request->expectsJson()) ? 401 : 200;
+            // work; browsers opening guarded web pages (the admin panel) are
+            // sent to the admin login.
+            if ($request->is('api/*') || $request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Unauthenticated.',
+                    'status' => 'error'
+                ], 401);
+            }
 
-            return response()->json([
-                'message' => 'Unauthenticated.',
-                'status' => 'error'
-            ], $status);
+            // The locale middleware has not run yet; take it from the URL.
+            $locale = in_array($request->segment(1), config('app.locales', []), true) ? $request->segment(1) : app()->getLocale();
+
+            return redirect()->guest(route('admin.login', $locale));
         }
 
         return parent::render($request, $exception);

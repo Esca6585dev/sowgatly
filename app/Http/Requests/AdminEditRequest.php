@@ -2,34 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class AdminEditRequest extends FormRequest
+/** Same as creating an admin, but the password may be left empty to keep the current one. */
+class AdminEditRequest extends AdminCreateRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    protected function passwordRules(): string
     {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'username' => 'required',
-            'password' => 'nullable|confirmed|min:8',
-            'roles' => 'required',
-        ];
+        return 'nullable|string|confirmed|min:8';
     }
 }

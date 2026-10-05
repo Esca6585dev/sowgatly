@@ -73,4 +73,19 @@ class BannerPagesTest extends TestCase
             ->assertRedirect('/tm/admin/banner/create')
             ->assertSessionHasErrors(['title_tm', 'link_value']);
     }
+
+    /** @test */
+    public function the_show_page_lists_the_banner_details(): void
+    {
+        $banner = Banner::create([
+            'title_tm' => 'Bahar', 'title_ru' => 'Весна', 'subtitle_en' => 'Spring sale',
+            'link_type' => 'url', 'link_value' => 'https://sowgatly.app/spring', 'position' => 2, 'is_active' => true,
+        ]);
+
+        $this->get("/tm/admin/banner/{$banner->id}")->assertOk()
+            ->assertSee('Весна')->assertSee('Spring sale')->assertSee('https://sowgatly.app/spring')
+            ->assertSee("/tm/admin/banner/{$banner->id}/edit", false);
+        $this->get('/tm/admin/banner?search=Bahar', ['X-Requested-With' => 'XMLHttpRequest'])
+            ->assertOk()->assertSee('Bahar')->assertDontSee('<html', false);
+    }
 }

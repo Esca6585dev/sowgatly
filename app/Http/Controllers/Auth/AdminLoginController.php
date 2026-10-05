@@ -23,7 +23,7 @@ class AdminLoginController extends Controller
         // Validate the form data
         $this->validate($request, [
             'username' => 'required|string',
-            'password' => 'required|min:8'
+            'password' => 'required|string'
         ]);
 
         // Attempt to log the user in
@@ -31,7 +31,9 @@ class AdminLoginController extends Controller
             // If successful, then redirect to their intended location
             return redirect()->intended(route('admin.dashboard', app()->getLocale()));
         }
-        // If unsuccessful, then redirect back to the login with the form data
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        // Wrong username or password: say so instead of silently reloading.
+        return redirect()->back()
+            ->withInput($request->only('username', 'remember'))
+            ->withErrors(['username' => __('Wrong username or password.')]);
     }
 }

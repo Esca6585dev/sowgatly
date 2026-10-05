@@ -1,34 +1,27 @@
 @extends('layouts.admin-page')
 
+@php
+    $l = app()->getLocale();
+    $current = request('status');
+    $statuses = \App\Models\ShopApplication::STATUSES;
+    $chipUrl = fn ($status) => route('shop-application.index', array_merge([$l], request()->except(['status', 'page']), $status ? ['status' => $status] : []));
+@endphp
 @section('page-title'){{ __('Shop applications') }}@endsection
-
-@section('breadcrumb')
-<a href="{{ route('shop-application.index', [ app()->getlocale() ]) }}" class="text-muted">{{ __('Shop applications') }}</a>
-@endsection
+@section('breadcrumb')<span>{{ __('Shop applications') }}</span>@endsection
 
 @section('content')
-<div class="card card-custom">
-    <div class="card-header flex-wrap py-5">
-        <div class="card-title"><h3 class="card-label">{{ __('Shop applications') }}</h3></div>
+<x-admin.page-header :title="__('Shop applications')" :subtitle="__('Requests from people who want to open a shop on Sowgatly')" />
+
+<x-admin.card flush>
+    <div class="chips" style="padding:16px 20px 14px">
+        <a class="chip {{ in_array($current, $statuses, true) ? '' : 'on' }}" href="{{ $chipUrl(null) }}">{{ __('All') }} <span class="num">{{ $statusCounts->sum() }}</span></a>
+        @foreach($statuses as $status)
+        <a class="chip {{ $current === $status ? 'on' : '' }}" href="{{ $chipUrl($status) }}">{{ __(ucfirst($status)) }} <span class="num">{{ $statusCounts[$status] ?? 0 }}</span></a>
+        @endforeach
     </div>
-    <div class="card-body">
-        <form method="get" class="form-inline mb-5">
-            <input type="search" name="search" value="{{ request('search') }}" class="form-control mr-2 mb-2" placeholder="{{ __('Name or phone') }}">
-            <select name="status" class="form-control mr-2 mb-2">
-                <option value="">{{ __('All statuses') }}</option>
-                @foreach(\App\Models\ShopApplication::STATUSES as $status)
-                <option value="{{ $status }}" {{ request('status') === $status ? 'selected' : '' }}>{{ __(ucfirst($status)) }}</option>
-                @endforeach
-            </select>
-            <select name="pagination" class="form-control mr-2 mb-2">
-                @foreach([10, 25, 50, 100] as $number)
-                <option value="{{ $number }}" {{ $pagination == $number ? 'selected' : '' }}>{{ $number }}</option>
-                @endforeach
-            </select>
-            <button type="submit" class="btn btn-primary mb-2">{{ __('Search') }}</button>
-        </form>
-        @include('layouts.alert')
-        @include('admin-panel.shop-application.shop-application-table')
-    </div>
-</div>
+    <x-admin.toolbar :placeholder="__('Name or phone')" :per-page="$pagination">
+        @if(in_array($current, $statuses, true))<input type="hidden" name="status" value="{{ $current }}">@endif
+    </x-admin.toolbar>
+    <div id="datatable">@include('admin-panel.shop-application.shop-application-table')</div>
+</x-admin.card>
 @endsection
