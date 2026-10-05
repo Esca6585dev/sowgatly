@@ -1,0 +1,28 @@
+{
+  "_comment": "Shared by the PHP recorder (tests/Contract) and the Go replay (api/contract). A value matching a rule is replaced by its placeholder in fixtures and in live responses before comparing.",
+  "keys": {
+    "token": "<token>",
+    "access_token": "<token>",
+    "plainTextToken": "<token>",
+    "remember_token": "<token>",
+    "device_token": "<token>"
+  },
+  "patterns": [
+    {
+      "name": "datetime",
+      "regex": "^\\d{4}-\\d{2}-\\d{2}[ T]\\d{2}:\\d{2}(:\\d{2}(\\.\\d+)?)?(Z|[+-]\\d{2}:?\\d{2})?$",
+      "placeholder": "<datetime>"
+    },
+    {
+      "name": "sanctum-token",
+      "regex": "^\\d+\\|[A-Za-z0-9]{40}$",
+      "placeholder": "<token>"
+    }
+  ],
+  "url": {
+    "_comment": "Absolute URLs: scheme and host become <url>, the path is kept so storage paths are still compared. Relative paths matching path_regex keep their shape too. In both, path segments that are random file names (Str::random, uniqid) become <file>.",
+    "regex": "^https?://[^/\\s]+(/[^\\s]*)?$",
+    "path_regex": "^/storage/[^\\s]*$",
+    "random_segment": "^([A-Za-z0-9_-]{16,}|[0-9a-f]{13})(\\.[A-Za-z0-9]{2,5})?$"
+  }
+}
