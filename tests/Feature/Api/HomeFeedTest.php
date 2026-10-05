@@ -30,10 +30,11 @@ class HomeFeedTest extends TestCase
         Product::factory()->count(2)->create(['shop_id' => $shop->id, 'category_id' => $flowers->id, 'production_time' => 60]);
         Product::factory()->create(['shop_id' => $shop->id, 'category_id' => $sub->id, 'production_time' => 600]);
         // Only one gift product: the category section needs at least two.
-        Product::factory()->create(['shop_id' => $shop->id, 'category_id' => $gifts->id]);
+        // Fixed production time: a random one under 180 min would also land in "delivery today".
+        Product::factory()->create(['shop_id' => $shop->id, 'category_id' => $gifts->id, 'production_time' => 600]);
         // Hidden products never show up.
         Product::factory()->inactive()->create(['shop_id' => $shop->id, 'category_id' => $flowers->id]);
-        Product::factory()->create(['shop_id' => $shop->id, 'category_id' => $flowers->id, 'seller_status' => false]);
+        Product::factory()->create(['shop_id' => $shop->id, 'category_id' => $flowers->id, 'seller_status' => false, 'production_time' => 60]);
         // Another city.
         Product::factory()->count(3)->create(['shop_id' => Shop::factory()->create(['region_id' => $mary->id])->id, 'category_id' => $flowers->id]);
 
