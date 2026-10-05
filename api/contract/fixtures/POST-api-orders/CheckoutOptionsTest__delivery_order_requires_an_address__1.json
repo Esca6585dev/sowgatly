@@ -1,0 +1,241 @@
+{
+    "name": "CheckoutOptionsTest__delivery_order_requires_an_address__1",
+    "test": "Tests\\Feature\\Api\\CheckoutOptionsTest::delivery_order_requires_an_address",
+    "route": "POST api/orders",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:06",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 61
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/orders",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "delivery_type": "asap",
+            "recipient_phone": "65656585",
+            "delivery_address": null
+        }
+    },
+    "response": {
+        "status": 422,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "The delivery address field is required."
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "cart_items": [
+                {
+                    "id": 12,
+                    "cart_id": 10,
+                    "product_id": 24,
+                    "quantity": 2,
+                    "price": "100.00",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "carts": [
+                {
+                    "id": 10,
+                    "user_id": 61,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 26,
+                    "name_tm": "quae",
+                    "name_en": "iste",
+                    "name_ru": "quis",
+                    "image": "https://via.placeholder.com/640x480.png/003399?text=aspernatur",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "images": [
+                {
+                    "id": 70,
+                    "url": "https://picsum.photos/id/160/300/300",
+                    "product_id": 24,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 71,
+                    "url": "https://picsum.photos/id/475/300/300",
+                    "product_id": 24,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 72,
+                    "url": "https://picsum.photos/id/189/300/300",
+                    "product_id": 24,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "products": [
+                {
+                    "id": 24,
+                    "name_tm": "sed ex deserunt",
+                    "name_en": "sed ex deserunt",
+                    "name_ru": "sed ex deserunt",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Fugiat aut reprehenderit quis est nulla aut.",
+                    "description_en": "Quia velit ipsa qui.",
+                    "description_ru": "Ad enim in odit tempora nostrum facere doloremque.",
+                    "production_time": 388,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 26,
+                    "category_id": 26,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 67,
+                    "name": "Shaynebury",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 68,
+                    "name": "New Amanifort",
+                    "type": "province",
+                    "parent_id": 67,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 69,
+                    "name": "Gutmannville",
+                    "type": "city",
+                    "parent_id": 68,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 26,
+                    "name": "Crooks-Turcotte",
+                    "email": "karson85@example.net",
+                    "phone": null,
+                    "mon_fri_open": "06:44",
+                    "mon_fri_close": "02:31",
+                    "sat_sun_open": "05:25",
+                    "sat_sun_close": "09:18",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 62,
+                    "region_id": 69,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "users": [
+                {
+                    "id": 61,
+                    "name": "Timmy Stroman",
+                    "phone_number": "82119546",
+                    "email": "hking@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "btgPiE9mIf",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 62,
+                    "name": "Madisyn Sauer",
+                    "phone_number": "17895690",
+                    "email": "rosie41@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "cBk7EJIZqk",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 13,
+            "carts": 11,
+            "categories": 27,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 73,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 8,
+            "orders": 11,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 25,
+            "regions": 70,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 27,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 14,
+            "user_otps": 5,
+            "users": 63,
+            "waitlist_items": 1
+        }
+    }
+}

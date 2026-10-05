@@ -1,0 +1,1031 @@
+{
+    "name": "HomeFeedTest__home_cache_is_refreshed_when_banners_or_products_change__3",
+    "test": "Tests\\Feature\\Api\\HomeFeedTest::test_home_cache_is_refreshed_when_banners_or_products_change",
+    "route": "GET api/home",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:07",
+    "timezone": "Asia/Ashgabat",
+    "auth": null,
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/home",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "region": null,
+            "categories": [
+                {
+                    "id": 41,
+                    "name": {
+                        "tm": "dignissimos",
+                        "en": "odio",
+                        "ru": "fugiat"
+                    },
+                    "image": "<url>/640x480.png/002222?text=distinctio",
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                }
+            ],
+            "banners": [
+                {
+                    "id": 5,
+                    "title": {
+                        "tm": "Täze ýyl",
+                        "ru": "С Новым годом",
+                        "en": "Happy New Year"
+                    },
+                    "subtitle": {
+                        "tm": "Bagtly pursatlary sowgat ediň",
+                        "ru": "Дарите моменты счастья",
+                        "en": "Give moments of happiness"
+                    },
+                    "image": null,
+                    "link_type": "none",
+                    "link_value": null,
+                    "position": 0
+                }
+            ],
+            "sections": [
+                {
+                    "key": "delivery_today",
+                    "title": {
+                        "tm": "Şu gün eltip bermek",
+                        "ru": "Доставка сегодня",
+                        "en": "Delivery today"
+                    },
+                    "products": [
+                        {
+                            "id": 54,
+                            "name": {
+                                "tm": "molestiae qui aut",
+                                "en": "molestiae qui aut",
+                                "ru": "molestiae qui aut"
+                            },
+                            "price": "977.35",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Non ipsa reiciendis architecto voluptatem quis.",
+                                "en": "Laudantium voluptatum illo non.",
+                                "ru": "Dolore ex necessitatibus a omnis nobis blanditiis."
+                            },
+                            "production_time": 167,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 46,
+                            "category_id": 41,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 160,
+                                    "url": "<url>/300x300/?product&sig=620",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 161,
+                                    "url": "<url>/id/592/300/300",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 162,
+                                    "url": "<url>/300x300/?product&sig=996",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 41,
+                                "name_tm": "dignissimos",
+                                "name_en": "odio",
+                                "name_ru": "fugiat",
+                                "image": "<url>/640x480.png/002222?text=distinctio",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 46,
+                                "name": "Harris-Price",
+                                "email": "tommie.zulauf@example.com",
+                                "phone": null,
+                                "mon_fri_open": "14:48",
+                                "mon_fri_close": "17:26",
+                                "sat_sun_open": "04:01",
+                                "sat_sun_close": "23:49",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 102,
+                                "region_id": 107,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "popular",
+                    "title": {
+                        "tm": "Meşhur harytlar",
+                        "ru": "Популярное",
+                        "en": "Popular"
+                    },
+                    "products": [
+                        {
+                            "id": 53,
+                            "name": {
+                                "tm": "mollitia repellat aspernatur",
+                                "en": "mollitia repellat aspernatur",
+                                "ru": "mollitia repellat aspernatur"
+                            },
+                            "price": "207.29",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Ut consequatur velit ipsa iusto aut.",
+                                "en": "Doloremque rerum cumque totam perferendis doloremque aperiam soluta.",
+                                "ru": "Impedit labore quos reprehenderit ipsa."
+                            },
+                            "production_time": 834,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 45,
+                            "category_id": 41,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 157,
+                                    "url": "<url>/id/514/300/300",
+                                    "product_id": 53,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 158,
+                                    "url": "<url>/id/919/300/300",
+                                    "product_id": 53,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 159,
+                                    "url": "<url>/id/622/300/300",
+                                    "product_id": 53,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 41,
+                                "name_tm": "dignissimos",
+                                "name_en": "odio",
+                                "name_ru": "fugiat",
+                                "image": "<url>/640x480.png/002222?text=distinctio",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 45,
+                                "name": "Prosacco, Ankunding and Murray",
+                                "email": "janae36@example.net",
+                                "phone": null,
+                                "mon_fri_open": "21:24",
+                                "mon_fri_close": "21:11",
+                                "sat_sun_open": "20:27",
+                                "sat_sun_close": "20:23",
+                                "image": "shop/shop-seeder/logo.png",
+                                "user_id": 101,
+                                "region_id": 106,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 54,
+                            "name": {
+                                "tm": "molestiae qui aut",
+                                "en": "molestiae qui aut",
+                                "ru": "molestiae qui aut"
+                            },
+                            "price": "977.35",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Non ipsa reiciendis architecto voluptatem quis.",
+                                "en": "Laudantium voluptatum illo non.",
+                                "ru": "Dolore ex necessitatibus a omnis nobis blanditiis."
+                            },
+                            "production_time": 167,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 46,
+                            "category_id": 41,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 160,
+                                    "url": "<url>/300x300/?product&sig=620",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 161,
+                                    "url": "<url>/id/592/300/300",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 162,
+                                    "url": "<url>/300x300/?product&sig=996",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 41,
+                                "name_tm": "dignissimos",
+                                "name_en": "odio",
+                                "name_ru": "fugiat",
+                                "image": "<url>/640x480.png/002222?text=distinctio",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 46,
+                                "name": "Harris-Price",
+                                "email": "tommie.zulauf@example.com",
+                                "phone": null,
+                                "mon_fri_open": "14:48",
+                                "mon_fri_close": "17:26",
+                                "sat_sun_open": "04:01",
+                                "sat_sun_close": "23:49",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 102,
+                                "region_id": 107,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 55,
+                            "name": {
+                                "tm": "voluptate amet enim",
+                                "en": "voluptate amet enim",
+                                "ru": "voluptate amet enim"
+                            },
+                            "price": "811.71",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Eum voluptas necessitatibus ex blanditiis sunt ipsam earum.",
+                                "en": "Omnis pariatur error dolor perferendis velit.",
+                                "ru": "Qui consectetur nostrum veritatis repudiandae."
+                            },
+                            "production_time": 1179,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 47,
+                            "category_id": 41,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 163,
+                                    "url": "<url>/300x300/?product&sig=711",
+                                    "product_id": 55,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 164,
+                                    "url": "<url>/300x300/?product&sig=328",
+                                    "product_id": 55,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 165,
+                                    "url": "<url>/300/300/product?lock=62",
+                                    "product_id": 55,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 41,
+                                "name_tm": "dignissimos",
+                                "name_en": "odio",
+                                "name_ru": "fugiat",
+                                "image": "<url>/640x480.png/002222?text=distinctio",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 47,
+                                "name": "Jerde, Pfeffer and Murray",
+                                "email": "rsmitham@example.net",
+                                "phone": null,
+                                "mon_fri_open": "23:31",
+                                "mon_fri_close": "05:22",
+                                "sat_sun_open": "03:52",
+                                "sat_sun_close": "15:54",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 103,
+                                "region_id": 108,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "category:41",
+                    "title": {
+                        "tm": "dignissimos",
+                        "ru": "fugiat",
+                        "en": "odio"
+                    },
+                    "category_id": 41,
+                    "products": [
+                        {
+                            "id": 53,
+                            "name": {
+                                "tm": "mollitia repellat aspernatur",
+                                "en": "mollitia repellat aspernatur",
+                                "ru": "mollitia repellat aspernatur"
+                            },
+                            "price": "207.29",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Ut consequatur velit ipsa iusto aut.",
+                                "en": "Doloremque rerum cumque totam perferendis doloremque aperiam soluta.",
+                                "ru": "Impedit labore quos reprehenderit ipsa."
+                            },
+                            "production_time": 834,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 45,
+                            "category_id": 41,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 157,
+                                    "url": "<url>/id/514/300/300",
+                                    "product_id": 53,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 158,
+                                    "url": "<url>/id/919/300/300",
+                                    "product_id": 53,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 159,
+                                    "url": "<url>/id/622/300/300",
+                                    "product_id": 53,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 41,
+                                "name_tm": "dignissimos",
+                                "name_en": "odio",
+                                "name_ru": "fugiat",
+                                "image": "<url>/640x480.png/002222?text=distinctio",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 45,
+                                "name": "Prosacco, Ankunding and Murray",
+                                "email": "janae36@example.net",
+                                "phone": null,
+                                "mon_fri_open": "21:24",
+                                "mon_fri_close": "21:11",
+                                "sat_sun_open": "20:27",
+                                "sat_sun_close": "20:23",
+                                "image": "shop/shop-seeder/logo.png",
+                                "user_id": 101,
+                                "region_id": 106,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 54,
+                            "name": {
+                                "tm": "molestiae qui aut",
+                                "en": "molestiae qui aut",
+                                "ru": "molestiae qui aut"
+                            },
+                            "price": "977.35",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Non ipsa reiciendis architecto voluptatem quis.",
+                                "en": "Laudantium voluptatum illo non.",
+                                "ru": "Dolore ex necessitatibus a omnis nobis blanditiis."
+                            },
+                            "production_time": 167,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 46,
+                            "category_id": 41,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 160,
+                                    "url": "<url>/300x300/?product&sig=620",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 161,
+                                    "url": "<url>/id/592/300/300",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 162,
+                                    "url": "<url>/300x300/?product&sig=996",
+                                    "product_id": 54,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 41,
+                                "name_tm": "dignissimos",
+                                "name_en": "odio",
+                                "name_ru": "fugiat",
+                                "image": "<url>/640x480.png/002222?text=distinctio",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 46,
+                                "name": "Harris-Price",
+                                "email": "tommie.zulauf@example.com",
+                                "phone": null,
+                                "mon_fri_open": "14:48",
+                                "mon_fri_close": "17:26",
+                                "sat_sun_open": "04:01",
+                                "sat_sun_close": "23:49",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 102,
+                                "region_id": 107,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 55,
+                            "name": {
+                                "tm": "voluptate amet enim",
+                                "en": "voluptate amet enim",
+                                "ru": "voluptate amet enim"
+                            },
+                            "price": "811.71",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Eum voluptas necessitatibus ex blanditiis sunt ipsam earum.",
+                                "en": "Omnis pariatur error dolor perferendis velit.",
+                                "ru": "Qui consectetur nostrum veritatis repudiandae."
+                            },
+                            "production_time": 1179,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 47,
+                            "category_id": 41,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 163,
+                                    "url": "<url>/300x300/?product&sig=711",
+                                    "product_id": 55,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 164,
+                                    "url": "<url>/300x300/?product&sig=328",
+                                    "product_id": 55,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 165,
+                                    "url": "<url>/300/300/product?lock=62",
+                                    "product_id": 55,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 41,
+                                "name_tm": "dignissimos",
+                                "name_en": "odio",
+                                "name_ru": "fugiat",
+                                "image": "<url>/640x480.png/002222?text=distinctio",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 47,
+                                "name": "Jerde, Pfeffer and Murray",
+                                "email": "rsmitham@example.net",
+                                "phone": null,
+                                "mon_fri_open": "23:31",
+                                "mon_fri_close": "05:22",
+                                "sat_sun_open": "03:52",
+                                "sat_sun_close": "15:54",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 103,
+                                "region_id": 108,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "banners": [
+                {
+                    "id": 5,
+                    "title_tm": "Täze ýyl",
+                    "title_ru": "С Новым годом",
+                    "title_en": "Happy New Year",
+                    "subtitle_tm": "Bagtly pursatlary sowgat ediň",
+                    "subtitle_ru": "Дарите моменты счастья",
+                    "subtitle_en": "Give moments of happiness",
+                    "image": null,
+                    "link_type": "none",
+                    "link_value": null,
+                    "region_id": null,
+                    "position": 0,
+                    "is_active": 1,
+                    "starts_at": null,
+                    "ends_at": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 41,
+                    "name_tm": "dignissimos",
+                    "name_en": "odio",
+                    "name_ru": "fugiat",
+                    "image": "https://via.placeholder.com/640x480.png/002222?text=distinctio",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "images": [
+                {
+                    "id": 157,
+                    "url": "https://picsum.photos/id/514/300/300",
+                    "product_id": 53,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 158,
+                    "url": "https://picsum.photos/id/919/300/300",
+                    "product_id": 53,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 159,
+                    "url": "https://picsum.photos/id/622/300/300",
+                    "product_id": 53,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 160,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=620",
+                    "product_id": 54,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 161,
+                    "url": "https://picsum.photos/id/592/300/300",
+                    "product_id": 54,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 162,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=996",
+                    "product_id": 54,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 163,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=711",
+                    "product_id": 55,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 164,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=328",
+                    "product_id": 55,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 165,
+                    "url": "https://loremflickr.com/300/300/product?lock=62",
+                    "product_id": 55,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "products": [
+                {
+                    "id": 53,
+                    "name_tm": "mollitia repellat aspernatur",
+                    "name_en": "mollitia repellat aspernatur",
+                    "name_ru": "mollitia repellat aspernatur",
+                    "price": "207.29",
+                    "discount": 0,
+                    "description_tm": "Ut consequatur velit ipsa iusto aut.",
+                    "description_en": "Doloremque rerum cumque totam perferendis doloremque aperiam soluta.",
+                    "description_ru": "Impedit labore quos reprehenderit ipsa.",
+                    "production_time": 834,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 45,
+                    "category_id": 41,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 54,
+                    "name_tm": "molestiae qui aut",
+                    "name_en": "molestiae qui aut",
+                    "name_ru": "molestiae qui aut",
+                    "price": "977.35",
+                    "discount": 0,
+                    "description_tm": "Non ipsa reiciendis architecto voluptatem quis.",
+                    "description_en": "Laudantium voluptatum illo non.",
+                    "description_ru": "Dolore ex necessitatibus a omnis nobis blanditiis.",
+                    "production_time": 167,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 46,
+                    "category_id": 41,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 55,
+                    "name_tm": "voluptate amet enim",
+                    "name_en": "voluptate amet enim",
+                    "name_ru": "voluptate amet enim",
+                    "price": "811.71",
+                    "discount": 0,
+                    "description_tm": "Eum voluptas necessitatibus ex blanditiis sunt ipsam earum.",
+                    "description_en": "Omnis pariatur error dolor perferendis velit.",
+                    "description_ru": "Qui consectetur nostrum veritatis repudiandae.",
+                    "production_time": 1179,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 47,
+                    "category_id": 41,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 106,
+                    "name": "South Deeland",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 107,
+                    "name": "Rafaelastad",
+                    "type": "village",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 108,
+                    "name": "New Jasenfurt",
+                    "type": "province",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 45,
+                    "name": "Prosacco, Ankunding and Murray",
+                    "email": "janae36@example.net",
+                    "phone": null,
+                    "mon_fri_open": "21:24",
+                    "mon_fri_close": "21:11",
+                    "sat_sun_open": "20:27",
+                    "sat_sun_close": "20:23",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 101,
+                    "region_id": 106,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 46,
+                    "name": "Harris-Price",
+                    "email": "tommie.zulauf@example.com",
+                    "phone": null,
+                    "mon_fri_open": "14:48",
+                    "mon_fri_close": "17:26",
+                    "sat_sun_open": "04:01",
+                    "sat_sun_close": "23:49",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 102,
+                    "region_id": 107,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 47,
+                    "name": "Jerde, Pfeffer and Murray",
+                    "email": "rsmitham@example.net",
+                    "phone": null,
+                    "mon_fri_open": "23:31",
+                    "mon_fri_close": "05:22",
+                    "sat_sun_open": "03:52",
+                    "sat_sun_close": "15:54",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 103,
+                    "region_id": 108,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "users": [
+                {
+                    "id": 101,
+                    "name": "Augustine Farrell",
+                    "phone_number": "98974982",
+                    "email": "monahan.martina@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "HDiO6PcGYZ",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 102,
+                    "name": "Samantha Batz",
+                    "phone_number": "55495024",
+                    "email": "eldred70@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "kSKqT1pwvw",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 103,
+                    "name": "Kailyn O'Keefe",
+                    "phone_number": "18521522",
+                    "email": "lou42@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "5WMTwN02NI",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 6,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 42,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 166,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 12,
+            "orders": 13,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 4,
+            "products": 56,
+            "regions": 109,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 48,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 18,
+            "user_otps": 5,
+            "users": 104,
+            "waitlist_items": 1
+        }
+    }
+}

@@ -1,0 +1,125 @@
+{
+    "name": "CustomerAccountTest__addresses_crud_and_default_handling__1",
+    "test": "Tests\\Feature\\Api\\CustomerAccountTest::test_addresses_crud_and_default_handling",
+    "route": "PUT api/me/addresses/{id}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:06",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 69
+    },
+    "config": {},
+    "request": {
+        "method": "PUT",
+        "path": "/api/me/addresses/1",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "address": "Aşgabat, Parahat 8"
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "data": {
+                "id": 1,
+                "user_id": 69,
+                "title": null,
+                "address": "Aşgabat, Parahat 8",
+                "is_default": false,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>"
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "user_addresses": [
+                {
+                    "id": 1,
+                    "user_id": 69,
+                    "title": "Home",
+                    "address": "Aşgabat, Parahat 7",
+                    "is_default": 0,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 2,
+                    "user_id": 69,
+                    "title": null,
+                    "address": "Aşgabat, Mir 2",
+                    "is_default": 1,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "users": [
+                {
+                    "id": 69,
+                    "name": "Tyshawn Mohr III",
+                    "phone_number": "54535720",
+                    "email": "florencio.goodwin@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "rPRnNMRvtB",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 29,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 2,
+            "images": 79,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 27,
+            "regions": 76,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 29,
+            "telescope_entries": 1,
+            "user_addresses": 3,
+            "user_notifications": 15,
+            "user_otps": 5,
+            "users": 70,
+            "waitlist_items": 1
+        }
+    }
+}

@@ -1,0 +1,174 @@
+{
+    "name": "ChatTest__a_thread_is_private_to_its_customer_and_shop__1",
+    "test": "Tests\\Feature\\Api\\ChatTest::a_thread_is_private_to_its_customer_and_shop",
+    "route": "GET api/shop/chats",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:06",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 52
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/shop/chats",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 403,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "You do not have a shop"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "chat_threads": [
+                {
+                    "id": 2,
+                    "user_id": 50,
+                    "shop_id": 21,
+                    "order_id": null,
+                    "last_message_at": null,
+                    "user_unread": 0,
+                    "shop_unread": 0,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 56,
+                    "name": "North Lyda",
+                    "type": "village",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 21,
+                    "name": "Goldner-Leannon",
+                    "email": "isac.lebsack@example.com",
+                    "phone": null,
+                    "mon_fri_open": "20:18",
+                    "mon_fri_close": "05:00",
+                    "sat_sun_open": "15:52",
+                    "sat_sun_close": "06:03",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 51,
+                    "region_id": 56,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 50,
+                    "name": "Dora Kreiger I",
+                    "phone_number": "59639921",
+                    "email": "myrtie04@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "39jGNmtF0w",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 51,
+                    "name": "Leora Gutkowski",
+                    "phone_number": "75688152",
+                    "email": "tina16@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "wjsjF0JE58",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 52,
+                    "name": "Stacy Bergnaum",
+                    "phone_number": "62559933",
+                    "email": "sophie.franecki@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "SDmnLHx3OV",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 23,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 61,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 6,
+            "orders": 9,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 21,
+            "regions": 57,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 22,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 12,
+            "user_otps": 5,
+            "users": 53,
+            "waitlist_items": 1
+        }
+    }
+}

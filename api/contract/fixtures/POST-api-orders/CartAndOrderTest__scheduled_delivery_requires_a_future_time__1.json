@@ -1,0 +1,241 @@
+{
+    "name": "CartAndOrderTest__scheduled_delivery_requires_a_future_time__1",
+    "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_scheduled_delivery_requires_a_future_time",
+    "route": "POST api/orders",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 22
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/orders",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "delivery_type": "scheduled",
+            "recipient_phone": "65123456",
+            "delivery_address": "x"
+        }
+    },
+    "response": {
+        "status": 422,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "The scheduled at field is required when delivery type is scheduled."
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "cart_items": [
+                {
+                    "id": 8,
+                    "cart_id": 6,
+                    "product_id": 9,
+                    "quantity": 1,
+                    "price": "100.00",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "carts": [
+                {
+                    "id": 6,
+                    "user_id": 22,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 9,
+                    "name_tm": "architecto",
+                    "name_en": "dolores",
+                    "name_ru": "nisi",
+                    "image": "https://via.placeholder.com/640x480.png/007733?text=voluptatem",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "images": [
+                {
+                    "id": 25,
+                    "url": "https://picsum.photos/id/33/300/300",
+                    "product_id": 9,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 26,
+                    "url": "https://picsum.photos/id/556/300/300",
+                    "product_id": 9,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 27,
+                    "url": "https://loremflickr.com/300/300/product?lock=341",
+                    "product_id": 9,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "products": [
+                {
+                    "id": 9,
+                    "name_tm": "vel aliquam voluptatum",
+                    "name_en": "vel aliquam voluptatum",
+                    "name_ru": "vel aliquam voluptatum",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Laborum rerum repellat possimus esse iure.",
+                    "description_en": "Perspiciatis cum itaque maiores.",
+                    "description_ru": "Rerum vero deserunt explicabo aliquam suscipit odit.",
+                    "production_time": 1035,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 7,
+                    "category_id": 9,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 19,
+                    "name": "West Richie",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 20,
+                    "name": "Yundtmouth",
+                    "type": "province",
+                    "parent_id": 19,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 21,
+                    "name": "Xzavierburgh",
+                    "type": "city",
+                    "parent_id": 20,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 7,
+                    "name": "Cummerata-Wilkinson",
+                    "email": "durgan.zelma@example.org",
+                    "phone": null,
+                    "mon_fri_open": "01:29",
+                    "mon_fri_close": "23:15",
+                    "sat_sun_open": "00:17",
+                    "sat_sun_close": "07:46",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 23,
+                    "region_id": 21,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 22,
+                    "name": "Consuelo Mante",
+                    "phone_number": "60453130",
+                    "email": "megane30@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "M2SgpytIEv",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 23,
+                    "name": "Saul Nienow",
+                    "phone_number": "74007949",
+                    "email": "cthompson@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "E1D3KCaw6X",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 10,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 28,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 5,
+            "orders": 4,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 10,
+            "regions": 22,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 8,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 4,
+            "user_otps": 5,
+            "users": 24,
+            "waitlist_items": 1
+        }
+    }
+}

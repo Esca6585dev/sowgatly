@@ -1,0 +1,129 @@
+{
+    "name": "AuthOtpTest__login_with_a_valid_code_returns_a_bearer_token__1",
+    "test": "Tests\\Feature\\Api\\AuthOtpTest::test_login_with_a_valid_code_returns_a_bearer_token",
+    "route": "GET api/users/me",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:04",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 4
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/users/me",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Authorization": "Bearer 1|UlrrMfDKyzkIb8Y10Waj8kNu03IS7MssMZpPuwXB09fef5b4",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "data": {
+                "id": 4,
+                "name": "Gideon Wehner",
+                "phone_number": "88025847",
+                "email": "ethel.bogan@example.net",
+                "birth_date": null,
+                "image": "<url>/img/logo/<file>",
+                "status": 1,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>"
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "personal_access_tokens": [
+                {
+                    "id": 1,
+                    "tokenable_type": "App\\Models\\User",
+                    "tokenable_id": 4,
+                    "name": "api-token",
+                    "token": "3418f2c91926bec9cf9cad007438ec953e7c8367053796f13fe7a74002c26df7",
+                    "abilities": "[\"*\"]",
+                    "last_used_at": null,
+                    "expires_at": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "user_otps": [
+                {
+                    "id": 2,
+                    "user_id": 4,
+                    "otp": "0000",
+                    "expire_at": "2026-10-05 12:04:04",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "users": [
+                {
+                    "id": 4,
+                    "name": "Gideon Wehner",
+                    "phone_number": "88025847",
+                    "email": "ethel.bogan@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "1Kd5CWBEeD",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 1,
+            "carts": 1,
+            "categories": 1,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 1,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 1,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 1,
+            "orders": 1,
+            "permissions": 1,
+            "personal_access_tokens": 2,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 1,
+            "regions": 1,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 1,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 1,
+            "user_otps": 3,
+            "users": 5,
+            "waitlist_items": 1
+        }
+    }
+}

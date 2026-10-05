@@ -1,0 +1,317 @@
+{
+    "name": "ProductWriteTest__a_shop_owner_can_partially_update_their_product__1",
+    "test": "Tests\\Feature\\Api\\ProductWriteTest::a_shop_owner_can_partially_update_their_product",
+    "route": "PUT api/products/{product}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:09",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 137
+    },
+    "config": {},
+    "request": {
+        "method": "PUT",
+        "path": "/api/products/70",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "name_en": "Updated name",
+            "price": 99.99
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "message": "Product updated successfully",
+            "data": {
+                "id": 70,
+                "name": {
+                    "tm": "aut iste iusto",
+                    "en": "Updated name",
+                    "ru": "aut iste iusto"
+                },
+                "price": "99.99",
+                "discount": 0,
+                "description": {
+                    "tm": "Et nihil sunt dolor aperiam.",
+                    "en": "Quisquam consequatur explicabo et ut.",
+                    "ru": "Dolores odio in fugiat magni accusantium nisi."
+                },
+                "production_time": 686,
+                "min_order": 1,
+                "seller_status": true,
+                "stock": 10,
+                "width": null,
+                "height": null,
+                "shop_id": 62,
+                "category_id": 59,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>",
+                "attributes": [],
+                "brands": [
+                    {
+                        "id": 5,
+                        "name": "Donnelly-Medhurst",
+                        "description": "Rerum veritatis accusantium quia a qui dolorem ut. Similique at vel laboriosam cumque omnis. Beatae iusto ut sed et ducimus et quos.",
+                        "logo": "<url>/wp-content/uploads/2021/11/Nike-Logo.png",
+                        "status": true,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>",
+                        "pivot": {
+                            "products_id": 70,
+                            "brands_id": 5
+                        }
+                    }
+                ],
+                "images": [
+                    {
+                        "id": 202,
+                        "url": "<url>/300/300/product?lock=912",
+                        "product_id": 70,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 203,
+                        "url": "<url>/id/429/300/300",
+                        "product_id": 70,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 204,
+                        "url": "<url>/300/300/product?lock=646",
+                        "product_id": 70,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    }
+                ],
+                "category": {
+                    "id": 59,
+                    "name_tm": "optio",
+                    "name_en": "praesentium",
+                    "name_ru": "dolores",
+                    "image": "<url>/640x480.png/00aacc?text=atque",
+                    "category_id": null,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "shop": {
+                    "id": 62,
+                    "name": "Muller and Sons",
+                    "email": "icruickshank@example.com",
+                    "phone": null,
+                    "mon_fri_open": "06:46",
+                    "mon_fri_close": "16:39",
+                    "sat_sun_open": "12:35",
+                    "sat_sun_close": "18:19",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 137,
+                    "region_id": 136,
+                    "delivery_fee": "20.00",
+                    "pickup_available": false,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "reviews_avg": null,
+                "reviews_count": 0
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "brands": [
+                {
+                    "id": 5,
+                    "name": "Donnelly-Medhurst",
+                    "description": "Rerum veritatis accusantium quia a qui dolorem ut. Similique at vel laboriosam cumque omnis. Beatae iusto ut sed et ducimus et quos.",
+                    "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
+                    "status": 1,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "brands_products": [
+                {
+                    "id": 3,
+                    "brands_id": 5,
+                    "products_id": 70,
+                    "created_at": null,
+                    "updated_at": null
+                }
+            ],
+            "categories": [
+                {
+                    "id": 58,
+                    "name_tm": "maxime",
+                    "name_en": "aut",
+                    "name_ru": "sunt",
+                    "image": "https://via.placeholder.com/640x480.png/00ddcc?text=facere",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 59,
+                    "name_tm": "optio",
+                    "name_en": "praesentium",
+                    "name_ru": "dolores",
+                    "image": "https://via.placeholder.com/640x480.png/00aacc?text=atque",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "images": [
+                {
+                    "id": 202,
+                    "url": "https://loremflickr.com/300/300/product?lock=912",
+                    "product_id": 70,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 203,
+                    "url": "https://picsum.photos/id/429/300/300",
+                    "product_id": 70,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 204,
+                    "url": "https://loremflickr.com/300/300/product?lock=646",
+                    "product_id": 70,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "products": [
+                {
+                    "id": 70,
+                    "name_tm": "aut iste iusto",
+                    "name_en": "aut iste iusto",
+                    "name_ru": "aut iste iusto",
+                    "price": "440.80",
+                    "discount": 0,
+                    "description_tm": "Et nihil sunt dolor aperiam.",
+                    "description_en": "Quisquam consequatur explicabo et ut.",
+                    "description_ru": "Dolores odio in fugiat magni accusantium nisi.",
+                    "production_time": 686,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 62,
+                    "category_id": 59,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 136,
+                    "name": "Harberchester",
+                    "type": "village",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 62,
+                    "name": "Muller and Sons",
+                    "email": "icruickshank@example.com",
+                    "phone": null,
+                    "mon_fri_open": "06:46",
+                    "mon_fri_close": "16:39",
+                    "sat_sun_open": "12:35",
+                    "sat_sun_close": "18:19",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 137,
+                    "region_id": 136,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "users": [
+                {
+                    "id": 137,
+                    "name": "Prof. Naomie Ortiz",
+                    "phone_number": "50814058",
+                    "email": "schuster.tina@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "RT0AVrEhV3",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 6,
+            "brands_products": 4,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 60,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 5,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 205,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 21,
+            "orders": 21,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 11,
+            "products": 71,
+            "regions": 137,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 63,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 31,
+            "user_otps": 5,
+            "users": 138,
+            "waitlist_items": 1
+        }
+    }
+}

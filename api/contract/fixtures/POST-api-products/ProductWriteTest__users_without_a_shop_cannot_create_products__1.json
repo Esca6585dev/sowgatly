@@ -1,0 +1,186 @@
+{
+    "name": "ProductWriteTest__users_without_a_shop_cannot_create_products__1",
+    "test": "Tests\\Feature\\Api\\ProductWriteTest::users_without_a_shop_cannot_create_products",
+    "route": "POST api/products",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:09",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 135
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/products",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "name_tm": "Bägül çemeni",
+            "name_en": "Rose bouquet",
+            "name_ru": "Букет роз",
+            "description_tm": "Gyzyl bägüller",
+            "description_en": "Red roses",
+            "description_ru": "Красные розы",
+            "price": 250.5,
+            "discount": 10,
+            "stock": 20,
+            "production_time": 120,
+            "min_order": 1,
+            "seller_status": true,
+            "status": true,
+            "category_id": 56,
+            "brand_ids": [
+                3
+            ]
+        }
+    },
+    "response": {
+        "status": 403,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "Only shop owners can add products"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "brands": [
+                {
+                    "id": 3,
+                    "name": "Wuckert Group",
+                    "description": "Sed sunt velit veritatis id. Sit ullam neque autem magnam. Consequatur dolore voluptatibus sed et sunt.",
+                    "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
+                    "status": 1,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 56,
+                    "name_tm": "nihil",
+                    "name_en": "officiis",
+                    "name_ru": "deserunt",
+                    "image": "https://via.placeholder.com/640x480.png/00aacc?text=cumque",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 134,
+                    "name": "Melvinafurt",
+                    "type": "city",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 60,
+                    "name": "O'Connell-Swaniawski",
+                    "email": "jhoppe@example.com",
+                    "phone": null,
+                    "mon_fri_open": "02:04",
+                    "mon_fri_close": "15:20",
+                    "sat_sun_open": "10:01",
+                    "sat_sun_close": "21:50",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 134,
+                    "region_id": 134,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "users": [
+                {
+                    "id": 134,
+                    "name": "Miss Rebecca Auer PhD",
+                    "phone_number": "56408108",
+                    "email": "charley.brown@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "uypHf6V8nz",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 135,
+                    "name": "Brycen Lind",
+                    "phone_number": "28624778",
+                    "email": "qcollier@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "UHf1mc2Lnj",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 4,
+            "brands_products": 3,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 57,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 5,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 202,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 21,
+            "orders": 21,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 11,
+            "products": 70,
+            "regions": 135,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 61,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 31,
+            "user_otps": 5,
+            "users": 136,
+            "waitlist_items": 1
+        }
+    }
+}

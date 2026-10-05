@@ -1,0 +1,363 @@
+{
+    "name": "CartAndOrderTest__checkout_splits_a_multi_shop_cart_into_one_order_per_shop__1",
+    "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_checkout_splits_a_multi_shop_cart_into_one_order_per_shop",
+    "route": "POST api/cart/add",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 19
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/cart/add",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "product_id": 7,
+            "quantity": 2
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "message": "Product added to cart",
+            "cart_item": {
+                "cart_id": 5,
+                "product_id": 7,
+                "quantity": 2,
+                "price": 100,
+                "updated_at": "<datetime>",
+                "created_at": "<datetime>",
+                "id": 6,
+                "product": {
+                    "id": 7,
+                    "name_tm": "illo dolorum aut",
+                    "name_en": "illo dolorum aut",
+                    "name_ru": "illo dolorum aut",
+                    "price": "100.00",
+                    "discount": null,
+                    "description_tm": "Aut corporis necessitatibus nihil autem ea similique.",
+                    "description_en": "Earum maxime a accusantium quo tenetur aut.",
+                    "description_ru": "Dolore corporis dolorem voluptatibus facilis dicta ut.",
+                    "production_time": 987,
+                    "min_order": 1,
+                    "stock": 5,
+                    "seller_status": true,
+                    "status": true,
+                    "shop_id": 5,
+                    "category_id": 7,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                }
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 7,
+                    "name_tm": "recusandae",
+                    "name_en": "velit",
+                    "name_ru": "nihil",
+                    "image": "https://via.placeholder.com/640x480.png/000011?text=est",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 8,
+                    "name_tm": "voluptatibus",
+                    "name_en": "distinctio",
+                    "name_ru": "doloremque",
+                    "image": "https://via.placeholder.com/640x480.png/00ff00?text=sit",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "images": [
+                {
+                    "id": 19,
+                    "url": "https://picsum.photos/id/610/300/300",
+                    "product_id": 7,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 20,
+                    "url": "https://loremflickr.com/300/300/product?lock=374",
+                    "product_id": 7,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 21,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=748",
+                    "product_id": 7,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 22,
+                    "url": "https://loremflickr.com/300/300/product?lock=213",
+                    "product_id": 8,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 23,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=678",
+                    "product_id": 8,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 24,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=190",
+                    "product_id": 8,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "products": [
+                {
+                    "id": 7,
+                    "name_tm": "illo dolorum aut",
+                    "name_en": "illo dolorum aut",
+                    "name_ru": "illo dolorum aut",
+                    "price": "100.00",
+                    "discount": null,
+                    "description_tm": "Aut corporis necessitatibus nihil autem ea similique.",
+                    "description_en": "Earum maxime a accusantium quo tenetur aut.",
+                    "description_ru": "Dolore corporis dolorem voluptatibus facilis dicta ut.",
+                    "production_time": 987,
+                    "min_order": 1,
+                    "stock": 5,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 5,
+                    "category_id": 7,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 8,
+                    "name_tm": "ut vel et",
+                    "name_en": "ut vel et",
+                    "name_ru": "ut vel et",
+                    "price": "60.00",
+                    "discount": null,
+                    "description_tm": "Eius ad dolore recusandae harum asperiores.",
+                    "description_en": "Explicabo praesentium ut nesciunt reiciendis dicta.",
+                    "description_ru": "Enim dolores laborum quia ipsa enim.",
+                    "production_time": 1426,
+                    "min_order": 1,
+                    "stock": 5,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 6,
+                    "category_id": 8,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 13,
+                    "name": "Murlfort",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 14,
+                    "name": "Spinkashire",
+                    "type": "province",
+                    "parent_id": 13,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 15,
+                    "name": "Port Leopold",
+                    "type": "city",
+                    "parent_id": 14,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 16,
+                    "name": "West Adah",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 17,
+                    "name": "Nolanfurt",
+                    "type": "province",
+                    "parent_id": 16,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 18,
+                    "name": "Port Sunny",
+                    "type": "city",
+                    "parent_id": 17,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 5,
+                    "name": "Nolan PLC",
+                    "email": "harry.schulist@example.com",
+                    "phone": null,
+                    "mon_fri_open": "17:29",
+                    "mon_fri_close": "08:14",
+                    "sat_sun_open": "15:18",
+                    "sat_sun_close": "09:17",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 20,
+                    "region_id": 15,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 6,
+                    "name": "Rice Group",
+                    "email": "zpfannerstill@example.com",
+                    "phone": null,
+                    "mon_fri_open": "15:40",
+                    "mon_fri_close": "01:06",
+                    "sat_sun_open": "23:50",
+                    "sat_sun_close": "18:59",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 21,
+                    "region_id": 18,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 19,
+                    "name": "Jake Haley III",
+                    "phone_number": "76984915",
+                    "email": "oleta.von@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "8Cdxe0JQmF",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 20,
+                    "name": "Ms. Fay Jacobi PhD",
+                    "phone_number": "52874968",
+                    "email": "adella.reynolds@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "v5uEAfpTSc",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 21,
+                    "name": "Ms. Dandre Terry",
+                    "phone_number": "01868445",
+                    "email": "jadon80@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "1oV5PNQW6W",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 6,
+            "carts": 5,
+            "categories": 9,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 25,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 3,
+            "orders": 2,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 9,
+            "regions": 19,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 7,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 2,
+            "user_otps": 5,
+            "users": 22,
+            "waitlist_items": 1
+        }
+    }
+}

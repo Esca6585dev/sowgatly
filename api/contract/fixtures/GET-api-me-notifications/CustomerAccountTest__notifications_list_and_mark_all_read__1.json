@@ -1,0 +1,149 @@
+{
+    "name": "CustomerAccountTest__notifications_list_and_mark_all_read__1",
+    "test": "Tests\\Feature\\Api\\CustomerAccountTest::test_notifications_list_and_mark_all_read",
+    "route": "GET api/me/notifications",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:06",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 72
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/me/notifications",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "data": [
+                {
+                    "id": 15,
+                    "user_id": 72,
+                    "type": "order_status",
+                    "data": {
+                        "order_id": 1,
+                        "status": "processing"
+                    },
+                    "read_at": null,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>",
+                    "title": "Order № 0000001 is being prepared",
+                    "body": "The shop confirmed your order and started preparing it."
+                }
+            ],
+            "meta": {
+                "unread": 1
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "user_notifications": [
+                {
+                    "id": 15,
+                    "user_id": 72,
+                    "type": "order_status",
+                    "data": "{\"order_id\":1,\"status\":\"processing\"}",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 16,
+                    "user_id": 73,
+                    "type": "order_status",
+                    "data": "[]",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "users": [
+                {
+                    "id": 72,
+                    "name": "Sean Rohan",
+                    "phone_number": "71234616",
+                    "email": "arthur14@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "lAFllbh2Vz",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 73,
+                    "name": "Nicole Heidenreich",
+                    "phone_number": "24392193",
+                    "email": "orn.abraham@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "cbHJMlXdzI",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 29,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 2,
+            "images": 79,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 27,
+            "regions": 76,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 29,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 17,
+            "user_otps": 5,
+            "users": 74,
+            "waitlist_items": 1
+        }
+    }
+}

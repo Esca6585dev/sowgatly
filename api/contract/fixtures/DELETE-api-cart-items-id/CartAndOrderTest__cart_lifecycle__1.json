@@ -1,0 +1,356 @@
+{
+    "name": "CartAndOrderTest__cart_lifecycle__1",
+    "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_cart_lifecycle",
+    "route": "DELETE api/cart/items/{id}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:04",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 10
+    },
+    "config": {},
+    "request": {
+        "method": "DELETE",
+        "path": "/api/cart/items/2",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "cart": {
+                "id": 1,
+                "user_id": 10,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>",
+                "items": [
+                    {
+                        "id": 1,
+                        "cart_id": 1,
+                        "product_id": 1,
+                        "quantity": 2,
+                        "price": "90.00",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>",
+                        "product": {
+                            "id": 1,
+                            "name_tm": "fugiat similique et",
+                            "name_en": "fugiat similique et",
+                            "name_ru": "fugiat similique et",
+                            "price": "100.00",
+                            "discount": 10,
+                            "description_tm": "Magnam tempora aliquid facilis dolor suscipit.",
+                            "description_en": "Provident non ut ut et.",
+                            "description_ru": "Qui ducimus voluptatem aut cumque.",
+                            "production_time": 1180,
+                            "min_order": 1,
+                            "stock": 10,
+                            "seller_status": true,
+                            "status": true,
+                            "shop_id": 1,
+                            "category_id": 1,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "images": [
+                                {
+                                    "id": 1,
+                                    "url": "<url>/id/774/300/300",
+                                    "product_id": 1,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 2,
+                                    "url": "<url>/id/279/300/300",
+                                    "product_id": 1,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 3,
+                                    "url": "<url>/300x300/?product&sig=645",
+                                    "product_id": 1,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "total_amount": 180
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "cart_items": [
+                {
+                    "id": 1,
+                    "cart_id": 1,
+                    "product_id": 1,
+                    "quantity": 2,
+                    "price": "90.00",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 2,
+                    "cart_id": 1,
+                    "product_id": 2,
+                    "quantity": 3,
+                    "price": "50.00",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "carts": [
+                {
+                    "id": 1,
+                    "user_id": 10,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 1,
+                    "name_tm": "aut",
+                    "name_en": "aut",
+                    "name_ru": "qui",
+                    "image": "https://via.placeholder.com/640x480.png/00ccff?text=blanditiis",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 2,
+                    "name_tm": "incidunt",
+                    "name_en": "molestias",
+                    "name_ru": "itaque",
+                    "image": "https://via.placeholder.com/640x480.png/006655?text=voluptate",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "images": [
+                {
+                    "id": 1,
+                    "url": "https://picsum.photos/id/774/300/300",
+                    "product_id": 1,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 2,
+                    "url": "https://picsum.photos/id/279/300/300",
+                    "product_id": 1,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 3,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=645",
+                    "product_id": 1,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 4,
+                    "url": "https://picsum.photos/id/14/300/300",
+                    "product_id": 2,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 5,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=324",
+                    "product_id": 2,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 6,
+                    "url": "https://loremflickr.com/300/300/product?lock=879",
+                    "product_id": 2,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "products": [
+                {
+                    "id": 1,
+                    "name_tm": "fugiat similique et",
+                    "name_en": "fugiat similique et",
+                    "name_ru": "fugiat similique et",
+                    "price": "100.00",
+                    "discount": 10,
+                    "description_tm": "Magnam tempora aliquid facilis dolor suscipit.",
+                    "description_en": "Provident non ut ut et.",
+                    "description_ru": "Qui ducimus voluptatem aut cumque.",
+                    "production_time": 1180,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 1,
+                    "category_id": 1,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 2,
+                    "name_tm": "quae aut debitis",
+                    "name_en": "quae aut debitis",
+                    "name_ru": "quae aut debitis",
+                    "price": "50.00",
+                    "discount": null,
+                    "description_tm": "Voluptatum suscipit rerum repellat voluptatibus natus aut quos alias.",
+                    "description_en": "Veritatis libero veritatis nulla consequuntur similique.",
+                    "description_ru": "Et eveniet nesciunt odit id blanditiis cumque ex.",
+                    "production_time": 510,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 1,
+                    "category_id": 2,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 1,
+                    "name": "Bernardofort",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 2,
+                    "name": "VonRuedenshire",
+                    "type": "province",
+                    "parent_id": 1,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 3,
+                    "name": "Port Mortimerhaven",
+                    "type": "city",
+                    "parent_id": 2,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 1,
+                    "name": "Balistreri-Runolfsson",
+                    "email": "haskell.towne@example.com",
+                    "phone": null,
+                    "mon_fri_open": "11:58",
+                    "mon_fri_close": "05:14",
+                    "sat_sun_open": "20:07",
+                    "sat_sun_close": "01:10",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 11,
+                    "region_id": 3,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "users": [
+                {
+                    "id": 10,
+                    "name": "Margie Stroman",
+                    "phone_number": "43821574",
+                    "email": "arden.veum@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "JLjYhXk3Sc",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 11,
+                    "name": "Ronny Hermann",
+                    "phone_number": "52132750",
+                    "email": "justina.stanton@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "IHJnoDG2kL",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 3,
+            "carts": 2,
+            "categories": 3,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 7,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 1,
+            "orders": 1,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 3,
+            "regions": 4,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 2,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 1,
+            "user_otps": 5,
+            "users": 12,
+            "waitlist_items": 1
+        }
+    }
+}

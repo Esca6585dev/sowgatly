@@ -1,0 +1,221 @@
+{
+    "name": "ProductReviewTest__only_buyers_can_review__1",
+    "test": "Tests\\Feature\\Api\\ProductReviewTest::test_only_buyers_can_review",
+    "route": "POST api/products/{id}/reviews",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:08",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 120
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/products/63/reviews",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "rating": 5,
+            "comment": "Great"
+        }
+    },
+    "response": {
+        "status": 403,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "You can only review products you have ordered"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 49,
+                    "name_tm": "inventore",
+                    "name_en": "at",
+                    "name_ru": "qui",
+                    "image": "https://via.placeholder.com/640x480.png/00bbdd?text=sit",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "images": [
+                {
+                    "id": 187,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=646",
+                    "product_id": 63,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 188,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=6",
+                    "product_id": 63,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 189,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=475",
+                    "product_id": 63,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "products": [
+                {
+                    "id": 63,
+                    "name_tm": "sint aut fuga",
+                    "name_en": "sint aut fuga",
+                    "name_ru": "sint aut fuga",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Et dicta temporibus corrupti ad rerum enim.",
+                    "description_en": "Tempora sunt ad nihil provident tempora.",
+                    "description_ru": "Assumenda iusto voluptas nesciunt dignissimos atque sit.",
+                    "production_time": 347,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 52,
+                    "category_id": 49,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 116,
+                    "name": "O'Connermouth",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 117,
+                    "name": "Marcellabury",
+                    "type": "province",
+                    "parent_id": 116,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 118,
+                    "name": "Kristopherville",
+                    "type": "city",
+                    "parent_id": 117,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 52,
+                    "name": "Schamberger Group",
+                    "email": "slebsack@example.net",
+                    "phone": null,
+                    "mon_fri_open": "13:17",
+                    "mon_fri_close": "23:05",
+                    "sat_sun_open": "20:52",
+                    "sat_sun_close": "16:53",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 121,
+                    "region_id": 118,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "users": [
+                {
+                    "id": 120,
+                    "name": "Emmet Ortiz",
+                    "phone_number": "55854607",
+                    "email": "mathias50@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "XQFfU90l94",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 121,
+                    "name": "Mr. Dorian Kihn",
+                    "phone_number": "71452492",
+                    "email": "swift.josefina@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "VVkOUAfAx7",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 50,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 5,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 190,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 17,
+            "orders": 17,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 8,
+            "products": 64,
+            "regions": 119,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 53,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 27,
+            "user_otps": 5,
+            "users": 122,
+            "waitlist_items": 1
+        }
+    }
+}

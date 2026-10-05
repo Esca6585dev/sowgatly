@@ -1,0 +1,352 @@
+{
+    "name": "CheckoutOptionsTest__online_payment_requires_a_known_bank__3",
+    "test": "Tests\\Feature\\Api\\CheckoutOptionsTest::online_payment_requires_a_known_bank",
+    "route": "POST api/orders",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:06",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 63
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/orders",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "delivery_type": "asap",
+            "recipient_phone": "65656585",
+            "delivery_address": "Aýtakow köç. 17",
+            "payment_method": "online",
+            "payment_bank": "rysgal",
+            "recipient_name": "Aýna"
+        }
+    },
+    "response": {
+        "status": 201,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "message": "Order created successfully",
+            "order": {
+                "user_id": 63,
+                "shop_id": 27,
+                "items_total": "200.00",
+                "delivery_fee": "20.00",
+                "total_amount": "220.00",
+                "status": "pending",
+                "fulfillment": "delivery",
+                "delivery_type": "asap",
+                "scheduled_at": null,
+                "recipient_phone": "65656585",
+                "recipient_name": "Aýna",
+                "delivery_address": "Aýtakow köç. 17",
+                "note": null,
+                "payment_method": "online",
+                "payment_bank": "rysgal",
+                "payment_status": "unpaid",
+                "updated_at": "<datetime>",
+                "created_at": "<datetime>",
+                "id": 11,
+                "number": "0000011",
+                "items": [
+                    {
+                        "id": 8,
+                        "order_id": 11,
+                        "product_id": 25,
+                        "quantity": 2,
+                        "price": "100.00",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>",
+                        "product": {
+                            "id": 25,
+                            "name_tm": "sit enim dolorem",
+                            "name_en": "sit enim dolorem",
+                            "name_ru": "sit enim dolorem",
+                            "price": "100.00",
+                            "discount": 0,
+                            "description_tm": "Dolores est explicabo ea ut ratione.",
+                            "description_en": "Voluptatem ipsum et et aliquam amet.",
+                            "description_ru": "Non provident quos iusto enim id est quia distinctio.",
+                            "production_time": 1203,
+                            "min_order": 1,
+                            "stock": 8,
+                            "seller_status": true,
+                            "status": true,
+                            "shop_id": 27,
+                            "category_id": 27,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    }
+                ]
+            },
+            "orders": [
+                {
+                    "user_id": 63,
+                    "shop_id": 27,
+                    "items_total": "200.00",
+                    "delivery_fee": "20.00",
+                    "total_amount": "220.00",
+                    "status": "pending",
+                    "fulfillment": "delivery",
+                    "delivery_type": "asap",
+                    "scheduled_at": null,
+                    "recipient_phone": "65656585",
+                    "recipient_name": "Aýna",
+                    "delivery_address": "Aýtakow köç. 17",
+                    "note": null,
+                    "payment_method": "online",
+                    "payment_bank": "rysgal",
+                    "payment_status": "unpaid",
+                    "updated_at": "<datetime>",
+                    "created_at": "<datetime>",
+                    "id": 11,
+                    "number": "0000011",
+                    "items": [
+                        {
+                            "id": 8,
+                            "order_id": 11,
+                            "product_id": 25,
+                            "quantity": 2,
+                            "price": "100.00",
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "product": {
+                                "id": 25,
+                                "name_tm": "sit enim dolorem",
+                                "name_en": "sit enim dolorem",
+                                "name_ru": "sit enim dolorem",
+                                "price": "100.00",
+                                "discount": 0,
+                                "description_tm": "Dolores est explicabo ea ut ratione.",
+                                "description_en": "Voluptatem ipsum et et aliquam amet.",
+                                "description_ru": "Non provident quos iusto enim id est quia distinctio.",
+                                "production_time": 1203,
+                                "min_order": 1,
+                                "stock": 8,
+                                "seller_status": true,
+                                "status": true,
+                                "shop_id": 27,
+                                "category_id": 27,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "cart_items": [
+                {
+                    "id": 13,
+                    "cart_id": 11,
+                    "product_id": 25,
+                    "quantity": 2,
+                    "price": "100.00",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "carts": [
+                {
+                    "id": 11,
+                    "user_id": 63,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 27,
+                    "name_tm": "pariatur",
+                    "name_en": "eveniet",
+                    "name_ru": "optio",
+                    "image": "https://via.placeholder.com/640x480.png/0011dd?text=magnam",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "images": [
+                {
+                    "id": 73,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=27",
+                    "product_id": 25,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 74,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=672",
+                    "product_id": 25,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 75,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=773",
+                    "product_id": 25,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "products": [
+                {
+                    "id": 25,
+                    "name_tm": "sit enim dolorem",
+                    "name_en": "sit enim dolorem",
+                    "name_ru": "sit enim dolorem",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Dolores est explicabo ea ut ratione.",
+                    "description_en": "Voluptatem ipsum et et aliquam amet.",
+                    "description_ru": "Non provident quos iusto enim id est quia distinctio.",
+                    "production_time": 1203,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 27,
+                    "category_id": 27,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 70,
+                    "name": "Rodrigoburgh",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 71,
+                    "name": "Citlalliborough",
+                    "type": "province",
+                    "parent_id": 70,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 72,
+                    "name": "New Francesca",
+                    "type": "city",
+                    "parent_id": 71,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 27,
+                    "name": "Wiza, Herzog and Ebert",
+                    "email": "hintz.tanya@example.com",
+                    "phone": null,
+                    "mon_fri_open": "00:38",
+                    "mon_fri_close": "15:34",
+                    "sat_sun_open": "21:21",
+                    "sat_sun_close": "15:14",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 64,
+                    "region_id": 72,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "users": [
+                {
+                    "id": 63,
+                    "name": "Emmie Moen",
+                    "phone_number": "24572557",
+                    "email": "runte.tatum@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "ExFcgXF9A3",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 64,
+                    "name": "Lempi Greenfelder",
+                    "phone_number": "02734976",
+                    "email": "aracely94@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "mWvKOwChAy",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 28,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 76,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 8,
+            "orders": 11,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 26,
+            "regions": 73,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 28,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 14,
+            "user_otps": 5,
+            "users": 65,
+            "waitlist_items": 1
+        }
+    }
+}

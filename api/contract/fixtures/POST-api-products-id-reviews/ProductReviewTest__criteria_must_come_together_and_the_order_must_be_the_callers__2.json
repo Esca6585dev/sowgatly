@@ -1,0 +1,322 @@
+{
+    "name": "ProductReviewTest__criteria_must_come_together_and_the_order_must_be_the_callers__2",
+    "test": "Tests\\Feature\\Api\\ProductReviewTest::test_criteria_must_come_together_and_the_order_must_be_the_callers",
+    "route": "POST api/products/{id}/reviews",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:08",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 128
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/products/67/reviews",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 422,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "The rating field is required when none of rating match / rating value / rating service are present."
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 53,
+                    "name_tm": "debitis",
+                    "name_en": "sed",
+                    "name_ru": "aspernatur",
+                    "image": "https://via.placeholder.com/640x480.png/009933?text=maiores",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "images": [
+                {
+                    "id": 199,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=300",
+                    "product_id": 67,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 200,
+                    "url": "https://picsum.photos/id/537/300/300",
+                    "product_id": 67,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 201,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=904",
+                    "product_id": 67,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "order_items": [
+                {
+                    "id": 19,
+                    "order_id": 19,
+                    "product_id": 67,
+                    "quantity": 1,
+                    "price": "418.42",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 20,
+                    "order_id": 20,
+                    "product_id": 67,
+                    "quantity": 1,
+                    "price": "218.42",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "orders": [
+                {
+                    "id": 19,
+                    "user_id": 128,
+                    "shop_id": 56,
+                    "address_id": null,
+                    "total_amount": "633.94",
+                    "items_total": null,
+                    "delivery_fee": "0.00",
+                    "payment_method": "cash",
+                    "payment_bank": null,
+                    "payment_status": "unpaid",
+                    "paid_at": null,
+                    "status": "completed",
+                    "fulfillment": "delivery",
+                    "delivery_type": "asap",
+                    "scheduled_at": null,
+                    "recipient_phone": "68882652",
+                    "recipient_name": null,
+                    "delivery_address": "4849 Hills Parkways Apt. 424",
+                    "note": null,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 20,
+                    "user_id": 130,
+                    "shop_id": 56,
+                    "address_id": null,
+                    "total_amount": "1755.85",
+                    "items_total": null,
+                    "delivery_fee": "0.00",
+                    "payment_method": "cash",
+                    "payment_bank": null,
+                    "payment_status": "unpaid",
+                    "paid_at": null,
+                    "status": "completed",
+                    "fulfillment": "delivery",
+                    "delivery_type": "asap",
+                    "scheduled_at": null,
+                    "recipient_phone": "67619772",
+                    "recipient_name": null,
+                    "delivery_address": "5022 Shields Rue",
+                    "note": null,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "products": [
+                {
+                    "id": 67,
+                    "name_tm": "natus fugiat repudiandae",
+                    "name_en": "natus fugiat repudiandae",
+                    "name_ru": "natus fugiat repudiandae",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Accusamus molestiae labore debitis et qui.",
+                    "description_en": "Quo quia quibusdam blanditiis modi facere quia.",
+                    "description_ru": "Vel quod ipsum ea est.",
+                    "production_time": 136,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 56,
+                    "category_id": 53,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 128,
+                    "name": "South Americo",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 129,
+                    "name": "West Krystelstad",
+                    "type": "province",
+                    "parent_id": 128,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 130,
+                    "name": "Lake Leonor",
+                    "type": "city",
+                    "parent_id": 129,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 56,
+                    "name": "Sporer Group",
+                    "email": "bhoppe@example.org",
+                    "phone": null,
+                    "mon_fri_open": "18:04",
+                    "mon_fri_close": "20:39",
+                    "sat_sun_open": "05:22",
+                    "sat_sun_close": "07:52",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 129,
+                    "region_id": 130,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "user_notifications": [
+                {
+                    "id": 29,
+                    "user_id": 128,
+                    "type": "order_created",
+                    "data": "{\"order_id\":19,\"status\":\"completed\"}",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 30,
+                    "user_id": 130,
+                    "type": "order_created",
+                    "data": "{\"order_id\":20,\"status\":\"completed\"}",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ],
+            "users": [
+                {
+                    "id": 128,
+                    "name": "Finn West",
+                    "phone_number": "09062045",
+                    "email": "corrine66@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "VzMdClTw9Q",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 129,
+                    "name": "Elwin Rohan",
+                    "phone_number": "64130425",
+                    "email": "senger.thad@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "zfJoC6ud9O",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                },
+                {
+                    "id": 130,
+                    "name": "Norris Reichel V",
+                    "phone_number": "48323077",
+                    "email": "abner.torphy@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "StbptKTkt6",
+                    "created_at": "2026-10-05 12:04:08",
+                    "updated_at": "2026-10-05 12:04:08"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 54,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 5,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 202,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 21,
+            "orders": 21,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 10,
+            "products": 68,
+            "regions": 131,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 57,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 31,
+            "user_otps": 5,
+            "users": 131,
+            "waitlist_items": 1
+        }
+    }
+}

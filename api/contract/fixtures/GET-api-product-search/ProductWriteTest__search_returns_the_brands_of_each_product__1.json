@@ -1,0 +1,324 @@
+{
+    "name": "ProductWriteTest__search_returns_the_brands_of_each_product__1",
+    "test": "Tests\\Feature\\Api\\ProductWriteTest::search_returns_the_brands_of_each_product",
+    "route": "GET api/product/search",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:09",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 142
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/product/search",
+        "query": {
+            "name": "Branded"
+        },
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "data": [
+                {
+                    "id": 74,
+                    "name": {
+                        "tm": "ullam facere quas",
+                        "en": "Branded tulips",
+                        "ru": "ullam facere quas"
+                    },
+                    "price": "199.64",
+                    "discount": 0,
+                    "description": {
+                        "tm": "Rerum eos voluptas facere et voluptatum natus est.",
+                        "en": "Ut et vitae cumque illum unde aut.",
+                        "ru": "Est ipsam nostrum et et rerum odio maxime officiis."
+                    },
+                    "production_time": 508,
+                    "min_order": 1,
+                    "seller_status": true,
+                    "stock": 10,
+                    "width": null,
+                    "height": null,
+                    "shop_id": 67,
+                    "category_id": 67,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>",
+                    "attributes": [],
+                    "brands": [
+                        {
+                            "id": 9,
+                            "name": "Russel-Rempel",
+                            "description": "Deleniti facere ut nam. Pariatur sed cupiditate aut quaerat quasi repellendus suscipit. Dolorem quos quibusdam sequi. Eligendi quidem architecto dolores nihil qui expedita reprehenderit. Reiciendis facilis nihil ducimus quia voluptas ipsum a.",
+                            "logo": "<url>/wp-content/uploads/2021/11/Nike-Logo.png",
+                            "status": true,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "pivot": {
+                                "products_id": 74,
+                                "brands_id": 9
+                            }
+                        }
+                    ],
+                    "images": [
+                        {
+                            "id": 215,
+                            "url": "<url>/300/300/product?lock=730",
+                            "product_id": 74,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 216,
+                            "url": "<url>/300/300/product?lock=783",
+                            "product_id": 74,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 217,
+                            "url": "<url>/300x300/?product&sig=509",
+                            "product_id": 74,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    ],
+                    "category": {
+                        "id": 67,
+                        "name_tm": "ab",
+                        "name_en": "voluptatem",
+                        "name_ru": "tempore",
+                        "image": "<url>/640x480.png/008899?text=eius",
+                        "category_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "shop": {
+                        "id": 67,
+                        "name": "Schmitt, McGlynn and Hegmann",
+                        "email": "klowe@example.com",
+                        "phone": null,
+                        "mon_fri_open": "22:06",
+                        "mon_fri_close": "05:41",
+                        "sat_sun_open": "01:47",
+                        "sat_sun_close": "17:45",
+                        "image": "shop/shop-seeder/sowgatly-logo.png",
+                        "user_id": 142,
+                        "region_id": 141,
+                        "delivery_fee": "20.00",
+                        "pickup_available": false,
+                        "min_order_amount": null,
+                        "description_tm": null,
+                        "description_ru": null,
+                        "description_en": null,
+                        "status": "approved",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "compositions": [],
+                    "reviews_avg": null,
+                    "reviews_count": 0
+                }
+            ],
+            "meta": {
+                "current_page": 1,
+                "last_page": 1,
+                "total": 1
+            },
+            "message": "Products retrieved successfully"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "brands": [
+                {
+                    "id": 9,
+                    "name": "Russel-Rempel",
+                    "description": "Deleniti facere ut nam. Pariatur sed cupiditate aut quaerat quasi repellendus suscipit. Dolorem quos quibusdam sequi. Eligendi quidem architecto dolores nihil qui expedita reprehenderit. Reiciendis facilis nihil ducimus quia voluptas ipsum a.",
+                    "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
+                    "status": 1,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "brands_products": [
+                {
+                    "id": 4,
+                    "brands_id": 9,
+                    "products_id": 74,
+                    "created_at": null,
+                    "updated_at": null
+                }
+            ],
+            "categories": [
+                {
+                    "id": 66,
+                    "name_tm": "iusto",
+                    "name_en": "et",
+                    "name_ru": "rem",
+                    "image": "https://via.placeholder.com/640x480.png/0077dd?text=et",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 67,
+                    "name_tm": "ab",
+                    "name_en": "voluptatem",
+                    "name_ru": "tempore",
+                    "image": "https://via.placeholder.com/640x480.png/008899?text=eius",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "images": [
+                {
+                    "id": 215,
+                    "url": "https://loremflickr.com/300/300/product?lock=730",
+                    "product_id": 74,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 216,
+                    "url": "https://loremflickr.com/300/300/product?lock=783",
+                    "product_id": 74,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 217,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=509",
+                    "product_id": 74,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "products": [
+                {
+                    "id": 74,
+                    "name_tm": "ullam facere quas",
+                    "name_en": "Branded tulips",
+                    "name_ru": "ullam facere quas",
+                    "price": "199.64",
+                    "discount": 0,
+                    "description_tm": "Rerum eos voluptas facere et voluptatum natus est.",
+                    "description_en": "Ut et vitae cumque illum unde aut.",
+                    "description_ru": "Est ipsam nostrum et et rerum odio maxime officiis.",
+                    "production_time": 508,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 67,
+                    "category_id": 67,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 141,
+                    "name": "West Lorenzo",
+                    "type": "city",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 67,
+                    "name": "Schmitt, McGlynn and Hegmann",
+                    "email": "klowe@example.com",
+                    "phone": null,
+                    "mon_fri_open": "22:06",
+                    "mon_fri_close": "05:41",
+                    "sat_sun_open": "01:47",
+                    "sat_sun_close": "17:45",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 142,
+                    "region_id": 141,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "users": [
+                {
+                    "id": 142,
+                    "name": "Trevion Marquardt",
+                    "phone_number": "09789870",
+                    "email": "uschaefer@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "wwLcVKHvp8",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 10,
+            "brands_products": 5,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 68,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 5,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 218,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 21,
+            "orders": 21,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 11,
+            "products": 75,
+            "regions": 142,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 68,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 31,
+            "user_otps": 5,
+            "users": 143,
+            "waitlist_items": 1
+        }
+    }
+}

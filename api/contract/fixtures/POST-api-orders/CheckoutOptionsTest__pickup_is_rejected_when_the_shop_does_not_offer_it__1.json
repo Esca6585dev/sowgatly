@@ -1,0 +1,242 @@
+{
+    "name": "CheckoutOptionsTest__pickup_is_rejected_when_the_shop_does_not_offer_it__1",
+    "test": "Tests\\Feature\\Api\\CheckoutOptionsTest::pickup_is_rejected_when_the_shop_does_not_offer_it",
+    "route": "POST api/orders",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:06",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 59
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/orders",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "delivery_type": "asap",
+            "recipient_phone": "65656585",
+            "delivery_address": "Aýtakow köç. 17",
+            "fulfillment": "pickup"
+        }
+    },
+    "response": {
+        "status": 422,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "This shop does not offer pickup"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "cart_items": [
+                {
+                    "id": 11,
+                    "cart_id": 9,
+                    "product_id": 23,
+                    "quantity": 1,
+                    "price": "100.00",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "carts": [
+                {
+                    "id": 9,
+                    "user_id": 59,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 25,
+                    "name_tm": "doloremque",
+                    "name_en": "nobis",
+                    "name_ru": "enim",
+                    "image": "https://via.placeholder.com/640x480.png/00ccaa?text=qui",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "images": [
+                {
+                    "id": 67,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=976",
+                    "product_id": 23,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 68,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=463",
+                    "product_id": 23,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 69,
+                    "url": "https://picsum.photos/id/922/300/300",
+                    "product_id": 23,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "products": [
+                {
+                    "id": 23,
+                    "name_tm": "illum quisquam magni",
+                    "name_en": "illum quisquam magni",
+                    "name_ru": "illum quisquam magni",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Voluptatem blanditiis non natus sit dicta ad cum omnis.",
+                    "description_en": "Non eum quas ratione necessitatibus dignissimos eaque distinctio.",
+                    "description_ru": "Eos recusandae consequuntur cum tempore pariatur.",
+                    "production_time": 1057,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 25,
+                    "category_id": 25,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 64,
+                    "name": "Elenatown",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 65,
+                    "name": "Lake Jennifermouth",
+                    "type": "province",
+                    "parent_id": 64,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 66,
+                    "name": "Jastton",
+                    "type": "city",
+                    "parent_id": 65,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 25,
+                    "name": "Anderson-Spencer",
+                    "email": "annette.willms@example.org",
+                    "phone": null,
+                    "mon_fri_open": "23:34",
+                    "mon_fri_close": "17:42",
+                    "sat_sun_open": "08:28",
+                    "sat_sun_close": "10:19",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 60,
+                    "region_id": 66,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "users": [
+                {
+                    "id": 59,
+                    "name": "Milton Lubowitz",
+                    "phone_number": "97768220",
+                    "email": "bgleichner@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "cTMckXRmQ4",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 60,
+                    "name": "Prof. Lew Hermann PhD",
+                    "phone_number": "70944468",
+                    "email": "hillard58@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "e30bYpfIzy",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 12,
+            "carts": 10,
+            "categories": 26,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 70,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 8,
+            "orders": 11,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 24,
+            "regions": 67,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 26,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 14,
+            "user_otps": 5,
+            "users": 61,
+            "waitlist_items": 1
+        }
+    }
+}

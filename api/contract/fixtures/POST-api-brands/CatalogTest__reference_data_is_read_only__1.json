@@ -1,0 +1,96 @@
+{
+    "name": "CatalogTest__reference_data_is_read_only__1",
+    "test": "Tests\\Feature\\Api\\CatalogTest::test_reference_data_is_read_only",
+    "route": "POST api/brands",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 47
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/brands",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "name": "x"
+        }
+    },
+    "response": {
+        "status": 405,
+        "content_type": "application/json",
+        "json": {
+            "message": "The POST method is not supported for route api/brands. Supported methods: GET, HEAD."
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "users": [
+                {
+                    "id": 47,
+                    "name": "Prof. Cody Haag IV",
+                    "phone_number": "68217800",
+                    "email": "raphaelle57@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "uH0xD7Iuxq",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 23,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 61,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 6,
+            "orders": 9,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 21,
+            "regions": 55,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 20,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 10,
+            "user_otps": 5,
+            "users": 48,
+            "waitlist_items": 1
+        }
+    }
+}

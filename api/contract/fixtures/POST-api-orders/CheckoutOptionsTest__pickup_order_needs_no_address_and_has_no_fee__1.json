@@ -1,0 +1,350 @@
+{
+    "name": "CheckoutOptionsTest__pickup_order_needs_no_address_and_has_no_fee__1",
+    "test": "Tests\\Feature\\Api\\CheckoutOptionsTest::pickup_order_needs_no_address_and_has_no_fee",
+    "route": "POST api/orders",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:06",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 57
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/orders",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "delivery_type": "asap",
+            "recipient_phone": "65656585",
+            "delivery_address": null,
+            "fulfillment": "pickup"
+        }
+    },
+    "response": {
+        "status": 201,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "message": "Order created successfully",
+            "order": {
+                "user_id": 57,
+                "shop_id": 24,
+                "items_total": "100.00",
+                "delivery_fee": "0.00",
+                "total_amount": "100.00",
+                "status": "pending",
+                "fulfillment": "pickup",
+                "delivery_type": "asap",
+                "scheduled_at": null,
+                "recipient_phone": "65656585",
+                "recipient_name": null,
+                "delivery_address": null,
+                "note": null,
+                "payment_method": "cash",
+                "payment_bank": null,
+                "payment_status": "unpaid",
+                "updated_at": "<datetime>",
+                "created_at": "<datetime>",
+                "id": 10,
+                "number": "0000010",
+                "items": [
+                    {
+                        "id": 7,
+                        "order_id": 10,
+                        "product_id": 22,
+                        "quantity": 1,
+                        "price": "100.00",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>",
+                        "product": {
+                            "id": 22,
+                            "name_tm": "sit ipsam nam",
+                            "name_en": "sit ipsam nam",
+                            "name_ru": "sit ipsam nam",
+                            "price": "100.00",
+                            "discount": 0,
+                            "description_tm": "Dignissimos impedit et sit.",
+                            "description_en": "Mollitia ut odio distinctio dolorem.",
+                            "description_ru": "In in nihil est.",
+                            "production_time": 421,
+                            "min_order": 1,
+                            "stock": 9,
+                            "seller_status": true,
+                            "status": true,
+                            "shop_id": 24,
+                            "category_id": 24,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    }
+                ]
+            },
+            "orders": [
+                {
+                    "user_id": 57,
+                    "shop_id": 24,
+                    "items_total": "100.00",
+                    "delivery_fee": "0.00",
+                    "total_amount": "100.00",
+                    "status": "pending",
+                    "fulfillment": "pickup",
+                    "delivery_type": "asap",
+                    "scheduled_at": null,
+                    "recipient_phone": "65656585",
+                    "recipient_name": null,
+                    "delivery_address": null,
+                    "note": null,
+                    "payment_method": "cash",
+                    "payment_bank": null,
+                    "payment_status": "unpaid",
+                    "updated_at": "<datetime>",
+                    "created_at": "<datetime>",
+                    "id": 10,
+                    "number": "0000010",
+                    "items": [
+                        {
+                            "id": 7,
+                            "order_id": 10,
+                            "product_id": 22,
+                            "quantity": 1,
+                            "price": "100.00",
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "product": {
+                                "id": 22,
+                                "name_tm": "sit ipsam nam",
+                                "name_en": "sit ipsam nam",
+                                "name_ru": "sit ipsam nam",
+                                "price": "100.00",
+                                "discount": 0,
+                                "description_tm": "Dignissimos impedit et sit.",
+                                "description_en": "Mollitia ut odio distinctio dolorem.",
+                                "description_ru": "In in nihil est.",
+                                "production_time": 421,
+                                "min_order": 1,
+                                "stock": 9,
+                                "seller_status": true,
+                                "status": true,
+                                "shop_id": 24,
+                                "category_id": 24,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "cart_items": [
+                {
+                    "id": 10,
+                    "cart_id": 8,
+                    "product_id": 22,
+                    "quantity": 1,
+                    "price": "100.00",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "carts": [
+                {
+                    "id": 8,
+                    "user_id": 57,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 24,
+                    "name_tm": "non",
+                    "name_en": "quo",
+                    "name_ru": "consectetur",
+                    "image": "https://via.placeholder.com/640x480.png/0044bb?text=esse",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "images": [
+                {
+                    "id": 64,
+                    "url": "https://loremflickr.com/300/300/product?lock=615",
+                    "product_id": 22,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 65,
+                    "url": "https://picsum.photos/id/373/300/300",
+                    "product_id": 22,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 66,
+                    "url": "https://picsum.photos/id/958/300/300",
+                    "product_id": 22,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "products": [
+                {
+                    "id": 22,
+                    "name_tm": "sit ipsam nam",
+                    "name_en": "sit ipsam nam",
+                    "name_ru": "sit ipsam nam",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Dignissimos impedit et sit.",
+                    "description_en": "Mollitia ut odio distinctio dolorem.",
+                    "description_ru": "In in nihil est.",
+                    "production_time": 421,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 24,
+                    "category_id": 24,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 61,
+                    "name": "Wilkinsonmouth",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 62,
+                    "name": "Ritaborough",
+                    "type": "province",
+                    "parent_id": 61,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 63,
+                    "name": "South Nathen",
+                    "type": "city",
+                    "parent_id": 62,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 24,
+                    "name": "O'Conner, Wolf and Ratke",
+                    "email": "qtrantow@example.org",
+                    "phone": null,
+                    "mon_fri_open": "16:41",
+                    "mon_fri_close": "20:24",
+                    "sat_sun_open": "05:27",
+                    "sat_sun_close": "17:14",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 58,
+                    "region_id": 63,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 1,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "users": [
+                {
+                    "id": 57,
+                    "name": "Prof. Bennie Kulas",
+                    "phone_number": "69891035",
+                    "email": "braxton39@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "deYjatEgA0",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 58,
+                    "name": "Veda Dare",
+                    "phone_number": "50254670",
+                    "email": "abernathy.kaleb@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "lmjqu7DQlb",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 11,
+            "carts": 9,
+            "categories": 25,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 67,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 7,
+            "orders": 10,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 23,
+            "regions": 64,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 25,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 13,
+            "user_otps": 5,
+            "users": 59,
+            "waitlist_items": 1
+        }
+    }
+}

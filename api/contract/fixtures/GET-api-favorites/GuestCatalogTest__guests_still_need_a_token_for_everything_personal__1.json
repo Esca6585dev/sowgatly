@@ -1,0 +1,230 @@
+{
+    "name": "GuestCatalogTest__guests_still_need_a_token_for_everything_personal__1",
+    "test": "Tests\\Feature\\Api\\GuestCatalogTest::test_guests_still_need_a_token_for_everything_personal",
+    "route": "GET api/favorites",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:07",
+    "timezone": "Asia/Ashgabat",
+    "auth": null,
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/favorites",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 401,
+        "content_type": "application/json",
+        "json": {
+            "message": "Unauthenticated.",
+            "status": "error"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 34,
+                    "name_tm": "consequatur",
+                    "name_en": "dolor",
+                    "name_ru": "dicta",
+                    "image": "https://via.placeholder.com/640x480.png/006655?text=et",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "images": [
+                {
+                    "id": 94,
+                    "url": "https://picsum.photos/id/113/300/300",
+                    "product_id": 32,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 95,
+                    "url": "https://loremflickr.com/300/300/product?lock=433",
+                    "product_id": 32,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 96,
+                    "url": "https://loremflickr.com/300/300/product?lock=154",
+                    "product_id": 32,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "product_reviews": [
+                {
+                    "id": 2,
+                    "user_id": 85,
+                    "product_id": 32,
+                    "order_id": null,
+                    "rating": 2,
+                    "rating_match": null,
+                    "rating_value": null,
+                    "rating_service": null,
+                    "comment": "Placeat quisquam mollitia cum corporis ut.",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "products": [
+                {
+                    "id": 32,
+                    "name_tm": "non optio optio",
+                    "name_en": "non optio optio",
+                    "name_ru": "non optio optio",
+                    "price": "496.09",
+                    "discount": 0,
+                    "description_tm": "Voluptas recusandae eum sit.",
+                    "description_en": "Vel sapiente tempora iste.",
+                    "description_ru": "In exercitationem eos possimus magnam dolor ea.",
+                    "production_time": 1362,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 32,
+                    "category_id": 34,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 85,
+                    "name": "North Kevintown",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 86,
+                    "name": "Nasirside",
+                    "type": "province",
+                    "parent_id": 85,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 87,
+                    "name": "Kshlerinberg",
+                    "type": "city",
+                    "parent_id": 86,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 32,
+                    "name": "Schoen-Armstrong",
+                    "email": "angela.mills@example.net",
+                    "phone": null,
+                    "mon_fri_open": "14:13",
+                    "mon_fri_close": "13:54",
+                    "sat_sun_open": "03:38",
+                    "sat_sun_close": "17:01",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 84,
+                    "region_id": 87,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "users": [
+                {
+                    "id": 84,
+                    "name": "Myrtice Labadie III",
+                    "phone_number": "48789406",
+                    "email": "hoppe.anita@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "12XEuUau5D",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 85,
+                    "name": "Kole Ondricka",
+                    "phone_number": "62966882",
+                    "email": "grady.vilma@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "8eGDBtj82b",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 35,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 97,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 3,
+            "products": 33,
+            "regions": 88,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 33,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 17,
+            "user_otps": 5,
+            "users": 86,
+            "waitlist_items": 1
+        }
+    }
+}

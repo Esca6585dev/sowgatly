@@ -1,0 +1,324 @@
+{
+    "name": "CartAndOrderTest__checkout_creates_an_order_with_discounted_prices_and_clears_the_cart__1",
+    "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_checkout_creates_an_order_with_discounted_prices_and_clears_the_cart",
+    "route": "GET api/cart",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:04",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 17
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/cart",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "message": "Cart is empty"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 5,
+                    "name_tm": "excepturi",
+                    "name_en": "in",
+                    "name_ru": "consequatur",
+                    "image": "https://via.placeholder.com/640x480.png/00ddbb?text=enim",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 6,
+                    "name_tm": "cupiditate",
+                    "name_en": "est",
+                    "name_ru": "minus",
+                    "image": "https://via.placeholder.com/640x480.png/009922?text=porro",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "images": [
+                {
+                    "id": 13,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=249",
+                    "product_id": 5,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 14,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=634",
+                    "product_id": 5,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 15,
+                    "url": "https://picsum.photos/id/405/300/300",
+                    "product_id": 5,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 16,
+                    "url": "https://picsum.photos/id/411/300/300",
+                    "product_id": 6,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 17,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=435",
+                    "product_id": 6,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 18,
+                    "url": "https://loremflickr.com/300/300/product?lock=205",
+                    "product_id": 6,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "order_items": [
+                {
+                    "id": 1,
+                    "order_id": 1,
+                    "product_id": 5,
+                    "quantity": 2,
+                    "price": "80.00",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 2,
+                    "order_id": 1,
+                    "product_id": 6,
+                    "quantity": 1,
+                    "price": "40.00",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "orders": [
+                {
+                    "id": 1,
+                    "user_id": 17,
+                    "shop_id": 4,
+                    "address_id": null,
+                    "total_amount": "220.00",
+                    "items_total": "200.00",
+                    "delivery_fee": "20.00",
+                    "payment_method": "cash",
+                    "payment_bank": null,
+                    "payment_status": "unpaid",
+                    "paid_at": null,
+                    "status": "pending",
+                    "fulfillment": "delivery",
+                    "delivery_type": "asap",
+                    "scheduled_at": null,
+                    "recipient_phone": "65123456",
+                    "recipient_name": null,
+                    "delivery_address": "Aşgabat, Magtymguly 10",
+                    "note": "Call before delivery",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "products": [
+                {
+                    "id": 5,
+                    "name_tm": "ab et nulla",
+                    "name_en": "ab et nulla",
+                    "name_ru": "ab et nulla",
+                    "price": "100.00",
+                    "discount": 20,
+                    "description_tm": "Nihil unde distinctio dolor ut est consequatur.",
+                    "description_en": "Distinctio facere sed doloremque libero veritatis.",
+                    "description_ru": "Rerum vero sed dignissimos molestiae iusto molestiae cumque et.",
+                    "production_time": 394,
+                    "min_order": 1,
+                    "stock": 3,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 4,
+                    "category_id": 5,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 6,
+                    "name_tm": "nihil autem consequatur",
+                    "name_en": "nihil autem consequatur",
+                    "name_ru": "nihil autem consequatur",
+                    "price": "40.00",
+                    "discount": null,
+                    "description_tm": "Cumque at et temporibus.",
+                    "description_en": "Recusandae aut qui voluptas.",
+                    "description_ru": "Culpa placeat aliquam autem aut quo dicta.",
+                    "production_time": 943,
+                    "min_order": 1,
+                    "stock": 4,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 4,
+                    "category_id": 6,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 10,
+                    "name": "West Meggiefort",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 11,
+                    "name": "Lake Consuelofurt",
+                    "type": "province",
+                    "parent_id": 10,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 12,
+                    "name": "Litteltown",
+                    "type": "city",
+                    "parent_id": 11,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 4,
+                    "name": "Lebsack-Hand",
+                    "email": "jgraham@example.net",
+                    "phone": null,
+                    "mon_fri_open": "19:17",
+                    "mon_fri_close": "23:44",
+                    "sat_sun_open": "00:28",
+                    "sat_sun_close": "09:38",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 18,
+                    "region_id": 12,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "user_notifications": [
+                {
+                    "id": 1,
+                    "user_id": 17,
+                    "type": "order_created",
+                    "data": "{\"order_id\":1,\"status\":\"pending\"}",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "users": [
+                {
+                    "id": 17,
+                    "name": "D'angelo Vandervort",
+                    "phone_number": "67510096",
+                    "email": "agulgowski@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "k6pr8eCOY7",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 18,
+                    "name": "Olaf Wilderman DVM",
+                    "phone_number": "96049902",
+                    "email": "waelchi.yvonne@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "OMJ7XwiSVP",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 6,
+            "carts": 5,
+            "categories": 7,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 19,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 3,
+            "orders": 2,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 7,
+            "regions": 13,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 5,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 2,
+            "user_otps": 5,
+            "users": 19,
+            "waitlist_items": 1
+        }
+    }
+}

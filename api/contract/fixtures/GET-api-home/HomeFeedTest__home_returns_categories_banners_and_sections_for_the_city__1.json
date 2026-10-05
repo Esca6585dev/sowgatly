@@ -1,0 +1,1524 @@
+{
+    "name": "HomeFeedTest__home_returns_categories_banners_and_sections_for_the_city__1",
+    "test": "Tests\\Feature\\Api\\HomeFeedTest::test_home_returns_categories_banners_and_sections_for_the_city",
+    "route": "GET api/home",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:07",
+    "timezone": "Asia/Ashgabat",
+    "auth": null,
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/home",
+        "query": {
+            "region_id": "93"
+        },
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "region": {
+                "id": 93,
+                "name": "Aşgabat"
+            },
+            "categories": [
+                {
+                    "id": 36,
+                    "name": {
+                        "tm": "Güller",
+                        "en": "Flowers",
+                        "ru": "Цветы"
+                    },
+                    "image": "<url>/640x480.png/007744?text=quia",
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                {
+                    "id": 38,
+                    "name": {
+                        "tm": "ut",
+                        "en": "quisquam",
+                        "ru": "incidunt"
+                    },
+                    "image": "<url>/640x480.png/00aa33?text=molestiae",
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                }
+            ],
+            "banners": [
+                {
+                    "id": 1,
+                    "title": {
+                        "tm": "Global",
+                        "ru": "С Новым годом",
+                        "en": "Happy New Year"
+                    },
+                    "subtitle": {
+                        "tm": "Bagtly pursatlary sowgat ediň",
+                        "ru": "Дарите моменты счастья",
+                        "en": "Give moments of happiness"
+                    },
+                    "image": null,
+                    "link_type": "none",
+                    "link_value": null,
+                    "position": 0
+                }
+            ],
+            "sections": [
+                {
+                    "key": "delivery_today",
+                    "title": {
+                        "tm": "Şu gün eltip bermek",
+                        "ru": "Доставка сегодня",
+                        "en": "Delivery today"
+                    },
+                    "products": [
+                        {
+                            "id": 34,
+                            "name": {
+                                "tm": "aut quia repudiandae",
+                                "en": "aut quia repudiandae",
+                                "ru": "aut quia repudiandae"
+                            },
+                            "price": "598.91",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Dolor in expedita alias illo iste.",
+                                "en": "Distinctio et ea quam.",
+                                "ru": "Facilis eos ut et commodi labore temporibus alias placeat."
+                            },
+                            "production_time": 60,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 36,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 100,
+                                    "url": "<url>/300/300/product?lock=911",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 101,
+                                    "url": "<url>/300x300/?product&sig=590",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 102,
+                                    "url": "<url>/300x300/?product&sig=472",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 36,
+                                "name_tm": "Güller",
+                                "name_en": "Flowers",
+                                "name_ru": "Цветы",
+                                "image": "<url>/640x480.png/007744?text=quia",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 35,
+                            "name": {
+                                "tm": "magni eum sit",
+                                "en": "magni eum sit",
+                                "ru": "magni eum sit"
+                            },
+                            "price": "242.11",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Rem omnis similique qui voluptatem qui consequatur omnis.",
+                                "en": "Excepturi sed ut ut laborum commodi soluta.",
+                                "ru": "Non dolorum mollitia consectetur consectetur."
+                            },
+                            "production_time": 60,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 36,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 103,
+                                    "url": "<url>/300/300/product?lock=92",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 104,
+                                    "url": "<url>/id/477/300/300",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 105,
+                                    "url": "<url>/300/300/product?lock=362",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 36,
+                                "name_tm": "Güller",
+                                "name_en": "Flowers",
+                                "name_ru": "Цветы",
+                                "image": "<url>/640x480.png/007744?text=quia",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "popular",
+                    "title": {
+                        "tm": "Meşhur harytlar",
+                        "ru": "Популярное",
+                        "en": "Popular"
+                    },
+                    "products": [
+                        {
+                            "id": 34,
+                            "name": {
+                                "tm": "aut quia repudiandae",
+                                "en": "aut quia repudiandae",
+                                "ru": "aut quia repudiandae"
+                            },
+                            "price": "598.91",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Dolor in expedita alias illo iste.",
+                                "en": "Distinctio et ea quam.",
+                                "ru": "Facilis eos ut et commodi labore temporibus alias placeat."
+                            },
+                            "production_time": 60,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 36,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 100,
+                                    "url": "<url>/300/300/product?lock=911",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 101,
+                                    "url": "<url>/300x300/?product&sig=590",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 102,
+                                    "url": "<url>/300x300/?product&sig=472",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 36,
+                                "name_tm": "Güller",
+                                "name_en": "Flowers",
+                                "name_ru": "Цветы",
+                                "image": "<url>/640x480.png/007744?text=quia",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 35,
+                            "name": {
+                                "tm": "magni eum sit",
+                                "en": "magni eum sit",
+                                "ru": "magni eum sit"
+                            },
+                            "price": "242.11",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Rem omnis similique qui voluptatem qui consequatur omnis.",
+                                "en": "Excepturi sed ut ut laborum commodi soluta.",
+                                "ru": "Non dolorum mollitia consectetur consectetur."
+                            },
+                            "production_time": 60,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 36,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 103,
+                                    "url": "<url>/300/300/product?lock=92",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 104,
+                                    "url": "<url>/id/477/300/300",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 105,
+                                    "url": "<url>/300/300/product?lock=362",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 36,
+                                "name_tm": "Güller",
+                                "name_en": "Flowers",
+                                "name_ru": "Цветы",
+                                "image": "<url>/640x480.png/007744?text=quia",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 36,
+                            "name": {
+                                "tm": "neque et veritatis",
+                                "en": "neque et veritatis",
+                                "ru": "neque et veritatis"
+                            },
+                            "price": "150.29",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Necessitatibus sit quia hic minus quam in.",
+                                "en": "Voluptates ut praesentium non laudantium dolore optio.",
+                                "ru": "Quam blanditiis sed asperiores dolores ut."
+                            },
+                            "production_time": 600,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 37,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 106,
+                                    "url": "<url>/300/300/product?lock=736",
+                                    "product_id": 36,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 107,
+                                    "url": "<url>/id/973/300/300",
+                                    "product_id": 36,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 108,
+                                    "url": "<url>/300x300/?product&sig=700",
+                                    "product_id": 36,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 37,
+                                "name_tm": "natus",
+                                "name_en": "aut",
+                                "name_ru": "distinctio",
+                                "image": "<url>/640x480.png/009966?text=itaque",
+                                "category_id": 36,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 37,
+                            "name": {
+                                "tm": "eligendi ut quis",
+                                "en": "eligendi ut quis",
+                                "ru": "eligendi ut quis"
+                            },
+                            "price": "841.95",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Qui possimus sint delectus voluptates.",
+                                "en": "Maiores expedita et molestias architecto ut.",
+                                "ru": "Et nesciunt perferendis et quo reprehenderit."
+                            },
+                            "production_time": 600,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 38,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 109,
+                                    "url": "<url>/300x300/?product&sig=656",
+                                    "product_id": 37,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 110,
+                                    "url": "<url>/300x300/?product&sig=683",
+                                    "product_id": 37,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 111,
+                                    "url": "<url>/id/838/300/300",
+                                    "product_id": 37,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 38,
+                                "name_tm": "ut",
+                                "name_en": "quisquam",
+                                "name_ru": "incidunt",
+                                "image": "<url>/640x480.png/00aa33?text=molestiae",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "category:36",
+                    "title": {
+                        "tm": "Güller",
+                        "ru": "Цветы",
+                        "en": "Flowers"
+                    },
+                    "category_id": 36,
+                    "products": [
+                        {
+                            "id": 34,
+                            "name": {
+                                "tm": "aut quia repudiandae",
+                                "en": "aut quia repudiandae",
+                                "ru": "aut quia repudiandae"
+                            },
+                            "price": "598.91",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Dolor in expedita alias illo iste.",
+                                "en": "Distinctio et ea quam.",
+                                "ru": "Facilis eos ut et commodi labore temporibus alias placeat."
+                            },
+                            "production_time": 60,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 36,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 100,
+                                    "url": "<url>/300/300/product?lock=911",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 101,
+                                    "url": "<url>/300x300/?product&sig=590",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 102,
+                                    "url": "<url>/300x300/?product&sig=472",
+                                    "product_id": 34,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 36,
+                                "name_tm": "Güller",
+                                "name_en": "Flowers",
+                                "name_ru": "Цветы",
+                                "image": "<url>/640x480.png/007744?text=quia",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 35,
+                            "name": {
+                                "tm": "magni eum sit",
+                                "en": "magni eum sit",
+                                "ru": "magni eum sit"
+                            },
+                            "price": "242.11",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Rem omnis similique qui voluptatem qui consequatur omnis.",
+                                "en": "Excepturi sed ut ut laborum commodi soluta.",
+                                "ru": "Non dolorum mollitia consectetur consectetur."
+                            },
+                            "production_time": 60,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 36,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 103,
+                                    "url": "<url>/300/300/product?lock=92",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 104,
+                                    "url": "<url>/id/477/300/300",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 105,
+                                    "url": "<url>/300/300/product?lock=362",
+                                    "product_id": 35,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 36,
+                                "name_tm": "Güller",
+                                "name_en": "Flowers",
+                                "name_ru": "Цветы",
+                                "image": "<url>/640x480.png/007744?text=quia",
+                                "category_id": null,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        },
+                        {
+                            "id": 36,
+                            "name": {
+                                "tm": "neque et veritatis",
+                                "en": "neque et veritatis",
+                                "ru": "neque et veritatis"
+                            },
+                            "price": "150.29",
+                            "discount": 0,
+                            "description": {
+                                "tm": "Necessitatibus sit quia hic minus quam in.",
+                                "en": "Voluptates ut praesentium non laudantium dolore optio.",
+                                "ru": "Quam blanditiis sed asperiores dolores ut."
+                            },
+                            "production_time": 600,
+                            "min_order": 1,
+                            "seller_status": true,
+                            "stock": 10,
+                            "width": null,
+                            "height": null,
+                            "shop_id": 34,
+                            "category_id": 37,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>",
+                            "attributes": [],
+                            "brands": [],
+                            "images": [
+                                {
+                                    "id": 106,
+                                    "url": "<url>/300/300/product?lock=736",
+                                    "product_id": 36,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 107,
+                                    "url": "<url>/id/973/300/300",
+                                    "product_id": 36,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                },
+                                {
+                                    "id": 108,
+                                    "url": "<url>/300x300/?product&sig=700",
+                                    "product_id": 36,
+                                    "created_at": "<datetime>",
+                                    "updated_at": "<datetime>"
+                                }
+                            ],
+                            "category": {
+                                "id": 37,
+                                "name_tm": "natus",
+                                "name_en": "aut",
+                                "name_ru": "distinctio",
+                                "image": "<url>/640x480.png/009966?text=itaque",
+                                "category_id": 36,
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "shop": {
+                                "id": 34,
+                                "name": "Corkery-Jacobson",
+                                "email": "ulang@example.org",
+                                "phone": null,
+                                "mon_fri_open": "23:57",
+                                "mon_fri_close": "21:39",
+                                "sat_sun_open": "02:49",
+                                "sat_sun_close": "02:37",
+                                "image": "shop/shop-seeder/modahouse-logo.jpg",
+                                "user_id": 89,
+                                "region_id": 93,
+                                "delivery_fee": "20.00",
+                                "pickup_available": false,
+                                "min_order_amount": null,
+                                "description_tm": null,
+                                "description_ru": null,
+                                "description_en": null,
+                                "status": "approved",
+                                "created_at": "<datetime>",
+                                "updated_at": "<datetime>"
+                            },
+                            "reviews_avg": null,
+                            "reviews_count": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "banners": [
+                {
+                    "id": 1,
+                    "title_tm": "Global",
+                    "title_ru": "С Новым годом",
+                    "title_en": "Happy New Year",
+                    "subtitle_tm": "Bagtly pursatlary sowgat ediň",
+                    "subtitle_ru": "Дарите моменты счастья",
+                    "subtitle_en": "Give moments of happiness",
+                    "image": null,
+                    "link_type": "none",
+                    "link_value": null,
+                    "region_id": null,
+                    "position": 0,
+                    "is_active": 1,
+                    "starts_at": null,
+                    "ends_at": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 2,
+                    "title_tm": "Mary only",
+                    "title_ru": "С Новым годом",
+                    "title_en": "Happy New Year",
+                    "subtitle_tm": "Bagtly pursatlary sowgat ediň",
+                    "subtitle_ru": "Дарите моменты счастья",
+                    "subtitle_en": "Give moments of happiness",
+                    "image": null,
+                    "link_type": "none",
+                    "link_value": null,
+                    "region_id": 96,
+                    "position": 0,
+                    "is_active": 1,
+                    "starts_at": null,
+                    "ends_at": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 3,
+                    "title_tm": "Off",
+                    "title_ru": "С Новым годом",
+                    "title_en": "Happy New Year",
+                    "subtitle_tm": "Bagtly pursatlary sowgat ediň",
+                    "subtitle_ru": "Дарите моменты счастья",
+                    "subtitle_en": "Give moments of happiness",
+                    "image": null,
+                    "link_type": "none",
+                    "link_value": null,
+                    "region_id": null,
+                    "position": 0,
+                    "is_active": 0,
+                    "starts_at": null,
+                    "ends_at": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 4,
+                    "title_tm": "Expired",
+                    "title_ru": "С Новым годом",
+                    "title_en": "Happy New Year",
+                    "subtitle_tm": "Bagtly pursatlary sowgat ediň",
+                    "subtitle_ru": "Дарите моменты счастья",
+                    "subtitle_en": "Give moments of happiness",
+                    "image": null,
+                    "link_type": "none",
+                    "link_value": null,
+                    "region_id": null,
+                    "position": 0,
+                    "is_active": 1,
+                    "starts_at": null,
+                    "ends_at": "2026-10-04 12:04:07",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 36,
+                    "name_tm": "Güller",
+                    "name_en": "Flowers",
+                    "name_ru": "Цветы",
+                    "image": "https://via.placeholder.com/640x480.png/007744?text=quia",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 37,
+                    "name_tm": "natus",
+                    "name_en": "aut",
+                    "name_ru": "distinctio",
+                    "image": "https://via.placeholder.com/640x480.png/009966?text=itaque",
+                    "category_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 38,
+                    "name_tm": "ut",
+                    "name_en": "quisquam",
+                    "name_ru": "incidunt",
+                    "image": "https://via.placeholder.com/640x480.png/00aa33?text=molestiae",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "images": [
+                {
+                    "id": 100,
+                    "url": "https://loremflickr.com/300/300/product?lock=911",
+                    "product_id": 34,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 101,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=590",
+                    "product_id": 34,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 102,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=472",
+                    "product_id": 34,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 103,
+                    "url": "https://loremflickr.com/300/300/product?lock=92",
+                    "product_id": 35,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 104,
+                    "url": "https://picsum.photos/id/477/300/300",
+                    "product_id": 35,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 105,
+                    "url": "https://loremflickr.com/300/300/product?lock=362",
+                    "product_id": 35,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 106,
+                    "url": "https://loremflickr.com/300/300/product?lock=736",
+                    "product_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 107,
+                    "url": "https://picsum.photos/id/973/300/300",
+                    "product_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 108,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=700",
+                    "product_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 109,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=656",
+                    "product_id": 37,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 110,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=683",
+                    "product_id": 37,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 111,
+                    "url": "https://picsum.photos/id/838/300/300",
+                    "product_id": 37,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 112,
+                    "url": "https://loremflickr.com/300/300/product?lock=28",
+                    "product_id": 38,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 113,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=438",
+                    "product_id": 38,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 114,
+                    "url": "https://loremflickr.com/300/300/product?lock=170",
+                    "product_id": 38,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 115,
+                    "url": "https://picsum.photos/id/289/300/300",
+                    "product_id": 39,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 116,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=114",
+                    "product_id": 39,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 117,
+                    "url": "https://picsum.photos/id/209/300/300",
+                    "product_id": 39,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 118,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=596",
+                    "product_id": 40,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 119,
+                    "url": "https://picsum.photos/id/514/300/300",
+                    "product_id": 40,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 120,
+                    "url": "https://loremflickr.com/300/300/product?lock=636",
+                    "product_id": 40,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 121,
+                    "url": "https://picsum.photos/id/984/300/300",
+                    "product_id": 41,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 122,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=909",
+                    "product_id": 41,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 123,
+                    "url": "https://loremflickr.com/300/300/product?lock=7",
+                    "product_id": 41,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 124,
+                    "url": "https://picsum.photos/id/612/300/300",
+                    "product_id": 42,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 125,
+                    "url": "https://loremflickr.com/300/300/product?lock=616",
+                    "product_id": 42,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 126,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=94",
+                    "product_id": 42,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "products": [
+                {
+                    "id": 34,
+                    "name_tm": "aut quia repudiandae",
+                    "name_en": "aut quia repudiandae",
+                    "name_ru": "aut quia repudiandae",
+                    "price": "598.91",
+                    "discount": 0,
+                    "description_tm": "Dolor in expedita alias illo iste.",
+                    "description_en": "Distinctio et ea quam.",
+                    "description_ru": "Facilis eos ut et commodi labore temporibus alias placeat.",
+                    "production_time": 60,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 34,
+                    "category_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 35,
+                    "name_tm": "magni eum sit",
+                    "name_en": "magni eum sit",
+                    "name_ru": "magni eum sit",
+                    "price": "242.11",
+                    "discount": 0,
+                    "description_tm": "Rem omnis similique qui voluptatem qui consequatur omnis.",
+                    "description_en": "Excepturi sed ut ut laborum commodi soluta.",
+                    "description_ru": "Non dolorum mollitia consectetur consectetur.",
+                    "production_time": 60,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 34,
+                    "category_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 36,
+                    "name_tm": "neque et veritatis",
+                    "name_en": "neque et veritatis",
+                    "name_ru": "neque et veritatis",
+                    "price": "150.29",
+                    "discount": 0,
+                    "description_tm": "Necessitatibus sit quia hic minus quam in.",
+                    "description_en": "Voluptates ut praesentium non laudantium dolore optio.",
+                    "description_ru": "Quam blanditiis sed asperiores dolores ut.",
+                    "production_time": 600,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 34,
+                    "category_id": 37,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 37,
+                    "name_tm": "eligendi ut quis",
+                    "name_en": "eligendi ut quis",
+                    "name_ru": "eligendi ut quis",
+                    "price": "841.95",
+                    "discount": 0,
+                    "description_tm": "Qui possimus sint delectus voluptates.",
+                    "description_en": "Maiores expedita et molestias architecto ut.",
+                    "description_ru": "Et nesciunt perferendis et quo reprehenderit.",
+                    "production_time": 600,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 34,
+                    "category_id": 38,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 38,
+                    "name_tm": "odio ut cupiditate",
+                    "name_en": "odio ut cupiditate",
+                    "name_ru": "odio ut cupiditate",
+                    "price": "813.77",
+                    "discount": 0,
+                    "description_tm": "Quaerat quae aut veniam quo non.",
+                    "description_en": "Dolore ut rem nesciunt sed.",
+                    "description_ru": "Consequatur in aut eius enim mollitia aut.",
+                    "production_time": 1080,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 0,
+                    "shop_id": 34,
+                    "category_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 39,
+                    "name_tm": "odio dolore ut",
+                    "name_en": "odio dolore ut",
+                    "name_ru": "odio dolore ut",
+                    "price": "243.97",
+                    "discount": 0,
+                    "description_tm": "Accusantium magnam fugit voluptates nobis velit accusamus.",
+                    "description_en": "Temporibus nostrum est aspernatur quod.",
+                    "description_ru": "Distinctio odit aliquam quis nihil itaque ratione.",
+                    "production_time": 60,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 0,
+                    "status": 1,
+                    "shop_id": 34,
+                    "category_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 40,
+                    "name_tm": "quo magni quae",
+                    "name_en": "quo magni quae",
+                    "name_ru": "quo magni quae",
+                    "price": "113.93",
+                    "discount": 0,
+                    "description_tm": "Voluptatum aut ad dolore vel itaque impedit consectetur.",
+                    "description_en": "Sapiente est libero similique atque.",
+                    "description_ru": "Autem ut incidunt vitae at.",
+                    "production_time": 1198,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 35,
+                    "category_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 41,
+                    "name_tm": "vel a omnis",
+                    "name_en": "vel a omnis",
+                    "name_ru": "vel a omnis",
+                    "price": "41.08",
+                    "discount": 0,
+                    "description_tm": "Enim tenetur mollitia veniam tenetur sint sunt aperiam eaque.",
+                    "description_en": "Doloribus enim aliquam est laudantium magnam.",
+                    "description_ru": "Minus nesciunt et tempore rerum facere ipsam autem.",
+                    "production_time": 168,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 35,
+                    "category_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 42,
+                    "name_tm": "ut doloribus quo",
+                    "name_en": "ut doloribus quo",
+                    "name_ru": "ut doloribus quo",
+                    "price": "494.95",
+                    "discount": 0,
+                    "description_tm": "Quaerat qui nostrum et voluptatibus suscipit quaerat nihil.",
+                    "description_en": "Nemo quis sapiente vel enim voluptatem veniam.",
+                    "description_ru": "Eaque voluptates vero repudiandae doloremque alias tempora veniam accusantium.",
+                    "production_time": 421,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 35,
+                    "category_id": 36,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 91,
+                    "name": "Everettshire",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 92,
+                    "name": "Juvenalville",
+                    "type": "province",
+                    "parent_id": 91,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 93,
+                    "name": "Aşgabat",
+                    "type": "city",
+                    "parent_id": 92,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 94,
+                    "name": "Orrinport",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 95,
+                    "name": "Eudorashire",
+                    "type": "province",
+                    "parent_id": 94,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 96,
+                    "name": "Mary",
+                    "type": "city",
+                    "parent_id": 95,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 34,
+                    "name": "Corkery-Jacobson",
+                    "email": "ulang@example.org",
+                    "phone": null,
+                    "mon_fri_open": "23:57",
+                    "mon_fri_close": "21:39",
+                    "sat_sun_open": "02:49",
+                    "sat_sun_close": "02:37",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 89,
+                    "region_id": 93,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 35,
+                    "name": "Barton, Daugherty and Harvey",
+                    "email": "jameson67@example.com",
+                    "phone": null,
+                    "mon_fri_open": "21:59",
+                    "mon_fri_close": "14:49",
+                    "sat_sun_open": "09:18",
+                    "sat_sun_close": "23:21",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 90,
+                    "region_id": 96,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "users": [
+                {
+                    "id": 89,
+                    "name": "Prof. Rey Haag IV",
+                    "phone_number": "19845830",
+                    "email": "owalker@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "g0Og2kDS2o",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 90,
+                    "name": "Dr. Wilburn Kovacek",
+                    "phone_number": "72628488",
+                    "email": "robyn.shields@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "bBvnzZ4dFi",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 5,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 39,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 127,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 4,
+            "products": 43,
+            "regions": 97,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 36,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 17,
+            "user_otps": 5,
+            "users": 91,
+            "waitlist_items": 1
+        }
+    }
+}

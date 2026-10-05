@@ -1,0 +1,252 @@
+{
+    "name": "ShopWriteTest__login_lists_the_callers_shop__1",
+    "test": "Tests\\Feature\\Api\\ShopWriteTest::login_lists_the_callers_shop",
+    "route": "POST api/login",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:09",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 155
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/login",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "phone_number": "65123456",
+            "otp": "0000"
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "access_token": "<token>",
+            "token_type": "Bearer",
+            "user": {
+                "id": 154,
+                "name": "Al Bode III",
+                "phone_number": "65123456",
+                "email": "mafalda14@example.net",
+                "birth_date": null,
+                "image": "<url>/img/logo/<file>",
+                "status": 1,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>",
+                "shop": {
+                    "id": 71,
+                    "name": "Parker, Hammes and Johnston",
+                    "email": "ron06@example.net",
+                    "mon_fri_open": "02:23",
+                    "mon_fri_close": "12:46",
+                    "sat_sun_open": "08:30",
+                    "sat_sun_close": "00:09",
+                    "image": "<url>/storage/shop/shop-seeder/sowgatly-logo.png",
+                    "phone": null,
+                    "delivery_fee": 20,
+                    "pickup_available": false,
+                    "min_order_amount": null,
+                    "description": {
+                        "tm": null,
+                        "ru": null,
+                        "en": null
+                    },
+                    "status": "approved",
+                    "rating_avg": null,
+                    "reviews_count": 0,
+                    "region": {
+                        "id": 147,
+                        "name": "East Delfinaport",
+                        "type": "country",
+                        "parent_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                }
+            },
+            "shops": [
+                {
+                    "id": 71,
+                    "name": "Parker, Hammes and Johnston",
+                    "email": "ron06@example.net",
+                    "mon_fri_open": "02:23",
+                    "mon_fri_close": "12:46",
+                    "sat_sun_open": "08:30",
+                    "sat_sun_close": "00:09",
+                    "image": "<url>/storage/shop/shop-seeder/sowgatly-logo.png",
+                    "phone": null,
+                    "delivery_fee": 20,
+                    "pickup_available": false,
+                    "min_order_amount": null,
+                    "description": {
+                        "tm": null,
+                        "ru": null,
+                        "en": null
+                    },
+                    "status": "approved",
+                    "rating_avg": null,
+                    "reviews_count": 0,
+                    "region": {
+                        "id": 147,
+                        "name": "East Delfinaport",
+                        "type": "country",
+                        "parent_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                }
+            ]
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "regions": [
+                {
+                    "id": 147,
+                    "name": "East Delfinaport",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 71,
+                    "name": "Parker, Hammes and Johnston",
+                    "email": "ron06@example.net",
+                    "phone": null,
+                    "mon_fri_open": "02:23",
+                    "mon_fri_close": "12:46",
+                    "sat_sun_open": "08:30",
+                    "sat_sun_close": "00:09",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 154,
+                    "region_id": 147,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "user_otps": [
+                {
+                    "id": 5,
+                    "user_id": 154,
+                    "otp": "0000",
+                    "expire_at": "2026-10-05 12:14:09",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "users": [
+                {
+                    "id": 153,
+                    "name": "Keira Feeney",
+                    "phone_number": "61694324",
+                    "email": "damore.dangelo@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "7JFaipThul",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 154,
+                    "name": "Al Bode III",
+                    "phone_number": "65123456",
+                    "email": "mafalda14@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "koILPdhjBD",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 155,
+                    "name": "Allen Mraz",
+                    "phone_number": "81307677",
+                    "email": "sanderson@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "fJRgRk0Rkn",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 10,
+            "brands_products": 5,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 68,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 5,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 218,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 21,
+            "orders": 21,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 11,
+            "products": 75,
+            "regions": 148,
+            "roles": 1,
+            "shop_applications": 3,
+            "shops": 72,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 31,
+            "user_otps": 6,
+            "users": 156,
+            "waitlist_items": 1
+        }
+    }
+}

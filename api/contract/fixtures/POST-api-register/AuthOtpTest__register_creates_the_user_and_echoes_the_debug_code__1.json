@@ -1,0 +1,121 @@
+{
+    "name": "AuthOtpTest__register_creates_the_user_and_echoes_the_debug_code__1",
+    "test": "Tests\\Feature\\Api\\AuthOtpTest::test_register_creates_the_user_and_echoes_the_debug_code",
+    "route": "POST api/register",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:04",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 6
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/register",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "phone_number": "65123456",
+            "name": "Test User",
+            "email": "test@example.com"
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "access_token": "<token>",
+            "token_type": "Bearer",
+            "otp": "0000",
+            "user": {
+                "id": 7,
+                "name": "Test User",
+                "phone_number": "65123456",
+                "email": "test@example.com",
+                "birth_date": null,
+                "image": null,
+                "status": null,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>"
+            },
+            "shops": [],
+            "device": {
+                "id": 1,
+                "device_token": "<token>",
+                "user_id": 7,
+                "device_type": "web",
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>"
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "users": [
+                {
+                    "id": 6,
+                    "name": "Albina Heaney",
+                    "phone_number": "42343300",
+                    "email": "donnelly.libbie@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "zo47L6BvtT",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 1,
+            "carts": 1,
+            "categories": 1,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 1,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 1,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 1,
+            "orders": 1,
+            "permissions": 1,
+            "personal_access_tokens": 2,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 1,
+            "regions": 1,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 1,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 1,
+            "user_otps": 4,
+            "users": 7,
+            "waitlist_items": 1
+        }
+    }
+}

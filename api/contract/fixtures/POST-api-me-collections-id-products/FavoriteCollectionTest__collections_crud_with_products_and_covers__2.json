@@ -1,0 +1,341 @@
+{
+    "name": "FavoriteCollectionTest__collections_crud_with_products_and_covers__2",
+    "test": "Tests\\Feature\\Api\\FavoriteCollectionTest::test_collections_crud_with_products_and_covers",
+    "route": "POST api/me/collections/{id}/products",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:06",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 74
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/me/collections/1/products",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "product_id": 27
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "added": false
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 29,
+                    "name_tm": "et",
+                    "name_en": "quisquam",
+                    "name_ru": "ipsa",
+                    "image": "https://via.placeholder.com/640x480.png/003366?text=recusandae",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 30,
+                    "name_tm": "earum",
+                    "name_en": "placeat",
+                    "name_ru": "labore",
+                    "image": "https://via.placeholder.com/640x480.png/0055dd?text=ab",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 31,
+                    "name_tm": "ut",
+                    "name_en": "tempore",
+                    "name_ru": "ipsum",
+                    "image": "https://via.placeholder.com/640x480.png/00aa33?text=recusandae",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "favorite_collection_items": [
+                {
+                    "id": 1,
+                    "collection_id": 1,
+                    "product_id": 27,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "favorite_collections": [
+                {
+                    "id": 1,
+                    "user_id": 74,
+                    "name": "Что я хочу",
+                    "position": 1,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "images": [
+                {
+                    "id": 79,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=186",
+                    "product_id": 27,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 80,
+                    "url": "https://picsum.photos/id/17/300/300",
+                    "product_id": 27,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 81,
+                    "url": "https://loremflickr.com/300/300/product?lock=869",
+                    "product_id": 27,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 82,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=477",
+                    "product_id": 28,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 83,
+                    "url": "https://picsum.photos/id/267/300/300",
+                    "product_id": 28,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 84,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=391",
+                    "product_id": 28,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 85,
+                    "url": "https://loremflickr.com/300/300/product?lock=621",
+                    "product_id": 29,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 86,
+                    "url": "https://loremflickr.com/300/300/product?lock=610",
+                    "product_id": 29,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 87,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=924",
+                    "product_id": 29,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "products": [
+                {
+                    "id": 27,
+                    "name_tm": "ut nulla vero",
+                    "name_en": "ut nulla vero",
+                    "name_ru": "ut nulla vero",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Ad et blanditiis voluptas exercitationem blanditiis sit et.",
+                    "description_en": "Quidem corporis voluptas molestiae quo nihil inventore fugiat.",
+                    "description_ru": "Consequatur iusto aut libero voluptates vel quod.",
+                    "production_time": 226,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 29,
+                    "category_id": 29,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 28,
+                    "name_tm": "perferendis sint voluptatum",
+                    "name_en": "perferendis sint voluptatum",
+                    "name_ru": "perferendis sint voluptatum",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Veniam molestias et sed sit.",
+                    "description_en": "Nam molestiae facere animi aut ut.",
+                    "description_ru": "Rem impedit dolores ullam sed.",
+                    "production_time": 580,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 29,
+                    "category_id": 30,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 29,
+                    "name_tm": "voluptatem qui et",
+                    "name_en": "voluptatem qui et",
+                    "name_ru": "voluptatem qui et",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Omnis veniam et quos.",
+                    "description_en": "Dignissimos consequatur suscipit expedita impedit.",
+                    "description_ru": "Atque voluptates ut ab suscipit qui est.",
+                    "production_time": 1164,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 29,
+                    "category_id": 31,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 76,
+                    "name": "Port Sonnyside",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 77,
+                    "name": "Annafort",
+                    "type": "province",
+                    "parent_id": 76,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 78,
+                    "name": "Fayhaven",
+                    "type": "city",
+                    "parent_id": 77,
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 29,
+                    "name": "Cummerata, Rice and Collier",
+                    "email": "wiza.lloyd@example.com",
+                    "phone": null,
+                    "mon_fri_open": "16:18",
+                    "mon_fri_close": "13:30",
+                    "sat_sun_open": "10:22",
+                    "sat_sun_close": "22:45",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 75,
+                    "region_id": 78,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ],
+            "users": [
+                {
+                    "id": 74,
+                    "name": "Torrey Vandervort",
+                    "phone_number": "37699834",
+                    "email": "scrooks@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "m2GcrJogxx",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                },
+                {
+                    "id": 75,
+                    "name": "Dr. Laisha Corkery PhD",
+                    "phone_number": "64394101",
+                    "email": "rodriguez.alejandrin@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "FAxI7pxl2L",
+                    "created_at": "2026-10-05 12:04:06",
+                    "updated_at": "2026-10-05 12:04:06"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 32,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 2,
+            "favorite_collections": 2,
+            "favorites": 2,
+            "images": 88,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 30,
+            "regions": 79,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 30,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 17,
+            "user_otps": 5,
+            "users": 76,
+            "waitlist_items": 1
+        }
+    }
+}

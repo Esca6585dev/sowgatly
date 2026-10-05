@@ -1,0 +1,207 @@
+{
+    "name": "CatalogTest__shops_index_lists_only_the_callers_shops_and_show_is_open__1",
+    "test": "Tests\\Feature\\Api\\CatalogTest::test_shops_index_lists_only_the_callers_shops_and_show_is_open",
+    "route": "GET api/shops/{shop}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 44
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/shops/19",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "status": true,
+            "data": {
+                "id": 19,
+                "name": "Stokes, Carter and Zemlak",
+                "email": "dagmar.lakin@example.net",
+                "mon_fri_open": "03:40",
+                "mon_fri_close": "09:23",
+                "sat_sun_open": "00:35",
+                "sat_sun_close": "22:18",
+                "image": "<url>/storage/shop/shop-seeder/logo.png",
+                "phone": null,
+                "delivery_fee": 20,
+                "pickup_available": false,
+                "min_order_amount": null,
+                "description": {
+                    "tm": null,
+                    "ru": null,
+                    "en": null
+                },
+                "status": "approved",
+                "rating_avg": null,
+                "reviews_count": 0,
+                "region": {
+                    "id": 51,
+                    "name": "Lake Ginoport",
+                    "type": "province",
+                    "parent_id": null,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "address": null,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>"
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "regions": [
+                {
+                    "id": 50,
+                    "name": "Marquardtburgh",
+                    "type": "city",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 51,
+                    "name": "Lake Ginoport",
+                    "type": "province",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 18,
+                    "name": "Kovacek-Jacobs",
+                    "email": "erdman.lonzo@example.com",
+                    "phone": null,
+                    "mon_fri_open": "02:44",
+                    "mon_fri_close": "22:55",
+                    "sat_sun_open": "15:59",
+                    "sat_sun_close": "05:22",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 44,
+                    "region_id": 50,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 19,
+                    "name": "Stokes, Carter and Zemlak",
+                    "email": "dagmar.lakin@example.net",
+                    "phone": null,
+                    "mon_fri_open": "03:40",
+                    "mon_fri_close": "09:23",
+                    "sat_sun_open": "00:35",
+                    "sat_sun_close": "22:18",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 45,
+                    "region_id": 51,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 44,
+                    "name": "Adaline Pacocha",
+                    "phone_number": "54071148",
+                    "email": "maeve74@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "aCo9P3N1kG",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 45,
+                    "name": "Prof. Myron Gislason IV",
+                    "phone_number": "36333335",
+                    "email": "alyson96@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "6UjDqrtdaS",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 23,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 61,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 6,
+            "orders": 9,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 21,
+            "regions": 52,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 20,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 10,
+            "user_otps": 5,
+            "users": 46,
+            "waitlist_items": 1
+        }
+    }
+}

@@ -1,0 +1,164 @@
+{
+    "name": "ChatTest__a_thread_is_private_to_its_customer_and_shop__1",
+    "test": "Tests\\Feature\\Api\\ChatTest::a_thread_is_private_to_its_customer_and_shop",
+    "route": "POST api/me/chats",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 50
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/me/chats",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "shop_id": 21
+        }
+    },
+    "response": {
+        "status": 201,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "data": {
+                "id": 2,
+                "shop": {
+                    "id": 21,
+                    "name": "Goldner-Leannon",
+                    "image": "<url>/storage/shop/shop-seeder/sowgatly-logo.png"
+                },
+                "user": {
+                    "id": 50,
+                    "name": "Dora Kreiger I",
+                    "image": "<url>/img/logo/<file>"
+                },
+                "order_id": null,
+                "last_message": null,
+                "unread": null,
+                "last_message_at": null,
+                "created_at": "<datetime>"
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "regions": [
+                {
+                    "id": 56,
+                    "name": "North Lyda",
+                    "type": "village",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 21,
+                    "name": "Goldner-Leannon",
+                    "email": "isac.lebsack@example.com",
+                    "phone": null,
+                    "mon_fri_open": "20:18",
+                    "mon_fri_close": "05:00",
+                    "sat_sun_open": "15:52",
+                    "sat_sun_close": "06:03",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 51,
+                    "region_id": 56,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 50,
+                    "name": "Dora Kreiger I",
+                    "phone_number": "59639921",
+                    "email": "myrtie04@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "39jGNmtF0w",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 51,
+                    "name": "Leora Gutkowski",
+                    "phone_number": "75688152",
+                    "email": "tina16@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "wjsjF0JE58",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 23,
+            "chat_messages": 3,
+            "chat_threads": 2,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 61,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 6,
+            "orders": 9,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 21,
+            "regions": 57,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 22,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 12,
+            "user_otps": 5,
+            "users": 52,
+            "waitlist_items": 1
+        }
+    }
+}

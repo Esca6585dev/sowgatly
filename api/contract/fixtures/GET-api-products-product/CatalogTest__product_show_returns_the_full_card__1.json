@@ -1,0 +1,300 @@
+{
+    "name": "CatalogTest__product_show_returns_the_full_card__1",
+    "test": "Tests\\Feature\\Api\\CatalogTest::test_product_show_returns_the_full_card",
+    "route": "GET api/products/{product}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 33
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/products/10",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "data": {
+                "id": 10,
+                "name": {
+                    "tm": "adipisci qui reprehenderit",
+                    "en": "adipisci qui reprehenderit",
+                    "ru": "adipisci qui reprehenderit"
+                },
+                "price": "100.00",
+                "discount": 0,
+                "description": {
+                    "tm": "Fugit tempora quasi doloremque eveniet vero dicta porro.",
+                    "en": "Quia aut quasi blanditiis fuga.",
+                    "ru": "Qui voluptas minima occaecati vitae."
+                },
+                "production_time": 641,
+                "min_order": 1,
+                "seller_status": true,
+                "stock": 10,
+                "width": null,
+                "height": null,
+                "shop_id": 12,
+                "category_id": 13,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>",
+                "attributes": [],
+                "brands": [],
+                "images": [
+                    {
+                        "id": 28,
+                        "url": "<url>/300x300/?product&sig=178",
+                        "product_id": 10,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 29,
+                        "url": "<url>/300/300/product?lock=974",
+                        "product_id": 10,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 30,
+                        "url": "<url>/id/689/300/300",
+                        "product_id": 10,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    }
+                ],
+                "category": {
+                    "id": 13,
+                    "name_tm": "enim",
+                    "name_en": "repellendus",
+                    "name_ru": "pariatur",
+                    "image": "<url>/640x480.png/007722?text=rerum",
+                    "category_id": null,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "shop": {
+                    "id": 12,
+                    "name": "Reilly PLC",
+                    "email": "hill.jensen@example.org",
+                    "phone": null,
+                    "mon_fri_open": "06:35",
+                    "mon_fri_close": "17:08",
+                    "sat_sun_open": "15:33",
+                    "sat_sun_close": "08:41",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 34,
+                    "region_id": 28,
+                    "delivery_fee": "20.00",
+                    "pickup_available": false,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "reviews_avg": null,
+                "reviews_count": 0
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 13,
+                    "name_tm": "enim",
+                    "name_en": "repellendus",
+                    "name_ru": "pariatur",
+                    "image": "https://via.placeholder.com/640x480.png/007722?text=rerum",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "images": [
+                {
+                    "id": 28,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=178",
+                    "product_id": 10,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 29,
+                    "url": "https://loremflickr.com/300/300/product?lock=974",
+                    "product_id": 10,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 30,
+                    "url": "https://picsum.photos/id/689/300/300",
+                    "product_id": 10,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "products": [
+                {
+                    "id": 10,
+                    "name_tm": "adipisci qui reprehenderit",
+                    "name_en": "adipisci qui reprehenderit",
+                    "name_ru": "adipisci qui reprehenderit",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Fugit tempora quasi doloremque eveniet vero dicta porro.",
+                    "description_en": "Quia aut quasi blanditiis fuga.",
+                    "description_ru": "Qui voluptas minima occaecati vitae.",
+                    "production_time": 641,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 12,
+                    "category_id": 13,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 26,
+                    "name": "East Cicerofort",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 27,
+                    "name": "South Spencermouth",
+                    "type": "province",
+                    "parent_id": 26,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 28,
+                    "name": "Hudsonfurt",
+                    "type": "city",
+                    "parent_id": 27,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 12,
+                    "name": "Reilly PLC",
+                    "email": "hill.jensen@example.org",
+                    "phone": null,
+                    "mon_fri_open": "06:35",
+                    "mon_fri_close": "17:08",
+                    "sat_sun_open": "15:33",
+                    "sat_sun_close": "08:41",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 34,
+                    "region_id": 28,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 33,
+                    "name": "Leone Emard",
+                    "phone_number": "87447967",
+                    "email": "davis.marilyne@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "ZueAzlnymT",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 34,
+                    "name": "Rhett Windler",
+                    "phone_number": "94612197",
+                    "email": "josiane.homenick@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "ogM0zy9Sxp",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 14,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 31,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 6,
+            "orders": 9,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 11,
+            "regions": 29,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 13,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 10,
+            "user_otps": 5,
+            "users": 35,
+            "waitlist_items": 1
+        }
+    }
+}

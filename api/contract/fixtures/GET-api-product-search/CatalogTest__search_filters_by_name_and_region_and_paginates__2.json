@@ -1,0 +1,575 @@
+{
+    "name": "CatalogTest__search_filters_by_name_and_region_and_paginates__2",
+    "test": "Tests\\Feature\\Api\\CatalogTest::test_search_filters_by_name_and_region_and_paginates",
+    "route": "GET api/product/search",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 36
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/product/search",
+        "query": {
+            "name": "роза"
+        },
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "data": [
+                {
+                    "id": 11,
+                    "name": {
+                        "tm": "Gyzyl bägül",
+                        "en": "Red rose",
+                        "ru": "Красная роза"
+                    },
+                    "price": "100.00",
+                    "discount": 0,
+                    "description": {
+                        "tm": "Dolor numquam consectetur repudiandae dolor deserunt recusandae.",
+                        "en": "Et aliquam omnis commodi quibusdam aut.",
+                        "ru": "Enim quisquam perferendis ipsum qui consequatur."
+                    },
+                    "production_time": 919,
+                    "min_order": 1,
+                    "seller_status": true,
+                    "stock": 10,
+                    "width": null,
+                    "height": null,
+                    "shop_id": 13,
+                    "category_id": 14,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>",
+                    "attributes": [],
+                    "brands": [],
+                    "images": [
+                        {
+                            "id": 31,
+                            "url": "<url>/id/425/300/300",
+                            "product_id": 11,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 32,
+                            "url": "<url>/300/300/product?lock=886",
+                            "product_id": 11,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 33,
+                            "url": "<url>/300/300/product?lock=745",
+                            "product_id": 11,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    ],
+                    "category": {
+                        "id": 14,
+                        "name_tm": "at",
+                        "name_en": "non",
+                        "name_ru": "est",
+                        "image": "<url>/640x480.png/009966?text=laudantium",
+                        "category_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "shop": {
+                        "id": 13,
+                        "name": "Jacobson-Heathcote",
+                        "email": "anne.botsford@example.org",
+                        "phone": null,
+                        "mon_fri_open": "03:51",
+                        "mon_fri_close": "19:08",
+                        "sat_sun_open": "20:39",
+                        "sat_sun_close": "13:26",
+                        "image": "shop/shop-seeder/logo.png",
+                        "user_id": 37,
+                        "region_id": 31,
+                        "delivery_fee": "20.00",
+                        "pickup_available": false,
+                        "min_order_amount": null,
+                        "description_tm": null,
+                        "description_ru": null,
+                        "description_en": null,
+                        "status": "approved",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "compositions": [],
+                    "reviews_avg": null,
+                    "reviews_count": 0
+                }
+            ],
+            "meta": {
+                "current_page": 1,
+                "last_page": 1,
+                "total": 1
+            },
+            "message": "Products retrieved successfully"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 14,
+                    "name_tm": "at",
+                    "name_en": "non",
+                    "name_ru": "est",
+                    "image": "https://via.placeholder.com/640x480.png/009966?text=laudantium",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 15,
+                    "name_tm": "perferendis",
+                    "name_en": "nostrum",
+                    "name_ru": "quae",
+                    "image": "https://via.placeholder.com/640x480.png/0022ff?text=vel",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 16,
+                    "name_tm": "laudantium",
+                    "name_en": "cum",
+                    "name_ru": "eaque",
+                    "image": "https://via.placeholder.com/640x480.png/00ee00?text=nihil",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 17,
+                    "name_tm": "nulla",
+                    "name_en": "vel",
+                    "name_ru": "est",
+                    "image": "https://via.placeholder.com/640x480.png/007766?text=cum",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "images": [
+                {
+                    "id": 31,
+                    "url": "https://picsum.photos/id/425/300/300",
+                    "product_id": 11,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 32,
+                    "url": "https://loremflickr.com/300/300/product?lock=886",
+                    "product_id": 11,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 33,
+                    "url": "https://loremflickr.com/300/300/product?lock=745",
+                    "product_id": 11,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 34,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=193",
+                    "product_id": 12,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 35,
+                    "url": "https://picsum.photos/id/103/300/300",
+                    "product_id": 12,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 36,
+                    "url": "https://loremflickr.com/300/300/product?lock=896",
+                    "product_id": 12,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 37,
+                    "url": "https://loremflickr.com/300/300/product?lock=501",
+                    "product_id": 13,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 38,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=919",
+                    "product_id": 13,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 39,
+                    "url": "https://loremflickr.com/300/300/product?lock=780",
+                    "product_id": 13,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 40,
+                    "url": "https://loremflickr.com/300/300/product?lock=643",
+                    "product_id": 14,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 41,
+                    "url": "https://picsum.photos/id/117/300/300",
+                    "product_id": 14,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 42,
+                    "url": "https://picsum.photos/id/77/300/300",
+                    "product_id": 14,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "products": [
+                {
+                    "id": 11,
+                    "name_tm": "Gyzyl bägül",
+                    "name_en": "Red rose",
+                    "name_ru": "Красная роза",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Dolor numquam consectetur repudiandae dolor deserunt recusandae.",
+                    "description_en": "Et aliquam omnis commodi quibusdam aut.",
+                    "description_ru": "Enim quisquam perferendis ipsum qui consequatur.",
+                    "production_time": 919,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 13,
+                    "category_id": 14,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 12,
+                    "name_tm": "error optio dolorum",
+                    "name_en": "error optio dolorum",
+                    "name_ru": "error optio dolorum",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Et repellat commodi aspernatur voluptatum ipsa molestiae.",
+                    "description_en": "Sapiente veritatis consequatur nulla accusamus sit voluptatem.",
+                    "description_ru": "Sint sint optio repudiandae vel eos ipsum dolore.",
+                    "production_time": 137,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 13,
+                    "category_id": 15,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 13,
+                    "name_tm": "et non praesentium",
+                    "name_en": "et non praesentium",
+                    "name_ru": "et non praesentium",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Fugit quia ut ullam autem voluptatem quis.",
+                    "description_en": "Et saepe ex laboriosam rerum maiores nihil.",
+                    "description_ru": "Rerum quaerat eos incidunt eius quia iste.",
+                    "production_time": 471,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 14,
+                    "category_id": 16,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 14,
+                    "name_tm": "ex quia illo",
+                    "name_en": "ex quia illo",
+                    "name_ru": "ex quia illo",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Laudantium minus recusandae consectetur et qui totam.",
+                    "description_en": "Excepturi perspiciatis hic cum aspernatur vel velit a.",
+                    "description_ru": "Et non autem cum ullam vitae voluptas beatae.",
+                    "production_time": 1223,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 14,
+                    "category_id": 17,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 29,
+                    "name": "Wayneview",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 30,
+                    "name": "New Delphafurt",
+                    "type": "province",
+                    "parent_id": 29,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 31,
+                    "name": "Aşgabat",
+                    "type": "city",
+                    "parent_id": 30,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 32,
+                    "name": "New Charityport",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 33,
+                    "name": "Ricemouth",
+                    "type": "province",
+                    "parent_id": 32,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 34,
+                    "name": "Mary",
+                    "type": "city",
+                    "parent_id": 33,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 35,
+                    "name": "Lake Stephany",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 36,
+                    "name": "Loycemouth",
+                    "type": "province",
+                    "parent_id": 35,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 37,
+                    "name": "East Daniella",
+                    "type": "city",
+                    "parent_id": 36,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 38,
+                    "name": "Lake Bertrandport",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 39,
+                    "name": "Lake Vickie",
+                    "type": "province",
+                    "parent_id": 38,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 40,
+                    "name": "New Addieland",
+                    "type": "city",
+                    "parent_id": 39,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 13,
+                    "name": "Jacobson-Heathcote",
+                    "email": "anne.botsford@example.org",
+                    "phone": null,
+                    "mon_fri_open": "03:51",
+                    "mon_fri_close": "19:08",
+                    "sat_sun_open": "20:39",
+                    "sat_sun_close": "13:26",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 37,
+                    "region_id": 31,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 14,
+                    "name": "Davis-Howe",
+                    "email": "fiona47@example.org",
+                    "phone": null,
+                    "mon_fri_open": "16:20",
+                    "mon_fri_close": "12:54",
+                    "sat_sun_open": "01:47",
+                    "sat_sun_close": "03:14",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 38,
+                    "region_id": 34,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 36,
+                    "name": "Zita Douglas",
+                    "phone_number": "46324308",
+                    "email": "ikutch@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "FqyFANBB4z",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 37,
+                    "name": "Aryanna Wolff",
+                    "phone_number": "47199200",
+                    "email": "qmante@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "nipqlnlGeS",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 38,
+                    "name": "Braeden Murazik",
+                    "phone_number": "85783270",
+                    "email": "sheldon.strosin@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "FWHR5YjaOo",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 18,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 43,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 6,
+            "orders": 9,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 15,
+            "regions": 41,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 15,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 10,
+            "user_otps": 5,
+            "users": 39,
+            "waitlist_items": 1
+        }
+    }
+}

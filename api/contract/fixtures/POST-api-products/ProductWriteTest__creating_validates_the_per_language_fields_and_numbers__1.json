@@ -1,0 +1,183 @@
+{
+    "name": "ProductWriteTest__creating_validates_the_per_language_fields_and_numbers__1",
+    "test": "Tests\\Feature\\Api\\ProductWriteTest::creating_validates_the_per_language_fields_and_numbers",
+    "route": "POST api/products",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:09",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 136
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/products",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 422,
+        "content_type": "application/json",
+        "json": {
+            "message": "The name tm field is required. (and 9 more errors)",
+            "errors": {
+                "name_tm": [
+                    "The name tm field is required."
+                ],
+                "name_en": [
+                    "The name en field is required."
+                ],
+                "name_ru": [
+                    "The name ru field is required."
+                ],
+                "description_tm": [
+                    "The description tm field is required."
+                ],
+                "description_en": [
+                    "The description en field is required."
+                ],
+                "description_ru": [
+                    "The description ru field is required."
+                ],
+                "price": [
+                    "The price field is required."
+                ],
+                "seller_status": [
+                    "The seller status field is required."
+                ],
+                "status": [
+                    "The status field is required."
+                ],
+                "category_id": [
+                    "The category id field is required."
+                ]
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "brands": [
+                {
+                    "id": 4,
+                    "name": "Bruen, Hartmann and Douglas",
+                    "description": "Facilis molestiae nobis cum explicabo. Et in inventore reiciendis non et dolore. Similique quod qui soluta est labore. Quis voluptatem dolorem dolore corporis minima dolorum. Voluptas nihil consequuntur sed enim aliquid adipisci qui eos.",
+                    "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
+                    "status": 1,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 57,
+                    "name_tm": "doloribus",
+                    "name_en": "maiores",
+                    "name_ru": "ipsum",
+                    "image": "https://via.placeholder.com/640x480.png/00bb11?text=at",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 135,
+                    "name": "Stehrfort",
+                    "type": "city",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 61,
+                    "name": "Stracke, Ankunding and Reynolds",
+                    "email": "okeefe.laila@example.net",
+                    "phone": null,
+                    "mon_fri_open": "04:38",
+                    "mon_fri_close": "11:29",
+                    "sat_sun_open": "17:37",
+                    "sat_sun_close": "11:12",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 136,
+                    "region_id": 135,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "users": [
+                {
+                    "id": 136,
+                    "name": "Clarissa Hagenes",
+                    "phone_number": "30381123",
+                    "email": "kertzmann.elinor@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "txbhRNpeOh",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 5,
+            "brands_products": 3,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 58,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 5,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 202,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 21,
+            "orders": 21,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 11,
+            "products": 70,
+            "regions": 136,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 62,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 31,
+            "user_otps": 5,
+            "users": 137,
+            "waitlist_items": 1
+        }
+    }
+}

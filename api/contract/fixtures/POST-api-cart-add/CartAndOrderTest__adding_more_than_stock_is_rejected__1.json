@@ -1,0 +1,221 @@
+{
+    "name": "CartAndOrderTest__adding_more_than_stock_is_rejected__1",
+    "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_adding_more_than_stock_is_rejected",
+    "route": "POST api/cart/add",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:04",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 12
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/cart/add",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "product_id": 3,
+            "quantity": 5
+        }
+    },
+    "response": {
+        "status": 422,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "Not enough stock"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 3,
+                    "name_tm": "corporis",
+                    "name_en": "impedit",
+                    "name_ru": "aut",
+                    "image": "https://via.placeholder.com/640x480.png/0099cc?text=temporibus",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "images": [
+                {
+                    "id": 7,
+                    "url": "https://loremflickr.com/300/300/product?lock=383",
+                    "product_id": 3,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 8,
+                    "url": "https://loremflickr.com/300/300/product?lock=759",
+                    "product_id": 3,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 9,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=47",
+                    "product_id": 3,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "products": [
+                {
+                    "id": 3,
+                    "name_tm": "et vel quibusdam",
+                    "name_en": "et vel quibusdam",
+                    "name_ru": "et vel quibusdam",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Sunt aut omnis et veritatis aliquid non.",
+                    "description_en": "Et sit dolores est cumque.",
+                    "description_ru": "Iusto ab qui voluptas excepturi.",
+                    "production_time": 1320,
+                    "min_order": 1,
+                    "stock": 1,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 2,
+                    "category_id": 3,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 4,
+                    "name": "East Jarodside",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 5,
+                    "name": "Dooleyberg",
+                    "type": "province",
+                    "parent_id": 4,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 6,
+                    "name": "Lake Reneechester",
+                    "type": "city",
+                    "parent_id": 5,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 2,
+                    "name": "Hane-Daugherty",
+                    "email": "gwintheiser@example.net",
+                    "phone": null,
+                    "mon_fri_open": "05:28",
+                    "mon_fri_close": "18:34",
+                    "sat_sun_open": "02:12",
+                    "sat_sun_close": "16:34",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 13,
+                    "region_id": 6,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "users": [
+                {
+                    "id": 12,
+                    "name": "Prof. Ansley Kunze",
+                    "phone_number": "51933016",
+                    "email": "lewis25@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "tIWC1u6vD1",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 13,
+                    "name": "Prof. Madyson Bayer",
+                    "phone_number": "46078900",
+                    "email": "leon.kerluke@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "gr0tmvU5DS",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 3,
+            "carts": 2,
+            "categories": 4,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 10,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 1,
+            "orders": 1,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 4,
+            "regions": 7,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 3,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 1,
+            "user_otps": 5,
+            "users": 14,
+            "waitlist_items": 1
+        }
+    }
+}

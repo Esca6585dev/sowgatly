@@ -1,0 +1,255 @@
+{
+    "name": "CartAndOrderTest__cart_items_belong_to_the_caller__1",
+    "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_cart_items_belong_to_the_caller",
+    "route": "PUT api/cart/items/{id}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:04",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 16
+    },
+    "config": {},
+    "request": {
+        "method": "PUT",
+        "path": "/api/cart/items/3",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "quantity": 2
+        }
+    },
+    "response": {
+        "status": 404,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "Cart item not found"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "cart_items": [
+                {
+                    "id": 3,
+                    "cart_id": 3,
+                    "product_id": 4,
+                    "quantity": 1,
+                    "price": "100.00",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "carts": [
+                {
+                    "id": 3,
+                    "user_id": 14,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 4,
+                    "name_tm": "quasi",
+                    "name_en": "nulla",
+                    "name_ru": "porro",
+                    "image": "https://via.placeholder.com/640x480.png/00eeee?text=ut",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "images": [
+                {
+                    "id": 10,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=851",
+                    "product_id": 4,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 11,
+                    "url": "https://loremflickr.com/300/300/product?lock=877",
+                    "product_id": 4,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 12,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=556",
+                    "product_id": 4,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "products": [
+                {
+                    "id": 4,
+                    "name_tm": "eum provident minus",
+                    "name_en": "eum provident minus",
+                    "name_ru": "eum provident minus",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Non ducimus non officiis molestiae et dolor.",
+                    "description_en": "Omnis cumque id eaque iusto.",
+                    "description_ru": "Molestiae sequi ratione eligendi ut quis.",
+                    "production_time": 1281,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 3,
+                    "category_id": 4,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 7,
+                    "name": "Schultzhaven",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 8,
+                    "name": "West Jadontown",
+                    "type": "province",
+                    "parent_id": 7,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 9,
+                    "name": "Lake Darienmouth",
+                    "type": "city",
+                    "parent_id": 8,
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 3,
+                    "name": "Hoppe Inc",
+                    "email": "clement.daugherty@example.com",
+                    "phone": null,
+                    "mon_fri_open": "15:53",
+                    "mon_fri_close": "03:45",
+                    "sat_sun_open": "16:59",
+                    "sat_sun_close": "19:43",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 15,
+                    "region_id": 9,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ],
+            "users": [
+                {
+                    "id": 14,
+                    "name": "Elise Swaniawski",
+                    "phone_number": "53534018",
+                    "email": "prudence79@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "TS0hHy1IIg",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 15,
+                    "name": "Leif McLaughlin",
+                    "phone_number": "15343461",
+                    "email": "gerlach.jeff@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "Ljtz5UOCPC",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                },
+                {
+                    "id": 16,
+                    "name": "Rene Harvey",
+                    "phone_number": "21127890",
+                    "email": "mcclure.gwen@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "RUJJJSTCAP",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 4,
+            "carts": 4,
+            "categories": 5,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 13,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 1,
+            "orders": 1,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 5,
+            "regions": 10,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 4,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 1,
+            "user_otps": 5,
+            "users": 17,
+            "waitlist_items": 1
+        }
+    }
+}

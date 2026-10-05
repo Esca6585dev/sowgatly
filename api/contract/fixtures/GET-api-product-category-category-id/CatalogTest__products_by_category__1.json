@@ -1,0 +1,542 @@
+{
+    "name": "CatalogTest__products_by_category__1",
+    "test": "Tests\\Feature\\Api\\CatalogTest::test_products_by_category",
+    "route": "GET api/product/category/{category_id}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 41
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/product/category/21",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "data": [
+                {
+                    "id": 18,
+                    "name": {
+                        "tm": "sint culpa excepturi",
+                        "en": "sint culpa excepturi",
+                        "ru": "sint culpa excepturi"
+                    },
+                    "price": "100.00",
+                    "discount": 0,
+                    "description": {
+                        "tm": "Incidunt magni omnis cum sit sed.",
+                        "en": "Aliquam non quia vel sequi.",
+                        "ru": "Quia doloribus harum est voluptas nobis."
+                    },
+                    "production_time": 563,
+                    "min_order": 1,
+                    "seller_status": true,
+                    "stock": 10,
+                    "width": null,
+                    "height": null,
+                    "shop_id": 16,
+                    "category_id": 21,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>",
+                    "attributes": [],
+                    "brands": [],
+                    "images": [
+                        {
+                            "id": 52,
+                            "url": "<url>/300x300/?product&sig=666",
+                            "product_id": 18,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 53,
+                            "url": "<url>/300/300/product?lock=983",
+                            "product_id": 18,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 54,
+                            "url": "<url>/300/300/product?lock=177",
+                            "product_id": 18,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    ],
+                    "category": {
+                        "id": 21,
+                        "name_tm": "consequatur",
+                        "name_en": "qui",
+                        "name_ru": "quis",
+                        "image": "<url>/640x480.png/0033bb?text=iusto",
+                        "category_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "shop": {
+                        "id": 16,
+                        "name": "Bayer-Koepp",
+                        "email": "upouros@example.com",
+                        "phone": null,
+                        "mon_fri_open": "11:43",
+                        "mon_fri_close": "06:51",
+                        "sat_sun_open": "14:45",
+                        "sat_sun_close": "11:59",
+                        "image": "shop/shop-seeder/logo.png",
+                        "user_id": 42,
+                        "region_id": 46,
+                        "delivery_fee": "20.00",
+                        "pickup_available": false,
+                        "min_order_amount": null,
+                        "description_tm": null,
+                        "description_ru": null,
+                        "description_en": null,
+                        "status": "approved",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "reviews_avg": null,
+                    "reviews_count": 0
+                },
+                {
+                    "id": 19,
+                    "name": {
+                        "tm": "ab ea aspernatur",
+                        "en": "ab ea aspernatur",
+                        "ru": "ab ea aspernatur"
+                    },
+                    "price": "100.00",
+                    "discount": 0,
+                    "description": {
+                        "tm": "Eaque porro temporibus maxime blanditiis.",
+                        "en": "Dolore velit minima perspiciatis alias nostrum aliquam.",
+                        "ru": "Doloremque est qui fuga voluptas necessitatibus."
+                    },
+                    "production_time": 929,
+                    "min_order": 1,
+                    "seller_status": true,
+                    "stock": 10,
+                    "width": null,
+                    "height": null,
+                    "shop_id": 16,
+                    "category_id": 21,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>",
+                    "attributes": [],
+                    "brands": [],
+                    "images": [
+                        {
+                            "id": 55,
+                            "url": "<url>/300/300/product?lock=193",
+                            "product_id": 19,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 56,
+                            "url": "<url>/300x300/?product&sig=594",
+                            "product_id": 19,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 57,
+                            "url": "<url>/300/300/product?lock=450",
+                            "product_id": 19,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    ],
+                    "category": {
+                        "id": 21,
+                        "name_tm": "consequatur",
+                        "name_en": "qui",
+                        "name_ru": "quis",
+                        "image": "<url>/640x480.png/0033bb?text=iusto",
+                        "category_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "shop": {
+                        "id": 16,
+                        "name": "Bayer-Koepp",
+                        "email": "upouros@example.com",
+                        "phone": null,
+                        "mon_fri_open": "11:43",
+                        "mon_fri_close": "06:51",
+                        "sat_sun_open": "14:45",
+                        "sat_sun_close": "11:59",
+                        "image": "shop/shop-seeder/logo.png",
+                        "user_id": 42,
+                        "region_id": 46,
+                        "delivery_fee": "20.00",
+                        "pickup_available": false,
+                        "min_order_amount": null,
+                        "description_tm": null,
+                        "description_ru": null,
+                        "description_en": null,
+                        "status": "approved",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "reviews_avg": null,
+                    "reviews_count": 0
+                }
+            ],
+            "message": "Products retrieved successfully"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 21,
+                    "name_tm": "consequatur",
+                    "name_en": "qui",
+                    "name_ru": "quis",
+                    "image": "https://via.placeholder.com/640x480.png/0033bb?text=iusto",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 22,
+                    "name_tm": "unde",
+                    "name_en": "sint",
+                    "name_ru": "et",
+                    "image": "https://via.placeholder.com/640x480.png/00ff99?text=sapiente",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "images": [
+                {
+                    "id": 52,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=666",
+                    "product_id": 18,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 53,
+                    "url": "https://loremflickr.com/300/300/product?lock=983",
+                    "product_id": 18,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 54,
+                    "url": "https://loremflickr.com/300/300/product?lock=177",
+                    "product_id": 18,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 55,
+                    "url": "https://loremflickr.com/300/300/product?lock=193",
+                    "product_id": 19,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 56,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=594",
+                    "product_id": 19,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 57,
+                    "url": "https://loremflickr.com/300/300/product?lock=450",
+                    "product_id": 19,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 58,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=490",
+                    "product_id": 20,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 59,
+                    "url": "https://picsum.photos/id/654/300/300",
+                    "product_id": 20,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 60,
+                    "url": "https://picsum.photos/id/841/300/300",
+                    "product_id": 20,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "products": [
+                {
+                    "id": 18,
+                    "name_tm": "sint culpa excepturi",
+                    "name_en": "sint culpa excepturi",
+                    "name_ru": "sint culpa excepturi",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Incidunt magni omnis cum sit sed.",
+                    "description_en": "Aliquam non quia vel sequi.",
+                    "description_ru": "Quia doloribus harum est voluptas nobis.",
+                    "production_time": 563,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 16,
+                    "category_id": 21,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 19,
+                    "name_tm": "ab ea aspernatur",
+                    "name_en": "ab ea aspernatur",
+                    "name_ru": "ab ea aspernatur",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Eaque porro temporibus maxime blanditiis.",
+                    "description_en": "Dolore velit minima perspiciatis alias nostrum aliquam.",
+                    "description_ru": "Doloremque est qui fuga voluptas necessitatibus.",
+                    "production_time": 929,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 16,
+                    "category_id": 21,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 20,
+                    "name_tm": "et a ut",
+                    "name_en": "et a ut",
+                    "name_ru": "et a ut",
+                    "price": "100.00",
+                    "discount": 0,
+                    "description_tm": "Cumque minus possimus itaque eius.",
+                    "description_en": "Voluptas nam itaque earum dolor omnis.",
+                    "description_ru": "Qui animi fugiat sed.",
+                    "production_time": 965,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 17,
+                    "category_id": 22,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 44,
+                    "name": "Marjoriefort",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 45,
+                    "name": "New Van",
+                    "type": "province",
+                    "parent_id": 44,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 46,
+                    "name": "East Rubymouth",
+                    "type": "city",
+                    "parent_id": 45,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 47,
+                    "name": "East Lulutown",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 48,
+                    "name": "Port Deborah",
+                    "type": "province",
+                    "parent_id": 47,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 49,
+                    "name": "Chloemouth",
+                    "type": "city",
+                    "parent_id": 48,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 16,
+                    "name": "Bayer-Koepp",
+                    "email": "upouros@example.com",
+                    "phone": null,
+                    "mon_fri_open": "11:43",
+                    "mon_fri_close": "06:51",
+                    "sat_sun_open": "14:45",
+                    "sat_sun_close": "11:59",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 42,
+                    "region_id": 46,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 17,
+                    "name": "Gottlieb-Herman",
+                    "email": "michelle.beahan@example.net",
+                    "phone": null,
+                    "mon_fri_open": "03:15",
+                    "mon_fri_close": "06:54",
+                    "sat_sun_open": "19:21",
+                    "sat_sun_close": "22:43",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 43,
+                    "region_id": 49,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 41,
+                    "name": "Haylie Kling",
+                    "phone_number": "73125601",
+                    "email": "aditya53@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "Q1vxsYnnh7",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 42,
+                    "name": "Vincenza Heller",
+                    "phone_number": "38781021",
+                    "email": "hunter81@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "vxWN8ZiIbH",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 43,
+                    "name": "Miss Leda Hermiston",
+                    "phone_number": "60724948",
+                    "email": "yhackett@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "RW3CHctkiv",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 23,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 61,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 6,
+            "orders": 9,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 21,
+            "regions": 50,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 18,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 10,
+            "user_otps": 5,
+            "users": 44,
+            "waitlist_items": 1
+        }
+    }
+}

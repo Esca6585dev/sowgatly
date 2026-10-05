@@ -1,0 +1,97 @@
+{
+    "name": "AuthOtpTest__generate_rejects_a_non_turkmen_number__1",
+    "test": "Tests\\Feature\\Api\\AuthOtpTest::test_generate_rejects_a_non_turkmen_number",
+    "route": "POST api/otp/generate",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:04",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 3
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/otp/generate",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "phone_number": "+99365123456"
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "The phone number must be exactly 8 digits."
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "users": [
+                {
+                    "id": 3,
+                    "name": "Adrianna Moen",
+                    "phone_number": "38779496",
+                    "email": "kuhic.hassie@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "mTUIvtnlQc",
+                    "created_at": "2026-10-05 12:04:04",
+                    "updated_at": "2026-10-05 12:04:04"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 1,
+            "carts": 1,
+            "categories": 1,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 1,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 1,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 1,
+            "orders": 1,
+            "permissions": 1,
+            "personal_access_tokens": 1,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 1,
+            "regions": 1,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 1,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 1,
+            "user_otps": 2,
+            "users": 4,
+            "waitlist_items": 1
+        }
+    }
+}

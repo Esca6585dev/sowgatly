@@ -1,0 +1,473 @@
+{
+    "name": "HomeFeedTest__search_filters_min_rating_delivery_today_and_popular_sort__3",
+    "test": "Tests\\Feature\\Api\\HomeFeedTest::test_search_filters_min_rating_delivery_today_and_popular_sort",
+    "route": "GET api/product/search",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:07",
+    "timezone": "Asia/Ashgabat",
+    "auth": null,
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/product/search",
+        "query": {
+            "min_rating": "3"
+        },
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "data": [
+                {
+                    "id": 58,
+                    "name": {
+                        "tm": "praesentium harum occaecati",
+                        "en": "praesentium harum occaecati",
+                        "ru": "praesentium harum occaecati"
+                    },
+                    "price": "308.93",
+                    "discount": 0,
+                    "description": {
+                        "tm": "Hic fugit et ratione alias dolor.",
+                        "en": "Laboriosam est voluptatibus et qui.",
+                        "ru": "Aut possimus similique sed tenetur est quas ipsa."
+                    },
+                    "production_time": 120,
+                    "min_order": 1,
+                    "seller_status": true,
+                    "stock": 10,
+                    "width": null,
+                    "height": null,
+                    "shop_id": 49,
+                    "category_id": 44,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>",
+                    "attributes": [],
+                    "brands": [],
+                    "images": [
+                        {
+                            "id": 172,
+                            "url": "<url>/300/300/product?lock=987",
+                            "product_id": 58,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 173,
+                            "url": "<url>/300/300/product?lock=474",
+                            "product_id": 58,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 174,
+                            "url": "<url>/id/360/300/300",
+                            "product_id": 58,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    ],
+                    "category": {
+                        "id": 44,
+                        "name_tm": "ipsa",
+                        "name_en": "harum",
+                        "name_ru": "sit",
+                        "image": "<url>/640x480.png/00ff00?text=odit",
+                        "category_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "shop": {
+                        "id": 49,
+                        "name": "Reilly, Mueller and Hackett",
+                        "email": "esteban24@example.net",
+                        "phone": null,
+                        "mon_fri_open": "16:39",
+                        "mon_fri_close": "02:30",
+                        "sat_sun_open": "17:53",
+                        "sat_sun_close": "22:41",
+                        "image": "shop/shop-seeder/sowgatly-logo.png",
+                        "user_id": 107,
+                        "region_id": 113,
+                        "delivery_fee": "20.00",
+                        "pickup_available": false,
+                        "min_order_amount": null,
+                        "description_tm": null,
+                        "description_ru": null,
+                        "description_en": null,
+                        "status": "approved",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "compositions": [],
+                    "reviews_avg": 3,
+                    "reviews_count": 1
+                },
+                {
+                    "id": 59,
+                    "name": {
+                        "tm": "repellat delectus necessitatibus",
+                        "en": "repellat delectus necessitatibus",
+                        "ru": "repellat delectus necessitatibus"
+                    },
+                    "price": "389.32",
+                    "discount": 0,
+                    "description": {
+                        "tm": "Repellat ad non dolores.",
+                        "en": "Voluptas nemo necessitatibus dignissimos itaque optio ratione ab non.",
+                        "ru": "Qui quam esse omnis laborum vero enim."
+                    },
+                    "production_time": 1440,
+                    "min_order": 1,
+                    "seller_status": true,
+                    "stock": 10,
+                    "width": null,
+                    "height": null,
+                    "shop_id": 49,
+                    "category_id": 45,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>",
+                    "attributes": [],
+                    "brands": [],
+                    "images": [
+                        {
+                            "id": 175,
+                            "url": "<url>/id/991/300/300",
+                            "product_id": 59,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 176,
+                            "url": "<url>/300x300/?product&sig=906",
+                            "product_id": 59,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 177,
+                            "url": "<url>/id/926/300/300",
+                            "product_id": 59,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    ],
+                    "category": {
+                        "id": 45,
+                        "name_tm": "quis",
+                        "name_en": "repellat",
+                        "name_ru": "itaque",
+                        "image": "<url>/640x480.png/0099aa?text=aliquam",
+                        "category_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "shop": {
+                        "id": 49,
+                        "name": "Reilly, Mueller and Hackett",
+                        "email": "esteban24@example.net",
+                        "phone": null,
+                        "mon_fri_open": "16:39",
+                        "mon_fri_close": "02:30",
+                        "sat_sun_open": "17:53",
+                        "sat_sun_close": "22:41",
+                        "image": "shop/shop-seeder/sowgatly-logo.png",
+                        "user_id": 107,
+                        "region_id": 113,
+                        "delivery_fee": "20.00",
+                        "pickup_available": false,
+                        "min_order_amount": null,
+                        "description_tm": null,
+                        "description_ru": null,
+                        "description_en": null,
+                        "status": "approved",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "compositions": [],
+                    "reviews_avg": 5,
+                    "reviews_count": 1
+                }
+            ],
+            "meta": {
+                "current_page": 1,
+                "last_page": 1,
+                "total": 2
+            },
+            "message": "Products retrieved successfully"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 44,
+                    "name_tm": "ipsa",
+                    "name_en": "harum",
+                    "name_ru": "sit",
+                    "image": "https://via.placeholder.com/640x480.png/00ff00?text=odit",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 45,
+                    "name_tm": "quis",
+                    "name_en": "repellat",
+                    "name_ru": "itaque",
+                    "image": "https://via.placeholder.com/640x480.png/0099aa?text=aliquam",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "images": [
+                {
+                    "id": 172,
+                    "url": "https://loremflickr.com/300/300/product?lock=987",
+                    "product_id": 58,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 173,
+                    "url": "https://loremflickr.com/300/300/product?lock=474",
+                    "product_id": 58,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 174,
+                    "url": "https://picsum.photos/id/360/300/300",
+                    "product_id": 58,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 175,
+                    "url": "https://picsum.photos/id/991/300/300",
+                    "product_id": 59,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 176,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=906",
+                    "product_id": 59,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 177,
+                    "url": "https://picsum.photos/id/926/300/300",
+                    "product_id": 59,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "product_reviews": [
+                {
+                    "id": 6,
+                    "user_id": 108,
+                    "product_id": 58,
+                    "order_id": null,
+                    "rating": 3,
+                    "rating_match": null,
+                    "rating_value": null,
+                    "rating_service": null,
+                    "comment": "Et nostrum voluptas quaerat voluptates et doloremque illo.",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 7,
+                    "user_id": 109,
+                    "product_id": 59,
+                    "order_id": null,
+                    "rating": 5,
+                    "rating_match": null,
+                    "rating_value": null,
+                    "rating_service": null,
+                    "comment": "Non laborum sed ut et culpa molestias.",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "products": [
+                {
+                    "id": 58,
+                    "name_tm": "praesentium harum occaecati",
+                    "name_en": "praesentium harum occaecati",
+                    "name_ru": "praesentium harum occaecati",
+                    "price": "308.93",
+                    "discount": 0,
+                    "description_tm": "Hic fugit et ratione alias dolor.",
+                    "description_en": "Laboriosam est voluptatibus et qui.",
+                    "description_ru": "Aut possimus similique sed tenetur est quas ipsa.",
+                    "production_time": 120,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 49,
+                    "category_id": 44,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 59,
+                    "name_tm": "repellat delectus necessitatibus",
+                    "name_en": "repellat delectus necessitatibus",
+                    "name_ru": "repellat delectus necessitatibus",
+                    "price": "389.32",
+                    "discount": 0,
+                    "description_tm": "Repellat ad non dolores.",
+                    "description_en": "Voluptas nemo necessitatibus dignissimos itaque optio ratione ab non.",
+                    "description_ru": "Qui quam esse omnis laborum vero enim.",
+                    "production_time": 1440,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 49,
+                    "category_id": 45,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 113,
+                    "name": "Alphonsoshire",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 49,
+                    "name": "Reilly, Mueller and Hackett",
+                    "email": "esteban24@example.net",
+                    "phone": null,
+                    "mon_fri_open": "16:39",
+                    "mon_fri_close": "02:30",
+                    "sat_sun_open": "17:53",
+                    "sat_sun_close": "22:41",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 107,
+                    "region_id": 113,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ],
+            "users": [
+                {
+                    "id": 107,
+                    "name": "Prof. Tillman Schuster",
+                    "phone_number": "16117665",
+                    "email": "hhuels@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "FEioGerV3K",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 108,
+                    "name": "Roxanne Turcotte",
+                    "phone_number": "27050554",
+                    "email": "jwolf@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "rKDTCuoH8d",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                },
+                {
+                    "id": 109,
+                    "name": "Prof. Maybelle Treutel",
+                    "phone_number": "04738997",
+                    "email": "lehner.clemmie@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "P4gT9pltWE",
+                    "created_at": "2026-10-05 12:04:07",
+                    "updated_at": "2026-10-05 12:04:07"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 46,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 178,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 12,
+            "orders": 13,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 8,
+            "products": 60,
+            "regions": 114,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 50,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 18,
+            "user_otps": 5,
+            "users": 110,
+            "waitlist_items": 1
+        }
+    }
+}

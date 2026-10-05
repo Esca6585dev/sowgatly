@@ -1,0 +1,302 @@
+{
+    "name": "ProductWriteTest__updating_stores_uploaded_images_in_the_url_column__1",
+    "test": "Tests\\Feature\\Api\\ProductWriteTest::updating_stores_uploaded_images_in_the_url_column",
+    "route": "PUT api/products/{product}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:09",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 138
+    },
+    "config": {},
+    "request": {
+        "method": "PUT",
+        "path": "/api/products/71",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "images": [
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+            ]
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "message": "Product updated successfully",
+            "data": {
+                "id": 71,
+                "name": {
+                    "tm": "labore maiores velit",
+                    "en": "labore maiores velit",
+                    "ru": "labore maiores velit"
+                },
+                "price": "806.18",
+                "discount": 0,
+                "description": {
+                    "tm": "Totam vel sed rerum.",
+                    "en": "Omnis qui quidem voluptatem inventore.",
+                    "ru": "Explicabo atque dolor eius architecto."
+                },
+                "production_time": 1357,
+                "min_order": 1,
+                "seller_status": true,
+                "stock": 10,
+                "width": null,
+                "height": null,
+                "shop_id": 63,
+                "category_id": 61,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>",
+                "attributes": [],
+                "brands": [],
+                "images": [
+                    {
+                        "id": 205,
+                        "url": "<url>/300/300/product?lock=749",
+                        "product_id": 71,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 206,
+                        "url": "<url>/300/300/product?lock=984",
+                        "product_id": 71,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 207,
+                        "url": "<url>/300/300/product?lock=63",
+                        "product_id": 71,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 208,
+                        "url": "/storage/product_images/<file>",
+                        "product_id": 71,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    }
+                ],
+                "category": {
+                    "id": 61,
+                    "name_tm": "incidunt",
+                    "name_en": "nihil",
+                    "name_ru": "dolor",
+                    "image": "<url>/640x480.png/005533?text=nemo",
+                    "category_id": null,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "shop": {
+                    "id": 63,
+                    "name": "Krajcik-Hintz",
+                    "email": "wrempel@example.net",
+                    "phone": null,
+                    "mon_fri_open": "02:02",
+                    "mon_fri_close": "08:07",
+                    "sat_sun_open": "18:03",
+                    "sat_sun_close": "07:05",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 138,
+                    "region_id": 137,
+                    "delivery_fee": "20.00",
+                    "pickup_available": false,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "reviews_avg": null,
+                "reviews_count": 0
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "brands": [
+                {
+                    "id": 6,
+                    "name": "Senger-Heidenreich",
+                    "description": "Nulla excepturi sit sunt. Aut in et fuga sint velit. Laudantium aut facere aspernatur culpa incidunt cumque.",
+                    "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
+                    "status": 1,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 60,
+                    "name_tm": "aperiam",
+                    "name_en": "sunt",
+                    "name_ru": "odit",
+                    "image": "https://via.placeholder.com/640x480.png/003344?text=necessitatibus",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 61,
+                    "name_tm": "incidunt",
+                    "name_en": "nihil",
+                    "name_ru": "dolor",
+                    "image": "https://via.placeholder.com/640x480.png/005533?text=nemo",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "images": [
+                {
+                    "id": 205,
+                    "url": "https://loremflickr.com/300/300/product?lock=749",
+                    "product_id": 71,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 206,
+                    "url": "https://loremflickr.com/300/300/product?lock=984",
+                    "product_id": 71,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                },
+                {
+                    "id": 207,
+                    "url": "https://loremflickr.com/300/300/product?lock=63",
+                    "product_id": 71,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "products": [
+                {
+                    "id": 71,
+                    "name_tm": "labore maiores velit",
+                    "name_en": "labore maiores velit",
+                    "name_ru": "labore maiores velit",
+                    "price": "806.18",
+                    "discount": 0,
+                    "description_tm": "Totam vel sed rerum.",
+                    "description_en": "Omnis qui quidem voluptatem inventore.",
+                    "description_ru": "Explicabo atque dolor eius architecto.",
+                    "production_time": 1357,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 63,
+                    "category_id": 61,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 137,
+                    "name": "Hammesstad",
+                    "type": "province",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 63,
+                    "name": "Krajcik-Hintz",
+                    "email": "wrempel@example.net",
+                    "phone": null,
+                    "mon_fri_open": "02:02",
+                    "mon_fri_close": "08:07",
+                    "sat_sun_open": "18:03",
+                    "sat_sun_close": "07:05",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 138,
+                    "region_id": 137,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ],
+            "users": [
+                {
+                    "id": 138,
+                    "name": "Elias Bernier",
+                    "phone_number": "35233638",
+                    "email": "hills.meghan@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "XumC4AlHl2",
+                    "created_at": "2026-10-05 12:04:09",
+                    "updated_at": "2026-10-05 12:04:09"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 9,
+            "brands": 7,
+            "brands_products": 4,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 62,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 5,
+            "failed_jobs": 1,
+            "favorite_collection_items": 3,
+            "favorite_collections": 55,
+            "favorites": 2,
+            "images": 208,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 21,
+            "orders": 21,
+            "permissions": 1,
+            "personal_access_tokens": 5,
+            "product_attributes": 1,
+            "product_reviews": 11,
+            "products": 72,
+            "regions": 138,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 64,
+            "telescope_entries": 1,
+            "user_addresses": 4,
+            "user_notifications": 31,
+            "user_otps": 5,
+            "users": 139,
+            "waitlist_items": 1
+        }
+    }
+}

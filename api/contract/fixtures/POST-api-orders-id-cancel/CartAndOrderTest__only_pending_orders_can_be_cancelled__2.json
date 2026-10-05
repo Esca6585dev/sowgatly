@@ -1,0 +1,268 @@
+{
+    "name": "CartAndOrderTest__only_pending_orders_can_be_cancelled__2",
+    "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_only_pending_orders_can_be_cancelled",
+    "route": "POST api/orders/{id}/cancel",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:04:05",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 29
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/orders/8/cancel",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 422,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "Only pending orders can be cancelled"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "orders": [
+                {
+                    "id": 7,
+                    "user_id": 29,
+                    "shop_id": 10,
+                    "address_id": null,
+                    "total_amount": "1507.91",
+                    "items_total": null,
+                    "delivery_fee": "0.00",
+                    "payment_method": "cash",
+                    "payment_bank": null,
+                    "payment_status": "unpaid",
+                    "paid_at": null,
+                    "status": "cancelled",
+                    "fulfillment": "delivery",
+                    "delivery_type": "asap",
+                    "scheduled_at": null,
+                    "recipient_phone": "63876171",
+                    "recipient_name": null,
+                    "delivery_address": "98667 Agustina Fields Suite 919",
+                    "note": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 8,
+                    "user_id": 29,
+                    "shop_id": 11,
+                    "address_id": null,
+                    "total_amount": "904.11",
+                    "items_total": null,
+                    "delivery_fee": "0.00",
+                    "payment_method": "cash",
+                    "payment_bank": null,
+                    "payment_status": "unpaid",
+                    "paid_at": null,
+                    "status": "processing",
+                    "fulfillment": "delivery",
+                    "delivery_type": "asap",
+                    "scheduled_at": null,
+                    "recipient_phone": "60869740",
+                    "recipient_name": null,
+                    "delivery_address": "24122 Shemar Isle",
+                    "note": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 24,
+                    "name": "Luciusfort",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 25,
+                    "name": "Treymouth",
+                    "type": "province",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 10,
+                    "name": "Gorczany, Bosco and Smitham",
+                    "email": "ekulas@example.net",
+                    "phone": null,
+                    "mon_fri_open": "10:57",
+                    "mon_fri_close": "10:34",
+                    "sat_sun_open": "17:28",
+                    "sat_sun_close": "02:09",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 30,
+                    "region_id": 24,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 11,
+                    "name": "Hayes, Schumm and Lang",
+                    "email": "ksawayn@example.net",
+                    "phone": null,
+                    "mon_fri_open": "14:37",
+                    "mon_fri_close": "08:09",
+                    "sat_sun_open": "00:49",
+                    "sat_sun_close": "14:11",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 31,
+                    "region_id": 25,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "user_notifications": [
+                {
+                    "id": 7,
+                    "user_id": 29,
+                    "type": "order_created",
+                    "data": "{\"order_id\":7,\"status\":\"pending\"}",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 8,
+                    "user_id": 29,
+                    "type": "order_created",
+                    "data": "{\"order_id\":8,\"status\":\"processing\"}",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 9,
+                    "user_id": 29,
+                    "type": "order_status",
+                    "data": "{\"order_id\":7,\"status\":\"cancelled\"}",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ],
+            "users": [
+                {
+                    "id": 29,
+                    "name": "Marianna Lynch IV",
+                    "phone_number": "39580238",
+                    "email": "ofelia92@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "lxm3rY91ry",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 30,
+                    "name": "Dr. Felix Gusikowski I",
+                    "phone_number": "14891169",
+                    "email": "mitchell.bins@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "JPe6CKfQRy",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                },
+                {
+                    "id": 31,
+                    "name": "Mrs. Layla Turcotte PhD",
+                    "phone_number": "98153261",
+                    "email": "arnulfo07@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "2GX8E5maVT",
+                    "created_at": "2026-10-05 12:04:05",
+                    "updated_at": "2026-10-05 12:04:05"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 1,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 1,
+            "brands_products": 1,
+            "cart_items": 9,
+            "carts": 7,
+            "categories": 10,
+            "chat_messages": 1,
+            "chat_threads": 1,
+            "compositions": 1,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 28,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 6,
+            "orders": 9,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 10,
+            "regions": 26,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 12,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 10,
+            "user_otps": 5,
+            "users": 32,
+            "waitlist_items": 1
+        }
+    }
+}
