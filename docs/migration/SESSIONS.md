@@ -18,7 +18,7 @@ Prompt "galanyny dowam et" diýip işleýär.
 
 | # | Sessiýa | Model | Ýagdaýy |
 |---|---|---|---|
-| 1 | Phase 0 — API kontraktyny doňdurmak | Fable 5.1 | ⏳ başlanmady |
+| 1 | Phase 0 — API kontraktyny doňdurmak | Fable 5.1 | ✅ gutardy (248/248 fixture Laravel-e garşy geçýär, `api/contract/README.md`) |
 | 2 | Phase 1 — Go esasy gurluşy, Sanctum-a gabat gelýän auth | Fable 5.1 | ⏳ |
 | 3 | Phase 2 — Katalog (diňe okamak) | Opus 5.5 | ⏳ |
 | 4 | Phase 3 — OTP giriş we profil | Opus 5.5 | ⏳ |
