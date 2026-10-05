@@ -1,5 +1,7 @@
 // Command coverage checks that every API route has contract fixtures: at
-// least one 2xx response, and for write routes at least one 4xx too.
+// least one 2xx response, and for write routes at least one failure too: a
+// 4xx, or a 2xx whose body says {"success": false} (the OTP routes answer
+// failures that way).
 //
 //	php artisan route:list --path=api --json | go run ./contract/coverage
 //
@@ -42,9 +44,16 @@ func main() {
 	fixtures, err := contract.LoadFixtures(*dir)
 	exitOn(err)
 	statuses := map[string][]int{}
+	softFail := map[string]bool{}
 	for _, f := range fixtures {
 		if f.Replayable {
 			statuses[f.Route] = append(statuses[f.Route], f.Response.Status)
+			var body struct {
+				Success *bool `json:"success"`
+			}
+			if json.Unmarshal(f.Response.JSON, &body) == nil && body.Success != nil && !*body.Success {
+				softFail[f.Route] = true
+			}
 		}
 	}
 
@@ -61,7 +70,7 @@ func main() {
 			}
 			total++
 			key := m + " " + r.URI
-			ok2xx, ok4xx := false, false
+			ok2xx, ok4xx := false, softFail[key]
 			for _, s := range statuses[key] {
 				ok2xx = ok2xx || (s >= 200 && s < 300)
 				ok4xx = ok4xx || (s >= 400 && s < 500)
@@ -70,7 +79,7 @@ func main() {
 				gaps = append(gaps, fmt.Sprintf("%-45s no 2xx fixture %v", key, statuses[key]))
 			}
 			if m != "GET" && !ok4xx {
-				gaps = append(gaps, fmt.Sprintf("%-45s no 4xx fixture %v", key, statuses[key]))
+				gaps = append(gaps, fmt.Sprintf("%-45s no failure fixture %v", key, statuses[key]))
 			}
 		}
 	}

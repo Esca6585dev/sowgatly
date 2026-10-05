@@ -125,7 +125,7 @@ The Go API (later phases) is started the same way against `sowgatly_replay`.
 cd api
 go run ./contract/replay -base-url http://127.0.0.1:8010 \
   -dsn 'sowgatly:sowgatly@tcp(127.0.0.1:3306)/sowgatly_replay'
-# contract: 221 passed, 0 failed, 0 errors, 2 skipped (of 223)
+# contract: 246 passed, 0 failed, 0 errors, 2 skipped (of 248)
 ```
 
 Flags: `-run <regexp>` (fixture id or route), `-v` (print passes),
@@ -145,7 +145,7 @@ a server. Today two fixtures need guest browsing off:
 ```bash
 APP_API_GUEST_BROWSING=false php artisan serve --host=127.0.0.1 --port=8011   # + the env above
 go run ./contract/replay -base-url http://127.0.0.1:8011 -config app.api_guest_browsing=false
-# contract: 2 passed, 0 failed, 0 errors, 221 skipped (of 223)
+# contract: 2 passed, 0 failed, 0 errors, 246 skipped (of 248)
 ```
 
 Both runs together cover all fixtures.
@@ -163,11 +163,11 @@ go test ./contract -run TestReplay              # one subtest per fixture
 ## Coverage
 
 Every API route needs at least one 2xx fixture, and every write route
-(POST/PUT/PATCH/DELETE) at least one 4xx fixture:
+(POST/PUT/PATCH/DELETE) at least one failure fixture (a 4xx, or a 2xx with `"success": false`, which is how the OTP routes answer failures):
 
 ```bash
 php artisan route:list --path=api --json | (cd api && go run ./contract/coverage)
-# coverage: 82 routes, N fixtures, 0 gaps
+# coverage: 82 routes, 248 fixtures, 0 gaps
 ```
 
 `api/documentation`, Telescope and the OAuth2 callback are not part of the
