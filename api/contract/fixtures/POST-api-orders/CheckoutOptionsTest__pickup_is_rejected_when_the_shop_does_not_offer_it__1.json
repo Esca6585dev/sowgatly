@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CheckoutOptionsTest::pickup_is_rejected_when_the_shop_does_not_offer_it",
     "route": "POST api/orders",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:06",
+    "recorded_at": "2026-10-05 12:10:41",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -44,112 +44,112 @@
                     "product_id": 23,
                     "quantity": 1,
                     "price": "100.00",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "carts": [
                 {
                     "id": 9,
                     "user_id": 59,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "categories": [
                 {
                     "id": 25,
-                    "name_tm": "doloremque",
-                    "name_en": "nobis",
-                    "name_ru": "enim",
-                    "image": "https://via.placeholder.com/640x480.png/00ccaa?text=qui",
+                    "name_tm": "et",
+                    "name_en": "voluptatem",
+                    "name_ru": "expedita",
+                    "image": "https://via.placeholder.com/640x480.png/00cc33?text=excepturi",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "images": [
                 {
                     "id": 67,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=976",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=430",
                     "product_id": 23,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 68,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=463",
+                    "url": "https://picsum.photos/id/519/300/300",
                     "product_id": 23,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 69,
-                    "url": "https://picsum.photos/id/922/300/300",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=731",
                     "product_id": 23,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "products": [
                 {
                     "id": 23,
-                    "name_tm": "illum quisquam magni",
-                    "name_en": "illum quisquam magni",
-                    "name_ru": "illum quisquam magni",
+                    "name_tm": "aperiam sit dolorem",
+                    "name_en": "aperiam sit dolorem",
+                    "name_ru": "aperiam sit dolorem",
                     "price": "100.00",
                     "discount": 0,
-                    "description_tm": "Voluptatem blanditiis non natus sit dicta ad cum omnis.",
-                    "description_en": "Non eum quas ratione necessitatibus dignissimos eaque distinctio.",
-                    "description_ru": "Eos recusandae consequuntur cum tempore pariatur.",
-                    "production_time": 1057,
+                    "description_tm": "Nihil velit maiores dolor architecto quia est accusamus.",
+                    "description_en": "Nobis impedit exercitationem cupiditate voluptas totam ea veritatis occaecati.",
+                    "description_ru": "Quis qui id modi illo dolorem iure.",
+                    "production_time": 1020,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 25,
                     "category_id": 25,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "regions": [
                 {
                     "id": 64,
-                    "name": "Elenatown",
+                    "name": "Port Alexandrechester",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 65,
-                    "name": "Lake Jennifermouth",
+                    "name": "Port Vicentamouth",
                     "type": "province",
                     "parent_id": 64,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 66,
-                    "name": "Jastton",
+                    "name": "Harrisonland",
                     "type": "city",
                     "parent_id": 65,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "shops": [
                 {
                     "id": 25,
-                    "name": "Anderson-Spencer",
-                    "email": "annette.willms@example.org",
+                    "name": "Dickinson-Kassulke",
+                    "email": "kiera.gislason@example.com",
                     "phone": null,
-                    "mon_fri_open": "23:34",
-                    "mon_fri_close": "17:42",
-                    "sat_sun_open": "08:28",
-                    "sat_sun_close": "10:19",
-                    "image": "shop/shop-seeder/logo.png",
+                    "mon_fri_open": "01:29",
+                    "mon_fri_close": "16:48",
+                    "sat_sun_open": "06:56",
+                    "sat_sun_close": "12:04",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
                     "user_id": 60,
                     "region_id": 66,
                     "delivery_fee": "20.00",
@@ -159,16 +159,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "users": [
                 {
                     "id": 59,
-                    "name": "Milton Lubowitz",
-                    "phone_number": "97768220",
-                    "email": "bgleichner@example.com",
+                    "name": "Dr. Kaya Kertzmann",
+                    "phone_number": "78724705",
+                    "email": "maxine.roberts@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -176,15 +176,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "cTMckXRmQ4",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "vQeTXYkuX2",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 60,
-                    "name": "Prof. Lew Hermann PhD",
-                    "phone_number": "70944468",
-                    "email": "hillard58@example.org",
+                    "name": "Ms. Zoila Zboncak II",
+                    "phone_number": "91368074",
+                    "email": "madisen.hirthe@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -192,9 +192,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "e30bYpfIzy",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "VMmD8Wuuv6",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ]
         },

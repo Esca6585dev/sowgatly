@@ -3,16 +3,16 @@
     "test": "Tests\\Feature\\Api\\ProductReviewTest::test_criteria_must_come_together_and_the_order_must_be_the_callers",
     "route": "POST api/products/{id}/reviews",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:08",
+    "recorded_at": "2026-10-05 12:10:45",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 128
+        "user_id": 162
     },
     "config": {},
     "request": {
         "method": "POST",
-        "path": "/api/products/67/reviews",
+        "path": "/api/products/75/reviews",
         "query": {},
         "headers": {
             "Accept": "application/json",
@@ -34,66 +34,66 @@
         "tables": {
             "categories": [
                 {
-                    "id": 53,
-                    "name_tm": "debitis",
-                    "name_en": "sed",
-                    "name_ru": "aspernatur",
-                    "image": "https://via.placeholder.com/640x480.png/009933?text=maiores",
+                    "id": 61,
+                    "name_tm": "laborum",
+                    "name_en": "aperiam",
+                    "name_ru": "et",
+                    "image": "https://via.placeholder.com/640x480.png/006666?text=minima",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "images": [
                 {
-                    "id": 199,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=300",
-                    "product_id": 67,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 223,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=142",
+                    "product_id": 75,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 200,
-                    "url": "https://picsum.photos/id/537/300/300",
-                    "product_id": 67,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 224,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=34",
+                    "product_id": 75,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 201,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=904",
-                    "product_id": 67,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 225,
+                    "url": "https://picsum.photos/id/176/300/300",
+                    "product_id": 75,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "order_items": [
                 {
-                    "id": 19,
-                    "order_id": 19,
-                    "product_id": 67,
+                    "id": 23,
+                    "order_id": 23,
+                    "product_id": 75,
                     "quantity": 1,
-                    "price": "418.42",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "price": "395.72",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 20,
-                    "order_id": 20,
-                    "product_id": 67,
+                    "id": 24,
+                    "order_id": 24,
+                    "product_id": 75,
                     "quantity": 1,
-                    "price": "218.42",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "price": "576.52",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "orders": [
                 {
-                    "id": 19,
-                    "user_id": 128,
-                    "shop_id": 56,
+                    "id": 23,
+                    "user_id": 162,
+                    "shop_id": 73,
                     "address_id": null,
-                    "total_amount": "633.94",
+                    "total_amount": "83.71",
                     "items_total": null,
                     "delivery_fee": "0.00",
                     "payment_method": "cash",
@@ -104,19 +104,19 @@
                     "fulfillment": "delivery",
                     "delivery_type": "asap",
                     "scheduled_at": null,
-                    "recipient_phone": "68882652",
+                    "recipient_phone": "64295616",
                     "recipient_name": null,
-                    "delivery_address": "4849 Hills Parkways Apt. 424",
+                    "delivery_address": "7632 Volkman Isle",
                     "note": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 20,
-                    "user_id": 130,
-                    "shop_id": 56,
+                    "id": 24,
+                    "user_id": 164,
+                    "shop_id": 73,
                     "address_id": null,
-                    "total_amount": "1755.85",
+                    "total_amount": "1475.98",
                     "items_total": null,
                     "delivery_fee": "0.00",
                     "payment_method": "cash",
@@ -127,75 +127,75 @@
                     "fulfillment": "delivery",
                     "delivery_type": "asap",
                     "scheduled_at": null,
-                    "recipient_phone": "67619772",
+                    "recipient_phone": "67539951",
                     "recipient_name": null,
-                    "delivery_address": "5022 Shields Rue",
+                    "delivery_address": "767 Zakary Coves",
                     "note": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "products": [
                 {
-                    "id": 67,
-                    "name_tm": "natus fugiat repudiandae",
-                    "name_en": "natus fugiat repudiandae",
-                    "name_ru": "natus fugiat repudiandae",
+                    "id": 75,
+                    "name_tm": "ab dolorum et",
+                    "name_en": "ab dolorum et",
+                    "name_ru": "ab dolorum et",
                     "price": "100.00",
                     "discount": 0,
-                    "description_tm": "Accusamus molestiae labore debitis et qui.",
-                    "description_en": "Quo quia quibusdam blanditiis modi facere quia.",
-                    "description_ru": "Vel quod ipsum ea est.",
-                    "production_time": 136,
+                    "description_tm": "Quas vel sed dolores eum hic quia ut.",
+                    "description_en": "Voluptatum qui autem consequuntur consectetur excepturi.",
+                    "description_ru": "Adipisci cum aliquam aut eius.",
+                    "production_time": 135,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
-                    "shop_id": 56,
-                    "category_id": 53,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "shop_id": 73,
+                    "category_id": 61,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "regions": [
                 {
-                    "id": 128,
-                    "name": "South Americo",
+                    "id": 161,
+                    "name": "Heaneystad",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 129,
-                    "name": "West Krystelstad",
+                    "id": 162,
+                    "name": "South Rahsaan",
                     "type": "province",
-                    "parent_id": 128,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "parent_id": 161,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 130,
-                    "name": "Lake Leonor",
+                    "id": 163,
+                    "name": "East D'angelo",
                     "type": "city",
-                    "parent_id": 129,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "parent_id": 162,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "shops": [
                 {
-                    "id": 56,
-                    "name": "Sporer Group",
-                    "email": "bhoppe@example.org",
+                    "id": 73,
+                    "name": "Rice-Kohler",
+                    "email": "brain08@example.net",
                     "phone": null,
-                    "mon_fri_open": "18:04",
-                    "mon_fri_close": "20:39",
-                    "sat_sun_open": "05:22",
-                    "sat_sun_close": "07:52",
+                    "mon_fri_open": "22:39",
+                    "mon_fri_close": "02:41",
+                    "sat_sun_open": "13:25",
+                    "sat_sun_close": "02:56",
                     "image": "shop/shop-seeder/modahouse-logo.jpg",
-                    "user_id": 129,
-                    "region_id": 130,
+                    "user_id": 163,
+                    "region_id": 163,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -203,36 +203,36 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "user_notifications": [
                 {
-                    "id": 29,
-                    "user_id": 128,
+                    "id": 33,
+                    "user_id": 162,
                     "type": "order_created",
-                    "data": "{\"order_id\":19,\"status\":\"completed\"}",
+                    "data": "{\"order_id\":23,\"status\":\"completed\"}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 30,
-                    "user_id": 130,
+                    "id": 34,
+                    "user_id": 164,
                     "type": "order_created",
-                    "data": "{\"order_id\":20,\"status\":\"completed\"}",
+                    "data": "{\"order_id\":24,\"status\":\"completed\"}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "users": [
                 {
-                    "id": 128,
-                    "name": "Finn West",
-                    "phone_number": "09062045",
-                    "email": "corrine66@example.net",
+                    "id": 162,
+                    "name": "Dr. Braxton Russel II",
+                    "phone_number": "91581892",
+                    "email": "qdenesik@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -240,15 +240,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "VzMdClTw9Q",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "yYLPLjEqv4",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 129,
-                    "name": "Elwin Rohan",
-                    "phone_number": "64130425",
-                    "email": "senger.thad@example.org",
+                    "id": 163,
+                    "name": "Jeanne Hane",
+                    "phone_number": "41212031",
+                    "email": "keon93@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -256,15 +256,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "zfJoC6ud9O",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "7rnCimgsGT",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 130,
-                    "name": "Norris Reichel V",
-                    "phone_number": "48323077",
-                    "email": "abner.torphy@example.net",
+                    "id": 164,
+                    "name": "Adan Spencer",
+                    "phone_number": "11556637",
+                    "email": "paul73@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -272,50 +272,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "StbptKTkt6",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "qdYrojw3ms",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 1,
+            "brands": 2,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 54,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 62,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 5,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 202,
+            "images": 226,
             "messages": 1,
             "migrations": 43,
-            "order_items": 21,
-            "orders": 21,
+            "order_items": 25,
+            "orders": 25,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 10,
-            "products": 68,
-            "regions": 131,
+            "products": 76,
+            "regions": 164,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 57,
+            "shops": 74,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 31,
+            "user_notifications": 35,
             "user_otps": 5,
-            "users": 131,
+            "users": 165,
             "waitlist_items": 1
         }
     }

@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\GuestCatalogTest::test_guests_can_read_the_catalog",
     "route": "GET api/categories",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:07",
+    "recorded_at": "2026-10-05 12:10:43",
     "timezone": "Asia/Ashgabat",
     "auth": null,
     "config": {},
@@ -24,13 +24,13 @@
         "json": {
             "data": [
                 {
-                    "id": 33,
+                    "id": 41,
                     "name": {
-                        "tm": "repellat",
-                        "en": "dolorum",
-                        "ru": "aliquid"
+                        "tm": "consequatur",
+                        "en": "deleniti",
+                        "ru": "eaque"
                     },
-                    "image": "<url>/640x480.png/00aacc?text=tempora",
+                    "image": "<url>/640x480.png/009900?text=quia",
                     "created_at": "<datetime>",
                     "updated_at": "<datetime>"
                 }
@@ -74,115 +74,115 @@
         "tables": {
             "categories": [
                 {
-                    "id": 33,
-                    "name_tm": "repellat",
-                    "name_en": "dolorum",
-                    "name_ru": "aliquid",
-                    "image": "https://via.placeholder.com/640x480.png/00aacc?text=tempora",
+                    "id": 41,
+                    "name_tm": "consequatur",
+                    "name_en": "deleniti",
+                    "name_ru": "eaque",
+                    "image": "https://via.placeholder.com/640x480.png/009900?text=quia",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 }
             ],
             "images": [
                 {
-                    "id": 91,
-                    "url": "https://picsum.photos/id/117/300/300",
-                    "product_id": 31,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "id": 115,
+                    "url": "https://picsum.photos/id/543/300/300",
+                    "product_id": 39,
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 },
                 {
-                    "id": 92,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=937",
-                    "product_id": 31,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "id": 116,
+                    "url": "https://picsum.photos/id/541/300/300",
+                    "product_id": 39,
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 },
                 {
-                    "id": 93,
-                    "url": "https://loremflickr.com/300/300/product?lock=613",
-                    "product_id": 31,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "id": 117,
+                    "url": "https://loremflickr.com/300/300/product?lock=569",
+                    "product_id": 39,
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 }
             ],
             "product_reviews": [
                 {
                     "id": 1,
-                    "user_id": 83,
-                    "product_id": 31,
+                    "user_id": 117,
+                    "product_id": 39,
                     "order_id": null,
-                    "rating": 5,
+                    "rating": 4,
                     "rating_match": null,
                     "rating_value": null,
                     "rating_service": null,
-                    "comment": "Accusantium tempora molestiae unde aut est sit.",
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "comment": "Et quo officiis aut ipsam architecto.",
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 }
             ],
             "products": [
                 {
-                    "id": 31,
-                    "name_tm": "est eos asperiores",
-                    "name_en": "est eos asperiores",
-                    "name_ru": "est eos asperiores",
-                    "price": "770.26",
+                    "id": 39,
+                    "name_tm": "et nihil sint",
+                    "name_en": "et nihil sint",
+                    "name_ru": "et nihil sint",
+                    "price": "47.82",
                     "discount": 0,
-                    "description_tm": "Quibusdam recusandae laudantium itaque distinctio.",
-                    "description_en": "Itaque quaerat occaecati et provident accusantium dolorum.",
-                    "description_ru": "Non nam molestiae sapiente consequatur.",
-                    "production_time": 281,
+                    "description_tm": "Aspernatur rerum sequi et quia mollitia.",
+                    "description_en": "Aliquid sit aut et sint rerum animi.",
+                    "description_ru": "Expedita ipsam expedita sit harum.",
+                    "production_time": 236,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
-                    "shop_id": 31,
-                    "category_id": 33,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "shop_id": 48,
+                    "category_id": 41,
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 }
             ],
             "regions": [
                 {
-                    "id": 82,
-                    "name": "Anitaport",
+                    "id": 115,
+                    "name": "Adellaside",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 },
                 {
-                    "id": 83,
-                    "name": "East Julia",
+                    "id": 116,
+                    "name": "West Caryville",
                     "type": "province",
-                    "parent_id": 82,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "parent_id": 115,
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 },
                 {
-                    "id": 84,
-                    "name": "Gabemouth",
+                    "id": 117,
+                    "name": "Betsyshire",
                     "type": "city",
-                    "parent_id": 83,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "parent_id": 116,
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 }
             ],
             "shops": [
                 {
-                    "id": 31,
-                    "name": "Donnelly-Hilpert",
-                    "email": "rvonrueden@example.org",
+                    "id": 48,
+                    "name": "Ankunding LLC",
+                    "email": "victoria.abernathy@example.net",
                     "phone": null,
-                    "mon_fri_open": "00:41",
-                    "mon_fri_close": "16:51",
-                    "sat_sun_open": "08:55",
-                    "sat_sun_close": "16:29",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 82,
-                    "region_id": 84,
+                    "mon_fri_open": "10:15",
+                    "mon_fri_close": "15:45",
+                    "sat_sun_open": "17:03",
+                    "sat_sun_close": "06:18",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 116,
+                    "region_id": 117,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -190,16 +190,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 }
             ],
             "users": [
                 {
-                    "id": 82,
-                    "name": "Annabelle Yost",
-                    "phone_number": "03211787",
-                    "email": "stamm.kristofer@example.com",
+                    "id": 116,
+                    "name": "Mrs. Janelle Braun I",
+                    "phone_number": "15001294",
+                    "email": "adaline.donnelly@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -207,15 +207,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "5bsWCcO36K",
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "remember_token": "NpXoaVDtBD",
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 },
                 {
-                    "id": 83,
-                    "name": "Dr. Jakob Runte Sr.",
-                    "phone_number": "29967316",
-                    "email": "maggio.adaline@example.net",
+                    "id": 117,
+                    "name": "Israel McCullough MD",
+                    "phone_number": "10308977",
+                    "email": "oconsidine@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -223,50 +223,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "ScsnTzDXyo",
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "remember_token": "hR7NQzhMsV",
+                    "created_at": "2026-10-05 12:10:43",
+                    "updated_at": "2026-10-05 12:10:43"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 1,
-            "brands": 1,
+            "brands": 2,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 34,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 42,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 2,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 94,
+            "images": 118,
             "messages": 1,
             "migrations": 43,
-            "order_items": 9,
-            "orders": 12,
+            "order_items": 13,
+            "orders": 16,
             "permissions": 1,
             "personal_access_tokens": 4,
             "product_attributes": 1,
             "product_reviews": 2,
-            "products": 32,
-            "regions": 85,
+            "products": 40,
+            "regions": 118,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 32,
+            "shops": 49,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 17,
+            "user_notifications": 21,
             "user_otps": 5,
-            "users": 84,
+            "users": 118,
             "waitlist_items": 1
         }
     }

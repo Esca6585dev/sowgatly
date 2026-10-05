@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_checkout_creates_an_order_with_discounted_prices_and_clears_the_cart",
     "route": "POST api/cart/add",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:04",
+    "recorded_at": "2026-10-05 12:10:40",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -40,15 +40,15 @@
                 "id": 4,
                 "product": {
                     "id": 5,
-                    "name_tm": "ab et nulla",
-                    "name_en": "ab et nulla",
-                    "name_ru": "ab et nulla",
+                    "name_tm": "eius nostrum dolore",
+                    "name_en": "eius nostrum dolore",
+                    "name_ru": "eius nostrum dolore",
                     "price": "100.00",
                     "discount": 20,
-                    "description_tm": "Nihil unde distinctio dolor ut est consequatur.",
-                    "description_en": "Distinctio facere sed doloremque libero veritatis.",
-                    "description_ru": "Rerum vero sed dignissimos molestiae iusto molestiae cumque et.",
-                    "production_time": 394,
+                    "description_tm": "Quia omnis deleniti quia.",
+                    "description_en": "Id molestias repellat officiis aut.",
+                    "description_ru": "Ut atque recusandae laudantium ut necessitatibus alias.",
+                    "production_time": 1114,
                     "min_order": 1,
                     "stock": 5,
                     "seller_status": true,
@@ -67,147 +67,147 @@
             "categories": [
                 {
                     "id": 5,
-                    "name_tm": "excepturi",
-                    "name_en": "in",
-                    "name_ru": "consequatur",
-                    "image": "https://via.placeholder.com/640x480.png/00ddbb?text=enim",
+                    "name_tm": "et",
+                    "name_en": "veritatis",
+                    "name_ru": "qui",
+                    "image": "https://via.placeholder.com/640x480.png/002255?text=voluptate",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 6,
-                    "name_tm": "cupiditate",
-                    "name_en": "est",
-                    "name_ru": "minus",
-                    "image": "https://via.placeholder.com/640x480.png/009922?text=porro",
+                    "name_tm": "ut",
+                    "name_en": "provident",
+                    "name_ru": "error",
+                    "image": "https://via.placeholder.com/640x480.png/009977?text=architecto",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "images": [
                 {
                     "id": 13,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=249",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=167",
                     "product_id": 5,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 14,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=634",
+                    "url": "https://picsum.photos/id/436/300/300",
                     "product_id": 5,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 15,
-                    "url": "https://picsum.photos/id/405/300/300",
+                    "url": "https://picsum.photos/id/590/300/300",
                     "product_id": 5,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 16,
-                    "url": "https://picsum.photos/id/411/300/300",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=593",
                     "product_id": 6,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 17,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=435",
+                    "url": "https://picsum.photos/id/517/300/300",
                     "product_id": 6,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 18,
-                    "url": "https://loremflickr.com/300/300/product?lock=205",
+                    "url": "https://loremflickr.com/300/300/product?lock=241",
                     "product_id": 6,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "products": [
                 {
                     "id": 5,
-                    "name_tm": "ab et nulla",
-                    "name_en": "ab et nulla",
-                    "name_ru": "ab et nulla",
+                    "name_tm": "eius nostrum dolore",
+                    "name_en": "eius nostrum dolore",
+                    "name_ru": "eius nostrum dolore",
                     "price": "100.00",
                     "discount": 20,
-                    "description_tm": "Nihil unde distinctio dolor ut est consequatur.",
-                    "description_en": "Distinctio facere sed doloremque libero veritatis.",
-                    "description_ru": "Rerum vero sed dignissimos molestiae iusto molestiae cumque et.",
-                    "production_time": 394,
+                    "description_tm": "Quia omnis deleniti quia.",
+                    "description_en": "Id molestias repellat officiis aut.",
+                    "description_ru": "Ut atque recusandae laudantium ut necessitatibus alias.",
+                    "production_time": 1114,
                     "min_order": 1,
                     "stock": 5,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 4,
                     "category_id": 5,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 6,
-                    "name_tm": "nihil autem consequatur",
-                    "name_en": "nihil autem consequatur",
-                    "name_ru": "nihil autem consequatur",
+                    "name_tm": "doloremque deleniti cum",
+                    "name_en": "doloremque deleniti cum",
+                    "name_ru": "doloremque deleniti cum",
                     "price": "40.00",
                     "discount": null,
-                    "description_tm": "Cumque at et temporibus.",
-                    "description_en": "Recusandae aut qui voluptas.",
-                    "description_ru": "Culpa placeat aliquam autem aut quo dicta.",
-                    "production_time": 943,
+                    "description_tm": "Et accusamus dolorem pariatur ad molestiae.",
+                    "description_en": "Autem laudantium ut atque adipisci aut facilis accusantium.",
+                    "description_ru": "Nostrum fuga dicta quidem et voluptatem maiores impedit.",
+                    "production_time": 1305,
                     "min_order": 1,
                     "stock": 5,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 4,
                     "category_id": 6,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "regions": [
                 {
                     "id": 10,
-                    "name": "West Meggiefort",
+                    "name": "Bergnaumshire",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 11,
-                    "name": "Lake Consuelofurt",
+                    "name": "Markusland",
                     "type": "province",
                     "parent_id": 10,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 12,
-                    "name": "Litteltown",
+                    "name": "Artview",
                     "type": "city",
                     "parent_id": 11,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "shops": [
                 {
                     "id": 4,
-                    "name": "Lebsack-Hand",
-                    "email": "jgraham@example.net",
+                    "name": "Batz-Willms",
+                    "email": "kpfeffer@example.com",
                     "phone": null,
-                    "mon_fri_open": "19:17",
-                    "mon_fri_close": "23:44",
-                    "sat_sun_open": "00:28",
-                    "sat_sun_close": "09:38",
+                    "mon_fri_open": "05:41",
+                    "mon_fri_close": "16:05",
+                    "sat_sun_open": "01:26",
+                    "sat_sun_close": "22:05",
                     "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 18,
                     "region_id": 12,
@@ -218,16 +218,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "users": [
                 {
                     "id": 17,
-                    "name": "D'angelo Vandervort",
-                    "phone_number": "67510096",
-                    "email": "agulgowski@example.net",
+                    "name": "Dell Ziemann",
+                    "phone_number": "03434821",
+                    "email": "kenyatta64@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -235,15 +235,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "k6pr8eCOY7",
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "remember_token": "sybVQj3qPt",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 18,
-                    "name": "Olaf Wilderman DVM",
-                    "phone_number": "96049902",
-                    "email": "waelchi.yvonne@example.com",
+                    "name": "Dr. Fernando Jacobson",
+                    "phone_number": "42300575",
+                    "email": "ayla15@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -251,9 +251,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "OMJ7XwiSVP",
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "remember_token": "uSjmihQi2v",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ]
         },

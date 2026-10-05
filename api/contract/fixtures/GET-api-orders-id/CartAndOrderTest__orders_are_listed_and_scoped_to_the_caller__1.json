@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_orders_are_listed_and_scoped_to_the_caller",
     "route": "GET api/orders/{id}",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:40",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -29,7 +29,7 @@
             "user_id": 25,
             "shop_id": 8,
             "address_id": null,
-            "total_amount": "1955.30",
+            "total_amount": "447.50",
             "items_total": null,
             "delivery_fee": "0.00",
             "payment_method": "cash",
@@ -40,9 +40,9 @@
             "fulfillment": "delivery",
             "delivery_type": "asap",
             "scheduled_at": null,
-            "recipient_phone": "63326286",
+            "recipient_phone": "66659682",
             "recipient_name": null,
-            "delivery_address": "3646 Herminia Greens",
+            "delivery_address": "2841 Brenna Expressway Suite 003",
             "note": null,
             "created_at": "<datetime>",
             "updated_at": "<datetime>",
@@ -50,14 +50,14 @@
             "items": [],
             "shop": {
                 "id": 8,
-                "name": "Gibson and Sons",
-                "email": "keely31@example.net",
+                "name": "Kozey Group",
+                "email": "caleigh.howe@example.com",
                 "phone": null,
-                "mon_fri_open": "17:57",
-                "mon_fri_close": "01:27",
-                "sat_sun_open": "07:40",
-                "sat_sun_close": "09:32",
-                "image": "shop/shop-seeder/logo.png",
+                "mon_fri_open": "23:24",
+                "mon_fri_close": "22:00",
+                "sat_sun_open": "02:15",
+                "sat_sun_close": "05:30",
+                "image": "shop/shop-seeder/sowgatly-logo.png",
                 "user_id": 26,
                 "region_id": 22,
                 "delivery_fee": "20.00",
@@ -81,7 +81,7 @@
                     "user_id": 25,
                     "shop_id": 8,
                     "address_id": null,
-                    "total_amount": "1955.30",
+                    "total_amount": "447.50",
                     "items_total": null,
                     "delivery_fee": "0.00",
                     "payment_method": "cash",
@@ -92,19 +92,19 @@
                     "fulfillment": "delivery",
                     "delivery_type": "asap",
                     "scheduled_at": null,
-                    "recipient_phone": "63326286",
+                    "recipient_phone": "66659682",
                     "recipient_name": null,
-                    "delivery_address": "3646 Herminia Greens",
+                    "delivery_address": "2841 Brenna Expressway Suite 003",
                     "note": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 6,
                     "user_id": 27,
                     "shop_id": 9,
                     "address_id": null,
-                    "total_amount": "321.30",
+                    "total_amount": "503.32",
                     "items_total": null,
                     "delivery_fee": "0.00",
                     "payment_method": "cash",
@@ -115,43 +115,43 @@
                     "fulfillment": "delivery",
                     "delivery_type": "asap",
                     "scheduled_at": null,
-                    "recipient_phone": "61474813",
+                    "recipient_phone": "65472115",
                     "recipient_name": null,
-                    "delivery_address": "13183 Braun Canyon",
+                    "delivery_address": "264 Electa Locks",
                     "note": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "regions": [
                 {
                     "id": 22,
-                    "name": "Smithchester",
-                    "type": "city",
+                    "name": "North Giovanniton",
+                    "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 23,
-                    "name": "Cronafurt",
-                    "type": "province",
+                    "name": "South Johathanmouth",
+                    "type": "city",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "shops": [
                 {
                     "id": 8,
-                    "name": "Gibson and Sons",
-                    "email": "keely31@example.net",
+                    "name": "Kozey Group",
+                    "email": "caleigh.howe@example.com",
                     "phone": null,
-                    "mon_fri_open": "17:57",
-                    "mon_fri_close": "01:27",
-                    "sat_sun_open": "07:40",
-                    "sat_sun_close": "09:32",
-                    "image": "shop/shop-seeder/logo.png",
+                    "mon_fri_open": "23:24",
+                    "mon_fri_close": "22:00",
+                    "sat_sun_open": "02:15",
+                    "sat_sun_close": "05:30",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
                     "user_id": 26,
                     "region_id": 22,
                     "delivery_fee": "20.00",
@@ -161,18 +161,18 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 9,
-                    "name": "Gutmann-Dicki",
-                    "email": "ashleigh97@example.org",
+                    "name": "Christiansen Inc",
+                    "email": "dora.dooley@example.com",
                     "phone": null,
-                    "mon_fri_open": "19:45",
-                    "mon_fri_close": "02:47",
-                    "sat_sun_open": "05:55",
-                    "sat_sun_close": "04:08",
+                    "mon_fri_open": "12:13",
+                    "mon_fri_close": "11:34",
+                    "sat_sun_open": "04:18",
+                    "sat_sun_close": "00:54",
                     "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 28,
                     "region_id": 23,
@@ -183,8 +183,8 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "user_notifications": [
@@ -194,8 +194,8 @@
                     "type": "order_created",
                     "data": "{\"order_id\":5,\"status\":\"pending\"}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 6,
@@ -203,16 +203,16 @@
                     "type": "order_created",
                     "data": "{\"order_id\":6,\"status\":\"pending\"}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "users": [
                 {
                     "id": 25,
-                    "name": "Jaylen Gutkowski",
-                    "phone_number": "00187833",
-                    "email": "ymorar@example.com",
+                    "name": "Ms. Nayeli Dach PhD",
+                    "phone_number": "81685076",
+                    "email": "tromp.dario@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -220,15 +220,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "CNqhxxDEUZ",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "cHXy07peLk",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 26,
-                    "name": "Darion Kuhlman",
-                    "phone_number": "34201424",
-                    "email": "anabel92@example.com",
+                    "name": "Ms. Mafalda Kuvalis",
+                    "phone_number": "14461139",
+                    "email": "dbayer@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -236,15 +236,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "YIy6Dpab9h",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "PAlnzpvoTG",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 27,
-                    "name": "Carley Stamm",
-                    "phone_number": "73586442",
-                    "email": "giovanni.parisian@example.org",
+                    "name": "Dr. Marguerite Huel",
+                    "phone_number": "94077305",
+                    "email": "gglover@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -252,15 +252,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "zxUupIrq6d",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "eFkzKFxiiZ",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 28,
-                    "name": "Anne Bailey",
-                    "phone_number": "05584569",
-                    "email": "mitchel05@example.com",
+                    "name": "Theodore Heller",
+                    "phone_number": "97480827",
+                    "email": "hrenner@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -268,9 +268,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "2CBaCT0ZD9",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "UawdSJiw0z",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ]
         },

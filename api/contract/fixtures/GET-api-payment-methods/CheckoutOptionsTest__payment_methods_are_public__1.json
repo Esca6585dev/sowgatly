@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CheckoutOptionsTest::payment_methods_are_public",
     "route": "GET api/payment-methods",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:06",
+    "recorded_at": "2026-10-05 12:10:41",
     "timezone": "Asia/Ashgabat",
     "auth": null,
     "config": {},
@@ -78,9 +78,9 @@
             "users": [
                 {
                     "id": 65,
-                    "name": "Augusta Sipes",
-                    "phone_number": "32850812",
-                    "email": "reichert.marcella@example.org",
+                    "name": "Oswald Yundt",
+                    "phone_number": "84159570",
+                    "email": "eugenia19@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -88,9 +88,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "zMEhdCG6z4",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "lT3OQnBml5",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ]
         },

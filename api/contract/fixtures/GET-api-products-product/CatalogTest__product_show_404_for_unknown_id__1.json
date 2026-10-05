@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CatalogTest::test_product_show_404_for_unknown_id",
     "route": "GET api/products/{product}",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:40",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -34,9 +34,9 @@
             "users": [
                 {
                     "id": 35,
-                    "name": "Chadd Witting",
-                    "phone_number": "87551017",
-                    "email": "barrows.lilla@example.net",
+                    "name": "Isaac Friesen",
+                    "phone_number": "17465752",
+                    "email": "dewayne.bauch@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -44,9 +44,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "fnvL9w3Y1V",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "EKnt6v2wWk",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ]
         },

@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\HomeFeedTest::test_banners_endpoint_filters_by_region",
     "route": "GET api/banners",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:07",
+    "recorded_at": "2026-10-05 12:10:44",
     "timezone": "Asia/Ashgabat",
     "auth": null,
     "config": {},
@@ -11,7 +11,7 @@
         "method": "GET",
         "path": "/api/banners",
         "query": {
-            "region_id": "111"
+            "region_id": "144"
         },
         "headers": {
             "Accept": "application/json",
@@ -83,8 +83,8 @@
                     "is_active": 1,
                     "starts_at": null,
                     "ends_at": null,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
                     "id": 7,
@@ -97,13 +97,13 @@
                     "image": null,
                     "link_type": "none",
                     "link_value": null,
-                    "region_id": 111,
+                    "region_id": 144,
                     "position": 1,
                     "is_active": 1,
                     "starts_at": null,
                     "ends_at": null,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
                     "id": 8,
@@ -119,77 +119,77 @@
                     "region_id": null,
                     "position": 0,
                     "is_active": 1,
-                    "starts_at": "2026-10-06 12:04:07",
+                    "starts_at": "2026-10-06 12:10:44",
                     "ends_at": null,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "regions": [
                 {
-                    "id": 109,
-                    "name": "Lake Audraville",
+                    "id": 142,
+                    "name": "South Roderickfurt",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 110,
-                    "name": "Dorothymouth",
+                    "id": 143,
+                    "name": "Whiteberg",
                     "type": "province",
-                    "parent_id": 109,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "parent_id": 142,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 111,
-                    "name": "Halvorsonberg",
+                    "id": 144,
+                    "name": "Bergstromfurt",
                     "type": "city",
-                    "parent_id": 110,
-                    "created_at": "2026-10-05 12:04:07",
-                    "updated_at": "2026-10-05 12:04:07"
+                    "parent_id": 143,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 1,
+            "brands": 2,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 42,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 50,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 2,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 166,
+            "images": 190,
             "messages": 1,
             "migrations": 43,
-            "order_items": 12,
-            "orders": 13,
+            "order_items": 16,
+            "orders": 17,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 4,
-            "products": 56,
-            "regions": 112,
+            "products": 64,
+            "regions": 145,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 48,
+            "shops": 65,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 18,
+            "user_notifications": 22,
             "user_otps": 5,
-            "users": 104,
+            "users": 138,
             "waitlist_items": 1
         }
     }

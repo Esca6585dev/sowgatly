@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\ChatTest::thread_bound_to_an_order_must_belong_to_the_customer",
     "route": "POST api/me/chats",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:06",
+    "recorded_at": "2026-10-05 12:10:41",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -38,24 +38,24 @@
             "regions": [
                 {
                     "id": 57,
-                    "name": "Abbottbury",
-                    "type": "province",
+                    "name": "North Jimmiechester",
+                    "type": "city",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "shops": [
                 {
                     "id": 22,
-                    "name": "Crooks, Dach and Schulist",
-                    "email": "qlang@example.com",
+                    "name": "VonRueden, Maggio and Feil",
+                    "email": "franecki.warren@example.net",
                     "phone": null,
-                    "mon_fri_open": "14:12",
-                    "mon_fri_close": "12:34",
-                    "sat_sun_open": "21:09",
-                    "sat_sun_close": "11:00",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "mon_fri_open": "19:37",
+                    "mon_fri_close": "21:31",
+                    "sat_sun_open": "05:08",
+                    "sat_sun_close": "03:33",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 54,
                     "region_id": 57,
                     "delivery_fee": "20.00",
@@ -65,16 +65,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "users": [
                 {
                     "id": 53,
-                    "name": "Jamie Schuppe",
-                    "phone_number": "96732715",
-                    "email": "bryce.cruickshank@example.com",
+                    "name": "Hillard Wilkinson PhD",
+                    "phone_number": "22038874",
+                    "email": "delfina.wilkinson@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -82,15 +82,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "hvht9b7VwU",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "ja2xKBYQ72",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 54,
-                    "name": "Beau Lemke",
-                    "phone_number": "43201270",
-                    "email": "block.royal@example.org",
+                    "name": "Dr. Bonnie Crooks I",
+                    "phone_number": "56531662",
+                    "email": "presley.ritchie@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -98,9 +98,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "BROU1UQJOb",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "e5VbcWsX7Y",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ]
         },

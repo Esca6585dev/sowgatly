@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CheckoutOptionsTest::old_payload_without_new_fields_still_creates_a_delivery_order_with_the_shop_fee",
     "route": "POST api/orders",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:06",
+    "recorded_at": "2026-10-05 12:10:41",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -63,15 +63,15 @@
                         "updated_at": "<datetime>",
                         "product": {
                             "id": 21,
-                            "name_tm": "at excepturi maxime",
-                            "name_en": "at excepturi maxime",
-                            "name_ru": "at excepturi maxime",
+                            "name_tm": "officiis iusto omnis",
+                            "name_en": "officiis iusto omnis",
+                            "name_ru": "officiis iusto omnis",
                             "price": "100.00",
                             "discount": 0,
-                            "description_tm": "Odio mollitia earum similique eos aut dolore nisi.",
-                            "description_en": "Quisquam facere aliquam quam.",
-                            "description_ru": "Harum aliquid rem in exercitationem aut omnis est totam.",
-                            "production_time": 331,
+                            "description_tm": "Nobis praesentium aut et quasi sit accusamus repudiandae.",
+                            "description_en": "Omnis ut facere totam soluta consequatur hic.",
+                            "description_ru": "Molestiae qui vitae debitis debitis eum cumque.",
+                            "production_time": 563,
                             "min_order": 1,
                             "stock": 8,
                             "seller_status": true,
@@ -117,15 +117,15 @@
                             "updated_at": "<datetime>",
                             "product": {
                                 "id": 21,
-                                "name_tm": "at excepturi maxime",
-                                "name_en": "at excepturi maxime",
-                                "name_ru": "at excepturi maxime",
+                                "name_tm": "officiis iusto omnis",
+                                "name_en": "officiis iusto omnis",
+                                "name_ru": "officiis iusto omnis",
                                 "price": "100.00",
                                 "discount": 0,
-                                "description_tm": "Odio mollitia earum similique eos aut dolore nisi.",
-                                "description_en": "Quisquam facere aliquam quam.",
-                                "description_ru": "Harum aliquid rem in exercitationem aut omnis est totam.",
-                                "production_time": 331,
+                                "description_tm": "Nobis praesentium aut et quasi sit accusamus repudiandae.",
+                                "description_en": "Omnis ut facere totam soluta consequatur hic.",
+                                "description_ru": "Molestiae qui vitae debitis debitis eum cumque.",
+                                "production_time": 563,
                                 "min_order": 1,
                                 "stock": 8,
                                 "seller_status": true,
@@ -151,111 +151,111 @@
                     "product_id": 21,
                     "quantity": 2,
                     "price": "100.00",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "carts": [
                 {
                     "id": 7,
                     "user_id": 55,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "categories": [
                 {
                     "id": 23,
-                    "name_tm": "aut",
-                    "name_en": "dolor",
-                    "name_ru": "consequatur",
-                    "image": "https://via.placeholder.com/640x480.png/00eebb?text=dicta",
+                    "name_tm": "assumenda",
+                    "name_en": "nihil",
+                    "name_ru": "architecto",
+                    "image": "https://via.placeholder.com/640x480.png/009900?text=excepturi",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "images": [
                 {
                     "id": 61,
-                    "url": "https://picsum.photos/id/821/300/300",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=492",
                     "product_id": 21,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 62,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=197",
+                    "url": "https://loremflickr.com/300/300/product?lock=351",
                     "product_id": 21,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 63,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=805",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=222",
                     "product_id": 21,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "products": [
                 {
                     "id": 21,
-                    "name_tm": "at excepturi maxime",
-                    "name_en": "at excepturi maxime",
-                    "name_ru": "at excepturi maxime",
+                    "name_tm": "officiis iusto omnis",
+                    "name_en": "officiis iusto omnis",
+                    "name_ru": "officiis iusto omnis",
                     "price": "100.00",
                     "discount": 0,
-                    "description_tm": "Odio mollitia earum similique eos aut dolore nisi.",
-                    "description_en": "Quisquam facere aliquam quam.",
-                    "description_ru": "Harum aliquid rem in exercitationem aut omnis est totam.",
-                    "production_time": 331,
+                    "description_tm": "Nobis praesentium aut et quasi sit accusamus repudiandae.",
+                    "description_en": "Omnis ut facere totam soluta consequatur hic.",
+                    "description_ru": "Molestiae qui vitae debitis debitis eum cumque.",
+                    "production_time": 563,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 23,
                     "category_id": 23,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "regions": [
                 {
                     "id": 58,
-                    "name": "North Hollymouth",
+                    "name": "South Mikayla",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 59,
-                    "name": "South Korbinmouth",
+                    "name": "Kautzerville",
                     "type": "province",
                     "parent_id": 58,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 60,
-                    "name": "Lake Americaborough",
+                    "name": "Bartolettishire",
                     "type": "city",
                     "parent_id": 59,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "shops": [
                 {
                     "id": 23,
-                    "name": "Tremblay, Nicolas and Gerhold",
-                    "email": "howard35@example.net",
+                    "name": "Grimes, Mosciski and Crona",
+                    "email": "robyn43@example.com",
                     "phone": null,
-                    "mon_fri_open": "22:57",
-                    "mon_fri_close": "02:19",
-                    "sat_sun_open": "04:55",
-                    "sat_sun_close": "06:04",
+                    "mon_fri_open": "07:12",
+                    "mon_fri_close": "10:29",
+                    "sat_sun_open": "10:59",
+                    "sat_sun_close": "02:52",
                     "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 56,
                     "region_id": 60,
@@ -266,16 +266,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "users": [
                 {
                     "id": 55,
-                    "name": "Camilla Larkin",
-                    "phone_number": "34119583",
-                    "email": "moore.vilma@example.net",
+                    "name": "Cordie Beahan",
+                    "phone_number": "49079819",
+                    "email": "cbernier@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -283,15 +283,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "TJgDccfvle",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "EL0gW03AGo",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 56,
-                    "name": "Miss Ashlynn Wiegand",
-                    "phone_number": "52758865",
-                    "email": "fupton@example.org",
+                    "name": "Mr. Carey Towne",
+                    "phone_number": "65296037",
+                    "email": "abraham.morissette@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -299,9 +299,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "jBKuoI6umZ",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "lIRnceBZSa",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ]
         },

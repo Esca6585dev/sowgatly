@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_adding_more_than_stock_is_rejected",
     "route": "POST api/cart/add",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:04",
+    "recorded_at": "2026-10-05 12:10:40",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -38,96 +38,96 @@
             "categories": [
                 {
                     "id": 3,
-                    "name_tm": "corporis",
-                    "name_en": "impedit",
-                    "name_ru": "aut",
-                    "image": "https://via.placeholder.com/640x480.png/0099cc?text=temporibus",
+                    "name_tm": "necessitatibus",
+                    "name_en": "at",
+                    "name_ru": "labore",
+                    "image": "https://via.placeholder.com/640x480.png/00aa55?text=aut",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "images": [
                 {
                     "id": 7,
-                    "url": "https://loremflickr.com/300/300/product?lock=383",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=107",
                     "product_id": 3,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 8,
-                    "url": "https://loremflickr.com/300/300/product?lock=759",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=590",
                     "product_id": 3,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 9,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=47",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=323",
                     "product_id": 3,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "products": [
                 {
                     "id": 3,
-                    "name_tm": "et vel quibusdam",
-                    "name_en": "et vel quibusdam",
-                    "name_ru": "et vel quibusdam",
+                    "name_tm": "blanditiis porro velit",
+                    "name_en": "blanditiis porro velit",
+                    "name_ru": "blanditiis porro velit",
                     "price": "100.00",
                     "discount": 0,
-                    "description_tm": "Sunt aut omnis et veritatis aliquid non.",
-                    "description_en": "Et sit dolores est cumque.",
-                    "description_ru": "Iusto ab qui voluptas excepturi.",
-                    "production_time": 1320,
+                    "description_tm": "Aut id ut qui dignissimos blanditiis.",
+                    "description_en": "Rerum magnam et laborum harum.",
+                    "description_ru": "Quae soluta quaerat ea sit reprehenderit.",
+                    "production_time": 1304,
                     "min_order": 1,
                     "stock": 1,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 2,
                     "category_id": 3,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "regions": [
                 {
                     "id": 4,
-                    "name": "East Jarodside",
+                    "name": "New Alba",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 5,
-                    "name": "Dooleyberg",
+                    "name": "East Patricia",
                     "type": "province",
                     "parent_id": 4,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 6,
-                    "name": "Lake Reneechester",
+                    "name": "Wiegandton",
                     "type": "city",
                     "parent_id": 5,
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "shops": [
                 {
                     "id": 2,
-                    "name": "Hane-Daugherty",
-                    "email": "gwintheiser@example.net",
+                    "name": "Schaden-Rolfson",
+                    "email": "fbeahan@example.org",
                     "phone": null,
-                    "mon_fri_open": "05:28",
-                    "mon_fri_close": "18:34",
-                    "sat_sun_open": "02:12",
-                    "sat_sun_close": "16:34",
+                    "mon_fri_open": "08:58",
+                    "mon_fri_close": "05:20",
+                    "sat_sun_open": "18:25",
+                    "sat_sun_close": "06:47",
                     "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 13,
                     "region_id": 6,
@@ -138,16 +138,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "users": [
                 {
                     "id": 12,
-                    "name": "Prof. Ansley Kunze",
-                    "phone_number": "51933016",
-                    "email": "lewis25@example.org",
+                    "name": "Carli Weissnat",
+                    "phone_number": "39694000",
+                    "email": "gay.wolf@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -155,15 +155,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "tIWC1u6vD1",
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "remember_token": "GJo5mw2q7N",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 13,
-                    "name": "Prof. Madyson Bayer",
-                    "phone_number": "46078900",
-                    "email": "leon.kerluke@example.com",
+                    "name": "Aubrey Hartmann",
+                    "phone_number": "59656255",
+                    "email": "bednar.johann@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -171,9 +171,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "gr0tmvU5DS",
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "remember_token": "L38wcU9dJF",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ]
         },

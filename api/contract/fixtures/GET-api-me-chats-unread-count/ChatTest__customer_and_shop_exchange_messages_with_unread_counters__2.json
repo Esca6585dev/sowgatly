@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\ChatTest::customer_and_shop_exchange_messages_with_unread_counters",
     "route": "GET api/me/chats/unread-count",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:41",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -39,9 +39,9 @@
                     "sender_type": "user",
                     "sender_id": 48,
                     "body": "Salam, gül barmy?",
-                    "read_at": "2026-10-05 12:04:05",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "read_at": "2026-10-05 12:10:41",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 2,
@@ -49,9 +49,9 @@
                     "sender_type": "shop",
                     "sender_id": 20,
                     "body": "Hawa, bar",
-                    "read_at": "2026-10-05 12:04:05",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "read_at": "2026-10-05 12:10:41",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "chat_threads": [
@@ -60,33 +60,33 @@
                     "user_id": 48,
                     "shop_id": 20,
                     "order_id": null,
-                    "last_message_at": "2026-10-05 12:04:05",
+                    "last_message_at": "2026-10-05 12:10:41",
                     "user_unread": 0,
                     "shop_unread": 0,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "regions": [
                 {
                     "id": 55,
-                    "name": "Bartonchester",
-                    "type": "province",
+                    "name": "Sauershire",
+                    "type": "village",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "shops": [
                 {
                     "id": 20,
-                    "name": "Crona-Sporer",
-                    "email": "jules.bosco@example.com",
+                    "name": "O'Conner, Dickinson and Quigley",
+                    "email": "freida.schultz@example.com",
                     "phone": null,
-                    "mon_fri_open": "00:57",
-                    "mon_fri_close": "02:52",
-                    "sat_sun_open": "10:13",
-                    "sat_sun_close": "17:24",
+                    "mon_fri_open": "05:41",
+                    "mon_fri_close": "18:01",
+                    "sat_sun_open": "10:12",
+                    "sat_sun_close": "22:54",
                     "image": "shop/shop-seeder/sowgatly-logo.png",
                     "user_id": 49,
                     "region_id": 55,
@@ -97,8 +97,8 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "user_notifications": [
@@ -108,8 +108,8 @@
                     "type": "chat_message",
                     "data": "{\"thread_id\":1,\"shop_id\":20,\"message_id\":1}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 11,
@@ -117,16 +117,16 @@
                     "type": "chat_message",
                     "data": "{\"thread_id\":1,\"shop_id\":20,\"message_id\":2}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "users": [
                 {
                     "id": 48,
-                    "name": "Alberto Frami",
-                    "phone_number": "46759356",
-                    "email": "icie74@example.com",
+                    "name": "Rosario Mraz",
+                    "phone_number": "51277186",
+                    "email": "domenica.kihn@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -134,15 +134,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "vqQHb3IoXA",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "IOrYl29Zwm",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 49,
-                    "name": "Dr. Christiana Leffler",
-                    "phone_number": "18140189",
-                    "email": "merlin.emard@example.com",
+                    "name": "Dr. Blaze McKenzie Jr.",
+                    "phone_number": "01029641",
+                    "email": "violet64@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -150,9 +150,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "vnfs3hJS9q",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "mYR7KP3zpw",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ]
         },

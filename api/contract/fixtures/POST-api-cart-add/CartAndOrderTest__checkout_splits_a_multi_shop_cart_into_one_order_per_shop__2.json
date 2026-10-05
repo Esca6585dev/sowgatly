@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CartAndOrderTest::test_checkout_splits_a_multi_shop_cart_into_one_order_per_shop",
     "route": "POST api/cart/add",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:40",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -40,15 +40,15 @@
                 "id": 7,
                 "product": {
                     "id": 8,
-                    "name_tm": "ut vel et",
-                    "name_en": "ut vel et",
-                    "name_ru": "ut vel et",
+                    "name_tm": "ipsa quia dicta",
+                    "name_en": "ipsa quia dicta",
+                    "name_ru": "ipsa quia dicta",
                     "price": "60.00",
                     "discount": null,
-                    "description_tm": "Eius ad dolore recusandae harum asperiores.",
-                    "description_en": "Explicabo praesentium ut nesciunt reiciendis dicta.",
-                    "description_ru": "Enim dolores laborum quia ipsa enim.",
-                    "production_time": 1426,
+                    "description_tm": "Voluptate et minus qui et.",
+                    "description_en": "Voluptate dicta voluptas est aut minima corporis qui quod.",
+                    "description_ru": "Nemo delectus repellendus ea blanditiis quod aut.",
+                    "production_time": 404,
                     "min_order": 1,
                     "stock": 5,
                     "seller_status": true,
@@ -71,187 +71,187 @@
                     "product_id": 7,
                     "quantity": 2,
                     "price": "100.00",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "carts": [
                 {
                     "id": 5,
                     "user_id": 19,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "categories": [
                 {
                     "id": 7,
-                    "name_tm": "recusandae",
-                    "name_en": "velit",
-                    "name_ru": "nihil",
-                    "image": "https://via.placeholder.com/640x480.png/000011?text=est",
+                    "name_tm": "debitis",
+                    "name_en": "minus",
+                    "name_ru": "dolor",
+                    "image": "https://via.placeholder.com/640x480.png/0099ee?text=aut",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 8,
-                    "name_tm": "voluptatibus",
-                    "name_en": "distinctio",
-                    "name_ru": "doloremque",
-                    "image": "https://via.placeholder.com/640x480.png/00ff00?text=sit",
+                    "name_tm": "sit",
+                    "name_en": "neque",
+                    "name_ru": "sunt",
+                    "image": "https://via.placeholder.com/640x480.png/0088ee?text=ea",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "images": [
                 {
                     "id": 19,
-                    "url": "https://picsum.photos/id/610/300/300",
+                    "url": "https://loremflickr.com/300/300/product?lock=399",
                     "product_id": 7,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 20,
-                    "url": "https://loremflickr.com/300/300/product?lock=374",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=86",
                     "product_id": 7,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 21,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=748",
+                    "url": "https://loremflickr.com/300/300/product?lock=623",
                     "product_id": 7,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 22,
-                    "url": "https://loremflickr.com/300/300/product?lock=213",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=324",
                     "product_id": 8,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 23,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=678",
+                    "url": "https://picsum.photos/id/627/300/300",
                     "product_id": 8,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 24,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=190",
+                    "url": "https://picsum.photos/id/380/300/300",
                     "product_id": 8,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "products": [
                 {
                     "id": 7,
-                    "name_tm": "illo dolorum aut",
-                    "name_en": "illo dolorum aut",
-                    "name_ru": "illo dolorum aut",
+                    "name_tm": "deleniti ipsa fugit",
+                    "name_en": "deleniti ipsa fugit",
+                    "name_ru": "deleniti ipsa fugit",
                     "price": "100.00",
                     "discount": null,
-                    "description_tm": "Aut corporis necessitatibus nihil autem ea similique.",
-                    "description_en": "Earum maxime a accusantium quo tenetur aut.",
-                    "description_ru": "Dolore corporis dolorem voluptatibus facilis dicta ut.",
-                    "production_time": 987,
+                    "description_tm": "Corrupti quo aspernatur distinctio architecto sequi.",
+                    "description_en": "Non ea corrupti debitis.",
+                    "description_ru": "Expedita impedit quidem voluptatem labore quo.",
+                    "production_time": 1177,
                     "min_order": 1,
                     "stock": 5,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 5,
                     "category_id": 7,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 8,
-                    "name_tm": "ut vel et",
-                    "name_en": "ut vel et",
-                    "name_ru": "ut vel et",
+                    "name_tm": "ipsa quia dicta",
+                    "name_en": "ipsa quia dicta",
+                    "name_ru": "ipsa quia dicta",
                     "price": "60.00",
                     "discount": null,
-                    "description_tm": "Eius ad dolore recusandae harum asperiores.",
-                    "description_en": "Explicabo praesentium ut nesciunt reiciendis dicta.",
-                    "description_ru": "Enim dolores laborum quia ipsa enim.",
-                    "production_time": 1426,
+                    "description_tm": "Voluptate et minus qui et.",
+                    "description_en": "Voluptate dicta voluptas est aut minima corporis qui quod.",
+                    "description_ru": "Nemo delectus repellendus ea blanditiis quod aut.",
+                    "production_time": 404,
                     "min_order": 1,
                     "stock": 5,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 6,
                     "category_id": 8,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "regions": [
                 {
                     "id": 13,
-                    "name": "Murlfort",
+                    "name": "Port Joannemouth",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 14,
-                    "name": "Spinkashire",
+                    "name": "West Ora",
                     "type": "province",
                     "parent_id": 13,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 15,
-                    "name": "Port Leopold",
+                    "name": "Muraziktown",
                     "type": "city",
                     "parent_id": 14,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 16,
-                    "name": "West Adah",
+                    "name": "South Pablochester",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 17,
-                    "name": "Nolanfurt",
+                    "name": "Nathenfort",
                     "type": "province",
                     "parent_id": 16,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 18,
-                    "name": "Port Sunny",
+                    "name": "Lake Austin",
                     "type": "city",
                     "parent_id": 17,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "shops": [
                 {
                     "id": 5,
-                    "name": "Nolan PLC",
-                    "email": "harry.schulist@example.com",
+                    "name": "Franecki, Von and Smitham",
+                    "email": "marcellus.swaniawski@example.org",
                     "phone": null,
-                    "mon_fri_open": "17:29",
-                    "mon_fri_close": "08:14",
-                    "sat_sun_open": "15:18",
-                    "sat_sun_close": "09:17",
-                    "image": "shop/shop-seeder/logo.png",
+                    "mon_fri_open": "04:51",
+                    "mon_fri_close": "21:00",
+                    "sat_sun_open": "20:42",
+                    "sat_sun_close": "06:43",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 20,
                     "region_id": 15,
                     "delivery_fee": "20.00",
@@ -261,18 +261,18 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 6,
-                    "name": "Rice Group",
-                    "email": "zpfannerstill@example.com",
+                    "name": "Williamson PLC",
+                    "email": "bins.verona@example.com",
                     "phone": null,
-                    "mon_fri_open": "15:40",
-                    "mon_fri_close": "01:06",
-                    "sat_sun_open": "23:50",
-                    "sat_sun_close": "18:59",
+                    "mon_fri_open": "00:18",
+                    "mon_fri_close": "16:55",
+                    "sat_sun_open": "16:11",
+                    "sat_sun_close": "21:49",
                     "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 21,
                     "region_id": 18,
@@ -283,16 +283,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "users": [
                 {
                     "id": 19,
-                    "name": "Jake Haley III",
-                    "phone_number": "76984915",
-                    "email": "oleta.von@example.com",
+                    "name": "Monroe Stark",
+                    "phone_number": "59981401",
+                    "email": "frami.jess@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -300,15 +300,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "8Cdxe0JQmF",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "VfB3MvzYyT",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 20,
-                    "name": "Ms. Fay Jacobi PhD",
-                    "phone_number": "52874968",
-                    "email": "adella.reynolds@example.com",
+                    "name": "Jessy Kautzer",
+                    "phone_number": "33667128",
+                    "email": "napoleon49@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -316,15 +316,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "v5uEAfpTSc",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "NEDCnEUKmY",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 21,
-                    "name": "Ms. Dandre Terry",
-                    "phone_number": "01868445",
-                    "email": "jadon80@example.org",
+                    "name": "Ian Beer",
+                    "phone_number": "59958924",
+                    "email": "dach.haylie@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -332,9 +332,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "1oV5PNQW6W",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "GunziMoZR2",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ]
         },

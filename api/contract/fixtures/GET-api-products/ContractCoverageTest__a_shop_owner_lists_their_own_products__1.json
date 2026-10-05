@@ -1,0 +1,384 @@
+{
+    "name": "ContractCoverageTest__a_shop_owner_lists_their_own_products__1",
+    "test": "Tests\\Feature\\Api\\ContractCoverageTest::test_a_shop_owner_lists_their_own_products",
+    "route": "GET api/products",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:10:41",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 70
+    },
+    "config": {},
+    "request": {
+        "method": "GET",
+        "path": "/api/products",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "data": [
+                {
+                    "id": 26,
+                    "name": {
+                        "tm": "ab perspiciatis sint",
+                        "en": "ab perspiciatis sint",
+                        "ru": "ab perspiciatis sint"
+                    },
+                    "price": "997.96",
+                    "discount": 0,
+                    "description": {
+                        "tm": "Omnis est excepturi maxime reprehenderit.",
+                        "en": "Voluptatem dolor est provident aut.",
+                        "ru": "Quos nisi non quia beatae."
+                    },
+                    "production_time": 113,
+                    "min_order": 1,
+                    "seller_status": true,
+                    "stock": 10,
+                    "width": null,
+                    "height": null,
+                    "shop_id": 29,
+                    "category_id": 28,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>",
+                    "attributes": [],
+                    "brands": [],
+                    "images": [
+                        {
+                            "id": 76,
+                            "url": "<url>/300x300/?product&sig=479",
+                            "product_id": 26,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 77,
+                            "url": "<url>/300/300/product?lock=673",
+                            "product_id": 26,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        },
+                        {
+                            "id": 78,
+                            "url": "<url>/300x300/?product&sig=856",
+                            "product_id": 26,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
+                        }
+                    ],
+                    "category": {
+                        "id": 28,
+                        "name_tm": "cum",
+                        "name_en": "eum",
+                        "name_ru": "optio",
+                        "image": "<url>/640x480.png/0066cc?text=suscipit",
+                        "category_id": null,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "shop": {
+                        "id": 29,
+                        "name": "Koepp and Sons",
+                        "email": "deondre37@example.org",
+                        "phone": null,
+                        "mon_fri_open": "22:18",
+                        "mon_fri_close": "10:14",
+                        "sat_sun_open": "23:10",
+                        "sat_sun_close": "13:21",
+                        "image": "shop/shop-seeder/sowgatly-logo.png",
+                        "user_id": 70,
+                        "region_id": 76,
+                        "delivery_fee": "20.00",
+                        "pickup_available": false,
+                        "min_order_amount": null,
+                        "description_tm": null,
+                        "description_ru": null,
+                        "description_en": null,
+                        "status": "approved",
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    "reviews_avg": null,
+                    "reviews_count": 0
+                }
+            ]
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 28,
+                    "name_tm": "cum",
+                    "name_en": "eum",
+                    "name_ru": "optio",
+                    "image": "https://via.placeholder.com/640x480.png/0066cc?text=suscipit",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 29,
+                    "name_tm": "eius",
+                    "name_en": "exercitationem",
+                    "name_ru": "ut",
+                    "image": "https://via.placeholder.com/640x480.png/0066dd?text=recusandae",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "images": [
+                {
+                    "id": 76,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=479",
+                    "product_id": 26,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 77,
+                    "url": "https://loremflickr.com/300/300/product?lock=673",
+                    "product_id": 26,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 78,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=856",
+                    "product_id": 26,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 79,
+                    "url": "https://loremflickr.com/300/300/product?lock=644",
+                    "product_id": 27,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 80,
+                    "url": "https://picsum.photos/id/726/300/300",
+                    "product_id": 27,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 81,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=517",
+                    "product_id": 27,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "products": [
+                {
+                    "id": 26,
+                    "name_tm": "ab perspiciatis sint",
+                    "name_en": "ab perspiciatis sint",
+                    "name_ru": "ab perspiciatis sint",
+                    "price": "997.96",
+                    "discount": 0,
+                    "description_tm": "Omnis est excepturi maxime reprehenderit.",
+                    "description_en": "Voluptatem dolor est provident aut.",
+                    "description_ru": "Quos nisi non quia beatae.",
+                    "production_time": 113,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 29,
+                    "category_id": 28,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 27,
+                    "name_tm": "aut eveniet eos",
+                    "name_en": "aut eveniet eos",
+                    "name_ru": "aut eveniet eos",
+                    "price": "436.08",
+                    "discount": 0,
+                    "description_tm": "Doloribus consectetur qui cum aut.",
+                    "description_en": "Ut placeat velit recusandae possimus ut autem nam.",
+                    "description_ru": "Quisquam doloribus quae quasi explicabo qui ad nihil.",
+                    "production_time": 1340,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 30,
+                    "category_id": 29,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 74,
+                    "name": "Yostton",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 75,
+                    "name": "Chelseafort",
+                    "type": "province",
+                    "parent_id": 74,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 76,
+                    "name": "Kalifort",
+                    "type": "city",
+                    "parent_id": 75,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 77,
+                    "name": "Lake Emanuel",
+                    "type": "city",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 29,
+                    "name": "Koepp and Sons",
+                    "email": "deondre37@example.org",
+                    "phone": null,
+                    "mon_fri_open": "22:18",
+                    "mon_fri_close": "10:14",
+                    "sat_sun_open": "23:10",
+                    "sat_sun_close": "13:21",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 70,
+                    "region_id": 76,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 30,
+                    "name": "Welch LLC",
+                    "email": "sam67@example.org",
+                    "phone": null,
+                    "mon_fri_open": "17:50",
+                    "mon_fri_close": "12:32",
+                    "sat_sun_open": "02:26",
+                    "sat_sun_close": "04:15",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 71,
+                    "region_id": 77,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "users": [
+                {
+                    "id": 70,
+                    "name": "Archibald Predovic",
+                    "phone_number": "58883033",
+                    "email": "konopelski.heaven@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "Ps4t7MDYyl",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 71,
+                    "name": "Myrtie Ullrich",
+                    "phone_number": "00627872",
+                    "email": "xkrajcik@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "TNi8DAwoGl",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 2,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 2,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 30,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 2,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 82,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 28,
+            "regions": 78,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 31,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 15,
+            "user_otps": 5,
+            "users": 72,
+            "waitlist_items": 1
+        }
+    }
+}

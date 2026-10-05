@@ -3,16 +3,16 @@
     "test": "Tests\\Feature\\Api\\ProductReviewTest::test_three_criteria_derive_the_rating_and_link_the_order",
     "route": "POST api/products/{id}/reviews",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:08",
+    "recorded_at": "2026-10-05 12:10:45",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 126
+        "user_id": 160
     },
     "config": {},
     "request": {
         "method": "POST",
-        "path": "/api/products/66/reviews",
+        "path": "/api/products/74/reviews",
         "query": {},
         "headers": {
             "Accept": "application/json",
@@ -24,7 +24,7 @@
             "rating_value": 4,
             "rating_service": 4,
             "comment": "Gowy",
-            "order_id": 18
+            "order_id": 22
         }
     },
     "response": {
@@ -33,14 +33,14 @@
         "json": {
             "success": true,
             "data": {
-                "user_id": 126,
-                "product_id": "66",
+                "user_id": 160,
+                "product_id": "74",
                 "rating_match": 5,
                 "rating_value": 4,
                 "rating_service": 4,
                 "rating": 4,
                 "comment": "Gowy",
-                "order_id": 18,
+                "order_id": 22,
                 "updated_at": "<datetime>",
                 "created_at": "<datetime>",
                 "id": 9
@@ -52,57 +52,57 @@
         "tables": {
             "categories": [
                 {
-                    "id": 52,
-                    "name_tm": "tempora",
-                    "name_en": "est",
-                    "name_ru": "et",
-                    "image": "https://via.placeholder.com/640x480.png/000088?text=temporibus",
+                    "id": 60,
+                    "name_tm": "esse",
+                    "name_en": "nostrum",
+                    "name_ru": "dolor",
+                    "image": "https://via.placeholder.com/640x480.png/000077?text=aspernatur",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "images": [
                 {
-                    "id": 196,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=184",
-                    "product_id": 66,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 220,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=706",
+                    "product_id": 74,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 197,
-                    "url": "https://loremflickr.com/300/300/product?lock=284",
-                    "product_id": 66,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 221,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=525",
+                    "product_id": 74,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 198,
-                    "url": "https://loremflickr.com/300/300/product?lock=449",
-                    "product_id": 66,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 222,
+                    "url": "https://picsum.photos/id/258/300/300",
+                    "product_id": 74,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "order_items": [
                 {
-                    "id": 18,
-                    "order_id": 18,
-                    "product_id": 66,
+                    "id": 22,
+                    "order_id": 22,
+                    "product_id": 74,
                     "quantity": 1,
-                    "price": "653.40",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "price": "920.93",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "orders": [
                 {
-                    "id": 18,
-                    "user_id": 126,
-                    "shop_id": 55,
+                    "id": 22,
+                    "user_id": 160,
+                    "shop_id": 72,
                     "address_id": null,
-                    "total_amount": "1857.03",
+                    "total_amount": "1048.39",
                     "items_total": null,
                     "delivery_fee": "0.00",
                     "payment_method": "cash",
@@ -113,75 +113,75 @@
                     "fulfillment": "delivery",
                     "delivery_type": "asap",
                     "scheduled_at": null,
-                    "recipient_phone": "69951671",
+                    "recipient_phone": "62567570",
                     "recipient_name": null,
-                    "delivery_address": "54097 Waelchi View",
+                    "delivery_address": "996 King Meadow Apt. 286",
                     "note": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "products": [
                 {
-                    "id": 66,
-                    "name_tm": "modi eum temporibus",
-                    "name_en": "modi eum temporibus",
-                    "name_ru": "modi eum temporibus",
+                    "id": 74,
+                    "name_tm": "nobis unde accusamus",
+                    "name_en": "nobis unde accusamus",
+                    "name_ru": "nobis unde accusamus",
                     "price": "100.00",
                     "discount": 0,
-                    "description_tm": "Sit officia quia sit.",
-                    "description_en": "Fuga ratione rem ut eos sunt.",
-                    "description_ru": "Quidem tempore modi a et.",
-                    "production_time": 607,
+                    "description_tm": "Ipsam vel facilis totam porro.",
+                    "description_en": "Repellendus asperiores dolor qui consequatur.",
+                    "description_ru": "Ea nisi sequi voluptatem tempore.",
+                    "production_time": 780,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
-                    "shop_id": 55,
-                    "category_id": 52,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "shop_id": 72,
+                    "category_id": 60,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "regions": [
                 {
-                    "id": 125,
-                    "name": "Kuphalfurt",
+                    "id": 158,
+                    "name": "Fadelmouth",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 126,
-                    "name": "Kutchfurt",
+                    "id": 159,
+                    "name": "Schultzbury",
                     "type": "province",
-                    "parent_id": 125,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "parent_id": 158,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 127,
-                    "name": "McDermottshire",
+                    "id": 160,
+                    "name": "East Geraldineland",
                     "type": "city",
-                    "parent_id": 126,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "parent_id": 159,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "shops": [
                 {
-                    "id": 55,
-                    "name": "Pfeffer Group",
-                    "email": "jarret55@example.org",
+                    "id": 72,
+                    "name": "Zemlak, Satterfield and Gorczany",
+                    "email": "evan58@example.net",
                     "phone": null,
-                    "mon_fri_open": "09:21",
-                    "mon_fri_close": "04:57",
-                    "sat_sun_open": "15:23",
-                    "sat_sun_close": "23:33",
-                    "image": "shop/shop-seeder/logo.png",
-                    "user_id": 127,
-                    "region_id": 127,
+                    "mon_fri_open": "07:42",
+                    "mon_fri_close": "04:12",
+                    "sat_sun_open": "08:17",
+                    "sat_sun_close": "15:27",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 161,
+                    "region_id": 160,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -189,27 +189,27 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "user_notifications": [
                 {
-                    "id": 28,
-                    "user_id": 126,
+                    "id": 32,
+                    "user_id": 160,
                     "type": "order_created",
-                    "data": "{\"order_id\":18,\"status\":\"completed\"}",
+                    "data": "{\"order_id\":22,\"status\":\"completed\"}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "users": [
                 {
-                    "id": 126,
-                    "name": "Kareem Schumm",
-                    "phone_number": "69303399",
-                    "email": "iconnelly@example.com",
+                    "id": 160,
+                    "name": "Dr. Nyah Runte III",
+                    "phone_number": "22710433",
+                    "email": "lind.mia@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -217,15 +217,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "zAIxUcZAQa",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "vFFGEnNuck",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 127,
-                    "name": "Leonor D'Amore",
-                    "phone_number": "66032465",
-                    "email": "van41@example.net",
+                    "id": 161,
+                    "name": "Orville Rice IV",
+                    "phone_number": "79814043",
+                    "email": "bbrekke@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -233,50 +233,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "4MrDWSyXJO",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "FjLYmOqVTw",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 1,
+            "brands": 2,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 53,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 61,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 5,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 199,
+            "images": 223,
             "messages": 1,
             "migrations": 43,
-            "order_items": 19,
-            "orders": 19,
+            "order_items": 23,
+            "orders": 23,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 9,
-            "products": 67,
-            "regions": 128,
+            "products": 75,
+            "regions": 161,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 56,
+            "shops": 73,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 29,
+            "user_notifications": 33,
             "user_otps": 5,
-            "users": 128,
+            "users": 162,
             "waitlist_items": 1
         }
     }

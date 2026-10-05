@@ -3,11 +3,11 @@
     "test": "Tests\\Feature\\Api\\NotificationTextAndPushTest::test_notifications_carry_localized_title_and_body",
     "route": "GET api/me/notifications",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:08",
+    "recorded_at": "2026-10-05 12:10:44",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 111
+        "user_id": 145
     },
     "config": {},
     "request": {
@@ -28,8 +28,8 @@
             "success": true,
             "data": [
                 {
-                    "id": 19,
-                    "user_id": 111,
+                    "id": 23,
+                    "user_id": 145,
                     "type": "order_status",
                     "data": {
                         "order_id": 12,
@@ -52,21 +52,21 @@
         "tables": {
             "user_notifications": [
                 {
-                    "id": 19,
-                    "user_id": 111,
+                    "id": 23,
+                    "user_id": 145,
                     "type": "order_status",
                     "data": "{\"order_id\":12,\"status\":\"delivering\"}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "users": [
                 {
-                    "id": 111,
-                    "name": "Rhea Langosh",
-                    "phone_number": "92510448",
-                    "email": "brown.branson@example.com",
+                    "id": 145,
+                    "name": "Clementina Macejkovic",
+                    "phone_number": "24636200",
+                    "email": "irwin.mcglynn@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -74,50 +74,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "NXX2MCkOfv",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "tGNpj2VLoC",
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 1,
+            "brands": 2,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 46,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 54,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 2,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 178,
+            "images": 202,
             "messages": 1,
             "migrations": 43,
-            "order_items": 14,
-            "orders": 14,
+            "order_items": 18,
+            "orders": 18,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 8,
-            "products": 60,
-            "regions": 114,
+            "products": 68,
+            "regions": 147,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 50,
+            "shops": 67,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 20,
+            "user_notifications": 24,
             "user_otps": 5,
-            "users": 112,
+            "users": 146,
             "waitlist_items": 1
         }
     }

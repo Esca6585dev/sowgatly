@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CatalogTest::test_product_show_returns_the_full_card",
     "route": "GET api/products/{product}",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:40",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -28,18 +28,18 @@
             "data": {
                 "id": 10,
                 "name": {
-                    "tm": "adipisci qui reprehenderit",
-                    "en": "adipisci qui reprehenderit",
-                    "ru": "adipisci qui reprehenderit"
+                    "tm": "temporibus quae ut",
+                    "en": "temporibus quae ut",
+                    "ru": "temporibus quae ut"
                 },
                 "price": "100.00",
                 "discount": 0,
                 "description": {
-                    "tm": "Fugit tempora quasi doloremque eveniet vero dicta porro.",
-                    "en": "Quia aut quasi blanditiis fuga.",
-                    "ru": "Qui voluptas minima occaecati vitae."
+                    "tm": "Vero voluptas odit aut perferendis officia ut.",
+                    "en": "Nulla et rem tempore est itaque necessitatibus.",
+                    "ru": "Ut labore sed aut."
                 },
-                "production_time": 641,
+                "production_time": 1116,
                 "min_order": 1,
                 "seller_status": true,
                 "stock": 10,
@@ -54,21 +54,21 @@
                 "images": [
                     {
                         "id": 28,
-                        "url": "<url>/300x300/?product&sig=178",
+                        "url": "<url>/id/65/300/300",
                         "product_id": 10,
                         "created_at": "<datetime>",
                         "updated_at": "<datetime>"
                     },
                     {
                         "id": 29,
-                        "url": "<url>/300/300/product?lock=974",
+                        "url": "<url>/id/801/300/300",
                         "product_id": 10,
                         "created_at": "<datetime>",
                         "updated_at": "<datetime>"
                     },
                     {
                         "id": 30,
-                        "url": "<url>/id/689/300/300",
+                        "url": "<url>/300x300/?product&sig=88",
                         "product_id": 10,
                         "created_at": "<datetime>",
                         "updated_at": "<datetime>"
@@ -76,24 +76,24 @@
                 ],
                 "category": {
                     "id": 13,
-                    "name_tm": "enim",
-                    "name_en": "repellendus",
-                    "name_ru": "pariatur",
-                    "image": "<url>/640x480.png/007722?text=rerum",
+                    "name_tm": "doloremque",
+                    "name_en": "aut",
+                    "name_ru": "atque",
+                    "image": "<url>/640x480.png/0055cc?text=quibusdam",
                     "category_id": null,
                     "created_at": "<datetime>",
                     "updated_at": "<datetime>"
                 },
                 "shop": {
                     "id": 12,
-                    "name": "Reilly PLC",
-                    "email": "hill.jensen@example.org",
+                    "name": "Ryan LLC",
+                    "email": "owolff@example.net",
                     "phone": null,
-                    "mon_fri_open": "06:35",
-                    "mon_fri_close": "17:08",
-                    "sat_sun_open": "15:33",
-                    "sat_sun_close": "08:41",
-                    "image": "shop/shop-seeder/logo.png",
+                    "mon_fri_open": "07:46",
+                    "mon_fri_close": "07:03",
+                    "sat_sun_open": "00:26",
+                    "sat_sun_close": "00:38",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
                     "user_id": 34,
                     "region_id": 28,
                     "delivery_fee": "20.00",
@@ -117,97 +117,97 @@
             "categories": [
                 {
                     "id": 13,
-                    "name_tm": "enim",
-                    "name_en": "repellendus",
-                    "name_ru": "pariatur",
-                    "image": "https://via.placeholder.com/640x480.png/007722?text=rerum",
+                    "name_tm": "doloremque",
+                    "name_en": "aut",
+                    "name_ru": "atque",
+                    "image": "https://via.placeholder.com/640x480.png/0055cc?text=quibusdam",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "images": [
                 {
                     "id": 28,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=178",
+                    "url": "https://picsum.photos/id/65/300/300",
                     "product_id": 10,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 29,
-                    "url": "https://loremflickr.com/300/300/product?lock=974",
+                    "url": "https://picsum.photos/id/801/300/300",
                     "product_id": 10,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 30,
-                    "url": "https://picsum.photos/id/689/300/300",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=88",
                     "product_id": 10,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "products": [
                 {
                     "id": 10,
-                    "name_tm": "adipisci qui reprehenderit",
-                    "name_en": "adipisci qui reprehenderit",
-                    "name_ru": "adipisci qui reprehenderit",
+                    "name_tm": "temporibus quae ut",
+                    "name_en": "temporibus quae ut",
+                    "name_ru": "temporibus quae ut",
                     "price": "100.00",
                     "discount": 0,
-                    "description_tm": "Fugit tempora quasi doloremque eveniet vero dicta porro.",
-                    "description_en": "Quia aut quasi blanditiis fuga.",
-                    "description_ru": "Qui voluptas minima occaecati vitae.",
-                    "production_time": 641,
+                    "description_tm": "Vero voluptas odit aut perferendis officia ut.",
+                    "description_en": "Nulla et rem tempore est itaque necessitatibus.",
+                    "description_ru": "Ut labore sed aut.",
+                    "production_time": 1116,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 12,
                     "category_id": 13,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "regions": [
                 {
                     "id": 26,
-                    "name": "East Cicerofort",
+                    "name": "Port Kaitlin",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 27,
-                    "name": "South Spencermouth",
+                    "name": "Lake Lesliefurt",
                     "type": "province",
                     "parent_id": 26,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 28,
-                    "name": "Hudsonfurt",
+                    "name": "Lake Mallory",
                     "type": "city",
                     "parent_id": 27,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "shops": [
                 {
                     "id": 12,
-                    "name": "Reilly PLC",
-                    "email": "hill.jensen@example.org",
+                    "name": "Ryan LLC",
+                    "email": "owolff@example.net",
                     "phone": null,
-                    "mon_fri_open": "06:35",
-                    "mon_fri_close": "17:08",
-                    "sat_sun_open": "15:33",
-                    "sat_sun_close": "08:41",
-                    "image": "shop/shop-seeder/logo.png",
+                    "mon_fri_open": "07:46",
+                    "mon_fri_close": "07:03",
+                    "sat_sun_open": "00:26",
+                    "sat_sun_close": "00:38",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
                     "user_id": 34,
                     "region_id": 28,
                     "delivery_fee": "20.00",
@@ -217,16 +217,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "users": [
                 {
                     "id": 33,
-                    "name": "Leone Emard",
-                    "phone_number": "87447967",
-                    "email": "davis.marilyne@example.com",
+                    "name": "Jennyfer Blanda DVM",
+                    "phone_number": "90331438",
+                    "email": "mitchel58@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -234,15 +234,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "ZueAzlnymT",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "XrNhNAPkNF",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 34,
-                    "name": "Rhett Windler",
-                    "phone_number": "94612197",
-                    "email": "josiane.homenick@example.com",
+                    "name": "Nina Larson",
+                    "phone_number": "60214811",
+                    "email": "conroy.august@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -250,9 +250,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "ogM0zy9Sxp",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "AyvARornGA",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ]
         },

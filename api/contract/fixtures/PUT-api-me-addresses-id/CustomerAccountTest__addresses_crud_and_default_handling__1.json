@@ -3,11 +3,11 @@
     "test": "Tests\\Feature\\Api\\CustomerAccountTest::test_addresses_crud_and_default_handling",
     "route": "PUT api/me/addresses/{id}",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:06",
+    "recorded_at": "2026-10-05 12:10:42",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 69
+        "user_id": 103
     },
     "config": {},
     "request": {
@@ -30,7 +30,7 @@
             "success": true,
             "data": {
                 "id": 1,
-                "user_id": 69,
+                "user_id": 103,
                 "title": null,
                 "address": "Aşgabat, Parahat 8",
                 "is_default": false,
@@ -45,29 +45,29 @@
             "user_addresses": [
                 {
                     "id": 1,
-                    "user_id": 69,
+                    "user_id": 103,
                     "title": "Home",
                     "address": "Aşgabat, Parahat 7",
                     "is_default": 0,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
                 },
                 {
                     "id": 2,
-                    "user_id": 69,
+                    "user_id": 103,
                     "title": null,
                     "address": "Aşgabat, Mir 2",
                     "is_default": 1,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
                 }
             ],
             "users": [
                 {
-                    "id": 69,
-                    "name": "Tyshawn Mohr III",
-                    "phone_number": "54535720",
-                    "email": "florencio.goodwin@example.org",
+                    "id": 103,
+                    "name": "Prof. Anissa Bradtke MD",
+                    "phone_number": "50798991",
+                    "email": "mekhi49@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -75,50 +75,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "rPRnNMRvtB",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "WuKcDgfbG8",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 1,
-            "brands": 1,
+            "brands": 2,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 29,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 37,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 2,
             "failed_jobs": 1,
             "favorite_collection_items": 1,
             "favorite_collections": 1,
             "favorites": 2,
-            "images": 79,
+            "images": 103,
             "messages": 1,
             "migrations": 43,
-            "order_items": 9,
-            "orders": 12,
+            "order_items": 13,
+            "orders": 16,
             "permissions": 1,
             "personal_access_tokens": 4,
             "product_attributes": 1,
             "product_reviews": 1,
-            "products": 27,
-            "regions": 76,
+            "products": 35,
+            "regions": 109,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 29,
+            "shops": 46,
             "telescope_entries": 1,
             "user_addresses": 3,
-            "user_notifications": 15,
+            "user_notifications": 19,
             "user_otps": 5,
-            "users": 70,
+            "users": 104,
             "waitlist_items": 1
         }
     }

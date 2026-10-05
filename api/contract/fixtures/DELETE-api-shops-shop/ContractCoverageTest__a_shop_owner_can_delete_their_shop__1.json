@@ -1,0 +1,145 @@
+{
+    "name": "ContractCoverageTest__a_shop_owner_can_delete_their_shop__1",
+    "test": "Tests\\Feature\\Api\\ContractCoverageTest::test_a_shop_owner_can_delete_their_shop",
+    "route": "DELETE api/shops/{shop}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:10:42",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 78
+    },
+    "config": {},
+    "request": {
+        "method": "DELETE",
+        "path": "/api/shops/36",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "status": true,
+            "message": "Shop deleted successfully"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "regions": [
+                {
+                    "id": 89,
+                    "name": "Lake Rogerland",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                },
+                {
+                    "id": 90,
+                    "name": "Collinsfort",
+                    "type": "province",
+                    "parent_id": 89,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                },
+                {
+                    "id": 91,
+                    "name": "Jenkinsmouth",
+                    "type": "city",
+                    "parent_id": 90,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 36,
+                    "name": "Hahn LLC",
+                    "email": "krajcik.vella@example.com",
+                    "phone": null,
+                    "mon_fri_open": "21:04",
+                    "mon_fri_close": "18:33",
+                    "sat_sun_open": "22:22",
+                    "sat_sun_close": "19:21",
+                    "image": null,
+                    "user_id": 78,
+                    "region_id": 91,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ],
+            "users": [
+                {
+                    "id": 78,
+                    "name": "Mrs. Sabrina Ullrich III",
+                    "phone_number": "28553786",
+                    "email": "chad78@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "V88BrAUtTO",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 2,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 2,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 32,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 2,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 88,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 30,
+            "regions": 92,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 37,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 15,
+            "user_otps": 5,
+            "users": 79,
+            "waitlist_items": 1
+        }
+    }
+}

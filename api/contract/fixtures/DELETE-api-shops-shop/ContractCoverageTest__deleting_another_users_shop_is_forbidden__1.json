@@ -1,0 +1,145 @@
+{
+    "name": "ContractCoverageTest__deleting_another_users_shop_is_forbidden__1",
+    "test": "Tests\\Feature\\Api\\ContractCoverageTest::test_deleting_another_users_shop_is_forbidden",
+    "route": "DELETE api/shops/{shop}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:10:42",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 79
+    },
+    "config": {},
+    "request": {
+        "method": "DELETE",
+        "path": "/api/shops/37",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 403,
+        "content_type": "application/json",
+        "json": {
+            "status": false,
+            "message": "You can only delete your own shop"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "regions": [
+                {
+                    "id": 92,
+                    "name": "North Keaganborough",
+                    "type": "province",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 37,
+                    "name": "Quigley Group",
+                    "email": "schultz.gay@example.org",
+                    "phone": null,
+                    "mon_fri_open": "04:03",
+                    "mon_fri_close": "04:25",
+                    "sat_sun_open": "07:22",
+                    "sat_sun_close": "18:44",
+                    "image": null,
+                    "user_id": 80,
+                    "region_id": 92,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ],
+            "users": [
+                {
+                    "id": 79,
+                    "name": "Tom Klein",
+                    "phone_number": "80395162",
+                    "email": "batz.jailyn@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "dgZRVvRNNl",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                },
+                {
+                    "id": 80,
+                    "name": "Jared Gislason",
+                    "phone_number": "50045594",
+                    "email": "shaun80@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "ktqn2GDHhW",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 2,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 2,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 32,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 2,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 88,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 30,
+            "regions": 93,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 38,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 15,
+            "user_otps": 5,
+            "users": 81,
+            "waitlist_items": 1
+        }
+    }
+}

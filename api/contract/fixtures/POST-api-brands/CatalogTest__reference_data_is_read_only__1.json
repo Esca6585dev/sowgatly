@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CatalogTest::test_reference_data_is_read_only",
     "route": "POST api/brands",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:41",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -36,9 +36,9 @@
             "users": [
                 {
                     "id": 47,
-                    "name": "Prof. Cody Haag IV",
-                    "phone_number": "68217800",
-                    "email": "raphaelle57@example.net",
+                    "name": "Prof. Ottis Bogan",
+                    "phone_number": "71794460",
+                    "email": "seth.senger@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -46,9 +46,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "uH0xD7Iuxq",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "nive5h7t9n",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ]
         },

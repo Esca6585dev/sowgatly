@@ -1,0 +1,250 @@
+{
+    "name": "ContractCoverageTest__patching_another_shops_product_is_forbidden__1",
+    "test": "Tests\\Feature\\Api\\ContractCoverageTest::test_patching_another_shops_product_is_forbidden",
+    "route": "PATCH api/products/{product}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:10:41",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 73
+    },
+    "config": {},
+    "request": {
+        "method": "PATCH",
+        "path": "/api/products/29",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "name_en": "Hijacked"
+        }
+    },
+    "response": {
+        "status": 403,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "You can only edit products of your own shop"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 31,
+                    "name_tm": "qui",
+                    "name_en": "ullam",
+                    "name_ru": "excepturi",
+                    "image": "https://via.placeholder.com/640x480.png/0000bb?text=sint",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "images": [
+                {
+                    "id": 85,
+                    "url": "https://loremflickr.com/300/300/product?lock=45",
+                    "product_id": 29,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 86,
+                    "url": "https://picsum.photos/id/946/300/300",
+                    "product_id": 29,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 87,
+                    "url": "https://loremflickr.com/300/300/product?lock=470",
+                    "product_id": 29,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "products": [
+                {
+                    "id": 29,
+                    "name_tm": "non quod velit",
+                    "name_en": "non quod velit",
+                    "name_ru": "non quod velit",
+                    "price": "958.18",
+                    "discount": 0,
+                    "description_tm": "Fugit dolorem eum voluptas pariatur quibusdam omnis asperiores.",
+                    "description_en": "Delectus perspiciatis voluptas nemo ut nam voluptas.",
+                    "description_ru": "Et ab sed quia voluptatem.",
+                    "production_time": 323,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 33,
+                    "category_id": 31,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 81,
+                    "name": "Lake Aiyanamouth",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 82,
+                    "name": "West Jodyview",
+                    "type": "province",
+                    "parent_id": 81,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 83,
+                    "name": "Erdmanfurt",
+                    "type": "city",
+                    "parent_id": 82,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 84,
+                    "name": "Lake Carlostown",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 32,
+                    "name": "Block, Altenwerth and Schaden",
+                    "email": "eli.shanahan@example.com",
+                    "phone": null,
+                    "mon_fri_open": "15:35",
+                    "mon_fri_close": "01:01",
+                    "sat_sun_open": "15:50",
+                    "sat_sun_close": "18:03",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 73,
+                    "region_id": 83,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 33,
+                    "name": "Okuneva Inc",
+                    "email": "peggie64@example.net",
+                    "phone": null,
+                    "mon_fri_open": "12:06",
+                    "mon_fri_close": "13:50",
+                    "sat_sun_open": "07:01",
+                    "sat_sun_close": "02:32",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 74,
+                    "region_id": 84,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "users": [
+                {
+                    "id": 73,
+                    "name": "Mrs. Gerda Dickinson",
+                    "phone_number": "63882401",
+                    "email": "anya.ritchie@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "PFABAYd1eL",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 74,
+                    "name": "Prof. Danika McDermott",
+                    "phone_number": "82975492",
+                    "email": "ebosco@example.com",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "7YEofJBzHC",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 2,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 2,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 32,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 2,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 88,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 30,
+            "regions": 85,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 34,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 15,
+            "user_otps": 5,
+            "users": 75,
+            "waitlist_items": 1
+        }
+    }
+}

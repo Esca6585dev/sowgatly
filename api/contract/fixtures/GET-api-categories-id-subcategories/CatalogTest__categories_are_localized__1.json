@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CatalogTest::test_categories_are_localized",
     "route": "GET api/categories/{id}/subcategories",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:40",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -29,11 +29,11 @@
                 {
                     "id": 11,
                     "name": {
-                        "tm": "rem",
-                        "en": "dolor",
-                        "ru": "ipsam"
+                        "tm": "dolores",
+                        "en": "enim",
+                        "ru": "omnis"
                     },
-                    "image": "<url>/640x480.png/006699?text=recusandae",
+                    "image": "<url>/640x480.png/0077ff?text=excepturi",
                     "category": {
                         "name": {
                             "tm": "Güller",
@@ -49,11 +49,11 @@
                 {
                     "id": 12,
                     "name": {
-                        "tm": "fugiat",
-                        "en": "animi",
-                        "ru": "pariatur"
+                        "tm": "occaecati",
+                        "en": "omnis",
+                        "ru": "facilis"
                     },
-                    "image": "<url>/640x480.png/005577?text=eum",
+                    "image": "<url>/640x480.png/00aacc?text=deserunt",
                     "category": {
                         "name": {
                             "tm": "Güller",
@@ -78,38 +78,38 @@
                     "name_tm": "Güller",
                     "name_en": "Flowers",
                     "name_ru": "Цветы",
-                    "image": "https://via.placeholder.com/640x480.png/00ff22?text=et",
+                    "image": "https://via.placeholder.com/640x480.png/0077cc?text=accusamus",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 11,
-                    "name_tm": "rem",
-                    "name_en": "dolor",
-                    "name_ru": "ipsam",
-                    "image": "https://via.placeholder.com/640x480.png/006699?text=recusandae",
+                    "name_tm": "dolores",
+                    "name_en": "enim",
+                    "name_ru": "omnis",
+                    "image": "https://via.placeholder.com/640x480.png/0077ff?text=excepturi",
                     "category_id": 10,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 12,
-                    "name_tm": "fugiat",
-                    "name_en": "animi",
-                    "name_ru": "pariatur",
-                    "image": "https://via.placeholder.com/640x480.png/005577?text=eum",
+                    "name_tm": "occaecati",
+                    "name_en": "omnis",
+                    "name_ru": "facilis",
+                    "image": "https://via.placeholder.com/640x480.png/00aacc?text=deserunt",
                     "category_id": 10,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "users": [
                 {
                     "id": 32,
-                    "name": "Jonatan Mills",
-                    "phone_number": "73108675",
-                    "email": "kovacek.calista@example.com",
+                    "name": "Joan Littel",
+                    "phone_number": "69153383",
+                    "email": "leta71@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -117,9 +117,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "ogGoRx5V2M",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "0EWeXBFsrp",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ]
         },

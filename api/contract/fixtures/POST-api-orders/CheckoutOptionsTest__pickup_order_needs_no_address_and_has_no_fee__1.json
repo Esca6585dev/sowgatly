@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CheckoutOptionsTest::pickup_order_needs_no_address_and_has_no_fee",
     "route": "POST api/orders",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:06",
+    "recorded_at": "2026-10-05 12:10:41",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -64,15 +64,15 @@
                         "updated_at": "<datetime>",
                         "product": {
                             "id": 22,
-                            "name_tm": "sit ipsam nam",
-                            "name_en": "sit ipsam nam",
-                            "name_ru": "sit ipsam nam",
+                            "name_tm": "non quasi qui",
+                            "name_en": "non quasi qui",
+                            "name_ru": "non quasi qui",
                             "price": "100.00",
                             "discount": 0,
-                            "description_tm": "Dignissimos impedit et sit.",
-                            "description_en": "Mollitia ut odio distinctio dolorem.",
-                            "description_ru": "In in nihil est.",
-                            "production_time": 421,
+                            "description_tm": "Et deleniti molestiae quae voluptatem.",
+                            "description_en": "Et qui eligendi vel sequi porro hic.",
+                            "description_ru": "Voluptatibus nesciunt aperiam rerum mollitia molestias non aperiam quam.",
+                            "production_time": 1428,
                             "min_order": 1,
                             "stock": 9,
                             "seller_status": true,
@@ -118,15 +118,15 @@
                             "updated_at": "<datetime>",
                             "product": {
                                 "id": 22,
-                                "name_tm": "sit ipsam nam",
-                                "name_en": "sit ipsam nam",
-                                "name_ru": "sit ipsam nam",
+                                "name_tm": "non quasi qui",
+                                "name_en": "non quasi qui",
+                                "name_ru": "non quasi qui",
                                 "price": "100.00",
                                 "discount": 0,
-                                "description_tm": "Dignissimos impedit et sit.",
-                                "description_en": "Mollitia ut odio distinctio dolorem.",
-                                "description_ru": "In in nihil est.",
-                                "production_time": 421,
+                                "description_tm": "Et deleniti molestiae quae voluptatem.",
+                                "description_en": "Et qui eligendi vel sequi porro hic.",
+                                "description_ru": "Voluptatibus nesciunt aperiam rerum mollitia molestias non aperiam quam.",
+                                "production_time": 1428,
                                 "min_order": 1,
                                 "stock": 9,
                                 "seller_status": true,
@@ -152,112 +152,112 @@
                     "product_id": 22,
                     "quantity": 1,
                     "price": "100.00",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "carts": [
                 {
                     "id": 8,
                     "user_id": 57,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "categories": [
                 {
                     "id": 24,
-                    "name_tm": "non",
-                    "name_en": "quo",
-                    "name_ru": "consectetur",
-                    "image": "https://via.placeholder.com/640x480.png/0044bb?text=esse",
+                    "name_tm": "temporibus",
+                    "name_en": "reprehenderit",
+                    "name_ru": "eos",
+                    "image": "https://via.placeholder.com/640x480.png/00ff11?text=ratione",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "images": [
                 {
                     "id": 64,
-                    "url": "https://loremflickr.com/300/300/product?lock=615",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=589",
                     "product_id": 22,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 65,
-                    "url": "https://picsum.photos/id/373/300/300",
+                    "url": "https://picsum.photos/id/507/300/300",
                     "product_id": 22,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 66,
-                    "url": "https://picsum.photos/id/958/300/300",
+                    "url": "https://source.unsplash.com/300x300/?product&sig=95",
                     "product_id": 22,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "products": [
                 {
                     "id": 22,
-                    "name_tm": "sit ipsam nam",
-                    "name_en": "sit ipsam nam",
-                    "name_ru": "sit ipsam nam",
+                    "name_tm": "non quasi qui",
+                    "name_en": "non quasi qui",
+                    "name_ru": "non quasi qui",
                     "price": "100.00",
                     "discount": 0,
-                    "description_tm": "Dignissimos impedit et sit.",
-                    "description_en": "Mollitia ut odio distinctio dolorem.",
-                    "description_ru": "In in nihil est.",
-                    "production_time": 421,
+                    "description_tm": "Et deleniti molestiae quae voluptatem.",
+                    "description_en": "Et qui eligendi vel sequi porro hic.",
+                    "description_ru": "Voluptatibus nesciunt aperiam rerum mollitia molestias non aperiam quam.",
+                    "production_time": 1428,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
                     "shop_id": 24,
                     "category_id": 24,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "regions": [
                 {
                     "id": 61,
-                    "name": "Wilkinsonmouth",
+                    "name": "Lake Carlietown",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 62,
-                    "name": "Ritaborough",
+                    "name": "Novellaton",
                     "type": "province",
                     "parent_id": 61,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 63,
-                    "name": "South Nathen",
+                    "name": "Durganmouth",
                     "type": "city",
                     "parent_id": 62,
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "shops": [
                 {
                     "id": 24,
-                    "name": "O'Conner, Wolf and Ratke",
-                    "email": "qtrantow@example.org",
+                    "name": "Herman LLC",
+                    "email": "aleen.tillman@example.org",
                     "phone": null,
-                    "mon_fri_open": "16:41",
-                    "mon_fri_close": "20:24",
-                    "sat_sun_open": "05:27",
-                    "sat_sun_close": "17:14",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "mon_fri_open": "04:28",
+                    "mon_fri_close": "11:10",
+                    "sat_sun_open": "11:11",
+                    "sat_sun_close": "20:06",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 58,
                     "region_id": 63,
                     "delivery_fee": "20.00",
@@ -267,16 +267,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "users": [
                 {
                     "id": 57,
-                    "name": "Prof. Bennie Kulas",
-                    "phone_number": "69891035",
-                    "email": "braxton39@example.com",
+                    "name": "Isidro West",
+                    "phone_number": "12240770",
+                    "email": "cleffler@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -284,15 +284,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "deYjatEgA0",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "pRMgnnsSv2",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 58,
-                    "name": "Veda Dare",
-                    "phone_number": "50254670",
-                    "email": "abernathy.kaleb@example.com",
+                    "name": "Dr. Benjamin Conroy PhD",
+                    "phone_number": "80984601",
+                    "email": "mariela.will@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -300,9 +300,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "lmjqu7DQlb",
-                    "created_at": "2026-10-05 12:04:06",
-                    "updated_at": "2026-10-05 12:04:06"
+                    "remember_token": "9jieMuOKAP",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ]
         },

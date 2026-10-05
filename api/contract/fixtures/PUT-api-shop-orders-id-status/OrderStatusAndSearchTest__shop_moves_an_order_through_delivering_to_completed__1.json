@@ -3,16 +3,16 @@
     "test": "Tests\\Feature\\Api\\OrderStatusAndSearchTest::shop_moves_an_order_through_delivering_to_completed",
     "route": "PUT api/shop/orders/{id}/status",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:08",
+    "recorded_at": "2026-10-05 12:10:44",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 119
+        "user_id": 153
     },
     "config": {},
     "request": {
         "method": "PUT",
-        "path": "/api/shop/orders/16/status",
+        "path": "/api/shop/orders/20/status",
         "query": {},
         "headers": {
             "Accept": "application/json",
@@ -29,9 +29,9 @@
         "json": {
             "success": true,
             "data": {
-                "id": 16,
-                "user_id": 118,
-                "shop_id": 51,
+                "id": 20,
+                "user_id": 152,
+                "shop_id": 68,
                 "address_id": null,
                 "total_amount": "120.00",
                 "items_total": "100.00",
@@ -50,54 +50,54 @@
                 "note": null,
                 "created_at": "<datetime>",
                 "updated_at": "<datetime>",
-                "number": "0000016",
+                "number": "0000020",
                 "items": [
                     {
-                        "id": 16,
-                        "order_id": 16,
-                        "product_id": 62,
+                        "id": 20,
+                        "order_id": 20,
+                        "product_id": 70,
                         "quantity": 1,
                         "price": "100.00",
                         "created_at": "<datetime>",
                         "updated_at": "<datetime>",
                         "product": {
-                            "id": 62,
+                            "id": 70,
                             "name_tm": "Lale",
                             "name_en": "Lale",
                             "name_ru": "Lale",
-                            "price": "450.27",
+                            "price": "783.26",
                             "discount": 0,
-                            "description_tm": "Omnis earum numquam earum et dolore perferendis voluptatem.",
-                            "description_en": "Ipsa explicabo est hic laudantium sit et laudantium.",
-                            "description_ru": "Sed placeat eos harum expedita vel.",
-                            "production_time": 991,
+                            "description_tm": "Aspernatur sapiente sed illum voluptatem voluptatum et.",
+                            "description_en": "Doloremque ab est odio quasi.",
+                            "description_ru": "Quia ea quis et aut eum iste.",
+                            "production_time": 166,
                             "min_order": 1,
                             "stock": 10,
                             "seller_status": true,
                             "status": true,
-                            "shop_id": 51,
-                            "category_id": 48,
+                            "shop_id": 68,
+                            "category_id": 56,
                             "created_at": "<datetime>",
                             "updated_at": "<datetime>",
                             "images": [
                                 {
-                                    "id": 184,
-                                    "url": "<url>/300x300/?product&sig=337",
-                                    "product_id": 62,
+                                    "id": 208,
+                                    "url": "<url>/id/532/300/300",
+                                    "product_id": 70,
                                     "created_at": "<datetime>",
                                     "updated_at": "<datetime>"
                                 },
                                 {
-                                    "id": 185,
-                                    "url": "<url>/300x300/?product&sig=286",
-                                    "product_id": 62,
+                                    "id": 209,
+                                    "url": "<url>/300x300/?product&sig=131",
+                                    "product_id": 70,
                                     "created_at": "<datetime>",
                                     "updated_at": "<datetime>"
                                 },
                                 {
-                                    "id": 186,
-                                    "url": "<url>/300/300/product?lock=638",
-                                    "product_id": 62,
+                                    "id": 210,
+                                    "url": "<url>/300/300/product?lock=838",
+                                    "product_id": 70,
                                     "created_at": "<datetime>",
                                     "updated_at": "<datetime>"
                                 }
@@ -106,9 +106,9 @@
                     }
                 ],
                 "user": {
-                    "id": 118,
-                    "name": "Jamal Johnson",
-                    "phone_number": "84018354"
+                    "id": 152,
+                    "name": "Mr. Jamir Torphy Jr.",
+                    "phone_number": "55730662"
                 }
             }
         }
@@ -118,55 +118,55 @@
         "tables": {
             "categories": [
                 {
-                    "id": 48,
-                    "name_tm": "libero",
-                    "name_en": "et",
-                    "name_ru": "voluptatum",
-                    "image": "https://via.placeholder.com/640x480.png/002222?text=molestias",
+                    "id": 56,
+                    "name_tm": "deleniti",
+                    "name_en": "tempora",
+                    "name_ru": "dolor",
+                    "image": "https://via.placeholder.com/640x480.png/008855?text=rerum",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "images": [
                 {
-                    "id": 184,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=337",
-                    "product_id": 62,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 208,
+                    "url": "https://picsum.photos/id/532/300/300",
+                    "product_id": 70,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 185,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=286",
-                    "product_id": 62,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 209,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=131",
+                    "product_id": 70,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 186,
-                    "url": "https://loremflickr.com/300/300/product?lock=638",
-                    "product_id": 62,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 210,
+                    "url": "https://loremflickr.com/300/300/product?lock=838",
+                    "product_id": 70,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "order_items": [
                 {
-                    "id": 16,
-                    "order_id": 16,
-                    "product_id": 62,
+                    "id": 20,
+                    "order_id": 20,
+                    "product_id": 70,
                     "quantity": 1,
                     "price": "100.00",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "orders": [
                 {
-                    "id": 16,
-                    "user_id": 118,
-                    "shop_id": 51,
+                    "id": 20,
+                    "user_id": 152,
+                    "shop_id": 68,
                     "address_id": null,
                     "total_amount": "120.00",
                     "items_total": "100.00",
@@ -183,55 +183,55 @@
                     "recipient_name": null,
                     "delivery_address": "x",
                     "note": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "products": [
                 {
-                    "id": 62,
+                    "id": 70,
                     "name_tm": "Lale",
                     "name_en": "Lale",
                     "name_ru": "Lale",
-                    "price": "450.27",
+                    "price": "783.26",
                     "discount": 0,
-                    "description_tm": "Omnis earum numquam earum et dolore perferendis voluptatem.",
-                    "description_en": "Ipsa explicabo est hic laudantium sit et laudantium.",
-                    "description_ru": "Sed placeat eos harum expedita vel.",
-                    "production_time": 991,
+                    "description_tm": "Aspernatur sapiente sed illum voluptatem voluptatum et.",
+                    "description_en": "Doloremque ab est odio quasi.",
+                    "description_ru": "Quia ea quis et aut eum iste.",
+                    "production_time": 166,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
-                    "shop_id": 51,
-                    "category_id": 48,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "shop_id": 68,
+                    "category_id": 56,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "regions": [
                 {
-                    "id": 115,
-                    "name": "Nicklausborough",
-                    "type": "province",
+                    "id": 148,
+                    "name": "Alenechester",
+                    "type": "city",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "shops": [
                 {
-                    "id": 51,
-                    "name": "Vandervort, Boyer and Daniel",
-                    "email": "hgottlieb@example.com",
+                    "id": 68,
+                    "name": "Carter and Sons",
+                    "email": "destiny.gibson@example.com",
                     "phone": null,
-                    "mon_fri_open": "08:42",
-                    "mon_fri_close": "08:32",
-                    "sat_sun_open": "01:37",
-                    "sat_sun_close": "17:32",
+                    "mon_fri_open": "09:47",
+                    "mon_fri_close": "14:06",
+                    "sat_sun_open": "07:05",
+                    "sat_sun_close": "18:47",
                     "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 119,
-                    "region_id": 115,
+                    "user_id": 153,
+                    "region_id": 148,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -239,27 +239,27 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "user_notifications": [
                 {
-                    "id": 24,
-                    "user_id": 118,
+                    "id": 28,
+                    "user_id": 152,
                     "type": "order_created",
-                    "data": "{\"order_id\":16,\"status\":\"processing\"}",
+                    "data": "{\"order_id\":20,\"status\":\"processing\"}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "users": [
                 {
-                    "id": 118,
-                    "name": "Jamal Johnson",
-                    "phone_number": "84018354",
-                    "email": "alexane78@example.org",
+                    "id": 152,
+                    "name": "Mr. Jamir Torphy Jr.",
+                    "phone_number": "55730662",
+                    "email": "farrell.cloyd@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -267,15 +267,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "zGZEcSExjE",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "Iw8fwANl3B",
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 119,
-                    "name": "Kevon Rodriguez DVM",
-                    "phone_number": "73486441",
-                    "email": "mya55@example.net",
+                    "id": 153,
+                    "name": "D'angelo Waters",
+                    "phone_number": "85288731",
+                    "email": "kyler.nitzsche@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -283,50 +283,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "tMH6oAgyAt",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "pBjXRBK9m9",
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 1,
+            "brands": 2,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 49,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 57,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 5,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 187,
+            "images": 211,
             "messages": 1,
             "migrations": 43,
-            "order_items": 17,
-            "orders": 17,
+            "order_items": 21,
+            "orders": 21,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 8,
-            "products": 63,
-            "regions": 116,
+            "products": 71,
+            "regions": 149,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 52,
+            "shops": 69,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 25,
+            "user_notifications": 29,
             "user_otps": 5,
-            "users": 120,
+            "users": 154,
             "waitlist_items": 1
         }
     }

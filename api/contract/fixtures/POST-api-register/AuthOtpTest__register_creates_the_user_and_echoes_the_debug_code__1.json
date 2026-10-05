@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\AuthOtpTest::test_register_creates_the_user_and_echoes_the_debug_code",
     "route": "POST api/register",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:04",
+    "recorded_at": "2026-10-05 12:10:39",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -61,9 +61,9 @@
             "users": [
                 {
                     "id": 6,
-                    "name": "Albina Heaney",
-                    "phone_number": "42343300",
-                    "email": "donnelly.libbie@example.org",
+                    "name": "Mrs. Lacey Pollich",
+                    "phone_number": "99906329",
+                    "email": "rose.champlin@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -71,9 +71,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "zo47L6BvtT",
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "remember_token": "iHMxUYSUfh",
+                    "created_at": "2026-10-05 12:10:39",
+                    "updated_at": "2026-10-05 12:10:39"
                 }
             ]
         },

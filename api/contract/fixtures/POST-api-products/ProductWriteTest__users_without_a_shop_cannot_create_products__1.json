@@ -3,11 +3,11 @@
     "test": "Tests\\Feature\\Api\\ProductWriteTest::users_without_a_shop_cannot_create_products",
     "route": "POST api/products",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:09",
+    "recorded_at": "2026-10-05 12:10:45",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 135
+        "user_id": 169
     },
     "config": {},
     "request": {
@@ -33,9 +33,9 @@
             "min_order": 1,
             "seller_status": true,
             "status": true,
-            "category_id": 56,
+            "category_id": 64,
             "brand_ids": [
-                3
+                4
             ]
         }
     },
@@ -52,50 +52,50 @@
         "tables": {
             "brands": [
                 {
-                    "id": 3,
-                    "name": "Wuckert Group",
-                    "description": "Sed sunt velit veritatis id. Sit ullam neque autem magnam. Consequatur dolore voluptatibus sed et sunt.",
+                    "id": 4,
+                    "name": "Cartwright and Sons",
+                    "description": "Iste ad aut adipisci autem atque dolore quis. Aspernatur aliquam vel magnam beatae a. Error repudiandae laboriosam est quas nesciunt voluptatem nam.",
                     "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
-                    "status": 1,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "status": 0,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "categories": [
                 {
-                    "id": 56,
-                    "name_tm": "nihil",
-                    "name_en": "officiis",
-                    "name_ru": "deserunt",
-                    "image": "https://via.placeholder.com/640x480.png/00aacc?text=cumque",
+                    "id": 64,
+                    "name_tm": "earum",
+                    "name_en": "aut",
+                    "name_ru": "dignissimos",
+                    "image": "https://via.placeholder.com/640x480.png/0055ff?text=ipsa",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "regions": [
                 {
-                    "id": 134,
-                    "name": "Melvinafurt",
-                    "type": "city",
+                    "id": 167,
+                    "name": "New Nikolasfurt",
+                    "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "shops": [
                 {
-                    "id": 60,
-                    "name": "O'Connell-Swaniawski",
-                    "email": "jhoppe@example.com",
+                    "id": 77,
+                    "name": "Deckow-Rogahn",
+                    "email": "winnifred.okeefe@example.net",
                     "phone": null,
-                    "mon_fri_open": "02:04",
-                    "mon_fri_close": "15:20",
-                    "sat_sun_open": "10:01",
-                    "sat_sun_close": "21:50",
-                    "image": "shop/shop-seeder/modahouse-logo.jpg",
-                    "user_id": 134,
-                    "region_id": 134,
+                    "mon_fri_open": "00:44",
+                    "mon_fri_close": "18:26",
+                    "sat_sun_open": "04:58",
+                    "sat_sun_close": "08:35",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 168,
+                    "region_id": 167,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -103,16 +103,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "users": [
                 {
-                    "id": 134,
-                    "name": "Miss Rebecca Auer PhD",
-                    "phone_number": "56408108",
-                    "email": "charley.brown@example.com",
+                    "id": 168,
+                    "name": "Prof. Prudence Gerhold",
+                    "phone_number": "79858107",
+                    "email": "xswaniawski@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -120,15 +120,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "uypHf6V8nz",
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "remember_token": "fW64Dfid4W",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 135,
-                    "name": "Brycen Lind",
-                    "phone_number": "28624778",
-                    "email": "qcollier@example.net",
+                    "id": 169,
+                    "name": "Okey Lockman III",
+                    "phone_number": "18573979",
+                    "email": "dejah79@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -136,50 +136,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "UHf1mc2Lnj",
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "remember_token": "ehWTADTsEi",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 4,
+            "brands": 5,
             "brands_products": 3,
             "cart_items": 14,
             "carts": 12,
-            "categories": 57,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 65,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 5,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 202,
+            "images": 226,
             "messages": 1,
             "migrations": 43,
-            "order_items": 21,
-            "orders": 21,
+            "order_items": 25,
+            "orders": 25,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 11,
-            "products": 70,
-            "regions": 135,
+            "products": 78,
+            "regions": 168,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 61,
+            "shops": 78,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 31,
+            "user_notifications": 35,
             "user_otps": 5,
-            "users": 136,
+            "users": 170,
             "waitlist_items": 1
         }
     }

@@ -1,0 +1,188 @@
+{
+    "name": "ContractCoverageTest__a_shop_owner_reads_a_thread_and_send_validates_the_body__1",
+    "test": "Tests\\Feature\\Api\\ContractCoverageTest::test_a_shop_owner_reads_a_thread_and_send_validates_the_body",
+    "route": "POST api/shop/chats/{id}/messages",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:10:42",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 91
+    },
+    "config": {},
+    "request": {
+        "method": "POST",
+        "path": "/api/shop/chats/5/messages",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "body": ""
+        }
+    },
+    "response": {
+        "status": 422,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "The body field is required."
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "chat_messages": [
+                {
+                    "id": 5,
+                    "thread_id": 5,
+                    "sender_type": "user",
+                    "sender_id": 92,
+                    "body": "Salam",
+                    "read_at": null,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ],
+            "chat_threads": [
+                {
+                    "id": 5,
+                    "user_id": 92,
+                    "shop_id": 42,
+                    "order_id": null,
+                    "last_message_at": "2026-10-05 12:10:42",
+                    "user_unread": 0,
+                    "shop_unread": 1,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 99,
+                    "name": "Lake Terrence",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                },
+                {
+                    "id": 100,
+                    "name": "Macejkovicville",
+                    "type": "province",
+                    "parent_id": 99,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                },
+                {
+                    "id": 101,
+                    "name": "Kunzeshire",
+                    "type": "city",
+                    "parent_id": 100,
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 42,
+                    "name": "Marquardt, Deckow and Franecki",
+                    "email": "maynard.kemmer@example.org",
+                    "phone": null,
+                    "mon_fri_open": "05:18",
+                    "mon_fri_close": "04:24",
+                    "sat_sun_open": "10:36",
+                    "sat_sun_close": "10:13",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 91,
+                    "region_id": 101,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ],
+            "users": [
+                {
+                    "id": 91,
+                    "name": "Dawn Mueller II",
+                    "phone_number": "51187703",
+                    "email": "rleannon@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "1JnaYMQlah",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                },
+                {
+                    "id": 92,
+                    "name": "Reina Jacobson",
+                    "phone_number": "54928428",
+                    "email": "frederique52@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "u5cxecfclC",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 2,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 2,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 36,
+            "chat_messages": 6,
+            "chat_threads": 6,
+            "compositions": 2,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 100,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 13,
+            "orders": 16,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 34,
+            "regions": 102,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 43,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 19,
+            "user_otps": 5,
+            "users": 93,
+            "waitlist_items": 1
+        }
+    }
+}

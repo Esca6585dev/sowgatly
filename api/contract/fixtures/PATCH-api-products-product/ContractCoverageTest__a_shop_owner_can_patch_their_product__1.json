@@ -1,0 +1,289 @@
+{
+    "name": "ContractCoverageTest__a_shop_owner_can_patch_their_product__1",
+    "test": "Tests\\Feature\\Api\\ContractCoverageTest::test_a_shop_owner_can_patch_their_product",
+    "route": "PATCH api/products/{product}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:10:41",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 72
+    },
+    "config": {},
+    "request": {
+        "method": "PATCH",
+        "path": "/api/products/28",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": {
+            "name_en": "Patched name",
+            "stock": 7
+        }
+    },
+    "response": {
+        "status": 200,
+        "content_type": "application/json",
+        "json": {
+            "success": true,
+            "message": "Product updated successfully",
+            "data": {
+                "id": 28,
+                "name": {
+                    "tm": "ut molestiae eveniet",
+                    "en": "Patched name",
+                    "ru": "ut molestiae eveniet"
+                },
+                "price": "618.61",
+                "discount": 0,
+                "description": {
+                    "tm": "Iusto consequatur natus aut quis eum illo enim.",
+                    "en": "Ut voluptate qui harum maiores.",
+                    "ru": "Reprehenderit non quia enim aut consequatur est omnis aut."
+                },
+                "production_time": 518,
+                "min_order": 1,
+                "seller_status": true,
+                "stock": 7,
+                "width": null,
+                "height": null,
+                "shop_id": 31,
+                "category_id": 30,
+                "created_at": "<datetime>",
+                "updated_at": "<datetime>",
+                "attributes": [],
+                "brands": [],
+                "images": [
+                    {
+                        "id": 82,
+                        "url": "<url>/id/333/300/300",
+                        "product_id": 28,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 83,
+                        "url": "<url>/300x300/?product&sig=509",
+                        "product_id": 28,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    },
+                    {
+                        "id": 84,
+                        "url": "<url>/id/163/300/300",
+                        "product_id": 28,
+                        "created_at": "<datetime>",
+                        "updated_at": "<datetime>"
+                    }
+                ],
+                "category": {
+                    "id": 30,
+                    "name_tm": "laborum",
+                    "name_en": "nihil",
+                    "name_ru": "facilis",
+                    "image": "<url>/640x480.png/0033bb?text=error",
+                    "category_id": null,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "shop": {
+                    "id": 31,
+                    "name": "Reichel, Gorczany and Labadie",
+                    "email": "maxwell.mcclure@example.com",
+                    "phone": null,
+                    "mon_fri_open": "17:29",
+                    "mon_fri_close": "23:33",
+                    "sat_sun_open": "21:11",
+                    "sat_sun_close": "04:18",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 72,
+                    "region_id": 80,
+                    "delivery_fee": "20.00",
+                    "pickup_available": false,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
+                },
+                "reviews_avg": null,
+                "reviews_count": 0
+            }
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "categories": [
+                {
+                    "id": 30,
+                    "name_tm": "laborum",
+                    "name_en": "nihil",
+                    "name_ru": "facilis",
+                    "image": "https://via.placeholder.com/640x480.png/0033bb?text=error",
+                    "category_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "images": [
+                {
+                    "id": 82,
+                    "url": "https://picsum.photos/id/333/300/300",
+                    "product_id": 28,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 83,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=509",
+                    "product_id": 28,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 84,
+                    "url": "https://picsum.photos/id/163/300/300",
+                    "product_id": 28,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "products": [
+                {
+                    "id": 28,
+                    "name_tm": "ut molestiae eveniet",
+                    "name_en": "ut molestiae eveniet",
+                    "name_ru": "ut molestiae eveniet",
+                    "price": "618.61",
+                    "discount": 0,
+                    "description_tm": "Iusto consequatur natus aut quis eum illo enim.",
+                    "description_en": "Ut voluptate qui harum maiores.",
+                    "description_ru": "Reprehenderit non quia enim aut consequatur est omnis aut.",
+                    "production_time": 518,
+                    "min_order": 1,
+                    "stock": 10,
+                    "seller_status": 1,
+                    "status": 1,
+                    "shop_id": 31,
+                    "category_id": 30,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "regions": [
+                {
+                    "id": 78,
+                    "name": "East Brendon",
+                    "type": "country",
+                    "parent_id": null,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 79,
+                    "name": "Port Nadia",
+                    "type": "province",
+                    "parent_id": 78,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                },
+                {
+                    "id": 80,
+                    "name": "New Lenny",
+                    "type": "city",
+                    "parent_id": 79,
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "shops": [
+                {
+                    "id": 31,
+                    "name": "Reichel, Gorczany and Labadie",
+                    "email": "maxwell.mcclure@example.com",
+                    "phone": null,
+                    "mon_fri_open": "17:29",
+                    "mon_fri_close": "23:33",
+                    "sat_sun_open": "21:11",
+                    "sat_sun_close": "04:18",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 72,
+                    "region_id": 80,
+                    "delivery_fee": "20.00",
+                    "pickup_available": 0,
+                    "min_order_amount": null,
+                    "description_tm": null,
+                    "description_ru": null,
+                    "description_en": null,
+                    "status": "approved",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ],
+            "users": [
+                {
+                    "id": 72,
+                    "name": "Dr. Sage Emmerich DVM",
+                    "phone_number": "07381392",
+                    "email": "damon.stamm@example.org",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "pDcRwVCnQd",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 2,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 2,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 31,
+            "chat_messages": 3,
+            "chat_threads": 3,
+            "compositions": 2,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 85,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 9,
+            "orders": 12,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 29,
+            "regions": 81,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 32,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 15,
+            "user_otps": 5,
+            "users": 73,
+            "waitlist_items": 1
+        }
+    }
+}

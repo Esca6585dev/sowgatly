@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\AuthOtpTest::test_generate_creates_a_code_for_an_existing_user",
     "route": "POST api/otp/generate",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:04",
+    "recorded_at": "2026-10-05 12:10:39",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -20,7 +20,7 @@
             "Content-Type": "application/json"
         },
         "json": {
-            "phone_number": "11050181"
+            "phone_number": "29745842"
         }
     },
     "response": {
@@ -37,9 +37,9 @@
             "users": [
                 {
                     "id": 1,
-                    "name": "Gloria Witting",
-                    "phone_number": "11050181",
-                    "email": "christopher.spinka@example.net",
+                    "name": "Nola Powlowski",
+                    "phone_number": "29745842",
+                    "email": "okerluke@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -47,9 +47,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "o9A5FJmwEO",
-                    "created_at": "2026-10-05 12:04:04",
-                    "updated_at": "2026-10-05 12:04:04"
+                    "remember_token": "PIsgvvMe2R",
+                    "created_at": "2026-10-05 12:10:39",
+                    "updated_at": "2026-10-05 12:10:39"
                 }
             ]
         },

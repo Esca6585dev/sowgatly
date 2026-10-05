@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\CatalogTest::test_shops_index_lists_only_the_callers_shops_and_show_is_open",
     "route": "GET api/shops",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:40",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -28,13 +28,13 @@
             "data": [
                 {
                     "id": 18,
-                    "name": "Kovacek-Jacobs",
-                    "email": "erdman.lonzo@example.com",
-                    "mon_fri_open": "02:44",
-                    "mon_fri_close": "22:55",
-                    "sat_sun_open": "15:59",
-                    "sat_sun_close": "05:22",
-                    "image": "<url>/storage/shop/shop-seeder/sowgatly-logo.png",
+                    "name": "Stoltenberg-Rodriguez",
+                    "email": "bechtelar.peter@example.net",
+                    "mon_fri_open": "04:30",
+                    "mon_fri_close": "08:25",
+                    "sat_sun_open": "21:41",
+                    "sat_sun_close": "10:39",
+                    "image": "<url>/storage/shop/shop-seeder/modahouse-logo.jpg",
                     "phone": null,
                     "delivery_fee": 20,
                     "pickup_available": false,
@@ -49,7 +49,7 @@
                     "reviews_count": 0,
                     "region": {
                         "id": 50,
-                        "name": "Marquardtburgh",
+                        "name": "East Ariel",
                         "type": "city",
                         "parent_id": null,
                         "created_at": "<datetime>",
@@ -67,32 +67,32 @@
             "regions": [
                 {
                     "id": 50,
-                    "name": "Marquardtburgh",
+                    "name": "East Ariel",
                     "type": "city",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 51,
-                    "name": "Lake Ginoport",
-                    "type": "province",
+                    "name": "Lake Magnustown",
+                    "type": "city",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "shops": [
                 {
                     "id": 18,
-                    "name": "Kovacek-Jacobs",
-                    "email": "erdman.lonzo@example.com",
+                    "name": "Stoltenberg-Rodriguez",
+                    "email": "bechtelar.peter@example.net",
                     "phone": null,
-                    "mon_fri_open": "02:44",
-                    "mon_fri_close": "22:55",
-                    "sat_sun_open": "15:59",
-                    "sat_sun_close": "05:22",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "mon_fri_open": "04:30",
+                    "mon_fri_close": "08:25",
+                    "sat_sun_open": "21:41",
+                    "sat_sun_close": "10:39",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
                     "user_id": 44,
                     "region_id": 50,
                     "delivery_fee": "20.00",
@@ -102,18 +102,18 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 19,
-                    "name": "Stokes, Carter and Zemlak",
-                    "email": "dagmar.lakin@example.net",
+                    "name": "Rutherford-Nolan",
+                    "email": "laisha.eichmann@example.org",
                     "phone": null,
-                    "mon_fri_open": "03:40",
-                    "mon_fri_close": "09:23",
-                    "sat_sun_open": "00:35",
-                    "sat_sun_close": "22:18",
+                    "mon_fri_open": "23:49",
+                    "mon_fri_close": "17:33",
+                    "sat_sun_open": "02:36",
+                    "sat_sun_close": "12:24",
                     "image": "shop/shop-seeder/logo.png",
                     "user_id": 45,
                     "region_id": 51,
@@ -124,16 +124,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ],
             "users": [
                 {
                     "id": 44,
-                    "name": "Adaline Pacocha",
-                    "phone_number": "54071148",
-                    "email": "maeve74@example.com",
+                    "name": "Ava Bosco",
+                    "phone_number": "74222918",
+                    "email": "fkoelpin@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -141,15 +141,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "aCo9P3N1kG",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "zuZTbRVenp",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 },
                 {
                     "id": 45,
-                    "name": "Prof. Myron Gislason IV",
-                    "phone_number": "36333335",
-                    "email": "alyson96@example.org",
+                    "name": "Brent Lehner",
+                    "phone_number": "78133066",
+                    "email": "fausto69@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -157,9 +157,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "6UjDqrtdaS",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "OsWuw0pzCl",
+                    "created_at": "2026-10-05 12:10:40",
+                    "updated_at": "2026-10-05 12:10:40"
                 }
             ]
         },

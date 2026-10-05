@@ -1,0 +1,95 @@
+{
+    "name": "ContractCoverageTest__removing_an_unknown_cart_item_answers_404__1",
+    "test": "Tests\\Feature\\Api\\ContractCoverageTest::test_removing_an_unknown_cart_item_answers_404",
+    "route": "DELETE api/cart/items/{id}",
+    "replayable": true,
+    "recorded_at": "2026-10-05 12:10:42",
+    "timezone": "Asia/Ashgabat",
+    "auth": {
+        "type": "bearer",
+        "user_id": 96
+    },
+    "config": {},
+    "request": {
+        "method": "DELETE",
+        "path": "/api/cart/items/999999",
+        "query": {},
+        "headers": {
+            "Accept": "application/json",
+            "Accept-Language": "en-us,en;q=0.5",
+            "Content-Type": "application/json"
+        },
+        "json": []
+    },
+    "response": {
+        "status": 404,
+        "content_type": "application/json",
+        "json": {
+            "success": false,
+            "message": "Cart item not found"
+        }
+    },
+    "seed": {
+        "driver": "mysql",
+        "tables": {
+            "users": [
+                {
+                    "id": 96,
+                    "name": "Halie Conroy",
+                    "phone_number": "46429481",
+                    "email": "zboncak.flossie@example.net",
+                    "birth_date": null,
+                    "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+                    "two_factor_secret": null,
+                    "two_factor_recovery_codes": null,
+                    "two_factor_confirmed_at": null,
+                    "image": "img/logo/no-avatar-profile.avif",
+                    "status": 1,
+                    "remember_token": "qPVxVHpvTu",
+                    "created_at": "2026-10-05 12:10:42",
+                    "updated_at": "2026-10-05 12:10:42"
+                }
+            ]
+        },
+        "auto_increment": {
+            "addresses": 2,
+            "admins": 1,
+            "attributes": 1,
+            "banners": 1,
+            "brands": 2,
+            "brands_products": 1,
+            "cart_items": 14,
+            "carts": 12,
+            "categories": 36,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
+            "compositions_products": 1,
+            "devices": 2,
+            "failed_jobs": 1,
+            "favorite_collection_items": 1,
+            "favorite_collections": 1,
+            "favorites": 1,
+            "images": 100,
+            "messages": 1,
+            "migrations": 43,
+            "order_items": 13,
+            "orders": 16,
+            "permissions": 1,
+            "personal_access_tokens": 4,
+            "product_attributes": 1,
+            "product_reviews": 1,
+            "products": 34,
+            "regions": 106,
+            "roles": 1,
+            "shop_applications": 1,
+            "shops": 45,
+            "telescope_entries": 1,
+            "user_addresses": 1,
+            "user_notifications": 19,
+            "user_otps": 5,
+            "users": 97,
+            "waitlist_items": 1
+        }
+    }
+}

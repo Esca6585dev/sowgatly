@@ -3,11 +3,11 @@
     "test": "Tests\\Feature\\Api\\ProductWriteTest::a_shop_owner_can_create_a_product",
     "route": "POST api/products",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:08",
+    "recorded_at": "2026-10-05 12:10:45",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 131
+        "user_id": 165
     },
     "config": {},
     "request": {
@@ -33,9 +33,9 @@
             "min_order": 1,
             "seller_status": true,
             "status": true,
-            "category_id": 54,
+            "category_id": 62,
             "brand_ids": [
-                1
+                2
             ]
         }
     },
@@ -46,7 +46,7 @@
             "success": true,
             "message": "Product created successfully",
             "product": {
-                "id": 68,
+                "id": 76,
                 "name": {
                     "tm": "Bägül çemeni",
                     "en": "Rose bouquet",
@@ -65,49 +65,49 @@
                 "stock": 20,
                 "width": null,
                 "height": null,
-                "shop_id": 57,
-                "category_id": 54,
+                "shop_id": 74,
+                "category_id": 62,
                 "created_at": "<datetime>",
                 "updated_at": "<datetime>",
                 "attributes": [],
                 "brands": [
                     {
-                        "id": 1,
-                        "name": "Herman-Beahan",
-                        "description": "Doloribus iure dicta consequatur provident aspernatur. Unde esse eius nihil velit perferendis. Nostrum enim tenetur rerum accusamus occaecati.",
+                        "id": 2,
+                        "name": "Fay-Powlowski",
+                        "description": "Ratione quis voluptates molestiae atque aut odio aliquid. Eius labore a beatae magni distinctio quo dolorem. Voluptas a impedit voluptatem repellendus.",
                         "logo": "<url>/wp-content/uploads/2021/11/Nike-Logo.png",
-                        "status": true,
+                        "status": false,
                         "created_at": "<datetime>",
                         "updated_at": "<datetime>",
                         "pivot": {
-                            "products_id": 68,
-                            "brands_id": 1
+                            "products_id": 76,
+                            "brands_id": 2
                         }
                     }
                 ],
                 "images": [],
                 "category": {
-                    "id": 54,
-                    "name_tm": "mollitia",
-                    "name_en": "voluptatem",
-                    "name_ru": "quia",
-                    "image": "<url>/640x480.png/00eedd?text=cumque",
+                    "id": 62,
+                    "name_tm": "consequuntur",
+                    "name_en": "ad",
+                    "name_ru": "veritatis",
+                    "image": "<url>/640x480.png/001133?text=ut",
                     "category_id": null,
                     "created_at": "<datetime>",
                     "updated_at": "<datetime>"
                 },
                 "shop": {
-                    "id": 57,
-                    "name": "Bernier Inc",
-                    "email": "nikolaus.paul@example.org",
+                    "id": 74,
+                    "name": "Schmitt PLC",
+                    "email": "jhowe@example.net",
                     "phone": null,
-                    "mon_fri_open": "08:39",
-                    "mon_fri_close": "05:29",
-                    "sat_sun_open": "10:15",
-                    "sat_sun_close": "07:31",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 131,
-                    "region_id": 131,
+                    "mon_fri_open": "05:46",
+                    "mon_fri_close": "22:35",
+                    "sat_sun_open": "21:31",
+                    "sat_sun_close": "23:31",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 165,
+                    "region_id": 164,
                     "delivery_fee": "20.00",
                     "pickup_available": false,
                     "min_order_amount": null,
@@ -122,7 +122,7 @@
                 "reviews_count": 0
             },
             "data": {
-                "id": 68,
+                "id": 76,
                 "name": {
                     "tm": "Bägül çemeni",
                     "en": "Rose bouquet",
@@ -141,49 +141,49 @@
                 "stock": 20,
                 "width": null,
                 "height": null,
-                "shop_id": 57,
-                "category_id": 54,
+                "shop_id": 74,
+                "category_id": 62,
                 "created_at": "<datetime>",
                 "updated_at": "<datetime>",
                 "attributes": [],
                 "brands": [
                     {
-                        "id": 1,
-                        "name": "Herman-Beahan",
-                        "description": "Doloribus iure dicta consequatur provident aspernatur. Unde esse eius nihil velit perferendis. Nostrum enim tenetur rerum accusamus occaecati.",
+                        "id": 2,
+                        "name": "Fay-Powlowski",
+                        "description": "Ratione quis voluptates molestiae atque aut odio aliquid. Eius labore a beatae magni distinctio quo dolorem. Voluptas a impedit voluptatem repellendus.",
                         "logo": "<url>/wp-content/uploads/2021/11/Nike-Logo.png",
-                        "status": true,
+                        "status": false,
                         "created_at": "<datetime>",
                         "updated_at": "<datetime>",
                         "pivot": {
-                            "products_id": 68,
-                            "brands_id": 1
+                            "products_id": 76,
+                            "brands_id": 2
                         }
                     }
                 ],
                 "images": [],
                 "category": {
-                    "id": 54,
-                    "name_tm": "mollitia",
-                    "name_en": "voluptatem",
-                    "name_ru": "quia",
-                    "image": "<url>/640x480.png/00eedd?text=cumque",
+                    "id": 62,
+                    "name_tm": "consequuntur",
+                    "name_en": "ad",
+                    "name_ru": "veritatis",
+                    "image": "<url>/640x480.png/001133?text=ut",
                     "category_id": null,
                     "created_at": "<datetime>",
                     "updated_at": "<datetime>"
                 },
                 "shop": {
-                    "id": 57,
-                    "name": "Bernier Inc",
-                    "email": "nikolaus.paul@example.org",
+                    "id": 74,
+                    "name": "Schmitt PLC",
+                    "email": "jhowe@example.net",
                     "phone": null,
-                    "mon_fri_open": "08:39",
-                    "mon_fri_close": "05:29",
-                    "sat_sun_open": "10:15",
-                    "sat_sun_close": "07:31",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 131,
-                    "region_id": 131,
+                    "mon_fri_open": "05:46",
+                    "mon_fri_close": "22:35",
+                    "sat_sun_open": "21:31",
+                    "sat_sun_close": "23:31",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 165,
+                    "region_id": 164,
                     "delivery_fee": "20.00",
                     "pickup_available": false,
                     "min_order_amount": null,
@@ -204,50 +204,50 @@
         "tables": {
             "brands": [
                 {
-                    "id": 1,
-                    "name": "Herman-Beahan",
-                    "description": "Doloribus iure dicta consequatur provident aspernatur. Unde esse eius nihil velit perferendis. Nostrum enim tenetur rerum accusamus occaecati.",
+                    "id": 2,
+                    "name": "Fay-Powlowski",
+                    "description": "Ratione quis voluptates molestiae atque aut odio aliquid. Eius labore a beatae magni distinctio quo dolorem. Voluptas a impedit voluptatem repellendus.",
                     "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
-                    "status": 1,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "status": 0,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "categories": [
                 {
-                    "id": 54,
-                    "name_tm": "mollitia",
-                    "name_en": "voluptatem",
-                    "name_ru": "quia",
-                    "image": "https://via.placeholder.com/640x480.png/00eedd?text=cumque",
+                    "id": 62,
+                    "name_tm": "consequuntur",
+                    "name_en": "ad",
+                    "name_ru": "veritatis",
+                    "image": "https://via.placeholder.com/640x480.png/001133?text=ut",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "regions": [
                 {
-                    "id": 131,
-                    "name": "West Nyasia",
+                    "id": 164,
+                    "name": "Katlynnfurt",
                     "type": "village",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "shops": [
                 {
-                    "id": 57,
-                    "name": "Bernier Inc",
-                    "email": "nikolaus.paul@example.org",
+                    "id": 74,
+                    "name": "Schmitt PLC",
+                    "email": "jhowe@example.net",
                     "phone": null,
-                    "mon_fri_open": "08:39",
-                    "mon_fri_close": "05:29",
-                    "sat_sun_open": "10:15",
-                    "sat_sun_close": "07:31",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 131,
-                    "region_id": 131,
+                    "mon_fri_open": "05:46",
+                    "mon_fri_close": "22:35",
+                    "sat_sun_open": "21:31",
+                    "sat_sun_close": "23:31",
+                    "image": "shop/shop-seeder/modahouse-logo.jpg",
+                    "user_id": 165,
+                    "region_id": 164,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -255,16 +255,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "users": [
                 {
-                    "id": 131,
-                    "name": "Prof. Anderson Schulist",
-                    "phone_number": "11074929",
-                    "email": "kellie70@example.org",
+                    "id": 165,
+                    "name": "Ms. Cora Rice III",
+                    "phone_number": "40856328",
+                    "email": "esther.jacobson@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -272,50 +272,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "FWbLgou7BU",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "qWJDZMxoVD",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 2,
+            "brands": 3,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 55,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 63,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 5,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 202,
+            "images": 226,
             "messages": 1,
             "migrations": 43,
-            "order_items": 21,
-            "orders": 21,
+            "order_items": 25,
+            "orders": 25,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 11,
-            "products": 68,
-            "regions": 132,
+            "products": 76,
+            "regions": 165,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 58,
+            "shops": 75,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 31,
+            "user_notifications": 35,
             "user_otps": 5,
-            "users": 132,
+            "users": 166,
             "waitlist_items": 1
         }
     }

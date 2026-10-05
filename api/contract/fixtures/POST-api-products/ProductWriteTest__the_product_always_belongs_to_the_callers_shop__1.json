@@ -3,11 +3,11 @@
     "test": "Tests\\Feature\\Api\\ProductWriteTest::the_product_always_belongs_to_the_callers_shop",
     "route": "POST api/products",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:08",
+    "recorded_at": "2026-10-05 12:10:45",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 132
+        "user_id": 166
     },
     "config": {},
     "request": {
@@ -33,11 +33,11 @@
             "min_order": 1,
             "seller_status": true,
             "status": true,
-            "category_id": 55,
+            "category_id": 63,
             "brand_ids": [
-                2
+                3
             ],
-            "shop_id": 59
+            "shop_id": 76
         }
     },
     "response": {
@@ -47,7 +47,7 @@
             "success": true,
             "message": "Product created successfully",
             "product": {
-                "id": 69,
+                "id": 77,
                 "name": {
                     "tm": "Bägül çemeni",
                     "en": "Rose bouquet",
@@ -66,49 +66,49 @@
                 "stock": 20,
                 "width": null,
                 "height": null,
-                "shop_id": 58,
-                "category_id": 55,
+                "shop_id": 75,
+                "category_id": 63,
                 "created_at": "<datetime>",
                 "updated_at": "<datetime>",
                 "attributes": [],
                 "brands": [
                     {
-                        "id": 2,
-                        "name": "Lynch-Beer",
-                        "description": "Praesentium culpa ut aut assumenda molestias ipsam. Nihil eius sit unde natus in delectus. Dicta ut omnis dolore numquam vel id sint.",
+                        "id": 3,
+                        "name": "Ward, McKenzie and Donnelly",
+                        "description": "Ex earum quis neque necessitatibus. Itaque voluptatem quo enim debitis distinctio deserunt non velit. Nemo numquam nostrum repudiandae. Quaerat dolorem cupiditate veritatis eos. In odio velit distinctio ea quam iste.",
                         "logo": "<url>/wp-content/uploads/2021/11/Nike-Logo.png",
                         "status": false,
                         "created_at": "<datetime>",
                         "updated_at": "<datetime>",
                         "pivot": {
-                            "products_id": 69,
-                            "brands_id": 2
+                            "products_id": 77,
+                            "brands_id": 3
                         }
                     }
                 ],
                 "images": [],
                 "category": {
-                    "id": 55,
-                    "name_tm": "et",
-                    "name_en": "provident",
-                    "name_ru": "voluptatem",
-                    "image": "<url>/640x480.png/000033?text=sit",
+                    "id": 63,
+                    "name_tm": "facilis",
+                    "name_en": "ea",
+                    "name_ru": "soluta",
+                    "image": "<url>/640x480.png/0022aa?text=minima",
                     "category_id": null,
                     "created_at": "<datetime>",
                     "updated_at": "<datetime>"
                 },
                 "shop": {
-                    "id": 58,
-                    "name": "Renner, Stark and Conn",
-                    "email": "keely.thompson@example.net",
+                    "id": 75,
+                    "name": "Mueller, Pagac and Mohr",
+                    "email": "diego.bartell@example.org",
                     "phone": null,
-                    "mon_fri_open": "14:51",
-                    "mon_fri_close": "22:17",
-                    "sat_sun_open": "07:12",
-                    "sat_sun_close": "01:51",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 132,
-                    "region_id": 132,
+                    "mon_fri_open": "18:35",
+                    "mon_fri_close": "17:34",
+                    "sat_sun_open": "10:42",
+                    "sat_sun_close": "15:43",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 166,
+                    "region_id": 165,
                     "delivery_fee": "20.00",
                     "pickup_available": false,
                     "min_order_amount": null,
@@ -123,7 +123,7 @@
                 "reviews_count": 0
             },
             "data": {
-                "id": 69,
+                "id": 77,
                 "name": {
                     "tm": "Bägül çemeni",
                     "en": "Rose bouquet",
@@ -142,49 +142,49 @@
                 "stock": 20,
                 "width": null,
                 "height": null,
-                "shop_id": 58,
-                "category_id": 55,
+                "shop_id": 75,
+                "category_id": 63,
                 "created_at": "<datetime>",
                 "updated_at": "<datetime>",
                 "attributes": [],
                 "brands": [
                     {
-                        "id": 2,
-                        "name": "Lynch-Beer",
-                        "description": "Praesentium culpa ut aut assumenda molestias ipsam. Nihil eius sit unde natus in delectus. Dicta ut omnis dolore numquam vel id sint.",
+                        "id": 3,
+                        "name": "Ward, McKenzie and Donnelly",
+                        "description": "Ex earum quis neque necessitatibus. Itaque voluptatem quo enim debitis distinctio deserunt non velit. Nemo numquam nostrum repudiandae. Quaerat dolorem cupiditate veritatis eos. In odio velit distinctio ea quam iste.",
                         "logo": "<url>/wp-content/uploads/2021/11/Nike-Logo.png",
                         "status": false,
                         "created_at": "<datetime>",
                         "updated_at": "<datetime>",
                         "pivot": {
-                            "products_id": 69,
-                            "brands_id": 2
+                            "products_id": 77,
+                            "brands_id": 3
                         }
                     }
                 ],
                 "images": [],
                 "category": {
-                    "id": 55,
-                    "name_tm": "et",
-                    "name_en": "provident",
-                    "name_ru": "voluptatem",
-                    "image": "<url>/640x480.png/000033?text=sit",
+                    "id": 63,
+                    "name_tm": "facilis",
+                    "name_en": "ea",
+                    "name_ru": "soluta",
+                    "image": "<url>/640x480.png/0022aa?text=minima",
                     "category_id": null,
                     "created_at": "<datetime>",
                     "updated_at": "<datetime>"
                 },
                 "shop": {
-                    "id": 58,
-                    "name": "Renner, Stark and Conn",
-                    "email": "keely.thompson@example.net",
+                    "id": 75,
+                    "name": "Mueller, Pagac and Mohr",
+                    "email": "diego.bartell@example.org",
                     "phone": null,
-                    "mon_fri_open": "14:51",
-                    "mon_fri_close": "22:17",
-                    "sat_sun_open": "07:12",
-                    "sat_sun_close": "01:51",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 132,
-                    "region_id": 132,
+                    "mon_fri_open": "18:35",
+                    "mon_fri_close": "17:34",
+                    "sat_sun_open": "10:42",
+                    "sat_sun_close": "15:43",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 166,
+                    "region_id": 165,
                     "delivery_fee": "20.00",
                     "pickup_available": false,
                     "min_order_amount": null,
@@ -205,58 +205,58 @@
         "tables": {
             "brands": [
                 {
-                    "id": 2,
-                    "name": "Lynch-Beer",
-                    "description": "Praesentium culpa ut aut assumenda molestias ipsam. Nihil eius sit unde natus in delectus. Dicta ut omnis dolore numquam vel id sint.",
+                    "id": 3,
+                    "name": "Ward, McKenzie and Donnelly",
+                    "description": "Ex earum quis neque necessitatibus. Itaque voluptatem quo enim debitis distinctio deserunt non velit. Nemo numquam nostrum repudiandae. Quaerat dolorem cupiditate veritatis eos. In odio velit distinctio ea quam iste.",
                     "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
                     "status": 0,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "categories": [
                 {
-                    "id": 55,
-                    "name_tm": "et",
-                    "name_en": "provident",
-                    "name_ru": "voluptatem",
-                    "image": "https://via.placeholder.com/640x480.png/000033?text=sit",
+                    "id": 63,
+                    "name_tm": "facilis",
+                    "name_en": "ea",
+                    "name_ru": "soluta",
+                    "image": "https://via.placeholder.com/640x480.png/0022aa?text=minima",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "regions": [
                 {
-                    "id": 132,
-                    "name": "Edmundshire",
+                    "id": 165,
+                    "name": "Helgafurt",
                     "type": "village",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 133,
-                    "name": "Trystanton",
-                    "type": "village",
+                    "id": 166,
+                    "name": "West Kenyon",
+                    "type": "city",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "shops": [
                 {
-                    "id": 58,
-                    "name": "Renner, Stark and Conn",
-                    "email": "keely.thompson@example.net",
+                    "id": 75,
+                    "name": "Mueller, Pagac and Mohr",
+                    "email": "diego.bartell@example.org",
                     "phone": null,
-                    "mon_fri_open": "14:51",
-                    "mon_fri_close": "22:17",
-                    "sat_sun_open": "07:12",
-                    "sat_sun_close": "01:51",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 132,
-                    "region_id": 132,
+                    "mon_fri_open": "18:35",
+                    "mon_fri_close": "17:34",
+                    "sat_sun_open": "10:42",
+                    "sat_sun_close": "15:43",
+                    "image": "shop/shop-seeder/logo.png",
+                    "user_id": 166,
+                    "region_id": 165,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -264,21 +264,21 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 59,
-                    "name": "Walsh Group",
-                    "email": "morar.candido@example.com",
+                    "id": 76,
+                    "name": "Batz, Muller and Strosin",
+                    "email": "qhintz@example.org",
                     "phone": null,
-                    "mon_fri_open": "20:18",
-                    "mon_fri_close": "16:46",
-                    "sat_sun_open": "23:34",
-                    "sat_sun_close": "02:53",
+                    "mon_fri_open": "05:30",
+                    "mon_fri_close": "03:46",
+                    "sat_sun_open": "03:03",
+                    "sat_sun_close": "18:46",
                     "image": "shop/shop-seeder/modahouse-logo.jpg",
-                    "user_id": 133,
-                    "region_id": 133,
+                    "user_id": 167,
+                    "region_id": 166,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -286,16 +286,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "users": [
                 {
-                    "id": 132,
-                    "name": "Kailee Hilpert I",
-                    "phone_number": "59935038",
-                    "email": "agustin70@example.com",
+                    "id": 166,
+                    "name": "Cordia Krajcik",
+                    "phone_number": "03456528",
+                    "email": "mblock@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -303,15 +303,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "RPkumjweZA",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "NMCeoRPPgf",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 133,
-                    "name": "Dr. Xavier Lebsack",
-                    "phone_number": "05465046",
-                    "email": "klocko.dion@example.net",
+                    "id": 167,
+                    "name": "Cleveland Jacobi",
+                    "phone_number": "33685926",
+                    "email": "dell.nikolaus@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -319,50 +319,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "eAJ514hwMC",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "lATK8Bk99z",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 3,
+            "brands": 4,
             "brands_products": 2,
             "cart_items": 14,
             "carts": 12,
-            "categories": 56,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 64,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 5,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 202,
+            "images": 226,
             "messages": 1,
             "migrations": 43,
-            "order_items": 21,
-            "orders": 21,
+            "order_items": 25,
+            "orders": 25,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 11,
-            "products": 69,
-            "regions": 134,
+            "products": 77,
+            "regions": 167,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 60,
+            "shops": 77,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 31,
+            "user_notifications": 35,
             "user_otps": 5,
-            "users": 134,
+            "users": 168,
             "waitlist_items": 1
         }
     }

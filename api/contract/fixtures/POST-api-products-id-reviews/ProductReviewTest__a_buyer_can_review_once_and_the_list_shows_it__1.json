@@ -3,16 +3,16 @@
     "test": "Tests\\Feature\\Api\\ProductReviewTest::test_a_buyer_can_review_once_and_the_list_shows_it",
     "route": "POST api/products/{id}/reviews",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:08",
+    "recorded_at": "2026-10-05 12:10:44",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 122
+        "user_id": 156
     },
     "config": {},
     "request": {
         "method": "POST",
-        "path": "/api/products/64/reviews",
+        "path": "/api/products/72/reviews",
         "query": {},
         "headers": {
             "Accept": "application/json",
@@ -30,8 +30,8 @@
         "json": {
             "success": true,
             "data": {
-                "user_id": 122,
-                "product_id": "64",
+                "user_id": 156,
+                "product_id": "72",
                 "rating_match": null,
                 "rating_value": null,
                 "rating_service": null,
@@ -49,57 +49,57 @@
         "tables": {
             "categories": [
                 {
-                    "id": 50,
-                    "name_tm": "enim",
-                    "name_en": "quaerat",
-                    "name_ru": "cumque",
-                    "image": "https://via.placeholder.com/640x480.png/00bb55?text=quam",
+                    "id": 58,
+                    "name_tm": "error",
+                    "name_en": "quod",
+                    "name_ru": "sit",
+                    "image": "https://via.placeholder.com/640x480.png/00aa44?text=sit",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "images": [
                 {
-                    "id": 190,
-                    "url": "https://picsum.photos/id/126/300/300",
-                    "product_id": 64,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 214,
+                    "url": "https://loremflickr.com/300/300/product?lock=38",
+                    "product_id": 72,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 191,
-                    "url": "https://picsum.photos/id/53/300/300",
-                    "product_id": 64,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 215,
+                    "url": "https://loremflickr.com/300/300/product?lock=33",
+                    "product_id": 72,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 192,
-                    "url": "https://loremflickr.com/300/300/product?lock=327",
-                    "product_id": 64,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "id": 216,
+                    "url": "https://source.unsplash.com/300x300/?product&sig=708",
+                    "product_id": 72,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "order_items": [
                 {
-                    "id": 17,
-                    "order_id": 17,
-                    "product_id": 64,
+                    "id": 21,
+                    "order_id": 21,
+                    "product_id": 72,
                     "quantity": 1,
-                    "price": "359.31",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "price": "729.21",
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "orders": [
                 {
-                    "id": 17,
-                    "user_id": 122,
-                    "shop_id": 53,
+                    "id": 21,
+                    "user_id": 156,
+                    "shop_id": 70,
                     "address_id": null,
-                    "total_amount": "1938.74",
+                    "total_amount": "1643.12",
                     "items_total": null,
                     "delivery_fee": "0.00",
                     "payment_method": "cash",
@@ -110,75 +110,75 @@
                     "fulfillment": "delivery",
                     "delivery_type": "asap",
                     "scheduled_at": null,
-                    "recipient_phone": "65087234",
+                    "recipient_phone": "69212819",
                     "recipient_name": null,
-                    "delivery_address": "85336 Wehner Flats Apt. 734",
+                    "delivery_address": "54397 Leuschke Mills Apt. 860",
                     "note": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "products": [
                 {
-                    "id": 64,
-                    "name_tm": "quisquam sit magni",
-                    "name_en": "quisquam sit magni",
-                    "name_ru": "quisquam sit magni",
+                    "id": 72,
+                    "name_tm": "doloribus ut eligendi",
+                    "name_en": "doloribus ut eligendi",
+                    "name_ru": "doloribus ut eligendi",
                     "price": "100.00",
                     "discount": 0,
-                    "description_tm": "Excepturi assumenda labore voluptatem ea velit est consequuntur.",
-                    "description_en": "Quis eum neque ea.",
-                    "description_ru": "Saepe ut et repudiandae eum nulla illum.",
-                    "production_time": 543,
+                    "description_tm": "Harum suscipit eveniet hic qui.",
+                    "description_en": "Voluptate cupiditate ea dicta quisquam.",
+                    "description_ru": "Eligendi ducimus aut sunt dolores nemo.",
+                    "production_time": 576,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
-                    "shop_id": 53,
-                    "category_id": 50,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "shop_id": 70,
+                    "category_id": 58,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "regions": [
                 {
-                    "id": 119,
-                    "name": "Katelynfurt",
+                    "id": 152,
+                    "name": "Lake Taylorton",
                     "type": "country",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 120,
-                    "name": "Port Evansberg",
+                    "id": 153,
+                    "name": "New Vickymouth",
                     "type": "province",
-                    "parent_id": 119,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "parent_id": 152,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 121,
-                    "name": "Port Damaris",
+                    "id": 154,
+                    "name": "Mayertown",
                     "type": "city",
-                    "parent_id": 120,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "parent_id": 153,
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "shops": [
                 {
-                    "id": 53,
-                    "name": "Rowe, Gislason and Friesen",
-                    "email": "tremaine.smith@example.com",
+                    "id": 70,
+                    "name": "Abernathy Ltd",
+                    "email": "berenice92@example.net",
                     "phone": null,
-                    "mon_fri_open": "07:34",
-                    "mon_fri_close": "22:39",
-                    "sat_sun_open": "05:30",
-                    "sat_sun_close": "07:55",
+                    "mon_fri_open": "09:36",
+                    "mon_fri_close": "02:55",
+                    "sat_sun_open": "22:41",
+                    "sat_sun_close": "02:51",
                     "image": "shop/shop-seeder/logo.png",
-                    "user_id": 123,
-                    "region_id": 121,
+                    "user_id": 157,
+                    "region_id": 154,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -186,27 +186,27 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "user_notifications": [
                 {
-                    "id": 27,
-                    "user_id": 122,
+                    "id": 31,
+                    "user_id": 156,
                     "type": "order_created",
-                    "data": "{\"order_id\":17,\"status\":\"completed\"}",
+                    "data": "{\"order_id\":21,\"status\":\"completed\"}",
                     "read_at": null,
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ],
             "users": [
                 {
-                    "id": 122,
-                    "name": "Ova Champlin",
-                    "phone_number": "72940768",
-                    "email": "bechtelar.anthony@example.net",
+                    "id": 156,
+                    "name": "Florence Goodwin",
+                    "phone_number": "66829360",
+                    "email": "vbailey@example.net",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -214,15 +214,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "BhmVFp7Kwf",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "QZYQhZrMhH",
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 },
                 {
-                    "id": 123,
-                    "name": "Miss Ivory Dietrich",
-                    "phone_number": "31221121",
-                    "email": "andreane20@example.org",
+                    "id": 157,
+                    "name": "Enola Kassulke",
+                    "phone_number": "35588718",
+                    "email": "phoppe@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -230,50 +230,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "ZXkkO4h6EH",
-                    "created_at": "2026-10-05 12:04:08",
-                    "updated_at": "2026-10-05 12:04:08"
+                    "remember_token": "NsjCPkTFK9",
+                    "created_at": "2026-10-05 12:10:44",
+                    "updated_at": "2026-10-05 12:10:44"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 1,
+            "brands": 2,
             "brands_products": 1,
             "cart_items": 14,
             "carts": 12,
-            "categories": 51,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 59,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 5,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 193,
+            "images": 217,
             "messages": 1,
             "migrations": 43,
-            "order_items": 18,
-            "orders": 18,
+            "order_items": 22,
+            "orders": 22,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 8,
-            "products": 65,
-            "regions": 122,
+            "products": 73,
+            "regions": 155,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 54,
+            "shops": 71,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 28,
+            "user_notifications": 32,
             "user_otps": 5,
-            "users": 124,
+            "users": 158,
             "waitlist_items": 1
         }
     }

@@ -3,16 +3,16 @@
     "test": "Tests\\Feature\\Api\\ProductWriteTest::other_shops_products_cannot_be_updated_or_deleted",
     "route": "PUT api/products/{product}",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:09",
+    "recorded_at": "2026-10-05 12:10:45",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
-        "user_id": 139
+        "user_id": 173
     },
     "config": {},
     "request": {
         "method": "PUT",
-        "path": "/api/products/72",
+        "path": "/api/products/80",
         "query": {},
         "headers": {
             "Accept": "application/json",
@@ -36,113 +36,113 @@
         "tables": {
             "brands": [
                 {
-                    "id": 7,
-                    "name": "Huels, Waelchi and Gusikowski",
-                    "description": "Enim quia est quis libero qui similique. Totam et nihil ut consequuntur consectetur.",
+                    "id": 8,
+                    "name": "Lesch PLC",
+                    "description": "Accusamus minima beatae incidunt non fugiat. Iure iste ullam suscipit itaque quaerat excepturi voluptates. At praesentium est libero in nihil ut non.",
                     "logo": "https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png",
-                    "status": 0,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "status": 1,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "categories": [
                 {
-                    "id": 62,
-                    "name_tm": "consequatur",
-                    "name_en": "aut",
-                    "name_ru": "quidem",
-                    "image": "https://via.placeholder.com/640x480.png/00ddbb?text=repellendus",
+                    "id": 70,
+                    "name_tm": "fugit",
+                    "name_en": "voluptate",
+                    "name_ru": "eaque",
+                    "image": "https://via.placeholder.com/640x480.png/00ccdd?text=adipisci",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 63,
-                    "name_tm": "qui",
-                    "name_en": "quia",
-                    "name_ru": "accusamus",
-                    "image": "https://via.placeholder.com/640x480.png/009911?text=ipsum",
+                    "id": 71,
+                    "name_tm": "soluta",
+                    "name_en": "cumque",
+                    "name_ru": "iusto",
+                    "image": "https://via.placeholder.com/640x480.png/002255?text=dicta",
                     "category_id": null,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "images": [
                 {
-                    "id": 209,
-                    "url": "https://picsum.photos/id/548/300/300",
-                    "product_id": 72,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "id": 233,
+                    "url": "https://picsum.photos/id/587/300/300",
+                    "product_id": 80,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 210,
-                    "url": "https://source.unsplash.com/300x300/?product&sig=320",
-                    "product_id": 72,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "id": 234,
+                    "url": "https://picsum.photos/id/782/300/300",
+                    "product_id": 80,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 211,
-                    "url": "https://loremflickr.com/300/300/product?lock=420",
-                    "product_id": 72,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "id": 235,
+                    "url": "https://loremflickr.com/300/300/product?lock=662",
+                    "product_id": 80,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "products": [
                 {
-                    "id": 72,
-                    "name_tm": "velit magnam omnis",
-                    "name_en": "velit magnam omnis",
-                    "name_ru": "velit magnam omnis",
-                    "price": "11.07",
+                    "id": 80,
+                    "name_tm": "praesentium deserunt laborum",
+                    "name_en": "praesentium deserunt laborum",
+                    "name_ru": "praesentium deserunt laborum",
+                    "price": "936.94",
                     "discount": 0,
-                    "description_tm": "Voluptatem sapiente atque aut voluptatem.",
-                    "description_en": "Adipisci provident similique culpa ut porro.",
-                    "description_ru": "Perspiciatis nihil ut ipsa voluptas.",
-                    "production_time": 662,
+                    "description_tm": "Explicabo qui saepe deleniti eum.",
+                    "description_en": "Incidunt repellat tempora nisi tempore.",
+                    "description_ru": "Odit saepe commodi beatae voluptatem molestiae quis suscipit distinctio.",
+                    "production_time": 203,
                     "min_order": 1,
                     "stock": 10,
                     "seller_status": 1,
                     "status": 1,
-                    "shop_id": 65,
-                    "category_id": 63,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "shop_id": 82,
+                    "category_id": 71,
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "regions": [
                 {
-                    "id": 138,
-                    "name": "Kuvalisville",
-                    "type": "village",
+                    "id": 171,
+                    "name": "Olafbury",
+                    "type": "city",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 139,
-                    "name": "New Providencimouth",
+                    "id": 172,
+                    "name": "North Shanny",
                     "type": "village",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "shops": [
                 {
-                    "id": 64,
-                    "name": "Bartoletti and Sons",
-                    "email": "lelia.herzog@example.org",
+                    "id": 81,
+                    "name": "Stanton-Barrows",
+                    "email": "windler.caesar@example.org",
                     "phone": null,
-                    "mon_fri_open": "23:47",
-                    "mon_fri_close": "15:42",
-                    "sat_sun_open": "05:06",
-                    "sat_sun_close": "03:32",
+                    "mon_fri_open": "00:46",
+                    "mon_fri_close": "11:37",
+                    "sat_sun_open": "01:45",
+                    "sat_sun_close": "09:15",
                     "image": "shop/shop-seeder/sowgatly-logo.png",
-                    "user_id": 139,
-                    "region_id": 138,
+                    "user_id": 173,
+                    "region_id": 171,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -150,21 +150,21 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 65,
-                    "name": "Murray, Gutmann and Wolf",
-                    "email": "reilly.alicia@example.com",
+                    "id": 82,
+                    "name": "Orn-McDermott",
+                    "email": "donnell.moore@example.net",
                     "phone": null,
-                    "mon_fri_open": "01:15",
-                    "mon_fri_close": "05:49",
-                    "sat_sun_open": "21:56",
-                    "sat_sun_close": "04:49",
-                    "image": "shop/shop-seeder/logo.png",
-                    "user_id": 140,
-                    "region_id": 139,
+                    "mon_fri_open": "16:51",
+                    "mon_fri_close": "10:59",
+                    "sat_sun_open": "06:04",
+                    "sat_sun_close": "06:51",
+                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "user_id": 174,
+                    "region_id": 172,
                     "delivery_fee": "20.00",
                     "pickup_available": 0,
                     "min_order_amount": null,
@@ -172,16 +172,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ],
             "users": [
                 {
-                    "id": 139,
-                    "name": "Thaddeus Schimmel",
-                    "phone_number": "86945468",
-                    "email": "kari.russel@example.net",
+                    "id": 173,
+                    "name": "Easton Towne",
+                    "phone_number": "21941106",
+                    "email": "aliyah.jacobson@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -189,15 +189,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "1AOD84KuAj",
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "remember_token": "qHGuEeCTpf",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 },
                 {
-                    "id": 140,
-                    "name": "Allene VonRueden V",
-                    "phone_number": "59402472",
-                    "email": "vicenta85@example.org",
+                    "id": 174,
+                    "name": "Prof. Domenico Powlowski MD",
+                    "phone_number": "60081819",
+                    "email": "sharon16@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -205,50 +205,50 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "mznPMbszaU",
-                    "created_at": "2026-10-05 12:04:09",
-                    "updated_at": "2026-10-05 12:04:09"
+                    "remember_token": "oyypM8Q5O6",
+                    "created_at": "2026-10-05 12:10:45",
+                    "updated_at": "2026-10-05 12:10:45"
                 }
             ]
         },
         "auto_increment": {
-            "addresses": 1,
+            "addresses": 2,
             "admins": 1,
             "attributes": 1,
             "banners": 9,
-            "brands": 8,
+            "brands": 9,
             "brands_products": 4,
             "cart_items": 14,
             "carts": 12,
-            "categories": 64,
-            "chat_messages": 3,
-            "chat_threads": 3,
-            "compositions": 1,
+            "categories": 72,
+            "chat_messages": 7,
+            "chat_threads": 7,
+            "compositions": 2,
             "compositions_products": 1,
             "devices": 5,
             "failed_jobs": 1,
             "favorite_collection_items": 3,
             "favorite_collections": 55,
             "favorites": 2,
-            "images": 212,
+            "images": 236,
             "messages": 1,
             "migrations": 43,
-            "order_items": 21,
-            "orders": 21,
+            "order_items": 25,
+            "orders": 25,
             "permissions": 1,
             "personal_access_tokens": 5,
             "product_attributes": 1,
             "product_reviews": 11,
-            "products": 73,
-            "regions": 140,
+            "products": 81,
+            "regions": 173,
             "roles": 1,
             "shop_applications": 1,
-            "shops": 66,
+            "shops": 83,
             "telescope_entries": 1,
             "user_addresses": 4,
-            "user_notifications": 31,
+            "user_notifications": 35,
             "user_otps": 5,
-            "users": 141,
+            "users": 175,
             "waitlist_items": 1
         }
     }

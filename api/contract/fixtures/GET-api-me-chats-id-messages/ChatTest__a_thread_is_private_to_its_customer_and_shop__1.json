@@ -3,7 +3,7 @@
     "test": "Tests\\Feature\\Api\\ChatTest::a_thread_is_private_to_its_customer_and_shop",
     "route": "GET api/me/chats/{id}/messages",
     "replayable": true,
-    "recorded_at": "2026-10-05 12:04:05",
+    "recorded_at": "2026-10-05 12:10:41",
     "timezone": "Asia/Ashgabat",
     "auth": {
         "type": "bearer",
@@ -41,31 +41,31 @@
                     "last_message_at": null,
                     "user_unread": 0,
                     "shop_unread": 0,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "regions": [
                 {
                     "id": 56,
-                    "name": "North Lyda",
-                    "type": "village",
+                    "name": "Romaguerashire",
+                    "type": "city",
                     "parent_id": null,
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "shops": [
                 {
                     "id": 21,
-                    "name": "Goldner-Leannon",
-                    "email": "isac.lebsack@example.com",
+                    "name": "Funk Group",
+                    "email": "denesik.bette@example.org",
                     "phone": null,
-                    "mon_fri_open": "20:18",
-                    "mon_fri_close": "05:00",
-                    "sat_sun_open": "15:52",
-                    "sat_sun_close": "06:03",
-                    "image": "shop/shop-seeder/sowgatly-logo.png",
+                    "mon_fri_open": "18:57",
+                    "mon_fri_close": "18:27",
+                    "sat_sun_open": "14:59",
+                    "sat_sun_close": "06:52",
+                    "image": "shop/shop-seeder/logo.png",
                     "user_id": 51,
                     "region_id": 56,
                     "delivery_fee": "20.00",
@@ -75,16 +75,16 @@
                     "description_ru": null,
                     "description_en": null,
                     "status": "approved",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ],
             "users": [
                 {
                     "id": 50,
-                    "name": "Dora Kreiger I",
-                    "phone_number": "59639921",
-                    "email": "myrtie04@example.com",
+                    "name": "Prof. Maudie Block I",
+                    "phone_number": "57505345",
+                    "email": "obie68@example.com",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -92,15 +92,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "39jGNmtF0w",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "tBYS4luUrq",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 51,
-                    "name": "Leora Gutkowski",
-                    "phone_number": "75688152",
-                    "email": "tina16@example.org",
+                    "name": "Wilfredo Braun",
+                    "phone_number": "83936964",
+                    "email": "hayden.smith@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -108,15 +108,15 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "wjsjF0JE58",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "GtnpfFf5sZ",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 },
                 {
                     "id": 52,
-                    "name": "Stacy Bergnaum",
-                    "phone_number": "62559933",
-                    "email": "sophie.franecki@example.org",
+                    "name": "Noe Williamson I",
+                    "phone_number": "08333592",
+                    "email": "zspinka@example.org",
                     "birth_date": null,
                     "password": "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
                     "two_factor_secret": null,
@@ -124,9 +124,9 @@
                     "two_factor_confirmed_at": null,
                     "image": "img/logo/no-avatar-profile.avif",
                     "status": 1,
-                    "remember_token": "SDmnLHx3OV",
-                    "created_at": "2026-10-05 12:04:05",
-                    "updated_at": "2026-10-05 12:04:05"
+                    "remember_token": "uRHKzny3mk",
+                    "created_at": "2026-10-05 12:10:41",
+                    "updated_at": "2026-10-05 12:10:41"
                 }
             ]
         },
