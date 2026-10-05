@@ -43,7 +43,16 @@ class OrderController extends Controller
      *             @OA\Property(property="note", type="string", nullable=true)
      *         )
      *     ),
-     *     @OA\Response(response="201", description="Order created"),
+     *     @OA\Response(
+     *         response="201",
+     *         description="One order per shop in the cart. `order` is the first one (kept for older clients), `orders` lists all of them.",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Order created successfully"),
+     *             @OA\Property(property="order", type="object"),
+     *             @OA\Property(property="orders", type="array", @OA\Items(type="object"))
+     *         )
+     *     ),
      *     @OA\Response(response="400", description="Bad request"),
      *     @OA\Response(response="422", description="Validation error"),
      *     security={{"bearerAuth": {}}}
@@ -91,60 +100,70 @@ class OrderController extends Controller
             return response()->json(['success' => false, 'message' => 'Cart is empty'], 400);
         }
 
-        // This app currently only supports single-shop checkout: every item
-        // in the cart is expected to come from the same shop, taken from the
-        // first item rather than trusted from the client.
-        $shopId = $cart->items->first()->product->shop_id;
+        // One order per shop: each shop fulfils, prices and charges delivery
+        // for its own items. Shop ids come from the products, never the client.
+        $groups = $cart->items->groupBy(fn ($item) => $item->product->shop_id);
+        $shops = Shop::whereIn('id', $groups->keys())->get()->keyBy('id');
 
-        $shop = Shop::find($shopId);
-
-        if ($fulfillment === 'pickup' && $shop && !$shop->pickup_available) {
-            return response()->json(['success' => false, 'message' => 'This shop does not offer pickup'], 422);
+        if ($fulfillment === 'pickup') {
+            foreach ($groups->keys() as $shopId) {
+                $shop = $shops->get($shopId);
+                if ($shop && !$shop->pickup_available) {
+                    return response()->json(['success' => false, 'message' => 'This shop does not offer pickup'], 422);
+                }
+            }
         }
-
-        $itemsTotal = $cart->items->sum(function ($item) {
-            return $item->quantity * $item->product->getDiscountedPrice();
-        });
-
-        // The shop's fee applies to delivery only; pickup is free.
-        $deliveryFee = $fulfillment === 'delivery' ? (float) ($shop->delivery_fee ?? 0) : 0.0;
-        $totalAmount = $itemsTotal + $deliveryFee;
 
         $paymentMethod = $request->input('payment_method', 'cash');
 
         DB::beginTransaction();
 
         try {
-            $order = Order::create([
-                'user_id' => $user->id,
-                'shop_id' => $shopId,
-                'items_total' => $itemsTotal,
-                'delivery_fee' => $deliveryFee,
-                'total_amount' => $totalAmount,
-                'status' => 'pending',
-                'fulfillment' => $fulfillment,
-                'delivery_type' => $request->delivery_type,
-                'scheduled_at' => $request->delivery_type === 'scheduled' ? $request->scheduled_at : null,
-                'recipient_phone' => $request->recipient_phone,
-                'recipient_name' => $request->recipient_name,
-                'delivery_address' => $fulfillment === 'pickup' ? null : $request->delivery_address,
-                'note' => $request->note,
-                'payment_method' => $paymentMethod,
-                // Online payment is not connected to a bank yet: the chosen
-                // bank is recorded and the order stays unpaid until settled.
-                'payment_bank' => $paymentMethod === 'online' ? $request->payment_bank : null,
-                'payment_status' => 'unpaid',
-            ]);
+            $orders = collect();
 
-            foreach ($cart->items as $item) {
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $item->product_id,
-                    'quantity' => $item->quantity,
-                    'price' => $item->product->getDiscountedPrice()
+            foreach ($groups as $shopId => $items) {
+                $shop = $shops->get($shopId);
+
+                $itemsTotal = $items->sum(function ($item) {
+                    return $item->quantity * $item->product->getDiscountedPrice();
+                });
+
+                // The shop's fee applies to delivery only; pickup is free.
+                $deliveryFee = $fulfillment === 'delivery' ? (float) ($shop->delivery_fee ?? 0) : 0.0;
+
+                $order = Order::create([
+                    'user_id' => $user->id,
+                    'shop_id' => $shopId,
+                    'items_total' => $itemsTotal,
+                    'delivery_fee' => $deliveryFee,
+                    'total_amount' => $itemsTotal + $deliveryFee,
+                    'status' => 'pending',
+                    'fulfillment' => $fulfillment,
+                    'delivery_type' => $request->delivery_type,
+                    'scheduled_at' => $request->delivery_type === 'scheduled' ? $request->scheduled_at : null,
+                    'recipient_phone' => $request->recipient_phone,
+                    'recipient_name' => $request->recipient_name,
+                    'delivery_address' => $fulfillment === 'pickup' ? null : $request->delivery_address,
+                    'note' => $request->note,
+                    'payment_method' => $paymentMethod,
+                    // Online payment is not connected to a bank yet: the chosen
+                    // bank is recorded and the order stays unpaid until settled.
+                    'payment_bank' => $paymentMethod === 'online' ? $request->payment_bank : null,
+                    'payment_status' => 'unpaid',
                 ]);
 
-                $item->product->decrement('stock', $item->quantity);
+                foreach ($items as $item) {
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_id' => $item->product_id,
+                        'quantity' => $item->quantity,
+                        'price' => $item->product->getDiscountedPrice()
+                    ]);
+
+                    $item->product->decrement('stock', $item->quantity);
+                }
+
+                $orders->push($order->load('items.product'));
             }
 
             $cart->items()->delete();
@@ -155,7 +174,10 @@ class OrderController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Order created successfully',
-                'order' => $order->load('items.product')
+                // `order` stays the first order so older clients keep working;
+                // `orders` lists every per-shop order created by this checkout.
+                'order' => $orders->first(),
+                'orders' => $orders->values(),
             ], 201);
         } catch (\Exception $e) {
             DB::rollBack();

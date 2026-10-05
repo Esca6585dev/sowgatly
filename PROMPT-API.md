@@ -19,9 +19,9 @@
 > `tests/Feature/Api`, `tests/Feature/Admin` and `tests/Feature/SwaggerCoversRoutesTest.php`
 > (`php artisan test` is green, Swagger regenerated). Differences from the text below:
 > `shops.delivery_fee` defaults to **20** (the fee in the design); `shops.status`
-> (pending/approved/rejected) exists; `ShopApplication` has an `admin_note`; checkout is
-> still **single-shop** (all cart items go into one order under the first item's shop —
-> per-shop splitting would change the `order` response and is left for a later decision);
+> (pending/approved/rejected) exists; `ShopApplication` has an `admin_note`; checkout
+> creates **one order per shop** (each with its own delivery fee) — the response keeps
+> `order` (the first one) and adds `orders` with all of them;
 > a review's `order_id` must belong to the caller and not be cancelled (not necessarily
 > `completed`); `product_reviews` pagination only switches on when `page` is sent; the
 > API locale comes from `Accept-Language` (`SetApiLocale` middleware); push uses FCM

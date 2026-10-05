@@ -11,7 +11,7 @@
             "description": "Local server"
         },
         {
-            "url": "http://localhost:8000",
+            "url": "https://sowgatly.app",
             "description": "Remote server"
         }
     ],
@@ -2175,7 +2175,33 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Order created"
+                        "description": "One order per shop in the cart. `order` is the first one (kept for older clients), `orders` lists all of them.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Order created successfully"
+                                        },
+                                        "order": {
+                                            "type": "object"
+                                        },
+                                        "orders": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request"

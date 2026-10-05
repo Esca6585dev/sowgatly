@@ -112,7 +112,7 @@ A bearer token is still honoured on these routes. Everything else needs a token.
 | Shop owners | `GET /shops`, `POST/PUT/DELETE /shops/{id}` (own shop only), `POST/PUT/DELETE /products` (own shop only), `GET /shop/orders`, `PUT /shop/orders/{id}/status` |
 | Notifications | `GET /me/notifications`, `POST /me/notifications/read` |
 
-| Checkout extras | `GET /payment-methods` (cash + online banks), `POST /orders` accepts `fulfillment` (`delivery`/`pickup`), `payment_method` (`cash`/`online`), `payment_bank`, `recipient_name`; `GET /orders?q=` searches by number or product |
+| Checkout extras | `GET /payment-methods` (cash + online banks), `POST /orders` accepts `fulfillment` (`delivery`/`pickup`), `payment_method` (`cash`/`online`), `payment_bank`, `recipient_name`; a cart with items from several shops becomes one order per shop (`order` = first, `orders` = all); `GET /orders?q=` searches by number or product |
 | Waiting list | `GET/POST /me/waitlist`, `DELETE /me/waitlist/{product_id}`; a `product_available` notification is created when the product is back |
 | Chats | Customer: `GET/POST /me/chats`, `GET/POST /me/chats/{id}/messages`, `POST /me/chats/{id}/read`, `GET /me/chats/unread-count`. Shop owner: the same under `/shop/chats` |
 | Shop applications | `POST /shop-applications` (guests too), `GET /me/shop-applications` |

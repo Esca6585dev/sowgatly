@@ -59,8 +59,6 @@ class CartAndOrderTest extends ApiTestCase
 
     public function test_checkout_creates_an_order_with_discounted_prices_and_clears_the_cart(): void
     {
-        // Today checkout is single-shop: every cart item lands in one order
-        // under the first item's shop. Per-shop splitting is a later phase.
         $shop = $this->shopWithProducts(2);
         [$a, $b] = $this->productsOf($shop)->all();
         $a->update(['price' => 100, 'discount' => 20, 'stock' => 5]);
@@ -88,6 +86,42 @@ class CartAndOrderTest extends ApiTestCase
         $this->assertEquals(80, $order->items->where('product_id', $a->id)->first()->price);
         $this->assertSame('pending', $order->status);
         $this->assertSame(3, $a->fresh()->stock);
+
+        $this->getJson('/api/cart')->assertJson(['message' => 'Cart is empty']);
+    }
+
+    public function test_checkout_splits_a_multi_shop_cart_into_one_order_per_shop(): void
+    {
+        $roses = $this->productsOf($this->shopWithProducts(1))->first();
+        $cakes = $this->productsOf($this->shopWithProducts(1))->first();
+        $roses->update(['price' => 100, 'discount' => null, 'stock' => 5]);
+        $cakes->update(['price' => 60, 'discount' => null, 'stock' => 5]);
+
+        $this->actingAsCustomer();
+        $this->postJson('/api/cart/add', ['product_id' => $roses->id, 'quantity' => 2]);
+        $this->postJson('/api/cart/add', ['product_id' => $cakes->id, 'quantity' => 1]);
+
+        $response = $this->postJson('/api/orders', [
+            'delivery_type' => 'asap',
+            'recipient_phone' => '65123456',
+            'delivery_address' => 'Aşgabat, Magtymguly 10',
+        ])->assertStatus(201)
+            ->assertJsonCount(2, 'orders')
+            // The legacy `order` key is still the first shop's order.
+            ->assertJsonPath('order.shop_id', $roses->shop_id)
+            ->assertJsonPath('orders.0.shop_id', $roses->shop_id)
+            ->assertJsonPath('orders.1.shop_id', $cakes->shop_id)
+            ->assertJsonCount(1, 'orders.1.items');
+
+        $this->assertSame($response->json('order.id'), $response->json('orders.0.id'));
+
+        $orders = Order::where('user_id', $this->user->id)->orderBy('id')->get();
+        $this->assertCount(2, $orders);
+        // Each shop charges its own items plus its own delivery fee.
+        $this->assertEquals(200, $orders[0]->items_total);
+        $this->assertEquals(220, $orders[0]->total_amount);
+        $this->assertEquals(60, $orders[1]->items_total);
+        $this->assertEquals(80, $orders[1]->total_amount);
 
         $this->getJson('/api/cart')->assertJson(['message' => 'Cart is empty']);
     }
