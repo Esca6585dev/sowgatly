@@ -37,10 +37,10 @@ class DashboardController extends Controller
             ->get(['created_at', 'total_amount'])
             ->groupBy(fn ($o) => $o->created_at->toDateString())
             ->map(fn ($g) => (float) $g->sum('total_amount'));
-        $faker = config('app.faker_locales.' . app()->getLocale(), 'en_US');
-        $days = collect(range(6, 0))->map(function ($ago) use ($today, $perDay, $faker) {
+        $days = collect(range(6, 0))->map(function ($ago) use ($today, $perDay) {
             $d = $today->copy()->subDays($ago);
-            return ['label' => $d->copy()->locale($faker)->isoFormat('dd'), 'date' => $d->toDateString(), 'value' => $perDay[$d->toDateString()] ?? 0];
+
+            return ['label' => \App\Support\AdminDate::weekdayShort($d->copy()), 'date' => $d->toDateString(), 'value' => $perDay[$d->toDateString()] ?? 0];
         });
         $max = max(1, $days->max('value'));
 

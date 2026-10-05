@@ -11,7 +11,7 @@
     $initials = fn ($name) => mb_strtoupper(collect(preg_split('/\s+/u', trim((string) $name)))->filter()->take(2)->map(fn ($p) => mb_substr($p, 0, 1))->implode('')) ?: '?';
 @endphp
 
-<x-admin.page-header :title="__('Hello, :name', ['name' => $admin->first_name ?? 'Admin'])" :subtitle="now()->locale($faker)->isoFormat('dddd, D MMMM')">
+<x-admin.page-header :title="__('Hello, :name', ['name' => $admin->first_name ?? 'Admin'])" :subtitle="\App\Support\AdminDate::long(now(), $l)">
     <x-slot:actions>
         <a class="btn" href="{{ route('order.index', $l) }}"><x-admin.icon name="orders" class="i-sm" />{{ __('All orders') }}</a>
         <a class="btn btn-primary" href="{{ route('product.create', $l) }}"><x-admin.icon name="plus" class="i-sm" />{{ __('New product') }}</a>
@@ -49,7 +49,7 @@
                         <td>{{ optional($order->shop)->name }}</td>
                         <td class="nowrap">
                             @if($order->fulfillment === 'pickup'){{ __('Pickup') }}
-                            @elseif($order->delivery_type === 'scheduled' && $order->scheduled_at){{ $order->scheduled_at->locale($faker)->isoFormat('D MMM, HH:mm') }}
+                            @elseif($order->delivery_type === 'scheduled' && $order->scheduled_at){{ \App\Support\AdminDate::dayMonthTime($order->scheduled_at, $l) }}
                             @else{{ __('ASAP') }}@endif
                         </td>
                         <td class="right num nowrap" style="font-weight:600">{{ $money($order->total_amount) }}</td>
