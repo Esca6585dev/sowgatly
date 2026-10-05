@@ -149,9 +149,9 @@ base64 avatar, birth date), `DELETE users/me/image`, user addresses CRUD.
 
 ## Phase 4 — Shopping
 
-Cart (add/update/remove, single-shop rule), favorites + favorite collections, waitlist (and the
+Cart (add/update/remove; a cart may hold several shops), favorites + favorite collections, waitlist (and the
 "back in stock" notification trigger — port the Product observer logic into the product write
-paths), checkout (`POST /orders`: fulfillment, delivery fee, payment method/bank, totals, stock
+paths), checkout (`POST /orders`: one order per shop with `order` + `orders` in the response, fulfillment, per-shop delivery fee, payment method/bank, totals, stock
 decrement in one transaction), orders list/search/show/cancel with restock, reviews create
 (three criteria, order link, buyer-only rule).
 

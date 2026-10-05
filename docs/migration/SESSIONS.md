@@ -141,7 +141,7 @@ Common rules for this session:
 - Commit per module with an English message; push to main.
 - At the end: update the "Ýagdaý" row of your session in docs/migration/SESSIONS.md (✅ or 🔄 with what is left), add a short dated entry to docs/migration/LOG.md (what was ported, contract pass rate n/total, open issues), commit and push. Then report the same in Turkmen to the user.
 
-Port: cart (single-shop rule), favorites + favorite collections, waitlist and the back-in-stock notification trigger on product writes, checkout POST /orders (fulfillment, delivery fee, payment method/bank, totals, stock decrement — one DB transaction, concurrency-safe with SELECT … FOR UPDATE), orders list/search/show/cancel with restock, reviews create (three criteria, order link, buyer-only). Add Go tests for race conditions on stock and for every Order::TRANSITIONS edge.
+Port: cart (may hold several shops), favorites + favorite collections, waitlist and the back-in-stock notification trigger on product writes, checkout POST /orders (one order per shop, response keeps `order` and adds `orders`; fulfillment, per-shop delivery fee, payment method/bank, totals, stock decrement — one DB transaction, concurrency-safe with SELECT … FOR UPDATE), orders list/search/show/cancel with restock, reviews create (three criteria, order link, buyer-only). Add Go tests for race conditions on stock and for every Order::TRANSITIONS edge.
 ```
 
 ## 6 — Phase 5: Dükan eýeleri, çatlar, bildirişler · Opus 5.5
